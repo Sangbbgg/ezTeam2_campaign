@@ -42,7 +42,8 @@ const Comments = ({ curList }) => {
   const fetchUserInfo = async () => {
     try {
       // 사용자 정보를 가져오는 API 호출
-      const response = await axios.get('http://localhost:8000/userinfo');
+      const response = await axios.get('http://localhost:8000/users');
+      console.log(response.data)
       setUserInfo(response.data); // 가져온 사용자 정보를 상태에 저장
     } catch (error) {
       console.error('Error fetching user info:', error);
@@ -57,16 +58,25 @@ const Comments = ({ curList }) => {
   const postComment = async (e) => {
     e.preventDefault();
     const confirmCreate = window.confirm("댓글을 등록하시겠습니까?");
+    const storedUserData = sessionStorage.getItem("userData");
+    const userData = JSON.parse(storedUserData);
+    const userid = userInfo.filter((data)=> {
+      return data.userid === userData.userid
+    })
+    console.log(userData)
+    
+    console.log(userid)
     if(confirmCreate){
       try {
         // 사용자 정보가 있는 경우에만 댓글을 등록
-        if(userInfo) {
+        if(userInfo && userInfo.length > 0) {
           const response = await axios.post(`http://localhost:8000/campaign/detail/${curList.id}/comments`, {
-            userid: userInfo.userid,
+            userid: userid[0].userid,
             comment_text: newComment,
             date: new Date(),
           });
           const commentId = response.data.commentId; // 서버로부터 받은 commentId
+
           dispatch(getCommentsUrl(curList.id));
           setNewComment("");
           setComments(prev => [{id: commentId, comment_text: newComment, date: new Date()}, ...prev]);
@@ -148,8 +158,12 @@ const Comments = ({ curList }) => {
             comments.map((comment, i) =>
               <div className="comment" key={i}>
                 <div className="view-div">
+                  {/* {console.log(comment)} */}
                   <p className="txt">{comment.comment_text}</p>
-                  <p className="date">{new Date(comment.date).toLocaleDateString()}</p>
+                  <div className="regi-w">
+                    <p className='username'>{comment.username}</p>
+                    <p className="date">{new Date(comment.date).toLocaleDateString()}</p>
+                  </div>
                   <div className="btn-w">
                     {/* <button className='btn-edit' onClick={(e) => addClsEdit(e, comment.id)}>수정</button> */}
 

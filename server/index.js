@@ -150,7 +150,7 @@ app.put("/campaign/edit/:id", (req, res) => {
 //   res.json(userInfo); // 사용자 정보를 클라이언트에게 전송
 // });
 app.get("/users", (req, res) => {
-  const q = "SELECT username FROM user";
+  const q = "SELECT userid, username FROM user";
   connection.query(q, (err, data) => {
     if (err) {
       console.error('Error executing MySQL query:', err);
@@ -190,13 +190,18 @@ app.post("/campaign/detail/:id/comments", (req, res) => {
 // 댓글을 가져오는 API 엔드포인트
 app.get("/campaign/detail/:id/comments", (req, res) => {
   const postId = req.params.id;
-  const q = "SELECT * FROM campaign_comments WHERE post_id = ?";
+  const q = `
+    SELECT cc.*, u.username
+    FROM campaign_comments cc
+    INNER JOIN user u ON cc.userid = u.userid
+    WHERE cc.post_id = ?`;
   
   connection.query(q, [postId], (err, data) => { 
     if(err) return res.status(500).json(err);
     return res.status(200).json(data); // 댓글 데이터를 반환합니다.
   });
 });
+
 
 //http://localhost:8000/campaign/detail/${curList.id}/comments
 // 댓글 삭제

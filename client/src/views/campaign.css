@@ -103,7 +103,10 @@ h2 {margin-bottom: 20px}
 .view-wrap .comment {position: relative; margin-bottom: 10px; border-bottom: 1px solid #ddd;}
 .view-wrap .comment .view-div {padding: 12px;}
 .view-wrap .comment .view-div .txt {padding-right: 70px; font-size: 16px;}
-.view-wrap .comment .view-div .date {position: absolute; top: 14px; right: 14px; font-size: 14px; color: #777;}
+.view-wrap .comment .regi-w {display: flex; justify-content: flex-end; position: absolute; top: 14px; right: 14px;}
+.view-wrap .comment .regi-w .username {font-size: 14px; color: #777;}
+.view-wrap .comment .regi-w .date {position: relative; margin-left: 10px; padding-left: 10px; font-size: 14px; color: #777;}
+.view-wrap .comment .regi-w .date::before {content: ""; display: block; position: absolute; top: 4px; left: 0; width: 1px; height: 10px; background-color: #999;}
 .view-wrap .comment .write-div {display: none;}
 
 .view-wrap .comment .view-div .btn-w {display: flex; justify-content: flex-end; margin-top: 20px;}
