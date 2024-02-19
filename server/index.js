@@ -153,7 +153,7 @@ app.get("/userinfo", (req, res) => {
   // 여기에 사용자 정보를 가져오는 코드를 작성 (예: 세션을 통해 사용자 정보를 가져오는 코드)
   // 예시로 사용자 정보를 하드코딩하여 전송
   const userInfo = {
-    author_id: 2, // 예시로 author_id를 하드코딩하여 전송 (실제로는 세션 등을 통해 가져옴)
+    author_id: 1, // 예시로 author_id를 하드코딩하여 전송 (실제로는 세션 등을 통해 가져옴)
     // 다른 사용자 정보도 필요한 경우 추가
   };
   res.json(userInfo); // 사용자 정보를 클라이언트에게 전송
@@ -203,7 +203,7 @@ app.get("/campaign/detail/:id/comments", (req, res) => {
   });
 });
 
-//http://localhost:4000/campaign/detail/${curList.id}/comments
+//http://localhost:8000/campaign/detail/${curList.id}/comments
 // 댓글 삭제
 app.delete("/campaign/detail/:id/comments/:commentId", (req, res) => {
   const postId = req.params.id;
@@ -294,17 +294,11 @@ app.post('/img', upload.single('img'), (req, res) => {
   console.log('저장된 파일의 이름', req.file.filename);
 
   // 파일이 저장된 경로를 클라이언트에게 반환해준다.
-  const IMG_URL = `http://localhost:4000/uploads/${req.file.filename}`;
+  const IMG_URL = `http://localhost:8000/uploads/${req.file.filename}`;
   console.log(IMG_URL);
   res.json({ url: IMG_URL });
 });
 // -------------- 이미지 저장 관련 --------------
-
-
-// Start the server
-app.listen(4000, () => {
-  console.log("Server is running on http://localhost:4000");
-});
 
 
 
