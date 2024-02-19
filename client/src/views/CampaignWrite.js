@@ -26,7 +26,7 @@ const CampaignWrite = () => {
   const [write, setWrite] = useState({
     title: "",
     body: "",
-    userid: 17, // 회원번호
+    userid: 1, // 회원번호
     start_date: startDate,
     end_date: endDate,
     address: address,
