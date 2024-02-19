@@ -7,6 +7,8 @@ import CampaignWrite from './views/CampaignWrite';
 import CampaignDetail from './views/CampaignDetail';
 import CampaignEdit from './views/CampaignEdit';
 
+import CarbonFootprint from "./views/CarbonFootprint";
+
 function App() {
   return (
     <div className="App">
@@ -17,7 +19,7 @@ function App() {
         <Route path='/campaign/write' element={<CampaignWrite />}></Route>
         <Route path='/campaign/edit/:id' element={<CampaignEdit />}></Route>
         <Route path='/campaign/detail/:id' element={<CampaignDetail />}></Route>
-
+        <Route exact path="/carbonFootprint" element={<CarbonFootprint />} />
       </Routes>
     </div>
   );

@@ -1,0 +1,100 @@
+.menu-container {
+    width: 100%;
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.tab-container {
+    width: 80%;
+
+}
+
+.tab-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: white;
+    border-radius: 20px;
+}
+
+.tab-item {
+    color: gray;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 0 10px;
+}
+
+.tab-item.active {
+    background-color: #5fba7d;
+    border-radius: 20px;
+    color: white;
+}
+
+.content-container {
+    margin-top: 20px;
+    background-color: whitesmoke;
+}
+
+
+.totalbox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.box {
+    width: 80vw;
+    background-color: white;
+    border-radius: 10px;
+    margin: 10px 10px;
+}
+
+.box input[type="number"] {
+    width: 80%;
+
+}
+
+.radioBox {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    max-width: 400px;
+    margin: auto;
+}
+
+.radioBox>div {
+    border: 1px solid gray;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+input[type="radio"] {
+    margin-right: 10px;
+}
+.barChart-container{
+    width: 95%;
+    display: flex;
+    /* flex-flow: column; */
+    justify-content: space-between;
+    align-items: center;
+}
+.barChart{
+    width: 30%;
+    height: 200px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin: 10px 10px;
+    
+}
+.barChart text{
+    font-weight: bold;
+}
