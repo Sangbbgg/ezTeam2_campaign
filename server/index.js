@@ -46,11 +46,6 @@ connection.connect((err) => {
 app.get("/", (req, res) => res.send(`Hell'o World!`));
 
 // ------------------- 김지수 -------------------
-
-// app.use(express.json()); // json 데이터 파서
-// app.use(cors());
-// app.use(express.urlencoded({ extended: true }))
-
 // 정적 파일 제공을 위한 미들웨어 추가
 app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 
@@ -92,16 +87,6 @@ app.post("/campaign", (req, res) => {
   });
 });
 
-// 글 삭제
-// app.delete("/campaign/detail/:id", (req, res) => {
-//   const campaignId = req.params.id;
-//   const q = "DELETE FROM campaign_posts WHERE id = ?";
-
-//   connection.query(q, [campaignId], (err, data) => {
-//     if (err) return res.json(err);
-//     return res.json("Message has been deleted successfully");
-//   });
-// });
 // 글 삭제
 app.delete("/campaign/detail/:id", (req, res) => {
   const campaignId = req.params.id;
@@ -232,25 +217,6 @@ app.get("/campaign/detail/:id/comments/:commentId", (req, res) => {
   console.log(commentId); // 올바른 위치에 console.log(commentId);를 이동
 });
 
-// app.get("/campaign/detail/:id", (req, res) => {
-//   const campaignId = req.params.id;
-//   const q = "SELECT * FROM campaign_posts WHERE id = ?";
-//   connection.query(q, campaignId, (err, data) => {
-//     if(err) return res.status(500).json(err);
-//     if(data.length === 0) return res.status(404).json({ message: "글을 찾을 수 없습니다." });
-//     return res.json(data[0]); 
-//   });
-// });
-
-// app.put("/campaign/detail/:id/comments/:commentId", (req, res) => {
-//   const campaignId = req.params.id;
-//   const q = "UPDATE campaign_posts SET `title` = ?, `body` = ? WHERE id = ?";
-//   const values = [req.body.title, req.body.body, campaignId];
-//   connection.query(q, values, (err, data) => {
-//     if(err) return res.json(err);
-//     return res.json("Message has been updated successfully");
-//   });
-// });
 // -------------- 댓글 --------------
 
 
