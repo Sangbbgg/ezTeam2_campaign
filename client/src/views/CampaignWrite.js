@@ -73,8 +73,21 @@ const CampaignWrite = () => {
     const confirmCreate = window.confirm("글을 등록하시겠습니까?");
 
     if (confirmCreate) {
+      let postData = {
+        title: write.title,
+        body: write.body,
+        userid: write.userid,
+        start_date: startDate,
+        end_date: endDate,
+
+        // "장소없음"일 경우 주소 관련 필드를 null로 설정
+        address: null,
+        latitude: null,
+        longitude: null,
+      }
+
       try {
-        await axios.post("http://localhost:8000/campaign", write);
+        await axios.post("http://localhost:8000/campaign", postData);
         navigate(-1);
       } catch (err) {
         console.log(err);

@@ -182,15 +182,6 @@ app.post("/campaign/detail/:id/comments", (req, res) => {
       date: new Date(),
     });
   });
-
-  //   connection.query(q, values, (err, data) => { 
-  //     if(err) {
-  //       console.error(err);
-  //       return res.status(500).json(err);
-  //     }
-      
-  //     return res.status(201).json({ message: "Comment has been sent successfully" });
-  //   });
 });
 
 // 댓글을 가져오는 API 엔드포인트
@@ -260,9 +251,6 @@ app.get("/campaign/detail/:id/comments/:commentId", (req, res) => {
 //     return res.json("Message has been updated successfully");
 //   });
 // });
-
-
-
 // -------------- 댓글 --------------
 
 
