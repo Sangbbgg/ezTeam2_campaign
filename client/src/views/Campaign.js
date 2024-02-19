@@ -28,7 +28,6 @@ const Campaign = () => {
     dispatch(getPost())
       .then((res) => {
         if (res.payload) {
-          console.log(res)
           let arrPost = [...res.payload];
           setCampaignList(arrPost.reverse());
         }

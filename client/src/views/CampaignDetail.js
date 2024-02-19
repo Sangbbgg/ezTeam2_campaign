@@ -14,9 +14,7 @@ const CampaignDetail = (props) => {
   const dispatch = useDispatch();
   const [campaignList, setCampaignList] = useState([]);
 
-
   const { kakao } = window;
-
 
   useEffect(() => {
     const getData = async () => {
@@ -50,6 +48,9 @@ const CampaignDetail = (props) => {
   };
 
 
+  // const mapRender = () => {
+    
+  // }
 
   useEffect(()=>{
     // curList가 존재하고 latitude 및 longitude 속성이 존재하는 경우에만 맵을 생성
@@ -70,11 +71,6 @@ const CampaignDetail = (props) => {
         position: markerPosition
       });
       marker.setMap(map);
-  
-      if(curList){
-        console.log(curList.latitude)
-        console.log(curList.longitude)
-      }
     }
 
 
@@ -135,8 +131,6 @@ const CampaignDetail = (props) => {
         </div>
       </div>
 
-
-      
 
       {/* 댓글 */}
       <Comments curList={curList}/>

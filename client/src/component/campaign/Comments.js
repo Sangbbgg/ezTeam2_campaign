@@ -67,8 +67,6 @@ const Comments = ({ curList }) => {
             date: new Date(),
           });
           const commentId = response.data.commentId; // 서버로부터 받은 commentId
-          console.log(response.data.date);
-          console.log(commentId);
           dispatch(getCommentsUrl(curList.id));
           setNewComment("");
           setComments(prev => [{id: commentId, comment_text: newComment, date: new Date()}, ...prev]);
