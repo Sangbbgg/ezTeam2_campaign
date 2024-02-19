@@ -13,7 +13,11 @@ const TextList = ({campaignList}) => {
           : campaignList.title
       }</p>
       {/* <p className="date">{campaignList.userid}</p> */}
-      <p className="date">{campaignList.date.slice(0, 10).replace('T', ' ')}</p>
+      <div className="txt-info">
+        <p className="username">{campaignList.username}</p>
+        <p className="date">{campaignList.date.slice(0, 10).replace('T', ' ')}</p>
+      </div>
+      
     </button>
   )
 }

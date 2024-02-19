@@ -55,7 +55,9 @@ app.get("/", (req, res) => {
 
 // 캠페인 글 목록 가져오기
 app.get("/campaign", (req, res) => {
-  const q = "SELECT * FROM campaign_posts";
+  const q = `SELECT a.*, u.*
+  FROM campaign_posts a
+  INNER JOIN user u ON a.userid = u.userid;`;
   connection.query(q, (err, data) => {
     if (err) {
       console.error('Error executing MySQL query:', err);
@@ -64,6 +66,9 @@ app.get("/campaign", (req, res) => {
     return res.json(data);
   });
 });
+
+
+
 
 // 글쓰기 페이지에서 사용자가 입력한 정보가 들어가도록 요청
 app.post("/campaign", (req, res) => {
@@ -135,15 +140,28 @@ app.put("/campaign/edit/:id", (req, res) => {
 
 
 // 사용자 정보를 가져옴
-app.get("/userinfo", (req, res) => {
-  // 여기에 사용자 정보를 가져오는 코드를 작성 (예: 세션을 통해 사용자 정보를 가져오는 코드)
-  // 예시로 사용자 정보를 하드코딩하여 전송
-  const userInfo = {
-    userid: 1, // 예시로 userid를 하드코딩하여 전송 (실제로는 세션 등을 통해 가져옴)
-    // 다른 사용자 정보도 필요한 경우 추가
-  };
-  res.json(userInfo); // 사용자 정보를 클라이언트에게 전송
+// app.get("/userinfo", (req, res) => {
+//   // 여기에 사용자 정보를 가져오는 코드를 작성 (예: 세션을 통해 사용자 정보를 가져오는 코드)
+//   // 예시로 사용자 정보를 하드코딩하여 전송
+//   const userInfo = {
+//     userid: 1, // 예시로 userid를 하드코딩하여 전송 (실제로는 세션 등을 통해 가져옴)
+//     // 다른 사용자 정보도 필요한 경우 추가
+//   };
+//   res.json(userInfo); // 사용자 정보를 클라이언트에게 전송
+// });
+app.get("/users", (req, res) => {
+  const q = "SELECT username FROM user";
+  connection.query(q, (err, data) => {
+    if (err) {
+      console.error('Error executing MySQL query:', err);
+      return res.json(err);
+    }
+    console.log(res)
+    return res.json(data);
+  });
 });
+
+
 
 // -------------- 댓글 --------------
 // 댓글 등록
