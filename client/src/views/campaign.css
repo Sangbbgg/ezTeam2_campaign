@@ -83,7 +83,7 @@ h2 {margin-bottom: 20px}
 
 /* 검색 input */
 .search-wrap {display: flex; justify-content: center; margin: 40px 0 60px;}
-.search-wrap input {padding: 4px; width: calc(100% - 120px); border: 0; border-bottom: 1px solid #000;}
+.search-wrap input {margin-bottom: 0; padding: 4px; width: calc(100% - 120px); border: 0; border-bottom: 1px solid #000;}
 .btn-search {margin-left: 12px; padding: 4px 16px; border: 1px solid #000;}
 
 /* 탭 */
