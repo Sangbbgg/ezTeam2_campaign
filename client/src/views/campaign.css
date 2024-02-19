@@ -13,6 +13,7 @@ h2 {margin-bottom: 20px}
 
 /* 글쓰기 */
 .campaign-write {margin: 0 auto; padding: 140px 40px; width: 80%;}
+.campaign-write input {padding: 4px 12px; border: 0; color: #000;background-color: #e1f0de;}
 /* .campaign-write .form-w {margin-top: 40px;} */
 .campaign-write .title {margin: 0 auto; padding: 4px 12px; width: 100%; border: 0;  color: #000; background-color: #e1f0de;}
 .campaign-write .title::placeholder {color: #777;} 
@@ -89,8 +90,8 @@ h2 {margin-bottom: 20px}
 .tab-area .btn-tab + .btn-tab {margin-left: 20px;}
 
 /* 캘린더 */
-.calendar-area {margin-top: 20px;}
-.calendar-area .cal-tit {margin-bottom: 12px;}
+.calendar-area {margin-top: 30px;}
+.calendar-area .cal-tit {margin-bottom: 12px; font-size: 16px;}
 .calendar {display: flex;}
 .calendar > div:nth-child(2) {margin-left: 12px;}
 .calendar input {margin: 0 auto; padding: 4px 12px; width: 100%; border: 0; color: #000; background-color: #e1f0de;}
@@ -111,8 +112,28 @@ h2 {margin-bottom: 20px}
 .view-wrap .comment.edit .write-div {display: block;}
 
 /* 우편 */
-.postcode {position: relative; margin-top: 10px;}
-.postcode .address-div {display: flex; justify-content: flex-start;}
-.daum_popup {z-index: 10;}
-.postcode .address-div .address-txt {width: 80%; margin: 0 auto; padding: 4px 12px; width: 100%; border: 0; color: #000; background-color: #e1f0de;}
-.postcode .address-div .btn-search {background-color: #fff; cursor: pointer;}
+/* 라디오 버튼 */
+.form-group {display: flex; margin-bottom: 10px;}
+.form-radio {position: relative; display: flex; height: 20px;}
+.form-radio + .form-radio {margin-left: 16px;}
+.form-radio input[type="radio"] {position: absolute; top: 0; left: 0; width: 20px; height: 20px; opacity: 1; cursor: pointer;}
+.form-radio input + label {position: relative; display: inline-block; padding-left: 25px; font-size: 16px; color: rgba(0, 0, 0, .55); line-height: 22px; font-weight: 400; background: url("../../public/img/icon-radio.svg") no-repeat 0 0; background-size: 20px 20px; cursor: pointer;}
+.form-radio input:checked + label {color: rgba(0, 0, 0, 1); background: url("../../public/img/icon-radio-checked.svg") no-repeat 0 0; background-size: 20px 20px;}
+.form-radio input:disabled + label {color: #999;}
+
+
+.address-area {position: relative; margin-top: 30px;}
+.address-area input {margin-bottom: 0;}
+.address-area .addr-tit {margin-bottom: 12px; font-size: 16px;}
+.address-area .addr-div .search-w {display: flex; justify-content: flex-start;}
+.daum_popup {z-index: 1;}
+
+/* .address-area .addr-div .address-txt {min-width: 330px;} */
+/* .address-area .addr-div .address-txt {min-width: 330px;} */
+/* .address-area .addr-div .address-detail {margin-top: 10px; min-width: 430px;} */
+.address-area .addr-div .addr-detail {margin-top: 10px; width: 100%;}
+.address-area .addr-div .btn-search {min-width: 88px; background-color: #fff; border: 1px solid #000; cursor: pointer;}
+
+
+
+

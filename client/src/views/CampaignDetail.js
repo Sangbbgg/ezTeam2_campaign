@@ -70,11 +70,6 @@ const CampaignDetail = (props) => {
         position: markerPosition
       });
       marker.setMap(map);
-  
-      if(curList){
-        console.log(curList.latitude)
-        console.log(curList.longitude)
-      }
     }
 
 

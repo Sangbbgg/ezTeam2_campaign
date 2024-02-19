@@ -15,9 +15,33 @@ const CampaignWrite = () => {
   const [endDate, setEndDate] = useState(new Date("2024/01/01"));
 
 
+  // 지도
   const [address, setAddress] = useState("");
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
+
+  // 주소 라디오 버튼
+  const [selOpt, setSelOpt] = useState("오프라인");
+  const onChangeRadio = (e) => {
+    setSelOpt(e.target.value);
+    console.log(e.target.value);
+  }
+
+  const renderAddrDiv = () => {
+    if(selOpt === "장소없음"){
+      return null;
+    }
+
+    return (
+      <div className='addr-div'>
+        <div className="search-w">
+          <input className="address-txt" type="text" id="sample5_address" placeholder="주소를 입력하세요." />
+          <input className="btn-search" type="button" id="searchButton" value="주소 검색" />
+        </div>
+        <input className="addr-detail" type="text" id="" placeholder="상세주소를 입력하세요." />
+      </div>
+    )
+  }
 
   useEffect(() => {
     setWrite((prev) => ({ ...prev, start_date: startDate, end_date: endDate, address: address, latitude: latitude, longitude: longitude }));
@@ -57,11 +81,6 @@ const CampaignWrite = () => {
       }
     }
   };
-
-
-
-
-
 
 // @@@@@@@@@@@@@@@@@@@@ 지도 @@@@@@@@@@@@@@@@@@@@ 
   useEffect(() => {
@@ -115,8 +134,6 @@ const CampaignWrite = () => {
         }
       }).open();
     }
-  console.log(latitude, longitude)
- 
 
     document.getElementById('searchButton').addEventListener('click', sample5_execDaumPostcode);
 
@@ -138,7 +155,7 @@ const CampaignWrite = () => {
       <h2>캠페인(글쓰기) 페이지입니다.</h2>
       <div className="content-wrap">
         <form>
-          <div className="content-wrap">
+          <div className="body-area">
             <input className="title" type="text" name="title" value={write.title} placeholder="제목을 입력하세요"  onChange={handleChange} /> 
 
             <div className="calendar-area">
@@ -154,11 +171,24 @@ const CampaignWrite = () => {
 
 
             {/* // @@@@@@@@@@@@@@@@@@@@ 지도 @@@@@@@@@@@@@@@@@@@@  */}
-            <div className='postcode'>
-              <div className='address-div'>
-                <input className="address-txt" type="text" id="sample5_address" placeholder="주소" />
-                <input className="btn-search" type="button" id="searchButton" value="주소 검색" />
+            <div className='address-area'>
+              <div className="addr-tit">주소</div>
+
+              {/* 주소 라디오 버튼 */}
+              <div className="form-group">
+                <div className="form-radio">
+                  <input type="radio" id="offline" name="addr-radio" value="오프라인" checked={selOpt === "오프라인"} onChange={onChangeRadio}/>
+                  <label htmlFor="offline">오프라인</label>
+                </div>
+                <div className="form-radio">
+                  <input type="radio" id="noaddress" name="addr-radio" value="장소없음" checked={selOpt === "장소없음"} onChange={onChangeRadio}/>
+                  <label htmlFor="noaddress">장소없음</label>
+                </div>
               </div>
+                {/* selOpt이 해당 라디오 버튼의 value와 일치한다면, 해당 버튼에 체크 */}
+
+                {renderAddrDiv()}
+              
               
               <div id="map" style={{ width: '300px', height: '300px', marginTop: '10px', display: 'none' }}></div>
             </div>
@@ -218,7 +248,7 @@ const CampaignWrite = () => {
 //   return (
 //     <div className='postcode'>
 //       {/* <input type="text" id="sample3_postcode" placeholder="우편번호" value={postcode} readOnly /> */}
-//       <div className="address-div">
+//       <div className="addr-div">
 //         <input type="text" className="address-txt" id="sample3_address" placeholder="주소" value={address} readOnly /><br />
 //         {console.log(address)}
 //         <input type="button" className='btn-search' onClick={togglePostcodeSearch} value="주소 찾기" />
@@ -307,7 +337,7 @@ const CampaignWrite = () => {
 
 //   return (
 //     <div className='postcode'>
-//       <div className='address-div'>
+//       <div className='addr-div'>
 //         <input className="address-txt" type="text" id="sample5_address" placeholder="주소" />
 //         <input className="btn-search" type="button" id="searchButton" value="주소 검색" />
 //       </div>
