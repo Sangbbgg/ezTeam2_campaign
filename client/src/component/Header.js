@@ -25,7 +25,7 @@ const Header = () => {
 
   return (
     <header>
-      {/* <h1 className="logo"><button onClick={()=>{navigate('/')}}></button></h1> */}
+      <h1 className="logo"><button onClick={()=>{navigate('/')}}></button></h1>
       {/* 로그인, 회원가입 버튼 임시 구현 */}
       <div>
       {loggedIn ? (
