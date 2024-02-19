@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+
+import Header from "../component/Header";
 // 내부 컴포넌트 분류---------------------------------------
 import Consumption from "../component/CarbonFootprints/Consumption";
 import Result from "../component/CarbonFootprints/Result";
@@ -6,9 +8,15 @@ import Practice from "../component/CarbonFootprints/Practice";
 // ---------------------------------------------------------
 import "../Styles/CarbonFootprint.css";
 function CarbonFootprint() {
-  // const userId = 104716; //개발용 user_id
+  // const userId = 179870; //개발용 user_id
   const storedUserData = sessionStorage.getItem("userData");
   const userData = JSON.parse(storedUserData);
+
+  // const userData = {
+  //   userid: 179870,
+  //   username: "상호형",
+  //   usertype: "1",
+  // };
 
   const currentDate = new Date().toISOString().slice(0, 10); // 현재 날짜를 'YYYY-MM-DD' 형식으로
 
@@ -35,9 +43,7 @@ function CarbonFootprint() {
   useEffect(() => {
     const checkData = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:8000/api/carbonFootprint/check/${userData.userid}/${currentDate}`
-        );
+        const response = await fetch(`http://localhost:8000/api/carbonFootprint/check/${userData.userid}/${currentDate}`);
         const data = await response.json();
         if (data.hasData) {
           setNewResultData(data.data);
@@ -100,34 +106,15 @@ function CarbonFootprint() {
     }
     switch (activeTab) {
       case "consumption":
-        return (
-          <Consumption
-            inputData={consumptionData}
-            initialData={initialData.carbonFootprintData}
-            onResultSubmit={handleResultSubmit}
-          />
-        );
+        return <Consumption inputData={consumptionData} initialData={initialData.carbonFootprintData} onResultSubmit={handleResultSubmit} />;
       case "result":
         // 서버의 userData가 있으면 그 값을, 없으면 로컬의 resultData를 사용
         const dataToShow = userEmissionData || newResultData;
-        return (
-          <Result
-            initialData={initialData.calculationAdviceData}
-            resultData={dataToShow}
-            userData={userData}
-            isTransportationOption={isTransportationOption}
-          />
-        );
+        return <Result initialData={initialData.calculationAdviceData} resultData={dataToShow} userData={userData} isTransportationOption={isTransportationOption} />;
       case "practice":
         return <Practice />;
       default:
-        return (
-          <Consumption
-            inputData={consumptionData}
-            initialData={initialData.carbonFootprintData}
-            onResultSubmit={handleResultSubmit}
-          />
-        );
+        return <Consumption inputData={consumptionData} initialData={initialData.carbonFootprintData} onResultSubmit={handleResultSubmit} />;
     }
   };
 
@@ -137,6 +124,7 @@ function CarbonFootprint() {
 
   return (
     <>
+      <Header />
       <div className="menu-container">
         <div className="tab-container">
           <ul className="tab-menu">

@@ -4,8 +4,14 @@ import cors from "cors";
 import mysql from "mysql2";
 
 import bodyParser from "body-parser";
+
 import multer from "multer"; // 이미지 저장 관련
 import path from "path"; // 이미지 저장 관련
+
+import bcrypt from "bcrypt";
+import session from "express-session"; //0213 김민호 세션 추가
+import MySQLSession from "express-mysql-session";//0213 김민호
+const MySQLStore = MySQLSession(session);
 
 import { fileURLToPath } from "url"; 
 
@@ -38,11 +44,6 @@ connection.connect((err) => {
 });
 
 app.get("/", (req, res) => res.send(`Hell'o World!`));
-
-
-
-
-
 
 // ------------------- 김지수 -------------------
 
@@ -475,6 +476,431 @@ app.post('/img', upload.single('img'), (req, res) => {
 
 
 // 상호형
+app.get("/api/carbonFootprint", async (req, res) => {
+  // MySQL에서 데이터를 가져와 JSON 형식으로 응답
+
+  // 첫 번째 쿼리: carbon_footprint에서 데이터 가져오기
+  const carbonFootprint = new Promise((resolve, reject) => {
+    connection.query("SELECT * FROM carbon_footprint;", (err, results) => {
+      if (err) reject(err);
+      else resolve(results);
+    });
+  });
+  const carbonFootprintData = await carbonFootprint;
+
+  // 두 번째 쿼리: calculation_advice에서 데이터 가져오기
+  const calculationAdvice = new Promise((resolve, reject) => {
+    connection.query("SELECT a.name, b.advice_text, b.savings_value FROM calculation_category as a join calculation_advice as b ON a.id = b.category_id;", (err, results) => {
+      if (err) reject(err);
+      else resolve(results);
+    });
+  });
+  const calculationAdviceData = await calculationAdvice;
+
+  // 두 쿼리의 결과를 합쳐서 응답
+  res.json({
+    carbonFootprintData,
+    calculationAdviceData,
+  });
+});
+
+// 해당 월의 데이터 존재 여부를 확인하는 라우트
+app.get("/api/carbonFootprint/check/:userId/:date", async (req, res) => {
+  const { userId, date } = req.params;
+  const yearMonth = date.slice(0, 7); // 'YYYY-MM' 형식으로 변환
+
+  // 해당 월의 첫 날과 마지막 날을 계산
+  const startDate = `${yearMonth}-01`;
+  const endDate = new Date(yearMonth);
+  endDate.setMonth(endDate.getMonth() + 1);
+  endDate.setDate(0);
+  const lastDay = endDate.getDate();
+  const endDateStr = `${yearMonth}-${lastDay}`;
+
+  console.log(`Checking data for user ${userId} between ${startDate} and ${endDateStr}`);
+
+  try {
+    const query = `
+        SELECT * FROM user_calculation 
+        WHERE user_id = ? 
+        AND calculation_month BETWEEN ? AND ?;
+      `;
+
+    console.log(`Executing query: ${query}`);
+    console.log(`With parameters: userId=${userId}, startDate=${startDate}, endDateStr=${endDateStr}`);
+
+    connection.query(query, [userId, startDate, endDateStr], (err, results) => {
+      if (err) {
+        console.error("Query error:", err);
+        return res.status(500).send("Error querying the database");
+      }
+
+      if (results.length > 0) {
+        console.log(`Found data for user ${userId} in the specified month.`);
+        res.json({ hasData: true, data: results[0] });
+      } else {
+        console.log(`No data found for user ${userId} in the specified month.`);
+        res.json({ hasData: false });
+      }
+    });
+  } catch (error) {
+    console.error("Server error:", error);
+    res.status(500).send("Server error");
+  }
+});
+
+// POST 라우트 추가
+app.post("/api/carbonFootprint", async (req, res) => {
+  const { userId, calculationMonth, electricity, gas, water, transportation, waste, total, checkedItems, categorySavings } = req.body;
+
+  // JSON 형식의 데이터를 문자열로 변환
+  const checkedItemsString = JSON.stringify(checkedItems);
+  const categorySavingsString = JSON.stringify(categorySavings);
+
+  // const insertQuery = "INSERT INTO user_calculation (user_id, calculation_month, electricity, gas, water, transportation, waste, total) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+  const insertQuery =
+    "INSERT INTO user_calculation (user_id, calculation_month, electricity, gas, water, transportation, waste, total, checked_items, category_savings) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+
+  connection.query(insertQuery, [userId, calculationMonth, electricity, gas, water, transportation, waste, total, checkedItemsString, categorySavingsString], (err, results) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send({ message: "Error saving data to the database", error: err.message });
+    }
+    res.status(201).send({ message: "Data saved successfully", data: req.body });
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 김민호
+
+//-------------------------------로그인-----------------------------------------------
+
+//-------------------------------익스플로스 세션 0213------------------------------------
+const sessionStore = new MySQLStore({
+  expiration: 3600000, // 세션의 유효시간 (1시간)
+  createDatabaseTable: true, // 세션 테이블을 자동으로 생성
+  schema: {
+    tableName: 'sessions', // 세션 테이블의 이름
+    columnNames: {
+      session_id: 'session_id', // 세션 ID를 저장하는 열의 이름
+      expires: 'expires', // 세션 만료 시간을 저장하는 열의 이름
+      data: 'data', // 세션 데이터를 저장하는 열의 이름
+    },
+  },
+}, connection);
+
+app.use(session({
+  secret: 'secretKey', // 랜덤하고 안전한 문자열로 바꾸세요.
+  resave: false,
+  saveUninitialized: true,
+  store: sessionStore,
+  cookie: {
+    maxAge: 3600000,
+    httpOnly: true,
+  },
+}));
+//-------------------------------로그인------------------------------------
+
+app.post("/login", async (req, res) => {
+  const { email, password, usertype } = req.body;//usertype 추가 2/14 김민호
+
+  try {
+    // 이메일을 사용하여 데이터베이스에서 사용자를 찾습니다.
+    connection.query(
+      "SELECT * FROM user WHERE email = ?",
+      [email],
+      async (err, result) => {
+        if (err) {
+          console.error("서버에서 에러 발생:", err);
+          res.status(500).send({ success: false, message: "서버 에러 발생" });
+        } else {
+          if (result.length > 0) {
+            const isPasswordMatch = await bcrypt.compare(
+              password,
+              result[0].password
+            );
+            if (isPasswordMatch && usertype == result[0].usertype) {
+            // 0213 김민호 세션스토리 초기화 확인
+            if (!req.session) {
+              req.session = {};
+            }
+            //세션데이터 저장(새로운 데이터 추가시 이부분 수정)
+            req.session.usertype = result[0].usertype;//0213 김민호 익스플로우 세션기능 추가
+            req.session.userid = result[0].userid;//0213 김민호 익스플로우 세션기능 추가
+
+              res.send({ success: true, message: "로그인 성공", data: result });
+            } else {
+              res.send({
+                success: false,
+                message: "정보가 일치하지 않습니다.",
+                //가입은 되어 있으나 정보가 맞지 않을 때
+              });
+            }
+          } else {
+            res.send({ success: false, message: "유저 정보가 없습니다." });
+            //가입된 정보가 없을 시 출력
+          }
+
+
+
+          
+        }
+      }
+    );
+  } catch (error) {
+    console.error("비밀번호 비교 중 오류:", error);
+    res.status(500).send({ success: false, message: "서버 에러 발생" });
+  }
+});
+//-------------------------------회원가입----------------------------------------------
+//---------------------------------- 회원번호---------------------------------------------
+const usedUserNumbers = new Set(); // 중복 방지를 위한 Set
+
+async function generateUserid(usertype) {
+  // 사용자 유형에 기반한 사용자 ID를 생성하는 로직을 추가합니다.
+  // 단순성을 위해 사용자 유형에 따라 접두어를 추가하고 6자리의 랜덤 숫자를 붙입니다.
+  const prefix = {
+    personal: 1,
+    business: 2,
+    organization: 3,
+  }[usertype];
+  
+  // 0219 추가_상호형
+  let randomDigits;
+  let userid;
+
+  do {
+    randomDigits = Math.floor(10000 + Math.random() * 90000);
+    userid = `${prefix}${randomDigits}`;
+  } while (usedUserNumbers.has(userid)); // 중복된 userid가 있다면 다시 생성
+
+  usedUserNumbers.add(userid); // Set에 추가
+
+
+  return userid;
+}
+//-------------------------------사업자 중복 체크 2/14 김민호---------------------------------
+// app.post("/checkbusinessnumber", (req, res) => {
+//   const { businessnumber} = req.body;
+
+//   // 데이터베이스에서 이메일이 이미 존재하는지 확인합니다.
+//   const sql = "SELECT * FROM user WHERE email = ?";
+//   connection.query(sql, [businessnumber], (err, result) => {
+//     if (err) {
+//       console.error("MySQL에서 사업자번호 중복 확인 중 오류:", err);
+//       return res.status(500).json({
+//         success: false,
+//         message: "사업자 중복 확인 중 오류가 발생했습니다.",
+//         error: err.message,
+//       });
+//     }
+
+//     if (result.length > 0) {
+//       // 이미 등록된 사업자인 경우
+//       return res.status(200).json({
+//         success: false,
+//         message: "이미 등록된 사업자입니다.",
+//       });
+//     } else {
+//       // 중복되지 않은 사업자인 경우
+//       return res.status(200).json({
+//         success: true,
+//         message: "사용 가능한 사업자 입니다.",
+//       });
+//     }
+//   });
+// });
+
+//-------------------------------이메일 중복 체크 2/14 김민호---------------------------------
+app.post("/checkEmailDuplication", (req, res) => {
+  const { email } = req.body;
+
+  // 데이터베이스에서 이메일이 이미 존재하는지 확인합니다.
+  const sql = "SELECT * FROM user WHERE email = ?";
+  connection.query(sql, [email], (err, result) => {
+    if (err) {
+      console.error("MySQL에서 이메일 중복 확인 중 오류:", err);
+      return res.status(500).json({
+        success: false,
+        message: "이메일 중복 확인 중 오류가 발생했습니다.",
+        error: err.message,
+      });
+    }
+
+    if (result.length > 0) {
+      // 이미 등록된 이메일인 경우
+      return res.status(200).json({
+        success: false,
+        message: "이미 등록된 이메일입니다.",
+      });
+    } else {
+      // 중복되지 않은 이메일인 경우
+      return res.status(200).json({
+        success: true,
+        message: "사용 가능한 이메일입니다.",
+      });
+    }
+  });
+});
+//---------------------------회원가입 기능구현----------------------------------------------
+app.post("/regester", async (req, res) => {
+  // 클라이언트에서 받은 요청의 body에서 필요한 정보를 추출합니다.
+  const { username, password, email, address, detailedaddress, phonenumber, usertype: clientUsertype, businessnumber } = req.body;
+
+  try {
+    
+    // 비밀번호를 해시화합니다.
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // 회원번호를 생성합니다. (6자리)
+    const userid = await generateUserid(clientUsertype);
+
+    // 클라이언트에서 받은 usertype을 서버에서 사용하는 usertype으로 변환합니다.
+    const usertypeNumber = {
+      personal: 1, // 개인
+      business: 2, // 기업
+      organization: 3, // 단체
+    };
+
+    const serverUsertype = usertypeNumber[clientUsertype];
+
+    // MySQL 쿼리를 작성하여 회원 정보를 데이터베이스에 삽입합니다.
+    const sql =
+      "INSERT INTO user (userid, username, email, password, address, detailedaddress, phonenumber, usertype, businessnumber) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    connection.query(
+      sql,
+      [userid, username, email, hashedPassword, address, detailedaddress, phonenumber, serverUsertype, businessnumber],
+      (err, result) => {
+        if (err) {
+          // 쿼리 실행 중 에러가 발생한 경우 에러를 처리합니다.
+          console.error("MySQL에 데이터 삽입 중 오류:", err);
+          return res.status(500).json({
+            success: false,
+            message: "회원가입 중 오류가 발생했습니다.",
+            error: err.message,
+          });
+        }
+        // 회원가입이 성공한 경우 응답을 클라이언트에게 보냅니다.
+        console.log("사용자가 성공적으로 등록됨");
+        return res.status(200).json({
+          success: true,
+          message: "사용자가 성공적으로 등록됨",
+          usertype: serverUsertype,
+        });
+      }
+    );
+  } catch (error) {
+    // 회원가입 중 다른 내부적인 오류가 발생한 경우 에러를 처리합니다.
+    console.error("회원가입 중 오류:", error);
+    return res.status(500).json({
+      success: false,
+      message: "내부 서버 오류",
+      details: error.message,
+    });
+  }
+});
+//---------------------------회원가입 수정구현----------------------------------------------
+// app.get("/user", (req, res) => {
+//   const { usertype, userid } = req.session;
+
+//   if (!usertype || !userid) {
+//     return res.status(401).json({ success: false, message: "로그인되어 있지 않습니다." });
+//   }
+
+//   // 여기에서 데이터베이스에서 사용자 정보를 가져오는 로직을 구현합니다.
+//   const sql = "SELECT * FROM user WHERE userid = ?";
+//   connection.query(sql, [userid], (err, result) => {
+//     if (err) {
+//       console.error("사용자 정보 조회 중 오류:", err);
+//       return res.status(500).json({ success: false, message: "사용자 정보 조회 중 오류가 발생했습니다." });
+//     }
+
+//     const userData = result[0]; // 첫 번째 사용자 정보를 가져옴
+
+//     if (!userData) {
+//       return res.status(404).json({ success: false, message: "사용자 정보를 찾을 수 없습니다." });
+//     }
+
+//     res.status(200).json(userData);
+//   });
+// });
+
+
+
+
+
+
+
+
 
 
 
