@@ -1,19 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './campaign.css';
-import Header from '../component/Header';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./campaign.css";
+import Header from "../component/Header";
 import axios from "axios";
-import WriteEditor from '../component/campaign/WriteEditor';
+import WriteEditor from "../component/campaign/WriteEditor";
 import DatePicker from "react-datepicker";
-import DaumPostcode from 'react-daum-postcode';
+import DaumPostcode from "react-daum-postcode";
 
 import "react-datepicker/dist/react-datepicker.css";
 
 const CampaignWrite = () => {
+  // 상호형 작성
+  const storedUserData = sessionStorage.getItem("userData");
+  const userData = JSON.parse(storedUserData);
+  console.log("유저아이디:",userData.userid)
+
+
   const navigate = useNavigate();
   const [startDate, setStartDate] = useState(new Date("2024/01/01"));
   const [endDate, setEndDate] = useState(new Date("2024/01/01"));
-
 
   const [address, setAddress] = useState("");
   const [latitude, setLatitude] = useState(0);
@@ -26,7 +31,7 @@ const CampaignWrite = () => {
   const [write, setWrite] = useState({
     title: "",
     body: "",
-    userid: 1, // 회원번호
+    userid: userData.userid, // 회원번호
     start_date: startDate,
     end_date: endDate,
     address: address,
@@ -58,17 +63,12 @@ const CampaignWrite = () => {
     }
   };
 
-
-
-
-
-
-// @@@@@@@@@@@@@@@@@@@@ 지도 @@@@@@@@@@@@@@@@@@@@ 
+  // @@@@@@@@@@@@@@@@@@@@ 지도 @@@@@@@@@@@@@@@@@@@@
   useEffect(() => {
-    const mapContainer = document.getElementById('map'); // 지도를 표시할 div
+    const mapContainer = document.getElementById("map"); // 지도를 표시할 div
     const mapOption = {
       center: new window.daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
-      level: 3 // 지도의 확대 레벨
+      level: 3, // 지도의 확대 레벨
     };
 
     //지도를 미리 생성
@@ -78,20 +78,19 @@ const CampaignWrite = () => {
     //마커를 미리 생성
     const marker = new window.daum.maps.Marker({
       position: new window.daum.maps.LatLng(37.537187, 127.005476),
-      map: map
+      map: map,
     });
 
     function sample5_execDaumPostcode() {
       new window.daum.Postcode({
-        oncomplete: function(data) {
+        oncomplete: function (data) {
           const addr = data.address; // 최종 주소 변수
-
 
           // 주소 정보를 해당 필드에 넣는다.
           document.getElementById("sample5_address").value = addr;
 
           // 주소로 상세 정보를 검색
-          geocoder.addressSearch(data.address, function(results, status) {
+          geocoder.addressSearch(data.address, function (results, status) {
             // 정상적으로 검색이 완료됐으면
             if (status === window.daum.maps.services.Status.OK) {
               const result = results[0]; //첫번째 결과의 값을 활용
@@ -100,25 +99,23 @@ const CampaignWrite = () => {
               // 지도를 보여준다.
               mapContainer.style.display = "block";
               map.relayout();
-               // 지도 중심을 변경한다.
+              // 지도 중심을 변경한다.
               map.setCenter(coords);
               marker.setPosition(coords);
 
-
-              setAddress(addr)
+              setAddress(addr);
               setLatitude(coords.Ma);
               setLongitude(coords.La);
-              
+
               // Ma 위도 La경도
             }
           });
-        }
+        },
       }).open();
     }
-  console.log(latitude, longitude)
- 
+    console.log(latitude, longitude);
 
-    document.getElementById('searchButton').addEventListener('click', sample5_execDaumPostcode);
+    document.getElementById("searchButton").addEventListener("click", sample5_execDaumPostcode);
 
     // Cleanup event listener on unmount
     // return () => {
@@ -128,61 +125,72 @@ const CampaignWrite = () => {
 
   // console.log(address)
   // console.log(latitude, longitude)
-// @@@@@@@@@@@@@@@@@@@@ 지도 @@@@@@@@@@@@@@@@@@@@ 
+  // @@@@@@@@@@@@@@@@@@@@ 지도 @@@@@@@@@@@@@@@@@@@@
 
-
-  
   return (
     <div className="campaign-write">
-      <Header/>
+      <Header />
       <h2>캠페인(글쓰기) 페이지입니다.</h2>
       <div className="content-wrap">
         <form>
           <div className="content-wrap">
-            <input className="title" type="text" name="title" value={write.title} placeholder="제목을 입력하세요"  onChange={handleChange} /> 
+            <input className="title" type="text" name="title" value={write.title} placeholder="제목을 입력하세요" onChange={handleChange} />
 
             <div className="calendar-area">
               <p className="cal-tit">진행기간</p>
               <div className="calendar">
-                <DatePicker className="start-date" dateFormat='yyyy.MM.dd'  selected={startDate} onChange={(date) => setStartDate(date)} selectsStart startDate={startDate} endDate={endDate}/>
-                <DatePicker className="end-date" dateFormat='yyyy.MM.dd'  selected={endDate} onChange={(date) => setEndDate(date)} selectsEnd startDate={startDate} endDate={endDate} minDate={startDate}/>
+                <DatePicker className="start-date" dateFormat="yyyy.MM.dd" selected={startDate} onChange={(date) => setStartDate(date)} selectsStart startDate={startDate} endDate={endDate} />
+                <DatePicker
+                  className="end-date"
+                  dateFormat="yyyy.MM.dd"
+                  selected={endDate}
+                  onChange={(date) => setEndDate(date)}
+                  selectsEnd
+                  startDate={startDate}
+                  endDate={endDate}
+                  minDate={startDate}
+                />
               </div>
             </div>
 
             {/* <PostcodeSearch/> */}
             {/* <TestArrd/> */}
 
-
             {/* // @@@@@@@@@@@@@@@@@@@@ 지도 @@@@@@@@@@@@@@@@@@@@  */}
-            <div className='postcode'>
-              <div className='address-div'>
+            <div className="postcode">
+              <div className="address-div">
                 <input className="address-txt" type="text" id="sample5_address" placeholder="주소" />
                 <input className="btn-search" type="button" id="searchButton" value="주소 검색" />
               </div>
-              
-              <div id="map" style={{ width: '300px', height: '300px', marginTop: '10px', display: 'none' }}></div>
+
+              <div id="map" style={{ width: "300px", height: "300px", marginTop: "10px", display: "none" }}></div>
             </div>
             {/* // @@@@@@@@@@@@@@@@@@@@ 지도 @@@@@@@@@@@@@@@@@@@@  */}
 
-
-
             <WriteEditor handleChangeQuill={handleChangeQuill} value={write.body} />
-            
-            <input className="author-id" type="number" name="userid" value={write.userid} onChange={handleChange}/>
+
+            <input className="author-id" type="number" name="userid" value={write.userid} onChange={handleChange} />
           </div>
           <div className="bottom-area">
-            <button className="btn-submit" type="submit" onClick={handleClick}>등록</button> <br></br>
+            <button className="btn-submit" type="submit" onClick={handleClick}>
+              등록
+            </button>{" "}
+            <br></br>
           </div>
         </form>
-      <button type="text" className="btn-tolist pos-right" onClick={()=>{navigate(-1);}}>목록</button>
+        <button
+          type="text"
+          className="btn-tolist pos-right"
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
+          목록
+        </button>
       </div>
-
     </div>
-
-    
   );
 };
-
 
 // const PostcodeSearch = () => {
 //   const [postcode, setPostcode] = useState('');
@@ -262,7 +270,6 @@ const CampaignWrite = () => {
 //         oncomplete: function(data) {
 //           const addr = data.address; // 최종 주소 변수
 
-
 //           // 주소 정보를 해당 필드에 넣는다.
 //           document.getElementById("sample5_address").value = addr;
 
@@ -280,7 +287,6 @@ const CampaignWrite = () => {
 //               map.setCenter(coords);
 //               marker.setPosition(coords);
 
-
 //               setAddress(addr)
 //               setLatitude(coords.Ma);
 //               setLongitude(coords.La);
@@ -290,8 +296,6 @@ const CampaignWrite = () => {
 //         }
 //       }).open();
 //     }
-
- 
 
 //     document.getElementById('searchButton').addEventListener('click', sample5_execDaumPostcode);
 
@@ -304,14 +308,13 @@ const CampaignWrite = () => {
 //   console.log(address)
 //   console.log(latitude, longitude)
 
-
 //   return (
 //     <div className='postcode'>
 //       <div className='address-div'>
 //         <input className="address-txt" type="text" id="sample5_address" placeholder="주소" />
 //         <input className="btn-search" type="button" id="searchButton" value="주소 검색" />
 //       </div>
-      
+
 //       <div id="map" style={{ width: '300px', height: '300px', marginTop: '10px', display: 'none' }}></div>
 //     </div>
 //   );

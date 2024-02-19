@@ -1,4 +1,5 @@
-.menu-container {
+/* .menu-container {
+
     width: 100%;
     background-color: whitesmoke;
     display: flex;
@@ -80,21 +81,28 @@
 input[type="radio"] {
     margin-right: 10px;
 }
-.barChart-container{
+
+.barChart-container {
     width: 95%;
     display: flex;
-    /* flex-flow: column; */
     justify-content: space-between;
     align-items: center;
 }
-.barChart{
+
+.barChart {
     width: 30%;
     height: 200px;
     border: 1px solid grey;
     border-radius: 5px;
     margin: 10px 10px;
-    
+
 }
-.barChart text{
+
+.barChart text {
     font-weight: bold;
-}
+} */
+
+
+
+
+.menu-container {padding: 140px 100px;}
