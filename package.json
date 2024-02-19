@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "concurrently": "^8.2.2",
-    "express": "^4.18.2"
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mysql2": "^3.9.1"
   },
   "devDependencies": {
     "nodemon": "^3.0.2"
