@@ -1,0 +1,118 @@
+.campaign {padding: 140px 100px;}
+h2 {margin-bottom: 20px}
+
+.campaign-wrap {margin-top: 20px;}
+.campaign-wrap .cont {display: flex; justify-content: space-between; width: 100%; padding: 30px 8px; border-bottom: 1px solid #000;}
+/* .campaign-wrap .cont {display: flex; justify-content: space-between; width: 100%; padding: 30px 8px; border-bottom: 1px solid #000;} */
+/* .campaign-wrap .cont + .cont {margin-top: 40px;} */
+.campaign-wrap .cont .title {margin-right: 20px; width: 30%; font-size: 18px; color: #000; text-align: left;}
+.campaign-wrap .cont p {width: 100%; color: #000; text-align: left;}
+.campaign-wrap .cont .date {text-align: right;}
+.campaign-wrap .cont .img {width: 120px; height: 120px; border: 1px solid red;}
+.campaign-wrap .cont .img img {width: 100%; height: 100%;}
+
+/* 글쓰기 */
+.campaign-write {margin: 0 auto; padding: 140px 40px; width: 80%;}
+/* .campaign-write .form-w {margin-top: 40px;} */
+.campaign-write .title {margin: 0 auto; padding: 4px 12px; width: 100%; border: 0;  color: #000; background-color: #e1f0de;}
+.campaign-write .title::placeholder {color: #777;} 
+.campaign-write .content {margin-top: 20px; width: 100%; min-height: 400px; color: #000;}
+.campaign-write .ql-container {height: 400px; background-color: #e1f0de;}
+/* .campaign-write .ql-container .ql-editor > * {width: 100%;} */
+/* .campaign-write .content::placeholder {color: #777;}  */
+.campaign-write .author-id {margin-top: 20px; padding: 4px 12px; width: 200px; border: 0; color: #000; background-color: #e1f0de;}
+.campaign-write .btn-submit {display: block; color: #fff; background-color: #228e0c;}
+.campaign-write .btn-tolist {padding: 10px 14px; color: #fff; background-color: #228e0c;}
+.campaign-write .btn-tolist.pos-right {position: absolute; right: 0; bottom: 0;}
+
+/* 상세 */
+.campaign-detail h2 {top: 12%; padding: 0;}
+.campaign-detail {position: relative; padding: 18vh 10%; min-height: 100vh;;}
+.campaign-detail p {font-size: 20px; color: #000;}
+.campaign-detail .title-area {padding-bottom: 14px; border-bottom: 1px solid #aaa;}
+.campaign-detail .title-area .title {font-size: 24px;}
+.campaign-detail .regi-info {display: flex; justify-content: flex-end;}
+.campaign-detail .regi-info p {font-size: 16px; color: #777;}
+.campaign-detail .regi-info .date {position: relative; margin-left: 16px; padding-left: 16px;}
+.campaign-detail .regi-info .date::before {content: ""; position: absolute; top: 6px; left: 0; width: 1px; height: 10px; background-color: #ccc;}
+.campaign-detail .body-area {padding: 20px; font-size: 18px;}
+
+.content-wrap {position: relative;}
+
+/* 댓글 영역 */
+.comment-area {position: relative; margin-top: 40px;}
+.comment-area .write-div {position: relative; border: 1px solid #000;}
+.comment-area .write-div::after {content: ""; display: block; position: absolute; bottom: 48px; left: 16px; width: calc(100% - 32px); height: 1px; background-color: #ccc;}
+.comment-area .for-padding {padding: 14px 14px 48px 14px;}
+.comment-area .comment-text {position: relative; padding: 0; width: 100%; font-size: 16px; min-height: 140px; border: 0;}
+
+.comment-area .comment-text::placeholder {font-size: 16px; color: #999;}
+.comment-area .write-div .btn-w {display: flex; position: absolute; right: 18px; bottom: 12px;}
+.comment-area .write-div .btn-w button {font-size: 16px;}
+.comment-area .write-div .btn-w button + button {margin-left: 10px;}
+/* .comment-area .btn-submit {position: absolute; right: 18px; bottom: 12px; font-size: 16px;} */
+
+
+/* 버튼 영역 */
+.bottom-area {margin-top: 80px; display: flex; justify-content: space-between;}
+.bottom-area button {padding: 10px 14px; color: #fff; background-color: #228e0c; border: 1px solid #228e0c;}
+.bottom-area .btn-edit {margin-right: 8px;}
+.bottom-area .btn-delete {background-color: #fff; color: #000; border: 1px solid #000;} 
+
+/* 진행 기간 */
+.period-area {display: flex; align-items: center; margin-top: 20px; padding: 20px; background-color: #ddd;}
+.period-area .period-tit {margin-right: 20px; word-break: keep-all; font-size: 18px;}
+.period-area .date-wrap {display: flex; align-items: center;}
+.period-area .date-wrap p {font-size: 16px; word-break: keep-all;}
+.period-area .date-wrap span {margin: 0 8px;}
+
+
+
+/* 페이지네이션 */
+.pagination {display: flex; justify-content: center; margin-top: 80px;}
+.pagination .btn-prev, .pagination .btn-next {margin-right: 8px; padding: 10px; border: 1px solid #999; color: #999;}
+.pagination button {display: flex; justify-content: center; align-items: center; position: relative; margin-right: 8px; padding: 10px; min-width: 40px; border: 1px solid #999; color: #999; word-break: keep-all;}
+/* .pagination button.active::after {content: ''; position: absolute; top: 0; left: 0; display: block; width: 100%; height: 100%; background-color: rgba(255, 255, 255, .25);} */
+.pagination button.active {font-weight: 700; padding: 10px 14px; color: #fff; background-color: #228e0c; border: 0;}
+.pagination button span {word-break: keep-all;}
+
+.btn-link {margin-top: 60px; padding: 10px 14px; color: #fff; background-color: #228e0c;}
+
+/* 검색 input */
+.search-wrap {display: flex; justify-content: center; margin: 40px 0 60px;}
+.search-wrap input {padding: 4px; width: calc(100% - 120px); border: 0; border-bottom: 1px solid #000;}
+.btn-search {margin-left: 12px; padding: 4px 16px; border: 1px solid #000;}
+
+/* 탭 */
+.tab-area {display: flex; justify-content: center; margin-bottom: 40px;}
+.tab-area .btn-tab.active {border-bottom: 1px solid #000;}
+.tab-area .btn-tab + .btn-tab {margin-left: 20px;}
+
+/* 캘린더 */
+.calendar-area {margin-top: 20px;}
+.calendar-area .cal-tit {margin-bottom: 12px;}
+.calendar {display: flex;}
+.calendar > div:nth-child(2) {margin-left: 12px;}
+.calendar input {margin: 0 auto; padding: 4px 12px; width: 100%; border: 0; color: #000; background-color: #e1f0de;}
+
+/* 댓글 */
+.view-wrap {padding: 40px 0;}
+.view-wrap .comment {position: relative; margin-bottom: 10px; border-bottom: 1px solid #ddd;}
+.view-wrap .comment .view-div {padding: 12px;}
+.view-wrap .comment .view-div .txt {padding-right: 70px; font-size: 16px;}
+.view-wrap .comment .view-div .date {position: absolute; top: 14px; right: 14px; font-size: 14px; color: #777;}
+.view-wrap .comment .write-div {display: none;}
+
+.view-wrap .comment .view-div .btn-w {display: flex; justify-content: flex-end; margin-top: 20px;}
+.view-wrap .comment .view-div .btn-w button {padding: 4px 8px; font-size: 14px; color: #777; background-color: #ddd;}
+.view-wrap .comment .view-div .btn-w .btn-delete {margin-left: 8px;}
+
+.view-wrap .comment.edit .view-div {display: none;}
+.view-wrap .comment.edit .write-div {display: block;}
+
+/* 우편 */
+.postcode {position: relative; margin-top: 10px;}
+.postcode .address-div {display: flex; justify-content: flex-start;}
+.daum_popup {z-index: 10;}
+.postcode .address-div .address-txt {width: 80%; margin: 0 auto; padding: 4px 12px; width: 100%; border: 0; color: #000; background-color: #e1f0de;}
+.postcode .address-div .btn-search {background-color: #fff; cursor: pointer;}

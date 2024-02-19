@@ -1,38 +1,78 @@
-.App {
-  text-align: center;
-}
+/* reset */
+* {margin: 0; padding: 0; letter-spacing: -.03em; -webkit-box-sizing: border-box; box-sizing: border-box; -webkit-print-color-adjust: exact !important; print-color-adjust: exact; /* word-break:keep-all; */ word-break: break-word; word-wrap:break-word; overflow-wrap:break-word;/* page-break-after: avoid; page-break-before: avoid; page-break-inside: avoid; break-inside: avoid-page; break-before: avoid-page; break-after: avoid-page; */}
+html {width: 100%; height: 100%;}
+body {position: relative; font-family: "Noto Sans KR", 'dotum', '돋움', 'gulim', '굴림', sans-serif; font-weight: 400; font-size: 14px; color: #1f1b1c; line-height: 1.5; height: 100%; -webkit-text-size-adjust: 100%; -moz-text-size-adjust: 100%; -ms-text-size-adjust: 100%; -webkit-overflow-scrolling: touch; -webkit-print-color-adjust: exact !important;}
+body, div, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, p, form, fieldset, table, tr, th, td {margin: 0; padding: 0; font-weight: normal;}
+ul, ol, li {list-style: none;}
+img, fieldset {border: none; vertical-align: top;}
+legend, caption {visibility: hidden; overflow: hidden; width: 0; height: 0; font-size: 0; line-height: 0;}
+textarea, button {vertical-align: middle;}
+input, select {font-family: "Noto Sans KR", 'dotum', '돋움', 'gulim', '굴림', sans-serif; vertical-align: top;}
+input {padding: 3px 20px; height: 50px;}
+input[type="text"]::-ms-clear {display:none;}
+input:focus, input:active {outline: none;}
+.attach_area .file_div input[readonly] {pointer-events: none;}
+option {padding: 3px 10px;}
+option:focus, option:active {outline: none;}
+input[type="radio"], input[type="checkbox"] {border: 0; padding: 0; height: auto; -webkit-box-shadow: none; box-shadow: none;}
+input[type="password"] {height: 40px; border: 1px solid #e5e5e5; color: #888; background: #fff; -webkit-appearance: none; -webkit-box-shadow: none; box-shadow: none;}
+input[type="password"]::-webkit-input-placeholder {color: #999;}
+input[type="password"]:-ms-input-placeholder {color: #999;}
+input[type="password"]::-ms-input-placeholder {color: #999;}
+input[type="password"]::placeholder {color: #999;}
+input[type="password"]:disabled {color: #999; background-color: #f3f3f3;}
+input[type="password"].readonly {color: #999; background-color: #f3f3f3;}
+input[type="password"][readonly=readonly] {color: #999; background-color: #f3f3f3;}
+input[type="text"] {background: #fff; -webkit-appearance: none; -webkit-box-shadow: none; box-shadow: none;}
+input[type="text"]::-webkit-input-placeholder {color: #999;}
+input[type="text"]:-ms-input-placeholder {color: #999;}
+input[type="text"]::-ms-input-placeholder {color: #999;}
+input[type="text"]::placeholder {color: #999;}
+input[type="text"]:disabled {color: #999; background-color: #e9e9e9;}
+input[type="text"]:-moz-read-only {color: #999; background-color: #e9e9e9;}
+input[type="text"]:read-only {color: #999; background-color: #e9e9e9; border:1px solid #e9e9e9;}
+input[type="text"].readonly {color: #999; background-color: #e9e9e9;}
+input[type="text"]:disabled + .cal_btn {opacity: .5;}
+input[type="tel"] {background: #fff; -webkit-appearance: none; -webkit-box-shadow: none; box-shadow: none;}
+input[type="tel"]::-webkit-input-placeholder {color: #999;}
+input[type="tel"]:-ms-input-placeholder {color: #999;}
+input[type="tel"]::-ms-input-placeholder {color: #999;}
+input[type="tel"]::placeholder {color: #999;}
+input[type="tel"]:disabled {color: #999; background-color: #f3f3f3;}
+input[type="tel"]:-moz-read-only {color: #999; background-color: #f3f3f3;}
+input[type="tel"]:read-only {color: #999; background-color: #f3f3f3;}
+input[type="tel"].readonly {color: #999; background-color: #f3f3f3;}
+input[type="tel"]:disabled + .cal_btn {opacity: .5;}
+input[type="number"]::-webkit-input-placeholder {color: #999;}
+input[type="number"]:-ms-input-placeholder {color: #999;}
+input[type="number"]::-ms-input-placeholder {color: #999;}
+input[type="number"]::placeholder {color: #999;}
+input[type="number"]:disabled {color: #999; background-color: #f3f3f3;}
+input[type="number"]:-moz-read-only {color: #999; background-color: #f3f3f3;}
+input[type="number"]:read-only {color: #999; background-color: #f3f3f3;}
+input[type="number"].readonly {color: #999; background-color: #f3f3f3;}
+select {font-size: 18px; color: #888; appearance: none; -webkit-appearance: none; -moz-appearance: none; -o-appearance: none; vertical-align: top;}
+select::-ms-expand {display: none;}
+select:focus, select:active {outline: none;}
+select:disabled {color: #999; background-color: #e9e9e9; opacity: 1;}
+textarea {padding: 10px 20px; width: 100%; font-family: "Noto Sans KR", 'dotum', '돋움', 'gulim', '굴림', sans-serif; font-size: 18px; color: #1f1b1c; -webkit-appearance: none; -webkit-box-shadow: none; box-shadow: none; border-radius: 0; vertical-align: top; background: #fff; border: 1px solid #e5e5e5; resize: none;}
+textarea:focus, textarea:active {outline: none;}
+textarea::-webkit-input-placeholder {color: #999;}
+textarea:-ms-input-placeholder {color: #999;}
+textarea::-ms-input-placeholder {color: #999;}
+textarea::placeholder {color: #999;}
+textarea:disabled {color: #999; background-color: #f3f3f3;}
+textarea:-moz-read-only {color: #999; background-color: #f3f3f3;}
+textarea:read-only {color: #999; background-color: #f3f3f3;}
+a {text-decoration: none; color: #1f1b1c;}
+a:hover, a:focus, a:active {text-decoration: none;}
+table {width: 100%; border-collapse: collapse;}
+button {background: none; border: none; padding: 0; margin: 0; font-family: "Noto Sans KR", 'dotum', '돋움', 'gulim', '굴림', sans-serif; font-size: 18px; cursor: pointer; overflow: visible;}
+button:focus, a:focus {outline: 0 !important;}/* 마우스, 터치로 버튼에 포커스 시 */
+button:focus:focus-visible, a:focus:focus-visible {outline: 2px solid black;}/* 키보드로 버튼에 포커스 시 */
+/* button:focus, button:active { outline: none; } */
+button::-moz-focus-inner {padding: 0; border: 0;}
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {display: block;}
+::selection {color: #fff; background-color: #0078C3;}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
