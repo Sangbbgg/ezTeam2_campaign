@@ -55,40 +55,76 @@ const Comments = ({ curList }) => {
   };
 
   // 댓글 등록
+  //  const postComment = async (e) => {
+  //   e.preventDefault();
+  //   const confirmCreate = window.confirm("댓글을 등록하시겠습니까?");
+  //   const storedUserData = sessionStorage.getItem("userData");
+  //   const userData = JSON.parse(storedUserData);
+  //   const userid = userInfo.filter((data)=> {
+  //     return data.userid === userData.userid
+  //   })
+  //   console.log(userData)
+    
+  //   console.log(userid)
+  //   if(confirmCreate){
+  //     try {
+  //       // 사용자 정보가 있는 경우에만 댓글을 등록
+  //       if(userInfo && userInfo.length > 0) {
+  //         const response = await axios.post(`http://localhost:8000/campaign/detail/${curList.id}/comments`, {
+  //           userid: userid[0].userid,
+  //           comment_text: newComment,
+  //           date: new Date(),
+  //         });
+  //         const commentId = response.data.commentId; // 서버로부터 받은 commentId
+
+  //         dispatch(getCommentsUrl(curList.id));
+  //         setNewComment("");
+  //         setComments(prev => [{id: commentId, userid: userid[0].userid, comment_text: newComment, date: new Date()}, ...prev]);
+  //       } else {
+  //         console.log("User information is not available.")
+  //       }
+        
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  // }
+  // 댓글 등록
   const postComment = async (e) => {
     e.preventDefault();
     const confirmCreate = window.confirm("댓글을 등록하시겠습니까?");
     const storedUserData = sessionStorage.getItem("userData");
     const userData = JSON.parse(storedUserData);
-    const userid = userInfo.filter((data)=> {
-      return data.userid === userData.userid
-    })
-    console.log(userData)
-    
-    console.log(userid)
-    if(confirmCreate){
+
+    if (confirmCreate) {
       try {
         // 사용자 정보가 있는 경우에만 댓글을 등록
-        if(userInfo && userInfo.length > 0) {
+        if (userInfo && userInfo.length > 0) {
           const response = await axios.post(`http://localhost:8000/campaign/detail/${curList.id}/comments`, {
-            userid: userid[0].userid,
+            userid: userData.userid,
             comment_text: newComment,
             date: new Date(),
           });
           const commentId = response.data.commentId; // 서버로부터 받은 commentId
+          const newCommentData = {
+            id: commentId,
+            userid: userData.userid,
+            comment_text: newComment,
+            date: new Date(),
+            username: userData.username, // 서버 응답에 사용자 이름이 포함되어 있다면 해당 정보를 사용
+          };
 
           dispatch(getCommentsUrl(curList.id));
           setNewComment("");
-          setComments(prev => [{id: commentId, comment_text: newComment, date: new Date()}, ...prev]);
+          setComments(prev => [newCommentData, ...prev]);
         } else {
-          console.log("User information is not available.")
+          console.log("User information is not available.");
         }
-        
       } catch (error) {
         console.log(error);
       }
     }
-  }
+  };
 
   // 댓글 삭제 버튼
   const deleteComment = async (commentId) => {
