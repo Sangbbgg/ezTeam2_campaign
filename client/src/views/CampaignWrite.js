@@ -26,7 +26,7 @@ const CampaignWrite = () => {
   const [write, setWrite] = useState({
     title: "",
     body: "",
-    author_id: 17, // 회원번호
+    userid: 17, // 회원번호
     start_date: startDate,
     end_date: endDate,
     address: address,
@@ -168,7 +168,7 @@ const CampaignWrite = () => {
 
             <WriteEditor handleChangeQuill={handleChangeQuill} value={write.body} />
             
-            <input className="author-id" type="number" name="author_id" value={write.author_id} onChange={handleChange}/>
+            <input className="author-id" type="number" name="userid" value={write.userid} onChange={handleChange}/>
           </div>
           <div className="bottom-area">
             <button className="btn-submit" type="submit" onClick={handleClick}>등록</button> <br></br>

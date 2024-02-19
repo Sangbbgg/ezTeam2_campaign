@@ -59,7 +59,7 @@ app.get("/", (req, res) => {
 
 // 캠페인 글 목록 가져오기
 app.get("/campaign", (req, res) => {
-  const q = "SELECT * FROM campaign.posts";
+  const q = "SELECT * FROM campaign_posts";
   connection.query(q, (err, data) => {
     if (err) {
       console.error('Error executing MySQL query:', err);
@@ -72,7 +72,7 @@ app.get("/campaign", (req, res) => {
 // 글쓰기 페이지에서 사용자가 입력한 정보가 들어가도록 요청
 app.post("/campaign", (req, res) => {
   // MySQL의 NOW() 함수를 사용하여 현재 시간을 삽입
-  const q = 'INSERT INTO posts (title, body, date, author_id, start_date, end_date, address, latitude, longitude) VALUES (?, ?, NOW(), ?, ?, ?, ?, ?, ?)';
+  const q = 'INSERT INTO campaign_posts (title, body, date, userid, start_date, end_date, address, latitude, longitude) VALUES (?, ?, NOW(), ?, ?, ?, ?, ?, ?)';
 
   // 시작날짜
   const startDateOffset = new Date(req.body.start_date);
@@ -82,7 +82,7 @@ app.post("/campaign", (req, res) => {
   const endDateOffset = new Date(req.body.end_date);
   const formattedEndDate = new Date(endDateOffset.getTime() - (endDateOffset.getTimezoneOffset() * 60000)).toISOString().slice(0, 19).replace('T', ' '); // ISO 형식의 날짜를 MySQL이 인식할 수 있는 형식으로 변환
 
-  const values = [req.body.title, req.body.body, req.body.author_id, formattedStartDate, formattedEndDate, req.body.address, req.body.latitude, req.body.longitude];
+  const values = [req.body.title, req.body.body, req.body.userid, formattedStartDate, formattedEndDate, req.body.address, req.body.latitude, req.body.longitude];
   console.log(req.body)
 
   connection.query(q, values, (err, data) => { 
@@ -94,7 +94,7 @@ app.post("/campaign", (req, res) => {
 // 글 삭제
 // app.delete("/campaign/detail/:id", (req, res) => {
 //   const campaignId = req.params.id;
-//   const q = "DELETE FROM posts WHERE id = ?";
+//   const q = "DELETE FROM campaign_posts WHERE id = ?";
 
 //   connection.query(q, [campaignId], (err, data) => {
 //     if (err) return res.json(err);
@@ -105,7 +105,7 @@ app.post("/campaign", (req, res) => {
 app.delete("/campaign/detail/:id", (req, res) => {
   const campaignId = req.params.id;
   const qDeleteComments = "DELETE FROM comments WHERE post_id = ?"; // 특정 post_id에 해당하는 모든 댓글을 삭제
-  const qDeletePost = "DELETE FROM posts WHERE id = ?"; // 게시물의 ID 값을 사용하여 특정 게시물을 삭제
+  const qDeletePost = "DELETE FROM campaign_posts WHERE id = ?"; // 게시물의 ID 값을 사용하여 특정 게시물을 삭제
 
   // 댓글 먼저 삭제
   connection.query(qDeleteComments, campaignId, (err, data) => {
@@ -129,7 +129,7 @@ app.delete("/campaign/detail/:id", (req, res) => {
 // 글 수정
 app.get("/campaign/detail/:id", (req, res) => {
   const campaignId = req.params.id;
-  const q = "SELECT * FROM posts WHERE id = ?";
+  const q = "SELECT * FROM campaign_posts WHERE id = ?";
   connection.query(q, campaignId, (err, data) => {
     if(err) return res.status(500).json(err);
     if(data.length === 0) return res.status(404).json({ message: "글을 찾을 수 없습니다." });
@@ -138,7 +138,7 @@ app.get("/campaign/detail/:id", (req, res) => {
 });
 app.put("/campaign/edit/:id", (req, res) => {
   const campaignId = req.params.id;
-  const q = "UPDATE posts SET `title` = ?, `body` = ? WHERE id = ?";
+  const q = "UPDATE campaign_posts SET `title` = ?, `body` = ? WHERE id = ?";
   const values = [req.body.title, req.body.body, campaignId];
   connection.query(q, values, (err, data) => {
     if(err) return res.json(err);
@@ -153,7 +153,7 @@ app.get("/userinfo", (req, res) => {
   // 여기에 사용자 정보를 가져오는 코드를 작성 (예: 세션을 통해 사용자 정보를 가져오는 코드)
   // 예시로 사용자 정보를 하드코딩하여 전송
   const userInfo = {
-    author_id: 1, // 예시로 author_id를 하드코딩하여 전송 (실제로는 세션 등을 통해 가져옴)
+    userid: 1, // 예시로 userid를 하드코딩하여 전송 (실제로는 세션 등을 통해 가져옴)
     // 다른 사용자 정보도 필요한 경우 추가
   };
   res.json(userInfo); // 사용자 정보를 클라이언트에게 전송
@@ -163,10 +163,10 @@ app.get("/userinfo", (req, res) => {
 // 댓글 등록
 app.post("/campaign/detail/:id/comments", (req, res) => {
   const postId = req.params.id;
-  const { author_id, comment_text } = req.body; 
+  const { userid, comment_text } = req.body; 
   
-  const values = [postId, author_id, comment_text];
-  const q = 'INSERT INTO comments (post_id, author_id, comment_text, date) VALUES (?, ?, ?, NOW())';
+  const values = [postId, userid, comment_text];
+  const q = 'INSERT INTO comments (post_id, userid, comment_text, date) VALUES (?, ?, ?, NOW())';
   
   connection.query(q, values, (err, data) => { 
     if(err) {
@@ -242,7 +242,7 @@ app.get("/campaign/detail/:id/comments/:commentId", (req, res) => {
 
 // app.get("/campaign/detail/:id", (req, res) => {
 //   const campaignId = req.params.id;
-//   const q = "SELECT * FROM posts WHERE id = ?";
+//   const q = "SELECT * FROM campaign_posts WHERE id = ?";
 //   connection.query(q, campaignId, (err, data) => {
 //     if(err) return res.status(500).json(err);
 //     if(data.length === 0) return res.status(404).json({ message: "글을 찾을 수 없습니다." });
@@ -252,7 +252,7 @@ app.get("/campaign/detail/:id/comments/:commentId", (req, res) => {
 
 // app.put("/campaign/detail/:id/comments/:commentId", (req, res) => {
 //   const campaignId = req.params.id;
-//   const q = "UPDATE posts SET `title` = ?, `body` = ? WHERE id = ?";
+//   const q = "UPDATE campaign_posts SET `title` = ?, `body` = ? WHERE id = ?";
 //   const values = [req.body.title, req.body.body, campaignId];
 //   connection.query(q, values, (err, data) => {
 //     if(err) return res.json(err);

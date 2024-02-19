@@ -88,7 +88,7 @@ const CampaignDetail = (props) => {
       <div className="title-area">
         <p className="title">{curList?.title}</p>
         <div className="regi-info">
-          <p className="author-id">{"회원번호: " + curList?.author_id}</p>
+          <p className="author-id">{"회원번호: " + curList?.userid}</p>
           {/* <p className="date">{curList?.date.slice(0, 10).replace("T", "")}</p> */}
           <p className="date">{new Date(curList?.date).toLocaleDateString()}</p>
         </div>

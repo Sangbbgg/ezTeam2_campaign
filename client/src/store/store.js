@@ -7,6 +7,7 @@ export const getPost = createAsyncThunk(
   "data/postData", // action 이름
   async()=>{
     const result = await axios.get(dataUrl.home);
+    console.log(result)
     return result.data;
   }
 )

@@ -12,7 +12,7 @@ const TextList = ({campaignList}) => {
           ? campaignList.title.slice(0, 20) + "..."
           : campaignList.title
       }</p>
-      {/* <p className="date">{campaignList.author_id}</p> */}
+      {/* <p className="date">{campaignList.userid}</p> */}
       <p className="date">{campaignList.date.slice(0, 10).replace('T', ' ')}</p>
     </button>
   )

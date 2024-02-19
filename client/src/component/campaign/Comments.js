@@ -62,7 +62,7 @@ const Comments = ({ curList }) => {
         // 사용자 정보가 있는 경우에만 댓글을 등록
         if(userInfo) {
           const response = await axios.post(`http://localhost:8000/campaign/detail/${curList.id}/comments`, {
-            author_id: userInfo.author_id,
+            userid: userInfo.userid,
             comment_text: newComment,
             date: new Date(),
           });
@@ -188,8 +188,8 @@ export default Comments;
 
 // id: 댓글을 고유하게 식별하는 자동 증가하는 정수형 열
 // post_id: 댓글이 속한 게시물의 ID를 저장하는 정수형 외래 키 열입니다. 이 열은 posts 테이블의 id 열을 참조
-// author_id: 댓글을 작성한 사용자를 식별하는 정수형 외래 키 열입니다. 이 열은 authors 테이블의 사용자 ID를 참조
+// userid: 댓글을 작성한 사용자를 식별하는 정수형 외래 키 열입니다. 이 열은 authors 테이블의 사용자 ID를 참조
 // comment_text: 댓글의 내용을 저장하는 텍스트 열입니다.
 // date: 댓글이 작성된 날짜 및 시간을 저장하는 열입니다. 기본값으로 현재 시간이 설정되며, NULL을 허용
 // PRIMARY KEY: id 열을 기본 키로 지정하여 각 레코드를 고유하게 식별
-// INDEX 및 CONSTRAINT: post_id 및 author_id 열에는 각각 외래 키 제약 조건이 정의되어 있습니다. 이러한 제약 조건은 데이터 무결성을 유지하고 참조 무결성을 보장
+// INDEX 및 CONSTRAINT: post_id 및 userid 열에는 각각 외래 키 제약 조건이 정의되어 있습니다. 이러한 제약 조건은 데이터 무결성을 유지하고 참조 무결성을 보장
