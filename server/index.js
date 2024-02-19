@@ -104,7 +104,7 @@ app.post("/campaign", (req, res) => {
 // 글 삭제
 app.delete("/campaign/detail/:id", (req, res) => {
   const campaignId = req.params.id;
-  const qDeleteComments = "DELETE FROM comments WHERE post_id = ?"; // 특정 post_id에 해당하는 모든 댓글을 삭제
+  const qDeleteComments = "DELETE FROM campaign_comments WHERE post_id = ?"; // 특정 post_id에 해당하는 모든 댓글을 삭제
   const qDeletePost = "DELETE FROM campaign_posts WHERE id = ?"; // 게시물의 ID 값을 사용하여 특정 게시물을 삭제
 
   // 댓글 먼저 삭제
@@ -166,7 +166,7 @@ app.post("/campaign/detail/:id/comments", (req, res) => {
   const { userid, comment_text } = req.body; 
   
   const values = [postId, userid, comment_text];
-  const q = 'INSERT INTO comments (post_id, userid, comment_text, date) VALUES (?, ?, ?, NOW())';
+  const q = 'INSERT INTO campaign_comments (post_id, userid, comment_text, date) VALUES (?, ?, ?, NOW())';
   
   connection.query(q, values, (err, data) => { 
     if(err) {
@@ -195,7 +195,7 @@ app.post("/campaign/detail/:id/comments", (req, res) => {
 // 댓글을 가져오는 API 엔드포인트
 app.get("/campaign/detail/:id/comments", (req, res) => {
   const postId = req.params.id;
-  const q = "SELECT * FROM comments WHERE post_id = ?";
+  const q = "SELECT * FROM campaign_comments WHERE post_id = ?";
   
   connection.query(q, [postId], (err, data) => { 
     if(err) return res.status(500).json(err);
@@ -208,7 +208,7 @@ app.get("/campaign/detail/:id/comments", (req, res) => {
 app.delete("/campaign/detail/:id/comments/:commentId", (req, res) => {
   const postId = req.params.id;
   const commentId = req.params.commentId;
-  const q = "DELETE FROM comments WHERE post_id = ? AND id = ?";
+  const q = "DELETE FROM campaign_comments WHERE post_id = ? AND id = ?";
 
   connection.query(q, [postId, commentId], (err, data) => {
     if (err) {
@@ -226,7 +226,7 @@ app.get("/campaign/detail/:id/comments/:commentId", (req, res) => {
   console.log(postId);
   console.log(commentId);
 
-  const q = "SELECT * FROM comments WHERE post_id = ? AND id = ?";
+  const q = "SELECT * FROM campaign_comments WHERE post_id = ? AND id = ?";
 
   connection.query(q, [postId, commentId], (err, data) => {
     if (err) {
