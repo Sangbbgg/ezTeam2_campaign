@@ -71,7 +71,7 @@ const CampaignWrite = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     const confirmCreate = window.confirm("글을 등록하시겠습니까?");
-
+  
     if (confirmCreate) {
       let postData = {
         title: write.title,
@@ -79,13 +79,25 @@ const CampaignWrite = () => {
         userid: write.userid,
         start_date: startDate,
         end_date: endDate,
-
-        // "장소없음"일 경우 주소 관련 필드를 null로 설정
-        address: null,
-        latitude: null,
-        longitude: null,
+      };
+  
+      // "장소없음"이 선택되었을 때만 주소 관련 필드를 null로 설정
+      if (selOpt === "장소없음" || address === "") {
+        postData = {
+          ...postData,
+          address: null,
+          latitude: null,
+          longitude: null,
+        };
+      } else {
+        postData = {
+          ...postData,
+          address: write.address,
+          latitude: write.latitude,
+          longitude: write.longitude,
+        };
       }
-
+  
       try {
         await axios.post("http://localhost:8000/campaign", postData);
         navigate(-1);
@@ -94,6 +106,7 @@ const CampaignWrite = () => {
       }
     }
   };
+  
 
 // @@@@@@@@@@@@@@@@@@@@ 지도 @@@@@@@@@@@@@@@@@@@@ 
   useEffect(() => {
