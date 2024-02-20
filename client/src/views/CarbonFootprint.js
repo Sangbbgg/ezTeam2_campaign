@@ -125,6 +125,7 @@ function CarbonFootprint() {
   return (
     <>
       <Header />
+      <div className="carbon-box">
       <div className="menu-container">
         <div className="tab-container">
           <ul className="tab-menu">
@@ -143,6 +144,7 @@ function CarbonFootprint() {
         </div>
       </div>
       <div className="content-container">{renderContent()}</div>
+      </div>
     </>
   );
 }
