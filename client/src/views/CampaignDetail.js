@@ -118,9 +118,17 @@ const CampaignDetail = (props) => {
       {/* <MapTest/> */}
       {
         curList?.latitude != null ? (
-          <div id="map" style={{width:"500px", height:"400px"}}></div>
+          <div className="map-area">
+            <p className="tit">위치 안내</p>
+              <div id="map" style={{width:"500px", height:"400px"}}></div>
+            <div className="txt-w">
+                <p className="txt">{curList?.address}</p>
+                <p className="detail-txt">{curList?.detailedaddress}</p>
+            </div>
+          </div>
         ):null
       }
+      
 
       {/* 하단 버튼 영역 */}
       <div className="bottom-area">
