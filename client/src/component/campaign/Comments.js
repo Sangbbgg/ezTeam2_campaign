@@ -43,7 +43,7 @@ const Comments = ({ curList }) => {
     try {
       // 사용자 정보를 가져오는 API 호출
       const response = await axios.get('http://localhost:8000/users');
-      console.log(response.data)
+      // console.log(response.data)
       setUserInfo(response.data); // 가져온 사용자 정보를 상태에 저장
     } catch (error) {
       console.error('Error fetching user info:', error);

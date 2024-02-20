@@ -33,12 +33,13 @@ h2 {margin-bottom: 20px}
 .campaign-detail {position: relative; padding: 18vh 10%; min-height: 100vh;;}
 .campaign-detail p {font-size: 20px; color: #000;}
 .campaign-detail .title-area {padding-bottom: 14px; border-bottom: 1px solid #aaa;}
-.campaign-detail .title-area .title {font-size: 24px;}
-.campaign-detail .regi-info {display: flex; justify-content: flex-end;}
-.campaign-detail .regi-info p {font-size: 16px; color: #777;}
-.campaign-detail .regi-info .date {position: relative; margin-left: 16px; padding-left: 16px;}
+.campaign-detail .title-area .title {font-size: 20px;}
+.campaign-detail .regi-info {display: flex; justify-content: flex-end; margin-top: 14px;}
+.campaign-detail .regi-info p {font-size: 14px; color: #777;}
+.campaign-detail .regi-info .date {position: relative; margin-left: 14px; padding-left: 16px;}
 .campaign-detail .regi-info .date::before {content: ""; position: absolute; top: 6px; left: 0; width: 1px; height: 10px; background-color: #ccc;}
-.campaign-detail .body-area {padding: 20px; font-size: 18px;}
+.campaign-detail .body-area {margin: 40px 0; font-size: 18px;}
+.campaign-detail .body-area p {font-size: 16px;}
 
 .content-wrap {position: relative;}
 
@@ -64,9 +65,9 @@ h2 {margin-bottom: 20px}
 
 /* 진행 기간 */
 .period-area {display: flex; align-items: center; margin-top: 20px; padding: 20px; background-color: #ddd;}
-.period-area .period-tit {margin-right: 20px; word-break: keep-all; font-size: 18px;}
+.period-area .period-tit {margin-right: 20px; word-break: keep-all; font-size: 14px;}
 .period-area .date-wrap {display: flex; align-items: center;}
-.period-area .date-wrap p {font-size: 16px; word-break: keep-all;}
+.period-area .date-wrap p {font-size: 14px; word-break: keep-all;}
 .period-area .date-wrap span {margin: 0 8px;}
 
 
@@ -139,6 +140,10 @@ h2 {margin-bottom: 20px}
 .address-area .addr-div .addr-detail {margin-top: 10px; width: 100%;}
 .address-area .addr-div .btn-search {min-width: 88px; background-color: #fff; border: 1px solid #000; cursor: pointer;}
 
-
-
+/* 상세페이지 - 지도 */
+.map-area {position: relative; margin-top: 100px;}
+.map-area .tit {margin-bottom: 10px;}
+.map-area .txt-w {display: flex; flex-wrap: wrap; position: relative; margin-top: 20px; padding-left: 24px; background: url("../../public/img/map-marker.svg") no-repeat no-repeat 0 3px; background-size: 20px;}
+.map-area .txt-w p {font-size: 16px;}
+.map-area .txt-w .detail-txt {margin-left: 6px}
 
