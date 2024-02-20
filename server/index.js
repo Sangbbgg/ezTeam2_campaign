@@ -623,7 +623,7 @@ app.post("/api/carbonFootprint", async (req, res) => {
 
 //-------------------------------익스플로스 세션 0213------------------------------------
 const sessionStore = new MySQLStore({
-  expiration: 3600000, // 세션의 유효시간 (1시간)
+  expiration: 1000, // 세션의 유효시간 (1시간)
   createDatabaseTable: true, // 세션 테이블을 자동으로 생성
   schema: {
     tableName: 'sessions', // 세션 테이블의 이름
@@ -641,7 +641,7 @@ app.use(session({
   saveUninitialized: true,
   store: sessionStore,
   cookie: {
-    maxAge: 3600000,
+    maxAge: 1000,
     httpOnly: true,
   },
 }));
