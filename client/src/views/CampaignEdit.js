@@ -3,6 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../component/Header';
 import WriteEditor from '../component/campaign/WriteEditor';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const CampaignEdit = () => {
   const navigate = useNavigate();
@@ -11,6 +13,8 @@ const CampaignEdit = () => {
   const [write, setWrite] = useState({
     title: "",
     body: "",
+    start_date: "",
+    end_date: "",
     address: "",
     address_detail: "",
     latitude: "",
@@ -21,17 +25,16 @@ const CampaignEdit = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`http://localhost:8000/campaign/detail/${id}`);
-        const { title, body, address, address_detail, latitude, longitude } = response.data;
-        console.log(response.data)
-        setWrite({ title, body, address, address_detail, latitude, longitude });
-        initializeMap(latitude, longitude); // 데이터를 받아온 후에 지도를 초기화
+        const { title, body, start_date, end_date, address, address_detail, latitude, longitude } = response.data;
+        setWrite({ title, body, start_date: new Date(start_date), end_date: new Date(end_date), address, address_detail, latitude, longitude });
+        initializeMap(latitude, longitude);
       } catch (error) {
         console.error(error);
       }
     };
 
     fetchData();
-  }, []);
+  }, [id]);
 
   const initializeMap = (latitude, longitude) => {
     const mapContainer = document.getElementById("map"); // 지도를 표시할 div
@@ -123,7 +126,7 @@ const CampaignEdit = () => {
     return (
       <div className='addr-div'>
         <div className="search-w">
-          <input className="address-txt" type="text" id="sample5_address" value={write.address} placeholder="주소를 입력하세요." />
+          <input className="address-txt" type="text" id="sample5_address" defaultValue={write.address} placeholder="주소를 입력하세요." />
           <input className="btn-search" type="button" id="searchButton" value="주소 검색" />
         </div>
         <input className="addr-detail" type="text" id="" value={write.address_detail} placeholder="상세주소를 입력하세요." onChange={(e) => setWrite((prev) => ({ ...prev, address_detail: e.target.value }))}/>
@@ -141,6 +144,32 @@ const CampaignEdit = () => {
         <form>
           <div className="content-wrap">
             <input className="title" type="text" name="title" value={write.title} placeholder="제목을 입력하세요" onChange={handleChange} />
+
+            <div className="calendar-area">
+              <p className="cal-tit">진행기간</p>
+              <div className="calendar">
+                
+                <DatePicker
+                  className="start-date"
+                  dateFormat="yyyy.MM.dd"
+                  selected={write.start_date}
+                  onChange={(date) => setWrite((prev) => ({ ...prev, start_date: date }))}
+                  selectsStart
+                  startDate={write.start_date}
+                  endDate={write.end_date}
+                />
+                <DatePicker
+                  className="end-date"
+                  dateFormat="yyyy.MM.dd"
+                  selected={write.end_date}
+                  onChange={(date) => setWrite((prev) => ({ ...prev, end_date: date }))}
+                  selectsEnd
+                  startDate={write.start_date}
+                  endDate={write.end_date}
+                  minDate={write.start_date}
+                />
+              </div>
+            </div>
             
             <WriteEditor value={write.body} handleChangeQuill={handleChangeQuill} />
 

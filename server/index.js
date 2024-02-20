@@ -131,15 +131,18 @@ app.get("/campaign/detail/:id", (req, res) => {
     return res.json(data[0]); 
   });
 });
+
 app.put("/campaign/edit/:id", (req, res) => {
   const campaignId = req.params.id;
-  const q = "UPDATE campaign_posts SET `title` = ?, `body` = ?, `address` = ?, `address_detail` = ?, `latitude` = ?, `longitude` = ? WHERE id = ?";
-  const values = [req.body.title, req.body.body, req.body.address, req.body.address_detail, req.body.latitude, req.body.longitude, campaignId];
+  const q = "UPDATE campaign_posts SET `title` = ?, `body` = ?, `start_date` = ?, `end_date` = ?, `address` = ?, `address_detail` = ?, `latitude` = ?, `longitude` = ? WHERE id = ?";
+  // start_date와 end_date가 문자열로 넘어오는 것을 Date 객체로 변환하여 사용
+  const values = [req.body.title, req.body.body, new Date(req.body.start_date), new Date(req.body.end_date), req.body.address, req.body.address_detail, req.body.latitude, req.body.longitude, campaignId];
   connection.query(q, values, (err, data) => {
-    if(err) return res.json(err);
+    if(err) return res.status(500).json(err);
     return res.json("Message has been updated successfully");
   });
 });
+
 
 
 
