@@ -12,6 +12,7 @@ const CampaignEdit = () => {
     title: "",
     body: "",
     address: "",
+    address_detail: "",
     latitude: "",
     longitude: "",
   });
@@ -20,9 +21,9 @@ const CampaignEdit = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`http://localhost:8000/campaign/detail/${id}`);
-        const { title, body, address, latitude, longitude } = response.data;
+        const { title, body, address, address_detail, latitude, longitude } = response.data;
         console.log(response.data)
-        setWrite({ title, body, address, latitude, longitude });
+        setWrite({ title, body, address, address_detail, latitude, longitude });
         initializeMap(latitude, longitude); // 데이터를 받아온 후에 지도를 초기화
       } catch (error) {
         console.error(error);
@@ -53,10 +54,10 @@ const CampaignEdit = () => {
       new window.daum.Postcode({
         oncomplete: function (data) {
           const addr = data.address; // 최종 주소 변수
-
+    
           // 주소 정보를 해당 필드에 넣는다.
           document.getElementById("sample5_address").value = addr;
-
+    
           // 주소로 상세 정보를 검색
           geocoder.addressSearch(data.address, function (results, status) {
             // 정상적으로 검색이 완료됐으면
@@ -71,13 +72,17 @@ const CampaignEdit = () => {
               // 지도 중심을 변경한다.
               map.setCenter(coords);
               marker.setPosition(coords);
-
-              setWrite(prev => ({ ...prev, latitude: result.y, longitude: result.x }));
+    
+              // 주소 값을 업데이트하여 변경된 주소가 유지되도록 함
+              setWrite(prev => ({ ...prev, address: addr, latitude: result.y, longitude: result.x }));
             }
           });
         },
       }).open();
     }
+    
+    
+    
 
     document.getElementById('searchButton').addEventListener('click', sample5_execDaumPostcode);
   };
@@ -121,7 +126,9 @@ const CampaignEdit = () => {
           <input className="address-txt" type="text" id="sample5_address" value={write.address} placeholder="주소를 입력하세요." />
           <input className="btn-search" type="button" id="searchButton" value="주소 검색" />
         </div>
-        <input className="addr-detail" type="text" id=""  placeholder="상세주소를 입력하세요." />
+        <input className="addr-detail" type="text" id="" value={write.address_detail} placeholder="상세주소를 입력하세요." onChange={(e) => setWrite((prev) => ({ ...prev, address_detail: e.target.value }))}/>
+
+        {/* <input className="addr-detail" type="text" id=""  value={write.address_detail} placeholder="상세주소를 입력하세요." /> */}
       </div>
     )
   };

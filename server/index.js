@@ -133,8 +133,8 @@ app.get("/campaign/detail/:id", (req, res) => {
 });
 app.put("/campaign/edit/:id", (req, res) => {
   const campaignId = req.params.id;
-  const q = "UPDATE campaign_posts SET `title` = ?, `body` = ? WHERE id = ?";
-  const values = [req.body.title, req.body.body, campaignId];
+  const q = "UPDATE campaign_posts SET `title` = ?, `body` = ?, `address` = ?, `address_detail` = ?, `latitude` = ?, `longitude` = ? WHERE id = ?";
+  const values = [req.body.title, req.body.body, req.body.address, req.body.address_detail, req.body.latitude, req.body.longitude, campaignId];
   connection.query(q, values, (err, data) => {
     if(err) return res.json(err);
     return res.json("Message has been updated successfully");
