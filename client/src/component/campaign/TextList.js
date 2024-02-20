@@ -7,6 +7,7 @@ const TextList = ({campaignList}) => {
        {/* {campaignList.body.includes('<img') && (
         <div className="img" dangerouslySetInnerHTML={{ __html: campaignList.body }}></div>
       )} */}
+      {console.log(campaignList)}
       <p className="txt">{
         campaignList.title.length > 20 
           ? campaignList.title.slice(0, 20) + "..."

@@ -8,8 +8,8 @@ h2 {margin-bottom: 20px}
 .campaign-wrap .cont .title {margin-right: 20px; width: 30%; font-size: 18px; color: #000; text-align: left;}
 .campaign-wrap .cont p {width: 100%; color: #000; text-align: left;}
 .campaign-wrap .cont .txt-info {display: flex;}
-.campaign-wrap .cont .username {font-size: 16px; text-align: right; min-width: 100px;}
-.campaign-wrap .cont .date {font-size: 16px; text-align: right; min-width: 100px;}
+.campaign-wrap .cont .username {font-size: 16px; text-align: right; min-width: 60px;}
+.campaign-wrap .cont .date {font-size: 16px; text-align: right; min-width: 86px;}
 .campaign-wrap .cont .img {width: 120px; height: 120px; border: 1px solid red;}
 .campaign-wrap .cont .img img {width: 100%; height: 100%;}
 
