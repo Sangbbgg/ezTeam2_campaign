@@ -29,6 +29,7 @@ const Campaign = () => {
       .then((res) => {
         if (res.payload) {
           let arrPost = [...res.payload];
+          
           setCampaignList(arrPost.reverse());
         }
       })
@@ -59,6 +60,25 @@ const Campaign = () => {
     return result;
   };
 
+   // 버튼 탭 클릭 이벤트 핸들러
+  const handleTabClick = (index) => {
+    // 클릭한 탭의 usertype과 동일한 데이터만 콘솔에 출력
+    const filteredUsertype = campaignList.filter((item) => {
+      return parseInt(item.usertype - 1) === index;
+    })
+    console.log(filteredUsertype);
+
+    // 탭 활성화를 위해 active 클래스 추가
+    const tabList = document.querySelectorAll(".tab-area .btn-tab");
+    tabList.forEach((tab, i) => {
+      if (i === index) {
+        tab.classList.add("active");
+      } else {
+        tab.classList.remove("active");
+      }
+    });
+  };
+
   return (
     <div className="campaign">
       <Header/>
@@ -73,9 +93,9 @@ const Campaign = () => {
       
       <div className="campaign-wrap">
         <div className="tab-area">
-          <button className='btn-tab active'>개인</button>
-          <button className='btn-tab'>기업</button>
-          <button className='btn-tab'>단체</button>
+          <button className='btn-tab active' onClick={() => handleTabClick(0)}>개인</button>
+          <button className='btn-tab' onClick={() => handleTabClick(1)}>기업</button>
+          <button className='btn-tab' onClick={() => handleTabClick(2)}>단체</button>
         </div>
         
         <div className="container">

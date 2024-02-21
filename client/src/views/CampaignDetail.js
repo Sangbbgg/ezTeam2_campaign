@@ -21,7 +21,6 @@ const CampaignDetail = (props) => {
       try {
         const result = await dispatch(getPost());
         setCampaignList(result.payload);
-        console.log(result.payload)
       } catch (error) {
         console.log('실패:', error);
       }
@@ -34,7 +33,6 @@ const CampaignDetail = (props) => {
     return data.id === parseInt(id);
   });
 
-  console.log(campaignList)
   // 글 삭제 버튼
   const handleDelete = async () => {
     const confirmDelete = window.confirm("글을 삭제하시겠습니까?");

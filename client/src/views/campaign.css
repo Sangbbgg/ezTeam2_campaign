@@ -64,7 +64,7 @@ h2 {margin-bottom: 20px}
 .bottom-area .btn-delete {background-color: #fff; color: #000; border: 1px solid #000;} 
 
 /* 진행 기간 */
-.period-area {display: flex; align-items: center; margin-top: 20px; padding: 20px; background-color: #ddd;}
+.period-area {display: flex; align-items: center; margin-top: 20px; padding: 20px; background-color: #e1f0de;}
 .period-area .period-tit {margin-right: 20px; word-break: keep-all; font-size: 14px;}
 .period-area .date-wrap {display: flex; align-items: center;}
 .period-area .date-wrap p {font-size: 14px; word-break: keep-all;}
@@ -103,7 +103,7 @@ h2 {margin-bottom: 20px}
 .view-wrap {padding: 40px 0;}
 .view-wrap .comment {position: relative; margin-bottom: 10px; border-bottom: 1px solid #ddd;}
 .view-wrap .comment .view-div {padding: 12px;}
-.view-wrap .comment .view-div .txt {padding-right: 70px; font-size: 16px;}
+.view-wrap .comment .view-div .txt {padding-right: 140px; font-size: 16px;}
 .view-wrap .comment .regi-w {display: flex; justify-content: flex-end; position: absolute; top: 14px; right: 14px;}
 .view-wrap .comment .regi-w .username {font-size: 14px; color: #777;}
 .view-wrap .comment .regi-w .date {position: relative; margin-left: 10px; padding-left: 10px; font-size: 14px; color: #777;}
