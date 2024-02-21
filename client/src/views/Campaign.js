@@ -60,6 +60,10 @@ const Campaign = () => {
     return result;
   };
 
+  useEffect(() => {
+    // 필터링된 결과가 변경될 때마다 화면을 다시 렌더링
+  }, [filteredResults]);
+  
    // 버튼 탭 클릭 이벤트 핸들러
   const handleTabClick = (index) => {
     // 클릭한 탭의 usertype과 동일한 데이터만 콘솔에 출력
@@ -67,6 +71,8 @@ const Campaign = () => {
       return parseInt(item.usertype - 1) === index;
     })
     console.log(filteredUsertype);
+    setFilteredResults(filteredUsertype);
+
 
     // 탭 활성화를 위해 active 클래스 추가
     const tabList = document.querySelectorAll(".tab-area .btn-tab");
@@ -105,10 +111,11 @@ const Campaign = () => {
               <TextList campaignList={data} key={i} />
             ))
           ) : (
-            postsData(campaignList).map((data, i) => (
+            postsData(filteredResults.length > 0 ? filteredResults : campaignList).map((data, i) => (
               <TextList campaignList={data} key={i} />
             ))
           )}
+
         </div>
       </div>
       
