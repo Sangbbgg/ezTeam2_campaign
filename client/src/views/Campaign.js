@@ -111,10 +111,20 @@ const Campaign = () => {
               <TextList campaignList={data} key={i} />
             ))
           ) : (
-            postsData(filteredResults.length > 0 ? filteredResults : campaignList).map((data, i) => (
+            postsData(filteredResults.length > 0 ? filteredResults : campaignList.filter((item) => parseInt(item.usertype) === 1)).map((data, i) => (
+              <TextList campaignList={data} key={i} />
+            )) // 초기에는 개인 탭에 해당하는 캠페인만 노출
+          )}
+
+          {/* {isSearchClicked ? (
+            filteredResults.map((data, i) => (
               <TextList campaignList={data} key={i} />
             ))
-          )}
+          ) : (
+            postsData(campaignList).map((data, i) => (
+              <TextList campaignList={data} key={i} />
+            ))
+          )} */}
 
         </div>
       </div>
