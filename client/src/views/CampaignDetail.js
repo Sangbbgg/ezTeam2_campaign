@@ -13,7 +13,6 @@ const CampaignDetail = (props) => {
   const {id} = useParams();
   const dispatch = useDispatch();
   const [campaignList, setCampaignList] = useState([]); // 글 리스트
-  const [views, setViews] = useState(0); // 조회수
 
   const { kakao } = window;
 
@@ -23,10 +22,15 @@ const CampaignDetail = (props) => {
         // 게시물 데이터 요청
         const result = await dispatch(getPost());
         setCampaignList(result.payload);
-        console.log(result)
-
+        console.log('Fetched data:', result);
+  
         // 조회수 증가 요청
         await axios.put(`http://localhost:8000/campaign/increase-views/${id}`);
+        console.log('View count incremented successfully');
+  
+        // Fetch the updated data again (optional)
+        const updatedData = await dispatch(getPost());
+        console.log('Updated data after view count increment:', updatedData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -34,6 +38,7 @@ const CampaignDetail = (props) => {
   
     fetchData();
   }, [id, dispatch]);
+  
   
 
   // useEffect(() => {
@@ -118,7 +123,7 @@ const CampaignDetail = (props) => {
         <p className="title">{curList?.title}</p>
         <div className="regi-info">
           
-          <p className="views">{"조회수: " +curList?.views}</p>
+          <p className="views">{"조회수: " + parseInt(curList?.views + 1)}</p>
         </div>
       </div>
 
