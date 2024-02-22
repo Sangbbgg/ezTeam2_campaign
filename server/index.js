@@ -10,8 +10,8 @@ import path from "path"; // 이미지 저장 관련
 
 import bcrypt from "bcrypt";
 import session from "express-session"; //0213 김민호 세션 추가
-import MySQLSession from "express-mysql-session";//0213 김민호
-const MySQLStore = MySQLSession(session);
+import MemoryStore from "memorystore"; // MemoryStore import 추가
+const MemoryStoreInstance = MemoryStore(session);
 
 import { fileURLToPath } from "url"; 
 
@@ -621,22 +621,12 @@ app.post("/api/carbonFootprint", async (req, res) => {
 
 
 // 김민호
-
 //-------------------------------로그인-----------------------------------------------
 
 //-------------------------------익스플로스 세션 0213------------------------------------
-const sessionStore = new MySQLStore({
-  expiration: 1000, // 세션의 유효시간 (1시간)
-  createDatabaseTable: true, // 세션 테이블을 자동으로 생성
-  schema: {
-    tableName: 'sessions', // 세션 테이블의 이름
-    columnNames: {
-      session_id: 'session_id', // 세션 ID를 저장하는 열의 이름
-      expires: 'expires', // 세션 만료 시간을 저장하는 열의 이름
-      data: 'data', // 세션 데이터를 저장하는 열의 이름
-    },
-  },
-}, connection);
+const sessionStore = new MemoryStoreInstance({
+  checkPeriod: 100000, // 옵션: 세션의 만료 기간을 확인하는 주기 (10초)
+});
 
 app.use(session({
   secret: 'secretKey', // 랜덤하고 안전한 문자열로 바꾸세요.
@@ -644,14 +634,16 @@ app.use(session({
   saveUninitialized: true,
   store: sessionStore,
   cookie: {
-    maxAge: 1000,
+    maxAge: 100000,
     httpOnly: true,
   },
 }));
 //-------------------------------로그인------------------------------------
 
 app.post("/login", async (req, res) => {
+  console.log(req.session);
   const { email, password, usertype } = req.body;//usertype 추가 2/14 김민호
+
 
   try {
     // 이메일을 사용하여 데이터베이스에서 사용자를 찾습니다.
@@ -676,7 +668,7 @@ app.post("/login", async (req, res) => {
             //세션데이터 저장(새로운 데이터 추가시 이부분 수정)
             req.session.usertype = result[0].usertype;//0213 김민호 익스플로우 세션기능 추가
             req.session.userid = result[0].userid;//0213 김민호 익스플로우 세션기능 추가
-
+            console.log(req.session)
               res.send({ success: true, message: "로그인 성공", data: result });
             } else {
               res.send({
@@ -689,10 +681,6 @@ app.post("/login", async (req, res) => {
             res.send({ success: false, message: "유저 정보가 없습니다." });
             //가입된 정보가 없을 시 출력
           }
-
-
-
-          
         }
       }
     );
@@ -728,37 +716,70 @@ async function generateUserid(usertype) {
 
   return userid;
 }
+
+//-------------------------------단체고유번호 중복 체크 2/14 김민호---------------------------------
+app.post("/checkuniquenumber", (req, res) => {
+  const { uniquenumber} = req.body;
+
+  // 데이터베이스에서 이메일이 이미 존재하는지 확인합니다.
+  const sql = "SELECT * FROM user WHERE uniquenumber = ?";
+  connection.query(sql, [uniquenumber], (err, result) => {
+    if (err) {
+      console.error("MySQL에서 고유번호 중복 확인 중 오류:", err);
+      return res.status(500).json({
+        success: false,
+        message: "고유번호 중복 확인 중 오류가 발생했습니다.",
+        error: err.message,
+      });
+    }
+
+    if (result.length > 0) {
+      // 이미 등록된 사업자인 경우
+      return res.status(200).json({
+        success: false,
+        message: "이미 등록된 고유번호입니다.",
+      });
+    } else {
+      // 중복되지 않은 사업자인 경우
+      return res.status(200).json({
+        success: true,
+        message: "사용 가능한 고유번호 입니다.",
+      });
+    }
+  });
+});
+
 //-------------------------------사업자 중복 체크 2/14 김민호---------------------------------
-// app.post("/checkbusinessnumber", (req, res) => {
-//   const { businessnumber} = req.body;
+app.post("/checkbusinessnumber", (req, res) => {
+  const { businessnumber} = req.body;
 
-//   // 데이터베이스에서 이메일이 이미 존재하는지 확인합니다.
-//   const sql = "SELECT * FROM user WHERE email = ?";
-//   connection.query(sql, [businessnumber], (err, result) => {
-//     if (err) {
-//       console.error("MySQL에서 사업자번호 중복 확인 중 오류:", err);
-//       return res.status(500).json({
-//         success: false,
-//         message: "사업자 중복 확인 중 오류가 발생했습니다.",
-//         error: err.message,
-//       });
-//     }
+  // 데이터베이스에서 이메일이 이미 존재하는지 확인합니다.
+  const sql = "SELECT * FROM user WHERE businessnumber = ?";
+  connection.query(sql, [businessnumber], (err, result) => {
+    if (err) {
+      console.error("MySQL에서 사업자번호 중복 확인 중 오류:", err);
+      return res.status(500).json({
+        success: false,
+        message: "사업자 중복 확인 중 오류가 발생했습니다.",
+        error: err.message,
+      });
+    }
 
-//     if (result.length > 0) {
-//       // 이미 등록된 사업자인 경우
-//       return res.status(200).json({
-//         success: false,
-//         message: "이미 등록된 사업자입니다.",
-//       });
-//     } else {
-//       // 중복되지 않은 사업자인 경우
-//       return res.status(200).json({
-//         success: true,
-//         message: "사용 가능한 사업자 입니다.",
-//       });
-//     }
-//   });
-// });
+    if (result.length > 0) {
+      // 이미 등록된 사업자인 경우
+      return res.status(200).json({
+        success: false,
+        message: "이미 등록된 사업자입니다.",
+      });
+    } else {
+      // 중복되지 않은 사업자인 경우
+      return res.status(200).json({
+        success: true,
+        message: "사용 가능한 사업자 입니다.",
+      });
+    }
+  });
+});
 
 //-------------------------------이메일 중복 체크 2/14 김민호---------------------------------
 app.post("/checkEmailDuplication", (req, res) => {
@@ -794,7 +815,7 @@ app.post("/checkEmailDuplication", (req, res) => {
 //---------------------------회원가입 기능구현----------------------------------------------
 app.post("/regester", async (req, res) => {
   // 클라이언트에서 받은 요청의 body에서 필요한 정보를 추출합니다.
-  const { username, password, email, address, detailedaddress, phonenumber, usertype: clientUsertype, businessnumber } = req.body;
+  const { username, password, email, address, detailedaddress, phonenumber, usertype: clientUsertype, businessnumber, uniquenumber } = req.body;
 
   try {
     
@@ -815,10 +836,10 @@ app.post("/regester", async (req, res) => {
 
     // MySQL 쿼리를 작성하여 회원 정보를 데이터베이스에 삽입합니다.
     const sql =
-      "INSERT INTO user (userid, username, email, password, address, detailedaddress, phonenumber, usertype, businessnumber) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      "INSERT INTO user (userid, username, email, password, address, detailedaddress, phonenumber, usertype, businessnumber, uniquenumber) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     connection.query(
       sql,
-      [userid, username, email, hashedPassword, address, detailedaddress, phonenumber, serverUsertype, businessnumber],
+      [userid, username, email, hashedPassword, address, detailedaddress, phonenumber, serverUsertype, businessnumber, uniquenumber],
       (err, result) => {
         if (err) {
           // 쿼리 실행 중 에러가 발생한 경우 에러를 처리합니다.
@@ -849,31 +870,34 @@ app.post("/regester", async (req, res) => {
   }
 });
 //---------------------------회원가입 수정구현----------------------------------------------
-// app.get("/user", (req, res) => {
-//   const { usertype, userid } = req.session;
 
-//   if (!usertype || !userid) {
-//     return res.status(401).json({ success: false, message: "로그인되어 있지 않습니다." });
-//   }
+app.get("/edit-profile/:userId/:usertype", (req, res) => { // 클라이언트에서 파라미터로 전달 받은값 반영
+  const { userId, usertype } = req.params; // userId, usertype 값 획득
+  // const usertype = req.session.usertype;
+  // const userid = req.session.userData[0].userid;
+  // console.log(req.session);
+  // console.log(req.session.userData.userid);
 
-//   // 여기에서 데이터베이스에서 사용자 정보를 가져오는 로직을 구현합니다.
-//   const sql = "SELECT * FROM user WHERE userid = ?";
-//   connection.query(sql, [userid], (err, result) => {
-//     if (err) {
-//       console.error("사용자 정보 조회 중 오류:", err);
-//       return res.status(500).json({ success: false, message: "사용자 정보 조회 중 오류가 발생했습니다." });
-//     }
+  if (!usertype || !userId) {
+    return res.status(401).json({ success: false, message: "로그인되어 있지 않습니다." });
+  }
 
-//     const userData = result[0]; // 첫 번째 사용자 정보를 가져옴
+  const sql = "SELECT * FROM user WHERE userid = ?";
+  connection.query(sql, [userId], (err, result) => {
+    if (err) {
+      console.error("사용자 정보 조회 중 오류:", err);
+      return res.status(500).json({ success: false, message: "사용자 정보 조회 중 오류가 발생했습니다." });
+    }
 
-//     if (!userData) {
-//       return res.status(404).json({ success: false, message: "사용자 정보를 찾을 수 없습니다." });
-//     }
+    const userData = result[0];
 
-//     res.status(200).json(userData);
-//   });
-// });
+    if (!userData) {
+      return res.status(404).json({ success: false, message: "사용자 정보를 찾을 수 없습니다." });
+    }
 
+    res.json({ usertype : usertype, userId:userId, userData: userData});
+  });
+});
 
 
 
