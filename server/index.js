@@ -907,8 +907,6 @@ app.post("/regester", async (req, res) => {
 //   });
 // });
 
-<<<<<<< HEAD
-=======
 app.get("/edit-profile/:userId/:usertype", (req, res) => { // 클라이언트에서 파라미터로 전달 받은값 반영
   const { userId, usertype } = req.params; // userId, usertype 값 획득
   // const usertype = req.session.usertype;
@@ -936,7 +934,6 @@ app.get("/edit-profile/:userId/:usertype", (req, res) => { // 클라이언트에
     res.json({ usertype : usertype, userId:userId, userData: userData});
   });
 });
->>>>>>> 61b2c07 (로그인단 첨부)
 
 
 
