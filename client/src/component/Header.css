@@ -25,7 +25,7 @@ header nav .btn-close-mo {display: block; position: absolute; top: 22px; right: 
 
 
 /* 로그인 영역 */
-header .login-w {position: absolute; z-index: 1;}
+header .login-w {position: absolute; z-index: 10;}
 
 /* @media screen and (max-width: 1024px) {
   header {height: 60px;}
