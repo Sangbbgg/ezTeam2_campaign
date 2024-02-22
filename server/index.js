@@ -71,9 +71,6 @@ app.get("/campaign", (req, res) => {
   });
 });
 
-
-
-
 // 글쓰기 페이지에서 사용자가 입력한 정보가 들어가도록 요청
 app.post("/campaign", (req, res) => {
   // MySQL의 NOW() 함수를 사용하여 현재 시간을 삽입
@@ -179,6 +176,7 @@ app.get("/campaign/detail/:id", (req, res) => {
         return res.status(500).json(err);
       }
       // 조회수가 업데이트된 후에 글 데이터를 클라이언트에게 전송
+      console.log("@@@@@@@@@@@@@@")
       return res.json(data[0]); 
     });
   });

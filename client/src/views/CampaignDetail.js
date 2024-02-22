@@ -22,15 +22,9 @@ const CampaignDetail = (props) => {
         // 게시물 데이터 요청
         const result = await dispatch(getPost());
         setCampaignList(result.payload);
-        console.log('Fetched data:', result);
-  
+
         // 조회수 증가 요청
         await axios.put(`http://localhost:8000/campaign/increase-views/${id}`);
-        console.log('View count incremented successfully');
-  
-        // Fetch the updated data again (optional)
-        const updatedData = await dispatch(getPost());
-        console.log('Updated data after view count increment:', updatedData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -39,8 +33,6 @@ const CampaignDetail = (props) => {
     fetchData();
   }, [id, dispatch]);
   
-  
-
   // useEffect(() => {
   //   const getData = async () => {
   //     try {
