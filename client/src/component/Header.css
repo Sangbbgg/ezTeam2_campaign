@@ -24,6 +24,9 @@ header .btn-menu-mo {display: none; position: absolute; top: 50%; right: 50px; t
 header nav .btn-close-mo {display: block; position: absolute; top: 22px; right: 30px; width: 20px; height: 20px; background: url("../../public/img/icon-gnb-close.svg") no-repeat center center / cover;}
 
 
+/* 로그인 영역 */
+header .login-w {position: absolute; z-index: 1;}
+
 /* @media screen and (max-width: 1024px) {
   header {height: 60px;}
   header .logo {left: 30px; width: 50px; height: 28px;}

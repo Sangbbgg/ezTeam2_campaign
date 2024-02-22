@@ -93,54 +93,57 @@ const Campaign = () => {
   return (
     <div className="campaign">
       <Header/>
-      <h2>캠페인(메인) 페이지입니다</h2>
-      <button className="btn-link" onClick={()=>{navigate('/campaign/write')}}>글쓰기</button>
-      
-      {/* 검색 인풋 */}
-      <div className="search-wrap">
-        <input type="text" placeholder="검색어를 입력하세요" onChange={(e) => setSearchInput(e.target.value)} />
-        <button className="btn-search" onClick={handleSearchButtonClick}>검색</button>
-      </div>
-      
-      <div className="campaign-wrap">
-        <div className="tab-area">
-          <button className='btn-tab active' onClick={() => handleTabClick(0)}>전체</button>
-          <button className='btn-tab' onClick={() => handleTabClick(1)}>개인</button>
-          <button className='btn-tab' onClick={() => handleTabClick(2)}>기업</button>
-          <button className='btn-tab' onClick={() => handleTabClick(3)}>단체</button>
+      {/* <h2>캠페인(메인) 페이지입니다</h2> */}
+
+      <div className="inner">
+        <button className="btn-link" onClick={()=>{navigate('/campaign/write')}}>글쓰기</button>
+        
+        {/* 검색 인풋 */}
+        <div className="search-wrap">
+          <input type="text" placeholder="검색어를 입력하세요" onChange={(e) => setSearchInput(e.target.value)} />
+          <button className="btn-search" onClick={handleSearchButtonClick}>검색</button>
         </div>
         
-        <div className="container">
-          {/* 검색 결과에 따라 글목록 나열 */}
-          {isSearchClicked ? (
-            filteredResults.map((data, i) => (
-              <TextList campaignList={data} key={i} />
-            ))
-          ) : (
-            postsData(filteredResults.length > 0 ? filteredResults : campaignList).map((data, i) => (
-              <TextList campaignList={data} key={i} />
-            ))
-          )}
-          {/* {isSearchClicked ? (
-            filteredResults.map((data, i) => (
-              <TextList campaignList={data} key={i} />
-            ))
-          ) : (
-            postsData(filteredResults.length > 0 ? filteredResults : campaignList.filter((item) => parseInt(item.usertype) === 1)).map((data, i) => (
-              <TextList campaignList={data} key={i} />
-            )) // 초기에는 개인 탭에 해당하는 캠페인만 노출
-          )} */}
+        <div className="campaign-wrap">
+          <div className="tab-area">
+            <button className='btn-tab active' onClick={() => handleTabClick(0)}>전체</button>
+            <button className='btn-tab' onClick={() => handleTabClick(1)}>개인</button>
+            <button className='btn-tab' onClick={() => handleTabClick(2)}>기업</button>
+            <button className='btn-tab' onClick={() => handleTabClick(3)}>단체</button>
+          </div>
+          
+          <div className="container">
+            {/* 검색 결과에 따라 글목록 나열 */}
+            {isSearchClicked ? (
+              filteredResults.map((data, i) => (
+                <TextList campaignList={data} key={i} />
+              ))
+            ) : (
+              postsData(filteredResults.length > 0 ? filteredResults : campaignList).map((data, i) => (
+                <TextList campaignList={data} key={i} />
+              ))
+            )}
+            {/* {isSearchClicked ? (
+              filteredResults.map((data, i) => (
+                <TextList campaignList={data} key={i} />
+              ))
+            ) : (
+              postsData(filteredResults.length > 0 ? filteredResults : campaignList.filter((item) => parseInt(item.usertype) === 1)).map((data, i) => (
+                <TextList campaignList={data} key={i} />
+              )) // 초기에는 개인 탭에 해당하는 캠페인만 노출
+            )} */}
 
-          {/* {isSearchClicked ? (
-            filteredResults.map((data, i) => (
-              <TextList campaignList={data} key={i} />
-            ))
-          ) : (
-            postsData(campaignList).map((data, i) => (
-              <TextList campaignList={data} key={i} />
-            ))
-          )} */}
+            {/* {isSearchClicked ? (
+              filteredResults.map((data, i) => (
+                <TextList campaignList={data} key={i} />
+              ))
+            ) : (
+              postsData(campaignList).map((data, i) => (
+                <TextList campaignList={data} key={i} />
+              ))
+            )} */}
 
+          </div>
         </div>
       </div>
       

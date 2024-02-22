@@ -49,10 +49,6 @@ app.get("/", (req, res) => res.send(`Hell'o World!`));
 // 정적 파일 제공을 위한 미들웨어 추가
 app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 
-app.get("/", (req, res) => {
-  res.json("hello this is the server");
-});
-
 // 캠페인 글 목록 가져오기
 app.get("/campaign", (req, res) => {
   const q = `SELECT a.*, u.*, a.address, a.address_detail
@@ -64,7 +60,7 @@ app.get("/campaign", (req, res) => {
   // INNER JOIN user u ON a.userid = u.userid;`;
   connection.query(q, (err, data) => {
     if (err) {
-      console.error('Error executing MySQL query:', err);
+      console.error(err);
       return res.json(err);
     }
     return res.json(data);
@@ -153,40 +149,11 @@ app.get("/users", (req, res) => {
   });
 });
 
-// 글 조회 및 조회수 증가
-app.get("/campaign/detail/:id", (req, res) => {
-  const campaignId = req.params.id;
-  const qSelectPost = "SELECT * FROM campaign_posts WHERE id = ?";
-  const qUpdateViews = "UPDATE campaign_posts SET `views` = `views` + 1 WHERE id = ?";
-
-  // 글 조회
-  connection.query(qSelectPost, campaignId, (err, data) => {
-    if(err) {
-      console.error(err);
-      return res.status(500).json(err);
-    }
-    if(data.length === 0) {
-      return res.status(404).json({ message: "글을 찾을 수 없습니다." });
-    }
-
-    // 조회수 업데이트
-    connection.query(qUpdateViews, campaignId, (err, result) => {
-      if (err) {
-        console.error(err);
-        return res.status(500).json(err);
-      }
-      // 조회수가 업데이트된 후에 글 데이터를 클라이언트에게 전송
-      console.log("@@@@@@@@@@@@@@")
-      return res.json(data[0]); 
-    });
-  });
-});
-
-// 조회수 증가
+// 조회수 
 app.put("/campaign/increase-views/:id", (req, res) => {
   const campaignId = req.params.id;
   const qUpdateViews = "UPDATE campaign_posts SET `views` = `views` + 1 WHERE id = ?";
-
+  
   // 조회수 증가
   connection.query(qUpdateViews, campaignId, (err, result) => {
     if (err) {

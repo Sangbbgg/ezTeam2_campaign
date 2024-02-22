@@ -21,13 +21,45 @@ const Header = () => {
       setLoggedIn(false);
       navigate("/"); //0210 상호형 추가
     };
+
+    // 헤더 스크롤 모션
+    let thisScroll = 0;
+
+    useEffect(() => {
+      const handleScroll = () => {
+        const isScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const header = document.querySelector("header");
+  
+        if (isScrollTop > thisScroll) { // down
+          if (isScrollTop > 0) {
+            if (header && isScrollTop > 100) {
+              if (!header.classList.contains("hover")) {
+                header.classList.add("hide");
+              }
+            }
+          }
+        }
+        if (isScrollTop < thisScroll) { // up
+          if (header) {
+            header.classList.remove("hide");
+          }
+        }
+        thisScroll = isScrollTop;
+      };
+  
+      window.addEventListener("scroll", handleScroll);
+  
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }, []);
   
 
   return (
     <header>
       <h1 className="logo"><button onClick={()=>{navigate('/')}}></button></h1>
       {/* 로그인, 회원가입 버튼 임시 구현 */}
-      <div>
+      <div className='login-w'>
       {loggedIn ? (
         <>
           <button className="LoginBtn" onClick={handleLogout}>

@@ -1,4 +1,7 @@
-.campaign {padding: 140px 100px;}
+.inner {position: relative; margin: 0 auto; width: 1024px;}
+
+
+/* .campaign {padding: 140px 100px;} */
 h2 {margin-bottom: 20px}
 
 .campaign-wrap {margin-top: 20px;}
