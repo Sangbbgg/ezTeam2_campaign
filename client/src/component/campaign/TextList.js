@@ -40,11 +40,12 @@ const TextList = ({campaignList}) => {
       </div>
 
       <div className="txt-wrap">
-        <p className="title">{
+        <p className="title">{campaignList.title}</p>
+        {/* <p className="title">{
           campaignList.title.length > 20 
             ? campaignList.title.slice(0, 20) + "..."
             : campaignList.title
-        }</p>
+        }</p> */}
         <div className="txt-info">
           <p className="username">{campaignList.username}</p>
           <p className="date">{campaignList.date.slice(0, 10).replace('T', ' ')}</p>
