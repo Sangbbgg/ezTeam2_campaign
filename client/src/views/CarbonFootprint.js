@@ -11,6 +11,7 @@ function CarbonFootprint() {
   // const userId = 179870; //개발용 user_id
   const storedUserData = sessionStorage.getItem("userData");
   const userData = JSON.parse(storedUserData);
+  console.log("세션확인:",userData)
 
   // const userData = {
   //   userid: 179870,
@@ -125,6 +126,7 @@ function CarbonFootprint() {
   return (
     <>
       <Header />
+      <div className="carbon-box">
       <div className="menu-container">
         <div className="tab-container">
           <ul className="tab-menu">
@@ -143,6 +145,7 @@ function CarbonFootprint() {
         </div>
       </div>
       <div className="content-container">{renderContent()}</div>
+      </div>
     </>
   );
 }

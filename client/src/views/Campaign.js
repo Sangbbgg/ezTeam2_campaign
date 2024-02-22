@@ -24,16 +24,23 @@ const Campaign = () => {
   const [filteredResults, setFilteredResults] = useState([]);
   const [isSearchClicked, setIsSearchClicked] = useState(false);
 
+  // 데이터 불러옴
   useEffect(() => {
     dispatch(getPost())
       .then((res) => {
         if (res.payload) {
           let arrPost = [...res.payload];
+          
           setCampaignList(arrPost.reverse());
         }
       })
       .catch((err) => console.log(err));
   }, []);
+
+  useEffect(() => {
+    // 필터링된 결과가 변경될 때마다 화면을 다시 렌더링
+  }, [filteredResults]);
+  
 
   // 검색 함수
   const searchPosts = () => {
@@ -59,6 +66,30 @@ const Campaign = () => {
     return result;
   };
 
+  // 버튼 탭 클릭 이벤트
+  const handleTabClick = (index) => {
+    let filteredUsertype;
+    if (index === 0) {
+      // 전체 보기 버튼을 클릭한 경우 
+      filteredUsertype = campaignList;
+    } else {
+      // 클릭한 탭의 usertype과 동일한 데이터만 필터링
+      filteredUsertype = campaignList.filter((item) => parseInt(item.usertype) === index);
+    }
+
+    // console.log(filteredUsertype);
+    setFilteredResults(filteredUsertype);
+
+    const tabList = document.querySelectorAll(".tab-area .btn-tab");
+    tabList.forEach((tab, i) => {
+      if (i === index) {
+        tab.classList.add("active");
+      } else {
+        tab.classList.remove("active");
+      }
+    });
+  };
+
   return (
     <div className="campaign">
       <Header/>
@@ -73,9 +104,10 @@ const Campaign = () => {
       
       <div className="campaign-wrap">
         <div className="tab-area">
-          <button className='btn-tab active'>개인</button>
-          <button className='btn-tab'>기업</button>
-          <button className='btn-tab'>단체</button>
+          <button className='btn-tab active' onClick={() => handleTabClick(0)}>전체</button>
+          <button className='btn-tab' onClick={() => handleTabClick(1)}>개인</button>
+          <button className='btn-tab' onClick={() => handleTabClick(2)}>기업</button>
+          <button className='btn-tab' onClick={() => handleTabClick(3)}>단체</button>
         </div>
         
         <div className="container">
@@ -85,10 +117,30 @@ const Campaign = () => {
               <TextList campaignList={data} key={i} />
             ))
           ) : (
-            postsData(campaignList).map((data, i) => (
+            postsData(filteredResults.length > 0 ? filteredResults : campaignList).map((data, i) => (
               <TextList campaignList={data} key={i} />
             ))
           )}
+          {/* {isSearchClicked ? (
+            filteredResults.map((data, i) => (
+              <TextList campaignList={data} key={i} />
+            ))
+          ) : (
+            postsData(filteredResults.length > 0 ? filteredResults : campaignList.filter((item) => parseInt(item.usertype) === 1)).map((data, i) => (
+              <TextList campaignList={data} key={i} />
+            )) // 초기에는 개인 탭에 해당하는 캠페인만 노출
+          )} */}
+
+          {/* {isSearchClicked ? (
+            filteredResults.map((data, i) => (
+              <TextList campaignList={data} key={i} />
+            ))
+          ) : (
+            postsData(campaignList).map((data, i) => (
+              <TextList campaignList={data} key={i} />
+            ))
+          )} */}
+
         </div>
       </div>
       

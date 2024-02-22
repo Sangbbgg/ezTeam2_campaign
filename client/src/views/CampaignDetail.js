@@ -118,9 +118,18 @@ const CampaignDetail = (props) => {
       {/* <MapTest/> */}
       {
         curList?.latitude != null ? (
-          <div id="map" style={{width:"500px", height:"400px"}}></div>
+          <div className="map-area">
+            <p className="tit">위치 안내</p>
+              <div id="map" style={{width:"500px", height:"400px"}}></div>
+            <div className="txt-w">
+              {console.log(curList)}
+                <p className="txt">{curList?.address}</p>
+                <p className="detail-txt">{curList?.address_detail}</p>
+            </div>
+          </div>
         ):null
       }
+      
 
       {/* 하단 버튼 영역 */}
       <div className="bottom-area">
@@ -137,37 +146,5 @@ const CampaignDetail = (props) => {
     </div>
   );
 };
-
-
-// const MapTest = () => {
-//   useEffect(()=>{
-//     var container = document.getElementById('map');
-//     var options = {
-//       center: new kakao.maps.LatLng(37.5565060349238, 127.134788855277),
-//       level: 3
-//     };
-//     // (127.134788855277, 37.5565060349238),
-
-//     // 서울 성북구 아리랑로 3
-//     // CampaignWrite.js:206  qa {La: 127.016174486678, Ma: 37.5930241251186}
-
-//     var map = new kakao.maps.Map(container, options);
-//     var markerPosition  = new kakao.maps.LatLng(37.5565060349238, 127.134788855277); 
-//     var marker = new kakao.maps.Marker({
-//       position: markerPosition
-//     });
-//     marker.setMap(map);
-
-//   }, []);
-
-
-//   return (
-//     <div>
-//     <div id="map" style={{width:"500px", height:"400px"}}></div>
-    
-//     </div>
-//   )
-// };
-
 
 export default CampaignDetail;

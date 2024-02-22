@@ -55,9 +55,13 @@ app.get("/", (req, res) => {
 
 // 캠페인 글 목록 가져오기
 app.get("/campaign", (req, res) => {
-  const q = `SELECT a.*, u.*
+  const q = `SELECT a.*, u.*, a.address, a.address_detail
   FROM campaign_posts a
-  INNER JOIN user u ON a.userid = u.userid;`;
+  INNER JOIN user u ON a.userid = u.userid;
+  `;
+  // const q = `SELECT a.*, u.*
+  // FROM campaign_posts a
+  // INNER JOIN user u ON a.userid = u.userid;`;
   connection.query(q, (err, data) => {
     if (err) {
       console.error('Error executing MySQL query:', err);
@@ -73,7 +77,7 @@ app.get("/campaign", (req, res) => {
 // 글쓰기 페이지에서 사용자가 입력한 정보가 들어가도록 요청
 app.post("/campaign", (req, res) => {
   // MySQL의 NOW() 함수를 사용하여 현재 시간을 삽입
-  const q = 'INSERT INTO campaign_posts (title, body, date, userid, start_date, end_date, address, latitude, longitude) VALUES (?, ?, NOW(), ?, ?, ?, ?, ?, ?)';
+  const q = 'INSERT INTO campaign_posts (title, body, date, userid, start_date, end_date, address, address_detail, latitude, longitude) VALUES (?, ?, NOW(), ?, ?, ?, ?, ?, ?, ?)';
 
   // 시작날짜
   const startDateOffset = new Date(req.body.start_date);
@@ -83,7 +87,7 @@ app.post("/campaign", (req, res) => {
   const endDateOffset = new Date(req.body.end_date);
   const formattedEndDate = new Date(endDateOffset.getTime() - (endDateOffset.getTimezoneOffset() * 60000)).toISOString().slice(0, 19).replace('T', ' '); // ISO 형식의 날짜를 MySQL이 인식할 수 있는 형식으로 변환
 
-  const values = [req.body.title, req.body.body, req.body.userid, formattedStartDate, formattedEndDate, req.body.address, req.body.latitude, req.body.longitude];
+  const values = [req.body.title, req.body.body, req.body.userid, formattedStartDate, formattedEndDate, req.body.address, req.body.address_detail, req.body.latitude, req.body.longitude];
   console.log(req.body)
 
   connection.query(q, values, (err, data) => { 
@@ -127,15 +131,18 @@ app.get("/campaign/detail/:id", (req, res) => {
     return res.json(data[0]); 
   });
 });
+
 app.put("/campaign/edit/:id", (req, res) => {
   const campaignId = req.params.id;
-  const q = "UPDATE campaign_posts SET `title` = ?, `body` = ? WHERE id = ?";
-  const values = [req.body.title, req.body.body, campaignId];
+  const q = "UPDATE campaign_posts SET `title` = ?, `body` = ?, `start_date` = ?, `end_date` = ?, `address` = ?, `address_detail` = ?, `latitude` = ?, `longitude` = ? WHERE id = ?";
+  // start_date와 end_date가 문자열로 넘어오는 것을 Date 객체로 변환하여 사용
+  const values = [req.body.title, req.body.body, new Date(req.body.start_date), new Date(req.body.end_date), req.body.address, req.body.address_detail, req.body.latitude, req.body.longitude, campaignId];
   connection.query(q, values, (err, data) => {
-    if(err) return res.json(err);
+    if(err) return res.status(500).json(err);
     return res.json("Message has been updated successfully");
   });
 });
+
 
 
 
