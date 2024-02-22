@@ -44,7 +44,7 @@ const Header = () => {
             <Link to="/Login">로그인</Link>
           </button>{" "}
           <button>
-            <Link to="/Regester">회원가입</Link>
+            <Link to="/Register">회원가입</Link>
           </button>
           <br />
         </>

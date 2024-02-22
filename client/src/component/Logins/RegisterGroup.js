@@ -5,7 +5,7 @@ import { handlePostcode } from "./Handle/Postcodehandle";
 import axios from 'axios';
 import './1.css'
 
-function RegesterGroup() {
+function RegisterGroup() {
   const [username, setUsername] = useState('');//이름
   const [email, setEmail] = useState('');//이메일
   const [password, setPassword] = useState('');//비밀번호
@@ -14,40 +14,68 @@ function RegesterGroup() {
   const [address, setAddress] = useState('');//주소
   const [detailedaddress, setdetailedaddress] = useState('');//상세주소
   const [phonenumber, setphonenumber] = useState('');//핸드폰번호
+  const [uniquenumber,setuniquenumber] = useState('');//고유번호(단체)
+  const [uniquenumberDuplication, setuniquenumberDuplication] = useState(true);//이메일 유효성
+  const [IsuniquenumberDuplication, setIsuniquenumberDuplication] = useState(true);//고유번호 유효성
   const [emailDuplication, setEmailDuplication] = useState(true);//이메일 유효성
-  //이메일 유효성 검사 2/14 김민호
-  
+  const [IsDuplicateChecked, setIsDuplicateChecked] = useState(false);
+  // 이메일 유효성 검사 02/14 김민호
   const handle = handlePostcode(openPostcode, setOpenPostcode, setAddress);
 
   const setPasswordMatch = (match) => {
     // setPasswordMatch(true) 또는 setPasswordMatch(false) 등으로 사용
   };
-
-  //이메일 유효성 검사 2/14 김민호
-  const handleEmailDuplicationCheck = () => {
-    if (!email) {
-      alert('이메일을 입력해주세요!');
-      return;
-    }
-    
+// 이메일 유효성 검사 02/14 김민호
+const handleEmailDuplicationCheck = () => {
+  if (!email) {
+    alert('이메일을 입력해주세요!');
+    return;
+  }
   
-    // 클라이언트가 서버에 이메일 중복 확인을 요청합니다./0214 김민호
-    axios.post('http://localhost:8000/checkEmailDuplication', { email })
-      .then(response => {
-        console.log('서버 응답:', response.data);
-        setEmailDuplication(response.data.success);
-        alert(response.data.message);
-      })
-      .catch(error => {
-        console.error('이메일 중복 확인 중 오류:', error);
-        alert('이메일 중복 확인 중 오류가 발생했습니다.');
-      });
-      
-      
-  };
 
+  // 클라이언트가 서버에 이메일 중복 확인을 요청합니다./0214 김민호
+  axios.post('http://localhost:8000/checkEmailDuplication', { email })
+    .then(response => {
+      console.log('서버 응답:', response.data);
+      alert(response.data.message);//응답 성공시 표시
+      setEmailDuplication(response.data.success);//이메일 중복여부 확인하는 상태
+      
+      if(response.data.success){
+        setIsDuplicateChecked(true);//중복 문제 없다 알려줌
+      }
+    })
+    .catch(error => {
+      console.error('이메일 중복 확인 중 오류:', error);
+      alert('이메일 중복 확인 중 오류가 발생했습니다.');
+    });
+    
+    
+};
+const handleuniquenumberCheck = () => {
+  if (!uniquenumber) {
+    alert('고유번호을 입력해주세요!');
+    return;
+  }
+  
 
-  const handleRegesterClick = () => {
+  // 클라이언트가 서버에 고유번호 중복 확인을 요청합니다./0220 김민호
+  axios.post('http://localhost:8000/checkuniquenumber', { uniquenumber })
+    .then(response => {
+      console.log('서버 응답:', response.data);
+      alert(response.data.message);
+      setuniquenumberDuplication(response.data.success);
+
+      if(response.data.success){
+        setIsuniquenumberDuplication(true);
+      }
+    })
+    .catch(error => {
+      console.error('사업자 중복 확인 중 오류:', error);
+      alert('사업자 중복 확인 중 오류가 발생했습니다.');
+    });
+};
+
+  const handleRigesterClick = () => {
     if (!username || !email || !password || !confirmPassword || !address) {
       alert('정보를 모두 입력해주세요!');
       return;
@@ -57,37 +85,53 @@ function RegesterGroup() {
       alert('이메일을 입력해주세요!');
       return;
     }
+    // 이메일이 중복되었는지 확인합니다.
+    // 이메일 유효성 검사 02/14 김민호
+    if (!IsDuplicateChecked) {
+      alert('이미 등록된 이메일이거나 이메일 중복 확인을 해주세요.');
+      return;
+    }
+    // --------이메일 기능 구현 함수 @가 없으면 회원가입이 안되게 해놨음-------
+
     // if (!email.includes('@')) {
     //   alert('이메일을 입력해주세요!');
     //   return;
     // }
+
   
     if (password !== confirmPassword) {
       alert('비밀번호가 일치하지 않습니다.');
       setPasswordMatch(false);
       return;
     }
-     // 이메일이 중복되었는지 확인합니다.
-     // 이메일 유효성 검사 02/14 김민호
-     if (!emailDuplication) {
-      alert('이미 등록된 이메일입니다.');
-      return;
-    }
-  
+
+  // --------비밀번호 유효성------------------------
+
     // if (password.length < 10 || !/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
     //   alert('비밀번호는 최소 10글자 이상이어야 하며, 특수문자를 포함해야 합니다.');
     //   return;
     // }
+    
+  // --------사업자 유효성------------------------  
+  if (!IsuniquenumberDuplication) {
+    alert('이미 등록된 고유번호이거나 고유번호 중복 확인을 해주세요.');
+    return;
+  }
+    // if (businessnumber.length !== 10) {
+    //   alert('사업자번호는 10자리로 입력해주세요.');
+    //   return;
+    // }
   
 // 클라이언트에서 서버로 회원가입 요청
-axios.post('http://localhost:8000/regester', {
+axios.post('http://localhost:8000/Rigester', {
   username,
   password,
   email,
   address,
   detailedaddress,
   phonenumber,
-  usertype: 'organization'
+  usertype: 'organization',
+  uniquenumber
 })
   .then(response => {
     console.log('서버 응답:', response.data);
@@ -137,14 +181,23 @@ axios.post('http://localhost:8000/regester', {
         onChange={(e) => setConfirmPassword(e.target.value)}
       />
       <br />
-
+      <input
+      type="text"
+      placeholder="고유번호"
+      value={uniquenumber}
+      onChange={(e) => setuniquenumber(e.target.value)}
+      />
+       <button onClick={()=>{handleuniquenumberCheck(); setIsuniquenumberDuplication(false);}}>확인</button>
+      {/* 고유 유효성 검사 02/20 김민호 */}
+      <br/>
       <input
         type="text"
         placeholder="이메일"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
-      <button onClick={handleEmailDuplicationCheck}>확인</button>
+      <button onClick={()=>{handleEmailDuplicationCheck(); setIsDuplicateChecked(false);}}>확인</button>
+      {/* handleEmailDuplicationCheck 함수가 호출해서 이메일 중복확인 작업을 진행하고, 중복방지를 해주는 코드 */}
       {/* 이메일 유효성 검사 02/14 김민호 */}
       <br />
 
@@ -179,7 +232,7 @@ axios.post('http://localhost:8000/regester', {
         onChange={(e) => setdetailedaddress(e.target.value)}
       />
       <br/>
-      <button className="RegesterBtn" onClick={handleRegesterClick}>
+      <button className="RigesterBtn" onClick={handleRigesterClick}>
         가입완료
       </button>
       <div>
@@ -189,4 +242,4 @@ axios.post('http://localhost:8000/regester', {
   );
 }
 
-export default RegesterGroup; 
+export default RegisterGroup; 

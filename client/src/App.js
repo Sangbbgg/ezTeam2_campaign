@@ -10,10 +10,10 @@ import CampaignEdit from "./views/CampaignEdit";
 // 김민호(임시)-----------------
 import LoginPage from "./component/Logins/Login";
 import Modify from "./component/Logins/Modify";
-import Regester from "./component/Logins/Regester";
-import RegesterPersonal from "./component/Logins/RegesterPersonal";
-import RegesterGroup from "./component/Logins/RegisterGroup";
-import RegesterCorporate from "./component/Logins/RegisterCorporate";
+import Register from "./component/Logins/Register";
+import RegisterPersonal from "./component/Logins/RegisterPersonal";
+import RegisterCorporate from "./component/Logins/RegisterCorporate";
+import RegisterGroup from "./component/Logins/RegisterGroup";
 
 import CarbonFootprint from "./views/CarbonFootprint";
 
@@ -32,10 +32,10 @@ function App() {
         {/* 김민호 */}
         <Route path="/Login" element={<LoginPage />}></Route>
         <Route path="/Modify" element={<Modify />}></Route>
-        <Route path="/Regester" element={<Regester />}></Route>
-        <Route path="/Regester/personal" element={<RegesterPersonal />}></Route>
-        <Route path="/Regester/corporate" element={<RegesterCorporate />}></Route>
-        <Route path="/Regester/group" element={<RegesterGroup />}></Route>
+        <Route path="/Register" element={<Register />}></Route>
+        <Route path="/Register/personal" element={<RegisterPersonal />}></Route>
+        <Route path="/Register/corporate" element={<RegisterCorporate />}></Route>
+        <Route path="/Register/group" element={<RegisterGroup />}></Route>
       </Routes>
     </div>
   );

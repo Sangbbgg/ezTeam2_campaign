@@ -1,6 +1,7 @@
 import React, { useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './1.css'
 
 //로그인 페이지 상태 변화 함수
 function LoginPage() {
@@ -53,6 +54,7 @@ function LoginPage() {
       <div className="form">
         <form className="login-form">
           {/* 로그인 아이디 비밀번호 표시 */}
+          <from className="login-a">
           <input
             id="id"
             type="text"
@@ -100,9 +102,10 @@ function LoginPage() {
             로그인
           </button>
           <div>
-            <Link to="/Regester">회원가입 필요하십니까?</Link>
+            <Link to="/Register">회원가입 필요하십니까?</Link>
           </div>
           {loginStatus && <div>{loginStatus}</div>}
+          </from>
         </form>
       </div>
     </div>
