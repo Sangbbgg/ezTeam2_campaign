@@ -27,6 +27,11 @@ header nav .btn-close-mo {display: block; position: absolute; top: 22px; right: 
 /* 로그인 영역 */
 header .login-w {position: absolute; z-index: 10;}
 
+
+
+/* 푸터 */
+footer {width: 100%; min-height: 240px; background-color: #333;}
+
 /* @media screen and (max-width: 1024px) {
   header {height: 60px;}
   header .logo {left: 30px; width: 50px; height: 28px;}

@@ -1,9 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
-
 const TextList = ({campaignList}) => {
   const navigate = useNavigate();
-
 
   // 이미지 태그의 src 속성값을 추출하는 함수
   const extractImageSrc = (htmlString) => {

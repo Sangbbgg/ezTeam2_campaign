@@ -6,6 +6,7 @@ import { getPost } from '../store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import Pagination from '../component/campaign/Pagination';
 import TextList from '../component/campaign/TextList';
+import Footer from '../component/Footer';
 
 const Campaign = () => {
   const navigate = useNavigate();
@@ -151,6 +152,7 @@ const Campaign = () => {
         </div>
       </div>
       
+      <Footer/>
     </div>
   );
 };
