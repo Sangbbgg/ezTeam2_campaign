@@ -1,20 +1,32 @@
-.inner {position: relative; margin: 0 auto; width: 1024px;}
 
+#wrap {position: relative; padding-top: 80px; overflow-x: hidden;}
+.inner {position: relative; margin: 0 auto; width: 1024px;}
 
 /* .campaign {padding: 140px 100px;} */
 h2 {margin-bottom: 20px}
 
-.campaign-wrap {margin-top: 20px;}
-.campaign-wrap .cont {display: flex; justify-content: space-between; width: 100%; padding: 30px 8px; border-bottom: 1px solid #000;}
-/* .campaign-wrap .cont {display: flex; justify-content: space-between; width: 100%; padding: 30px 8px; border-bottom: 1px solid #000;} */
-/* .campaign-wrap .cont + .cont {margin-top: 40px;} */
-.campaign-wrap .cont .title {margin-right: 20px; width: 30%; font-size: 18px; color: #000; text-align: left;}
-.campaign-wrap .cont p {width: 100%; color: #000; text-align: left;}
-.campaign-wrap .cont .txt-info {display: flex;}
-.campaign-wrap .cont .username {font-size: 16px; text-align: right; min-width: 60px;}
-.campaign-wrap .cont .date {font-size: 16px; text-align: right; min-width: 86px;}
-.campaign-wrap .cont .img {width: 120px; height: 120px; border: 1px solid red;}
-.campaign-wrap .cont .img img {width: 100%; height: 100%;}
+.container {display: flex; flex-wrap: wrap;}
+.container .cont {position: relative; margin-right: 20px; width: calc((100%  - 40px) / 3); overflow: hidden;}
+.container .cont:nth-child(n+4) {margin-top: 30px;}
+.container .cont:nth-child(3n) {margin-right: 0;}
+/* .container .cont .img-wrap {position: relative; width: 100%; padding-bottom: 75%; overflow: hidden;} */
+.container .cont .img-wrap:hover img {transform: translate(-50%, -50%) scale(1.1);}
+.container .cont .img-wrap {position: relative; overflow: hidden; width: auto; height: 277px;}
+.container .cont .img-wrap img {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1); width: 100%; transition: transform .3s ease-out;}
+
+.img-resize-w {position:relative; width: 400rem; height: 400rem; overflow: hidden;}
+.img-resize-w > img {position: absolute; width: 100%; height: auto; left: 50%; top: 50%; transform: translate(-50%, -50%);}
+.img-resize-w > img {width: auto; height: 100%;}
+
+.campaign-wrap {margin-top: 20px; padding-bottom: 200px;}
+.campaign-wrap .cont .title {font-size: 18px; color: #000; text-align: left;overflow: hidden; word-wrap: break-word; overflow: hidden; text-overflow: ellipsis;}
+.campaign-wrap .txt-wrap {display: block; margin-top: 12px;}
+.campaign-wrap .txt-wrap .txt-info {display: flex; justify-content: space-between; margin-top: 10px;}
+.campaign-wrap .txt-wrap .username {font-size: 16px; text-align: right; color: #777;}
+.campaign-wrap .txt-wrap .date {font-size: 16px; text-align: right; color: #777;}
+
+
+/* 글 목록 */
 
 /* 글쓰기 */
 .campaign-write {margin: 0 auto; padding: 140px 40px; width: 80%;}
@@ -76,7 +88,7 @@ h2 {margin-bottom: 20px}
 
 
 /* 페이지네이션 */
-.pagination {display: flex; justify-content: center; margin-top: 80px;}
+.pagination {display: flex; justify-content: center; margin-top: 120px;}
 .pagination .btn-prev, .pagination .btn-next {margin-right: 8px; padding: 10px; border: 1px solid #999; color: #999;}
 .pagination button {display: flex; justify-content: center; align-items: center; position: relative; margin-right: 8px; padding: 10px; min-width: 40px; border: 1px solid #999; color: #999; word-break: keep-all;}
 /* .pagination button.active::after {content: ''; position: absolute; top: 0; left: 0; display: block; width: 100%; height: 100%; background-color: rgba(255, 255, 255, .25);} */
@@ -87,8 +99,8 @@ h2 {margin-bottom: 20px}
 
 /* 검색 input */
 .search-wrap {display: flex; justify-content: center; margin: 40px 0 60px;}
-.search-wrap input {margin-bottom: 0; padding: 4px; width: calc(100% - 120px); border: 0; border-bottom: 1px solid #000;}
-.btn-search {margin-left: 12px; padding: 4px 16px; border: 1px solid #000;}
+.search-wrap input {margin-bottom: 0; padding: 4px; width: 340px; height: 40px; border: 0; border-bottom: 1px solid #000;}
+.btn-search {margin-left: 20px; padding: 4px 16px; height: 40px; font-size: 14px; border: 1px solid #000;}
 
 /* 탭 */
 .tab-area {display: flex; justify-content: center; margin-bottom: 40px;}

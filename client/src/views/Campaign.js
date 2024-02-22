@@ -16,7 +16,7 @@ const Campaign = () => {
 
   // 페이지네이션
   const [page, setPage] = useState(1); 
-  const listLimit = 10; // 페이지당 글 갯수
+  const listLimit = 9; // 페이지당 글 갯수
   const offset = (page - 1) * listLimit; // 시작점과 끝점을 구하는 offset
 
   // 검색 인풋  
@@ -91,7 +91,7 @@ const Campaign = () => {
   };
 
   return (
-    <div className="campaign">
+    <div id="wrap">
       <Header/>
       {/* <h2>캠페인(메인) 페이지입니다</h2> */}
 
@@ -144,11 +144,13 @@ const Campaign = () => {
             )} */}
 
           </div>
+
+          {/* 페이지네이션 */}
+          <Pagination listLimit={listLimit} page={page} setPage={setPage} totalPosts={isSearchClicked ? filteredResults.length : campaignList.length} />
+      
         </div>
       </div>
       
-      {/* 페이지네이션 */}
-      <Pagination listLimit={listLimit} page={page} setPage={setPage} totalPosts={isSearchClicked ? filteredResults.length : campaignList.length} />
     </div>
   );
 };
