@@ -12,22 +12,59 @@ const CampaignDetail = (props) => {
   const navigate = useNavigate();
   const {id} = useParams();
   const dispatch = useDispatch();
-  const [campaignList, setCampaignList] = useState([]);
+  const [campaignList, setCampaignList] = useState([]); // 글 리스트
+  const [views, setViews] = useState(0); // 조회수
 
   const { kakao } = window;
 
   useEffect(() => {
-    const getData = async () => {
+    const fetchData = async () => {
       try {
+        // 게시물 데이터 요청
         const result = await dispatch(getPost());
         setCampaignList(result.payload);
+        console.log(result)
+
+        // 조회수 증가 요청
+        await axios.put(`http://localhost:8000/campaign/increase-views/${id}`);
       } catch (error) {
-        console.log('실패:', error);
+        console.error('Error fetching data:', error);
       }
     };
+  
+    fetchData();
+  }, [id, dispatch]);
+  
 
-    getData();
-  }, []);
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     try {
+  //       const result = await dispatch(getPost());
+  //       setCampaignList(result.payload);
+  //     } catch (error) {
+  //       console.log('실패:', error);
+  //     }
+  //   };
+
+  //   getData();
+  // }, []);
+  
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       // 조회수 증가 요청
+  //       await axios.put(`http://localhost:8000/campaign/increase-views/${id}`);
+  //       // 게시물 데이터 요청
+  //       const response = await axios.get(`http://localhost:8000/campaign/detail/${id}`);
+  //       setCampaignList([response.data]);
+  //       setViews(response.data.views);
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error);
+  //     }
+  //   };
+  
+  //   fetchData();
+  // }, [id]);
   
   let curList = campaignList.find(function(data){
     return data.id === parseInt(id);
@@ -55,19 +92,15 @@ const CampaignDetail = (props) => {
   useEffect(()=>{
     // curList가 존재하고 latitude 및 longitude 속성이 존재하는 경우에만 맵을 생성
     if(curList && curList.latitude && curList.longitude){
-      var container = document.getElementById('map');
-      var options = {
+      const container = document.getElementById('map');
+      const options = {
         center: new kakao.maps.LatLng(curList.latitude, curList.longitude),
         level: 3
       };
-      // (curList.longitude, curList.latitude),
   
-      // 서울 성북구 아리랑로 3
-      // CampaignWrite.js:206  qa {La: 127.016174486678, Ma: 37.5930241251186}
-  
-      var map = new kakao.maps.Map(container, options);
-      var markerPosition  = new kakao.maps.LatLng(curList.latitude, curList.longitude); 
-      var marker = new kakao.maps.Marker({
+      const map = new kakao.maps.Map(container, options);
+      const markerPosition  = new kakao.maps.LatLng(curList.latitude, curList.longitude); 
+      const marker = new kakao.maps.Marker({
         position: markerPosition
       });
       marker.setMap(map);
@@ -84,10 +117,17 @@ const CampaignDetail = (props) => {
       <div className="title-area">
         <p className="title">{curList?.title}</p>
         <div className="regi-info">
-          <p className="author-id">{"회원번호: " + curList?.userid}</p>
-          {/* <p className="date">{curList?.date.slice(0, 10).replace("T", "")}</p> */}
-          <p className="date">{new Date(curList?.date).toLocaleDateString()}</p>
+          
+          <p className="views">{"조회수: " +curList?.views}</p>
         </div>
+      </div>
+
+      {/* 작성자 정보 */}
+      <div className="writer-info">
+        {/* <p className="author-id">{"회원번호: " + curList?.userid}</p> */}
+        <p className="author-id">{curList?.username}</p>
+        {/* <p className="date">{curList?.date.slice(0, 10).replace("T", "")}</p> */}
+        <p className="date">{new Date(curList?.date).toLocaleDateString()}</p>
       </div>
       
       {/* 진행 기간 */}
@@ -115,17 +155,15 @@ const CampaignDetail = (props) => {
         __html: DOMPurify.sanitize(curList?.body),
       }}></div>
 
-      {/* <MapTest/> */}
       {
         curList?.latitude != null ? (
           <div className="map-area">
             <p className="tit">위치 안내</p>
               <div id="map" style={{width:"500px", height:"400px"}}></div>
-            <div className="txt-w">
-              {console.log(curList)}
+              <div className="txt-w">
                 <p className="txt">{curList?.address}</p>
                 <p className="detail-txt">{curList?.address_detail}</p>
-            </div>
+              </div>
           </div>
         ):null
       }
