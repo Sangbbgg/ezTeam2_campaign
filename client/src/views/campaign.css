@@ -7,12 +7,13 @@ h2 {margin-bottom: 20px}
 
 .container {display: flex; flex-wrap: wrap;}
 .container .cont {position: relative; margin-right: 20px; width: calc((100%  - 40px) / 3); overflow: hidden;}
-.container .cont:nth-child(n+4) {margin-top: 30px;}
+.container .cont:nth-child(n+4) {margin-top: 40px;}
 .container .cont:nth-child(3n) {margin-right: 0;}
 /* .container .cont .img-wrap {position: relative; width: 100%; padding-bottom: 75%; overflow: hidden;} */
 .container .cont .img-wrap:hover img {transform: translate(-50%, -50%) scale(1.1);}
 .container .cont .img-wrap {position: relative; overflow: hidden; width: auto; height: 277px;}
-.container .cont .img-wrap img {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1); width: 100%; transition: transform .3s ease-out;}
+.container .cont .img-wrap img {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1); width: 100%; transition: transform .3s ease-out; object-fit: cover;}
+
 
 .img-resize-w {position:relative; width: 400rem; height: 400rem; overflow: hidden;}
 .img-resize-w > img {position: absolute; width: 100%; height: auto; left: 50%; top: 50%; transform: translate(-50%, -50%);}
@@ -22,8 +23,8 @@ h2 {margin-bottom: 20px}
 .campaign-wrap .cont .title {font-size: 18px; color: #000; text-align: left;overflow: hidden; word-wrap: break-word; overflow: hidden; text-overflow: ellipsis;}
 .campaign-wrap .txt-wrap {display: block; margin-top: 12px;}
 .campaign-wrap .txt-wrap .txt-info {display: flex; justify-content: space-between; margin-top: 10px;}
-.campaign-wrap .txt-wrap .username {font-size: 16px; text-align: right; color: #777;}
-.campaign-wrap .txt-wrap .date {font-size: 16px; text-align: right; color: #777;}
+.campaign-wrap .txt-wrap .username {font-size: 14px; text-align: right; color: #777;}
+.campaign-wrap .txt-wrap .date {font-size: 14px; text-align: right; color: #777;}
 
 
 /* 글 목록 */
