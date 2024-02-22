@@ -909,6 +909,36 @@ app.post("/regester", async (req, res) => {
 //   });
 // });
 
+<<<<<<< HEAD
+=======
+app.get("/edit-profile/:userId/:usertype", (req, res) => { // 클라이언트에서 파라미터로 전달 받은값 반영
+  const { userId, usertype } = req.params; // userId, usertype 값 획득
+  // const usertype = req.session.usertype;
+  // const userid = req.session.userData[0].userid;
+  // console.log(req.session);
+  // console.log(req.session.userData.userid);
+
+  if (!usertype || !userId) {
+    return res.status(401).json({ success: false, message: "로그인되어 있지 않습니다." });
+  }
+
+  const sql = "SELECT * FROM user WHERE userid = ?";
+  connection.query(sql, [userId], (err, result) => {
+    if (err) {
+      console.error("사용자 정보 조회 중 오류:", err);
+      return res.status(500).json({ success: false, message: "사용자 정보 조회 중 오류가 발생했습니다." });
+    }
+
+    const userData = result[0];
+
+    if (!userData) {
+      return res.status(404).json({ success: false, message: "사용자 정보를 찾을 수 없습니다." });
+    }
+
+    res.json({ usertype : usertype, userId:userId, userData: userData});
+  });
+});
+>>>>>>> 61b2c07 (로그인단 첨부)
 
 
 
