@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Header from '../component/Header';
 import { useNavigate } from 'react-router-dom';
 import { getPost } from '../store/store';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Pagination from '../component/campaign/Pagination';
 import TextList from '../component/campaign/TextList';
 import Footer from '../component/Footer';
@@ -12,43 +12,48 @@ const Campaign = () => {
   const dispatch = useDispatch();
   
   // 글 목록
-  const [campaignList, setCampaignList] = useState([]);
+  const [campaignList, setCampaignList] = useState([]); // 캠페인 목록을 저장 
+  const [filteredResults, setFilteredResults] = useState([]); // 필터링된 결과 저장
+  const [isSearchClicked, setIsSearchClicked] = useState(false); // 검색 버튼이 클릭되었는지 여부를 저장
+  const [totalPostsCount, setTotalPostsCount] = useState(0); // 탭별 전체 포스트 개수를 저장
 
   // 페이지네이션
-  const [page, setPage] = useState(1); 
+  const [page, setPage] = useState(1); // 현재 페이지 번호를 저장
   const listLimit = 9; // 페이지당 글 갯수
   const offset = (page - 1) * listLimit; // 시작점과 끝점을 구하는 offset
 
   // 검색 인풋  
-  const [searchInput, setSearchInput] = useState('');
-  const [filteredResults, setFilteredResults] = useState([]);
-  const [isSearchClicked, setIsSearchClicked] = useState(false);
+  const [searchInput, setSearchInput] = useState(''); // 검색어를 저장하는 state
 
   // 데이터 불러옴
   useEffect(() => {
+    // 포스트 데이터를 불러와서 campaignList state에 저장
     dispatch(getPost())
       .then((res) => {
         if (res.payload) {
           let arrPost = [...res.payload];
-          
+          // 새로운 데이터가 불러와졌을 때 역순으로 정렬하여 최신 글이 위로 오도록 함
           setCampaignList(arrPost.reverse());
+          // 초기 필터링 결과로 전체 포스트를 설정
+          setFilteredResults(arrPost);
+          // 전체 포스트 개수 설정
+          setTotalPostsCount(arrPost.length);
         }
       })
       .catch((err) => console.log(err));
   }, []);
 
-  useEffect(() => {
-    // 필터링된 결과가 변경될 때마다 화면을 다시 렌더링
-  }, [filteredResults]);
-  
-
   // 검색 함수
   const searchPosts = () => {
+    // 검색어를 포함하는 글만 필터링하여 filteredResults state에 저장
     const filteredData = campaignList.filter((item) => {
       return Object.values(item).join('').toLowerCase().includes(searchInput.toLowerCase());
     });
     setFilteredResults(filteredData);
-    setIsSearchClicked(true);
+    setIsSearchClicked(true); // 검색 버튼이 클릭되었음을 설정
+    // 검색 결과에 따라 전체 포스트 개수 업데이트
+    setTotalPostsCount(filteredData.length);
+    setPage(1); // 페이지를 1로 초기화
   };
 
   // 검색 버튼 클릭 이벤트 핸들러
@@ -77,9 +82,13 @@ const Campaign = () => {
       filteredUsertype = campaignList.filter((item) => parseInt(item.usertype) === index);
     }
 
-    // console.log(filteredUsertype);
-    setFilteredResults(filteredUsertype);
+    setFilteredResults(filteredUsertype); // 필터링된 결과를 저장
+    setIsSearchClicked(false); // 검색 결과 초기화
+    // 필터링된 결과의 개수로 전체 포스트 개수 설정
+    setTotalPostsCount(filteredUsertype.length);
+    setPage(1); // 페이지를 1로 초기화
 
+    // 클릭한 탭에 active 클래스 추가
     const tabList = document.querySelectorAll(".tab-area .btn-tab");
     tabList.forEach((tab, i) => {
       if (i === index) {
@@ -93,64 +102,30 @@ const Campaign = () => {
   return (
     <div id="wrap">
       <Header/>
-      {/* <h2>캠페인(메인) 페이지입니다</h2> */}
-
       <div className="inner">
         <button className="btn-link" onClick={()=>{navigate('/campaign/write')}}>글쓰기</button>
-        
-        {/* 검색 인풋 */}
         <div className="search-wrap">
           <input type="text" placeholder="검색어를 입력하세요" onChange={(e) => setSearchInput(e.target.value)} />
           <button className="btn-search" onClick={handleSearchButtonClick}>검색</button>
         </div>
-        
         <div className="campaign-wrap">
           <div className="tab-area">
+            {/* 각 탭 클릭시 handleTabClick 함수 호출 */}
             <button className='btn-tab active' onClick={() => handleTabClick(0)}>전체</button>
             <button className='btn-tab' onClick={() => handleTabClick(1)}>개인</button>
             <button className='btn-tab' onClick={() => handleTabClick(2)}>기업</button>
             <button className='btn-tab' onClick={() => handleTabClick(3)}>단체</button>
           </div>
-          
           <div className="container">
             {/* 검색 결과에 따라 글목록 나열 */}
-            {isSearchClicked ? (
-              filteredResults.map((data, i) => (
-                <TextList campaignList={data} key={i} />
-              ))
-            ) : (
-              postsData(filteredResults.length > 0 ? filteredResults : campaignList).map((data, i) => (
-                <TextList campaignList={data} key={i} />
-              ))
-            )}
-            {/* {isSearchClicked ? (
-              filteredResults.map((data, i) => (
-                <TextList campaignList={data} key={i} />
-              ))
-            ) : (
-              postsData(filteredResults.length > 0 ? filteredResults : campaignList.filter((item) => parseInt(item.usertype) === 1)).map((data, i) => (
-                <TextList campaignList={data} key={i} />
-              )) // 초기에는 개인 탭에 해당하는 캠페인만 노출
-            )} */}
-
-            {/* {isSearchClicked ? (
-              filteredResults.map((data, i) => (
-                <TextList campaignList={data} key={i} />
-              ))
-            ) : (
-              postsData(campaignList).map((data, i) => (
-                <TextList campaignList={data} key={i} />
-              ))
-            )} */}
-
+            {postsData(filteredResults).map((data, i) => (
+              <TextList campaignList={data} key={i} />
+            ))}
           </div>
-
-          {/* 페이지네이션 */}
-          <Pagination listLimit={listLimit} page={page} setPage={setPage} totalPosts={isSearchClicked ? filteredResults.length : campaignList.length} />
-      
+          {/* 페이지네이션 컴포넌트 */}
+          <Pagination listLimit={listLimit} page={page} setPage={setPage} totalPosts={totalPostsCount} />
         </div>
       </div>
-      
       <Footer/>
     </div>
   );
