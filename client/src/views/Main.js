@@ -36,30 +36,23 @@ const Main = () => {
       </div> */}
 
       <Header />
-      {/* <div className="key-visual">
-        <div className="img-w">
-          <img src={process.env.PUBLIC_URL + '/img/bg-key-visual2.jpg'} alt="Default Campaign Image" />
-        </div>  
-        <div className="txt-w">
-          <p className="txt">나의 행동이 지구를 위한 발걸음이 되도록, 탄소 중립을 향한 여정을 함께하세요.</p>
-        </div>
-      </div>   */}
       <section className="main-visual">
-          <div className="img-wrap">
-            <img src={process.env.PUBLIC_URL + '/img/bg-key-visual2.jpg'} alt="Default Campaign Image" />
+        <div className="img-wrap">
+          <img src={process.env.PUBLIC_URL + '/img/bg-key-visual2.jpg'} alt="Default Campaign Image" />
+        </div>
+
+        <div className="txt-wrap">
+          <p className="txt">나의 행동이 <br/>지구를 위한 발걸음이 되도록</p>
+          <p className="sub-txt">탄소 중립을 향한 여정을 함께하세요.</p>
+        </div>
+
+        <div className="scroll-mark">
+          <div className="bar">
+            <div className="move-bar"></div>
           </div>
-
-          <div className="txt_area">
-            <p className="txt">나의 행동이 <br/>지구를 위한 발걸음이 되도록</p>
-            <p className="sub-txt">탄소 중립을 향한 여정을 함께하세요.</p>
-            {/* <a className="btn_more">더보기</a> */}
-          </div>
-
-
+          <div className="text">Scroll Down</div>
+        </div>
       </section>
-      {/* <h2 style={{position: 'absolute', top: '30%'}}>메인 페이지입니다.</h2> */}
-      {/* <button onClick={()=>{navigate('./login')}}>로그인</button>
-      <button onClick={()=>{navigate('./register')}}>회원가입</button> */}
     </div>
   );
 };

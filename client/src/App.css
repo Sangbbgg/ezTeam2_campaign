@@ -110,6 +110,7 @@ header nav .btn-close-mo {display: block; position: absolute; top: 22px; right: 
 .main header nav {background-color: transparent;}
 .main header .for-bg {background: transparent;}
 
+
 /* 로그인 영역 */
 header .utils {position: absolute; right: 50px; z-index: 3;}
 header .utils button {font-size: 13px;}
@@ -169,13 +170,20 @@ footer {width: 100%; min-height: 240px; background-color: #333;}
 }
 .main-visual .mob_tit {display: none; position: absolute; bottom: 216px; left: 16px; font-size: 13px; font-family: "spoqa_medium"; color: #F58220; opacity: 0; line-height: 21px; letter-spacing: -.25px; z-index: 1}
 
+.main-visual .txt-wrap {position: absolute; z-index: 1; left: 140px; bottom: 120px; max-width: calc(100% - 280px);}
+.main-visual .txt-wrap .txt {font-size: 40px; font-family: "spoqa_bold"; color: #fff; opacity: 0; transform: translateY(70px); line-height: 56px; letter-spacing: -.3px;}
+.main-visual .txt-wrap .sub-txt {font-size: 20px; font-family: "spoqa_medium"; color: #fff; opacity: 0; transform: translateY(70px); line-height: 28px; letter-spacing: -.3px; word-break: keep-all; margin: 32px 0 40px;}
 
+.scroll-mark {position: absolute; bottom: 40px; right: 220px; z-index: 1;}
+.scroll-mark .text {font-size: 14px; color: #fff;}
+.scroll-mark .bar {position: absolute; top: -5px; left: -20px; z-index: 100; overflow: hidden; width: 1px; height: 68px; background-color: rgba(255, 255, 255, .3);}
+.scroll-mark .bar .move-bar {position: absolute; top: -100%; left: -1px; width: 3px; height: 100%; background-color: #fff; animation: flowBar 1.3s ease-in-out infinite;}
 
-.main-visual .txt_area {position: absolute; z-index: 1; left: 140px; bottom: 120px; max-width: calc(100% - 280px);}
-.main-visual .txt_area .txt {font-size: 40px; font-family: "spoqa_bold"; color: #fff; opacity: 0; transform: translateY(70px); line-height: 56px; letter-spacing: -.3px;}
-.main-visual .txt_area .sub-txt {font-size: 20px; font-family: "spoqa_medium"; color: #fff; opacity: 0; transform: translateY(70px); line-height: 28px; letter-spacing: -.3px; word-break: keep-all; margin: 32px 0 40px;}
-
-/* .main-visual .txt_area .btn_more {display: inline-block; width: auto; height: auto; color: #fff; background: url('../images/morebt-icon-w.svg') no-repeat right  5px; opacity: 0; transform: translateY(50px);} */
+@keyframes flowBar {
+  0% {top: -100%;}
+  100% {top: 100%;}
+}
+/* .main-visual .txt-wrap .btn_more {display: inline-block; width: auto; height: auto; color: #fff; background: url('../images/morebt-icon-w.svg') no-repeat right  5px; opacity: 0; transform: translateY(50px);} */
 
 
 
