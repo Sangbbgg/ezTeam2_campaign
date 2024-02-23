@@ -61,9 +61,9 @@ const Header = () => {
         <div className="for-bg">
           <div className="gnb-wrap">
             <ul className="gnb">
-              <li>
+              {/* <li>
                 <button className="one-link" onClick={()=>{navigate('/carbonNeutrality')}}>탄소 중립이란?</button>
-              </li>
+              </li> */}
               <li>
                 <a className="one-link" href=""><button className="one-link" onClick={()=>{navigate('/campaign')}}>캠페인</button></a>
               </li>

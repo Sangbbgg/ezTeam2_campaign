@@ -94,7 +94,7 @@ header nav.show {left: 0;}
 header .for-bg {position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #fff; border-bottom: 1px solid #ddd; overflow: hidden; transition: height .6s ease;  overflow: hidden;}
 header .for-bg.hide-bg {transition: none;}
 header .gnb-w {position: relative; display: inline-block; text-align: center;}
-header .gnb {display: flex; justify-content: flex-start; padding-left: 170px; height: 80px; }
+header .gnb {display: flex; justify-content: flex-start; padding-left: 140px; height: 80px; }
 header .gnb a {display: block; color: #333;}
 header .gnb > li {display: inline-block; position: relative; min-width: 100px; height: 100%;}
 header .gnb > li .one-link {position: relative; display: flex; justify-content: center; align-items: center; height: 80px; white-space: nowrap; font-size: max(14px, 16px);}
@@ -106,10 +106,13 @@ header .gnb > li .two-depth > li .two-link:hover {color: #000;}
 header .btn-menu-mo {display: none; position: absolute; top: 50%; right: 50px; transform: translateY(-50%); width: 32px; height: 32px; background: url("../public/img/frog.png") no-repeat center center / cover; z-index: 3;}
 header nav .btn-close-mo {display: block; position: absolute; top: 22px; right: 30px; width: 20px; height: 20px; background: url("../public/img/icon-gnb-close.svg") no-repeat center center / cover;}
 
+.main header {background-color: transparent;}
+.main header nav {background-color: transparent;}
+.main header .for-bg {background: transparent;}
 
 /* 로그인 영역 */
-header .utils {position: absolute; right: 40px; z-index: 3;}
-header .utils button {font-size: 14px;}
+header .utils {position: absolute; right: 50px; z-index: 3;}
+header .utils button {font-size: 13px;}
 header .utils button + button {margin-left: 10px;}
 
 
@@ -149,6 +152,30 @@ footer {width: 100%; min-height: 240px; background-color: #333;}
   header .srch-area .form-search {width: calc(100% - 60px);}
 } */
 
+/* 메인 */
+#wrap.main {position: relative; padding-top: 0;}
+.key-visual {position: relative; top: 0; left: 0; width: 100%; height: 100vh; overflow: hidden;}
+.key-visual .img-w {position: absolute; top: 0; left: 0; width: 100%; height: 100vh; overflow: hidden; background: #fff;}
+.key-visual .img-w img {display: block; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1); width: auto; height: auto; min-width: 100%;min-height: 100%;}
+
+
+.main-visual {position: relative; top: 0; left: 0; width: 100%; height: 100vh; overflow: hidden;}
+.main-visual .img-wrap {position: absolute; top: 0; left: 0; width: 100%; height: 100vh; overflow: hidden; background: #fff;}
+.main-visual .img-wrap::after {content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, transparent, rgba(0,0,0,.25)  70%, rgba(0,0,0,.55) 85%);;}
+.main-visual .img-wrap img {display:block; position:absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1); width: auto; height: auto; min-width: 100%; min-height: 100%; animation-duration: 3s; animation-name: zoom; animation-fill-mode: forwards;}
+@keyframes zoom {
+  0% {transform: translate(-50%, -50%) scale(1);}
+  100% {transform: translate(-50%, -50%) scale(1.05);}
+}
+.main-visual .mob_tit {display: none; position: absolute; bottom: 216px; left: 16px; font-size: 13px; font-family: "spoqa_medium"; color: #F58220; opacity: 0; line-height: 21px; letter-spacing: -.25px; z-index: 1}
+
+
+
+.main-visual .txt_area {position: absolute; z-index: 1; left: 140px; bottom: 120px; max-width: calc(100% - 280px);}
+.main-visual .txt_area .txt {font-size: 40px; font-family: "spoqa_bold"; color: #fff; opacity: 0; transform: translateY(70px); line-height: 56px; letter-spacing: -.3px;}
+.main-visual .txt_area .sub-txt {font-size: 20px; font-family: "spoqa_medium"; color: #fff; opacity: 0; transform: translateY(70px); line-height: 28px; letter-spacing: -.3px; word-break: keep-all; margin: 32px 0 40px;}
+
+/* .main-visual .txt_area .btn_more {display: inline-block; width: auto; height: auto; color: #fff; background: url('../images/morebt-icon-w.svg') no-repeat right  5px; opacity: 0; transform: translateY(50px);} */
 
 
 
