@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../component/Header';
 import { useNavigate } from 'react-router-dom';
-import './campaign.css';
 import { getPost } from '../store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import Pagination from '../component/campaign/Pagination';

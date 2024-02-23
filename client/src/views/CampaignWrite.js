@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./campaign.css";
 import Header from "../component/Header";
 import axios from "axios";
 import WriteEditor from "../component/campaign/WriteEditor";
