@@ -27,7 +27,7 @@ const TextList = ({campaignList}) => {
         <img src={process.env.PUBLIC_URL + '/img/img-campaign-def.jpg'}/>
       </div> */}
 
-      <div className="img-wrap img-resize-w">
+      <div className="img-wrap">
         {imageSrcList.length > 0 ? (
           imageSrcList.map((src, index) => (
             <img key={index} src={src} alt={`Image ${index}`} />

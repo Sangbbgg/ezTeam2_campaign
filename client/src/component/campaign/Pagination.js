@@ -34,10 +34,11 @@ const Pagination = ({ listLimit, page, setPage, totalPosts }) => {
         }}
         disabled={page === 1}
       >
-        <span>&lt;</span>
       </button>
 
-      {renderPageButtons()}
+      <div className="btn-num-w">
+        {renderPageButtons()}
+      </div>
 
       <button
         className="btn-next" onClick={() => {
@@ -50,7 +51,6 @@ const Pagination = ({ listLimit, page, setPage, totalPosts }) => {
         }}
         disabled={page === totalPages}
       >
-        <span>&gt;</span>
       </button>
     </div>
   );
