@@ -693,6 +693,7 @@ app.post("/login", async (req, res) => {
 //---------------------------------- 회원번호---------------------------------------------
 const usedUserNumbers = new Set(); // 중복 방지를 위한 Set
 
+
 async function generateUserid(usertype) {
   // 사용자 유형에 기반한 사용자 ID를 생성하는 로직을 추가합니다.
   // 단순성을 위해 사용자 유형에 따라 접두어를 추가하고 6자리의 랜덤 숫자를 붙입니다.
@@ -898,7 +899,26 @@ app.get("/edit-profile/:userId/:usertype", (req, res) => { // 클라이언트에
     res.json({ usertype : usertype, userId:userId, userData: userData});
   });
 });
+//---------------------------회원 탈퇴--------------------------------------------------
+app.delete('/delete-account/:userId/:userType', (req, res) => {
+  const userId = req.params.userId;
+  const userType = req.params.userType;
 
+  // userType을 확인하여 적절한 테이블을 결정합니다 (다른 사용자 유형에 대해 다른 테이블을 가질 수 있습니다).
+  const tableName = (userType === 'admin') ? 'admin_table' : 'user';
+
+  const deleteQuery = `DELETE FROM ${tableName} WHERE userid = ?`;
+
+  connection.query(deleteQuery, [userId], (error, results) => {
+    if (error) {
+      console.error('사용자 삭제 오류:', error);
+      res.status(500).json({ success: false, message: '사용자 삭제 오류' });
+    } else {
+      console.log('사용자가 성공적으로 삭제되었습니다');
+      res.status(200).json({ success: true, message: '사용자가 성공적으로 삭제되었습니다' });
+    }
+  });
+});
 
 
 
