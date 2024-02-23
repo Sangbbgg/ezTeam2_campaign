@@ -1,6 +1,7 @@
 import React, {useRef, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../component/Header';
+import Footer from '../component/Footer';
 import {gsap} from "gsap";
 
 const Main = () => {
@@ -36,9 +37,10 @@ const Main = () => {
       </div> */}
 
       <Header />
+      {/* 키비주얼 영역 */}
       <section className="main-visual">
         <div className="img-wrap">
-          <img src={process.env.PUBLIC_URL + '/img/bg-key-visual2.jpg'} alt="Default Campaign Image" />
+          <img src={process.env.PUBLIC_URL + '/img/bg-key-visual.jpg'} alt="Default Campaign Image" />
         </div>
 
         <div className="txt-wrap">
@@ -53,6 +55,16 @@ const Main = () => {
           <div className="text">Scroll Down</div>
         </div>
       </section>
+
+      {/* 캠페인 소개 */}
+      <section className="campaign">
+        <div className="inner">
+          <p className="sec-tit">캠페인</p>
+          
+        </div>
+      </section>
+
+      <Footer/>
     </div>
   );
 };
