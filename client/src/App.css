@@ -86,8 +86,8 @@ html.scl-lock, body.scl-lock {overflow: hidden;}
 
 header {position: fixed; left: 0; top: 0; width: 100%; height: 80px; background-color: #fff; transition: top .6s ease, background-color .6s ease; z-index: 10;}
 header.hide {top: -80px;}
-header .logo {position: absolute; top: 50%; left: 50px; transform: translateY(-50%); z-index: 10; width: 66px; height: 53px;}
-header .logo button {display: block; width: 100%; height: 100%; background: url("../public/img/logo3.png") no-repeat center -3px / cover ;}
+header .logo {position: absolute; top: 50%; left: 50px; transform: translateY(-50%); z-index: 10; width: 56px; height:60px;}
+header .logo button {display: block; width: 100%; height: 100%; background: url("../public/img/logo-wht.png") no-repeat center 2px / cover ;}
 /* header .inner-dimd {display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, .5); z-index: 1;} */
 header nav {display: flex; justify-content: space-between; align-items: center; position: relative; width: 100%; height: 100%; text-align: center; background-color: #fff; transition: height .6s ease, left .6s ease; z-index: 2;}
 header nav.show {left: 0;}
@@ -95,9 +95,9 @@ header .for-bg {position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
 header .for-bg.hide-bg {transition: none;}
 header .gnb-w {position: relative; display: inline-block; text-align: center;}
 header .gnb {display: flex; justify-content: flex-start; padding-left: 140px; height: 80px; }
-header .gnb a {display: block; color: #333;}
+header .gnb a {display: block;}
 header .gnb > li {display: inline-block; position: relative; min-width: 100px; height: 100%;}
-header .gnb > li .one-link {position: relative; display: flex; justify-content: center; align-items: center; height: 80px; white-space: nowrap; font-size: max(14px, 16px);}
+header .gnb > li .one-link {position: relative; display: flex; justify-content: center; align-items: center; height: 80px; white-space: nowrap; font-size: max(14px, 16px); color: #fff;}
 header .gnb > li .one-link:after {content: ""; display: block; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: #ccc; opacity: 0; transition: opacity .6s ease;}
 header .gnb > li.on .one-link:after {opacity: 1;}
 header .gnb > li .two-depth {display: block; position: absolute; top: 80px; width: 100%; height: auto; overflow: hidden; padding-bottom: 20px; background-color: transparent;}  
@@ -113,7 +113,8 @@ header nav .btn-close-mo {display: block; position: absolute; top: 22px; right: 
 
 /* 로그인 영역 */
 header .utils {position: absolute; right: 50px; z-index: 3;}
-header .utils button {font-size: 13px;}
+header .utils button {font-size: 13px; color: #fff;}
+header .utils button a {font-size: 13px; color: #fff;}
 header .utils button + button {margin-left: 10px;}
 
 
@@ -160,7 +161,8 @@ footer {width: 100%; min-height: 240px; background-color: #333;}
 .key-visual .img-w img {display: block; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1); width: auto; height: auto; min-width: 100%;min-height: 100%;} */
 .main-visual {position: relative; top: 0; left: 0; width: 100%; height: 100vh; overflow: hidden;}
 .main-visual .img-wrap {position: absolute; top: 0; left: 0; width: 100%; height: 100vh; overflow: hidden; background: #fff; display: flex; justify-content: center; align-items: center; }
-.main-visual .img-wrap::after {content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.05) 50%, rgba(0,0,0,.15) 60%, rgba(0,0,0,.35) 70%, rgba(0,0,0,.45) 80%, rgba(0,0,0,.45) 100%);}
+.main-visual .img-wrap::after {content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(2, 16, 58, 0.3) 0%, rgba(26, 64, 178, 0.2) 20%, rgba(61, 87, 167, 0.15) 50%, rgba(0,0,0,.15) 60%, rgba(0,0,0,.35) 70%, rgba(0,0,0,.45) 80%, rgba(0,0,0,.45) 100%);}
+/* .main-visual .img-wrap::after {content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, transparent 0%, rgba(17, 60, 192, 0.05) 50%, rgba(0,0,0,.15) 60%, rgba(0,0,0,.35) 70%, rgba(0,0,0,.45) 80%, rgba(0,0,0,.45) 100%);} */
 
 .main-visual .img-wrap img {
   display: block;
@@ -184,7 +186,7 @@ footer {width: 100%; min-height: 240px; background-color: #333;}
 .main-visual .mob_tit {display: none; position: absolute; bottom: 216px; left: 16px; font-size: 13px; font-family: "spoqa_medium"; color: #F58220; opacity: 0; line-height: 21px; letter-spacing: -.25px; z-index: 1}
 
 .main-visual .txt-wrap {position: absolute; z-index: 1; left: 140px; bottom: 120px; max-width: calc(100% - 280px);}
-.main-visual .txt-wrap .txt {font-size: 40px; font-family: "spoqa_bold"; color: #fff; opacity: 0; transform: translateY(70px); line-height: 56px; letter-spacing: -.3px;}
+.main-visual .txt-wrap .txt {font-size: 40px; font-family: "spoqa_bold"; color: #fff; font-weight: 700; opacity: 0; transform: translateY(70px); line-height: 56px; letter-spacing: -.3px;}
 .main-visual .txt-wrap .sub-txt {font-size: 20px; font-family: "spoqa_medium"; color: #fff; opacity: 0; transform: translateY(70px); line-height: 28px; letter-spacing: -.3px; word-break: keep-all; margin: 32px 0 40px;}
 
 .scroll-mark {position: absolute; bottom: 73px; left: 50%; transform: translateX(-50%); z-index: 1;}
@@ -197,10 +199,10 @@ footer {width: 100%; min-height: 240px; background-color: #333;}
   100% {top: 100%;}
 }
 
-.main .campaign {margin-top: 160px; min-height: 800px;}
-.main .campaign .sec-tit {font-size: 42px; font-weight: 500; text-align: center;}
-
-
+.main .campaign {position: relative; padding: 160px 0; min-height: 800px; background: url("../public/img/bg-main-campaign.jpg") no-repeat center / cover;}
+.main .campaign .txt-area {text-align: center;}
+.main .campaign .sec-tit {font-size: 42px; font-weight: 500; color: #fff;}
+.main .campaign .sec-txt {margin-top: 28px; font-size: 18px; color: #fff;}
 
 
 
