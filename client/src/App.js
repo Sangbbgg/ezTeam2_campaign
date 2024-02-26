@@ -14,6 +14,8 @@ import Register from "./component/Logins/Register";
 import RegisterPersonal from "./component/Logins/RegisterPersonal";
 import RegisterCorporate from "./component/Logins/RegisterCorporate";
 import RegisterGroup from "./component/Logins/RegisterGroup";
+import Find from "./component/Logins/Find";
+import FindPw from "./component/Logins/FindPw";
 
 import CarbonFootprint from "./views/CarbonFootprint";
 
@@ -36,6 +38,8 @@ function App() {
         <Route path="/Register/personal" element={<RegisterPersonal />}></Route>
         <Route path="/Register/corporate" element={<RegisterCorporate />}></Route>
         <Route path="/Register/group" element={<RegisterGroup />}></Route>
+        <Route path="/Find" element={<Find/>}></Route>
+        <Route path="/FindPW" element={<FindPw/>}></Route>
       </Routes>
     </div>
   );
