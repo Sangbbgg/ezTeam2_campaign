@@ -6,7 +6,8 @@ import Consumption from "../component/CarbonFootprints/Consumption";
 import Result from "../component/CarbonFootprints/Result";
 import Practice from "../component/CarbonFootprints/Practice";
 // ---------------------------------------------------------
-import "../Styles/CarbonFootprint.css";
+
+
 function CarbonFootprint() {
   // const userId = 179870; //개발용 user_id
   const storedUserData = sessionStorage.getItem("userData");
