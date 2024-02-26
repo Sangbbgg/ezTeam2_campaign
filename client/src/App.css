@@ -159,13 +159,28 @@ footer {width: 100%; min-height: 240px; background-color: #333;}
 .key-visual .img-w {position: absolute; top: 0; left: 0; width: 100%; height: 100vh; overflow: hidden; background: #fff;}
 .key-visual .img-w img {display: block; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1); width: auto; height: auto; min-width: 100%;min-height: 100%;} */
 .main-visual {position: relative; top: 0; left: 0; width: 100%; height: 100vh; overflow: hidden;}
-.main-visual .img-wrap {position: absolute; top: 0; left: 0; width: 100%; height: 100vh; overflow: hidden; background: #fff;}
-.main-visual .img-wrap::after {content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.05) 50%, rgba(0,0,0,.15) 60%,  rgba(0,0,0,.35) 70%, rgba(0,0,0,.45) 80%, rgba(0,0,0,.45) 100%);}
-.main-visual .img-wrap img {display:block; position:absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1); width: auto; height: auto; min-width: 100%; min-height: 100%; animation-duration: 3s; animation-name: zoom; animation-fill-mode: forwards;}
-@keyframes zoom {
-  0% {transform: translate(-50%, -50%) scale(1);}
-  100% {transform: translate(-50%, -50%) scale(1.05);}
+.main-visual .img-wrap {position: absolute; top: 0; left: 0; width: 100%; height: 100vh; overflow: hidden; background: #fff; display: flex; justify-content: center; align-items: center; }
+.main-visual .img-wrap::after {content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.05) 50%, rgba(0,0,0,.15) 60%, rgba(0,0,0,.35) 70%, rgba(0,0,0,.45) 80%, rgba(0,0,0,.45) 100%);}
+
+.main-visual .img-wrap img {
+  display: block;
+  width: auto;
+  height: auto;
+
+  animation-duration: 3s;
+  animation-name: zoom;
+  animation-fill-mode: forwards;
 }
+
+@keyframes zoom {
+  0% {
+    transform: scale(1); /* 초기 크기 */
+  }
+  100% {
+    transform: scale(1.05); /* 최종 크기 */
+  }
+}
+
 .main-visual .mob_tit {display: none; position: absolute; bottom: 216px; left: 16px; font-size: 13px; font-family: "spoqa_medium"; color: #F58220; opacity: 0; line-height: 21px; letter-spacing: -.25px; z-index: 1}
 
 .main-visual .txt-wrap {position: absolute; z-index: 1; left: 140px; bottom: 120px; max-width: calc(100% - 280px);}
