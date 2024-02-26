@@ -209,6 +209,17 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .main .campaign .cont .txt-wrap .txt-info {display: none;}
 
 
+/* 탄소발자국 */
+.main .carbon {position: relative; padding: 160px 0;}
+.main .carbon .txt-area {text-align: center;}
+.main .carbon .sec-tit {font-size: 42px; font-weight: 500; color: #000;}
+.main .carbon .sec-txt {margin-top: 28px; font-size: 18px; color: #000;}
+
+
+
+
+
+
 
 
 

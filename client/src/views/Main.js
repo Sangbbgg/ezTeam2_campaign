@@ -120,6 +120,20 @@ const Main = () => {
         </div>
       </section>
 
+      <section className='carbon'>
+      <div className="inner">
+          <div className="txt-area">
+            <p className="sec-tit">탄소발자국</p>
+            <p className="sec-txt">우리는 탄소중립 난제를 해결하고 녹색성장을 이끌기 위해 모였습니다.</p>
+          </div>
+
+          <div className="cont-area">
+            
+          </div>
+          
+        </div>
+
+      </section>
       <Footer/>
     </div>
   );
