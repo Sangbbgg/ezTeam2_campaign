@@ -123,18 +123,9 @@ header .utils button + button {margin-left: 10px;}
 
 
 /* 푸터 */
-footer {width: 100%; background: #fff ;padding: 100px 0px;}
-footer .inner {width: 1024px; margin: 0px auto;}
-footer .inner .top {width: 100%; border-bottom: 1px solid #000; padding-bottom: 20px;}
-footer .inner .top h1 {float: left;font: 24px/1 'Righteous', cursive; color: #000;}
-footer .logo {z-index: 10; width: 56px; height:60px; background: url("../public/img/logo-blk.png") no-repeat center 2px / cover;}
-footer .inner .top ul {float: right;}
-footer .inner .top ul li {float: left; margin-left: 20px;}
-footer .inner .top ul li a {color: #000;}
-footer .inner .top::after {content: ""; display: block; clear: both;}
-footer .inner .bottom {width: 100%; padding-top: 20px;}
-footer .inner .bottom address {width: 100%; font-style: normal; font-size: 13px; color: #000; margin-bottom: 20px;}
-footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
+footer {width: 100%; min-height: 240px; background-color: #333;}
+
+
 /* @media screen and (max-width: 1024px) {
   header {height: 60px;}
   header .logo {left: 30px; width: 50px; height: 28px;}
@@ -207,17 +198,6 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .main .campaign .cont .img-wrap:hover img {transform: translate(-50%, -50%) scale(1.1);}
 .main .campaign .cont .txt-wrap .title {margin-top: 18px; font-size: 16px; color: #fff;}
 .main .campaign .cont .txt-wrap .txt-info {display: none;}
-
-
-/* 탄소발자국 */
-.main .carbon {position: relative; padding: 160px 0;}
-.main .carbon .txt-area {text-align: center;}
-.main .carbon .sec-tit {font-size: 42px; font-weight: 500; color: #000;}
-.main .carbon .sec-txt {margin-top: 28px; font-size: 18px; color: #000;}
-
-
-
-
 
 
 
@@ -451,7 +431,11 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 
 
 /* ------------------------------- 탄소 발자국 ------------------------------- */
-
+.menu-container {padding: 140px 100px;}
+.tab-container {background-color:aliceblue; border-radius: 20px;}
+.menu-container .tab-menu{display: flex; padding: 5px; justify-content:space-between;}
+.menu-container .tab-menu .tab-item{width: 30%; height: 35px; padding-top: 7px; text-align: center; border-radius: 20px; background-color: white;}
+.menu-container .tab-menu .tab-item.tab-item.active{background-color:#228E0C; color: white;}
 
 
 
