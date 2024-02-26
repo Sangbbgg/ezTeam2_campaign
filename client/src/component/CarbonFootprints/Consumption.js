@@ -271,6 +271,7 @@ function Consumption({ inputData, initialData, onResultSubmit }) {
                   </div>
                   <div className="input_box_right">
                     <input
+                      className="weight_600 co2Emission"
                       type="number"
                       placeholder="출력값"
                       value={co2Emission[item.category_name]} // 예시로 입력값을 그대로 출력; 실제 로직에 따라 변경 필요
@@ -322,7 +323,7 @@ function Consumption({ inputData, initialData, onResultSubmit }) {
                 <p>CO₂ 발생량</p>
               </div>
               <div className="input_box_right">
-                <input type="number" placeholder="total" value={co2Emission.total} readOnly />
+                <input className="weight_600 co2Emission" type="number" placeholder="total" value={co2Emission.total} readOnly />
                 <span>kg/월</span>
               </div>
             </div>

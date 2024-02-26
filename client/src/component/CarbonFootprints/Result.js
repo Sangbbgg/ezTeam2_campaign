@@ -13,6 +13,7 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
 
   const [barChatData, setBarChatData] = useState([]);
   const [selectTargetTap, setSelectSubTap] = useState("electricity");
+  const [selectTap, setSelectTap] = useState("electricity");
 
   const [targetEmissions, setTargetEmission] = useState(resultData);
   const [checkedItems, setCheckedItems] = useState({});
@@ -228,6 +229,7 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
   //목표 분류템 선택
   const handleSubTapClick = (key) => {
     setSelectSubTap(key);
+    setSelectTap(key);
   };
 
   // 체크박스 변경 핸들러
@@ -271,166 +273,187 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
 
   const data11 = [
     {
-      subject: '전기',
+      subject: "전기",
       A: 120,
       B: 110,
       fullMark: 100,
     },
     {
-      subject: '가스',
+      subject: "가스",
       A: 98,
       B: 130,
       fullMark: 30,
     },
     {
-      subject: '수도',
+      subject: "수도",
       A: 86,
       B: 130,
       fullMark: 300,
     },
     {
-      subject: '교통',
+      subject: "교통",
       A: 99,
       B: 100,
       fullMark: 405,
     },
     {
-      subject: '폐기물',
+      subject: "폐기물",
       A: 85,
       B: 90,
       fullMark: 20,
-    }
+    },
   ];
 
-  console.log("barChatData",barChatData)
+  console.log("barChatData", barChatData);
   return (
-    <div>
+    <>
       <div ref={captureRef}>
-        <section className="household_two_step">
-          <p>결과 페이지</p>
-        </section>
-        <div>
-          <div>
+        <div className="top_box">
+          <div className="title_info">
+            <span className="weight_600">결과 페이지</span>
+          </div>
+        </div>
+
+        <div className="result_box">
+          <div className="item_title">
             <p>사용량 분석</p>
           </div>
-          <div style={{ width: "100%" }}>
-            <PiChart data={data} />
-            <div>
-              <div>
-                <div>
+          <div className="result_box_content">
+            <div className="pi_chart_wrap">
+              <PiChart data={data} />
+              <div className="pi_chart_wrap_right">
+                <div className="result_conment_right">
                   <h2>결과안내</h2>
-                  <p>{userData.username}님의 이산화탄소(CO₂) 발생량 통계입니다.</p>
+                  <p>
+                    <span className="forest_green_text">{userData.username}</span>님의 이산화탄소(CO₂) 발생량
+                    통계입니다.
+                  </p>
                 </div>
                 <p>
-                  {userData.username}님의 가정은 이산화탄소 배출량은 총 {resultData.total}kg 이며, 비슷한 다른 가정 평균{" "}
-                  {averageData.total}kg 보다 약 {((resultData.total / averageData.total) * 100 - 100).toFixed(1)}% 더
-                  많이 배출하고 있습니다. 아래의 그래프를 보고 어느 부분에서 이산화탄소를 많이 발생하고 있는지 비교해
+                  <span className="forest_green_text">{userData.username}</span>님의 가정은 이산화탄소 배출량은 총{" "}
+                  {resultData.total}kg 이며,
+                  <br /> 비슷한 다른 가정 평균 <span className="forest_green_text">{averageData.total}kg</span> 보다 약{" "}
+                  <span className="forest_green_text">
+                    {((resultData.total / averageData.total) * 100 - 100).toFixed(1)}%
+                  </span>{" "}
+                  더 많이 배출하고 있습니다. 아래의 그래프를 보고 어느 부분에서 이산화탄소를 많이 발생하고 있는지 비교해
                   보세요.
                 </p>
-                {!hasResultData && (
-                  <>
-                    <button onClick={onClickCarbonFootprint}>탄소계산기 다시하기</button>
-                    <button onClick={onSaveClick}>저장</button>
-                  </>
-                )}
               </div>
             </div>
-          </div>
-        </div>
-        <div className="barChart-container">
-          {barChatData.map((data, index) => (
-            <div key={index} className="barChart">
-              <BarChart barChatData={[data]} />
-            </div>
-          ))}
-        </div>
 
-        <div>
-          <div>
-            <p>실천 목표</p>
-          </div>
-          <div style={{ width: "100%" }}>
-            <h2>우리집 실천목표! 생활 속에서 실천가능한 목표를 선택해주세요.</h2>
-          </div>
-          <div>
-            <ul>
-              {Object.keys(labels).map((key) => (
-                <li key={key} onClick={() => handleSubTapClick(key)}>
-                  {labels[key]}
-                </li>
+            <div className="barChart-container">
+              {barChatData.map((data, index) => (
+                <div key={index} className="bar_chart">
+                  <BarChart barChatData={[data]} />
+                </div>
               ))}
-            </ul>
-            {Object.keys(labels).map(
-              (label) =>
-                selectTargetTap === label && (
-                  <div key={label}>
-                    <div>
-                      <div> {labels[label]}</div>
-                      {initialData
-                        .filter((item) => item.name === label)
-                        .map((filteredItem, index) => (
-                          <div key={index}>
-                            <label>
-                              <input
-                                type="checkbox"
-                                id={`${label}-${index}`}
-                                name={`${filteredItem.name}-${index}`}
-                                value={filteredItem.savings_value}
-                                // 체크 박스 추적관리
-                                checked={!!checkedItems[`${filteredItem.name}-${index}`]}
-                                // onChange 작성 부분
-                                onChange={handleCheckboxChange}
-                                disabled={
-                                  hasResultData || (filteredItem.name === "transportation" && isTransportationOption)
-                                }
-                              />
-                              <span>{filteredItem.advice_text}</span>
-                            </label>
-                          </div>
-                        ))}
+            </div>
+          </div>
+        </div>
+        <div>
+          <div className="result_box">
+            <div className="item_title">
+              <p>실천 목표</p>
+            </div>
+            <div className="result_box_content">
+              <h2>
+                우리집 실천목표! <span className="forest_green_text">생활 속에서 실천가능한 목표</span>를 선택해주세요.
+              </h2>
+              <div>
+                <div className="select_category">
+                  <ul>
+                    {Object.keys(labels).map((key) => (
+                      <li
+                        key={key}
+                        className={`select_tap ${selectTap === key ? "active" : ""} `}
+                        onClick={() => handleSubTapClick(key)}
+                      >
+                        {labels[key]}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                {Object.keys(labels).map(
+                  (label) =>
+                    selectTargetTap === label && (
+                      <div key={label} className={label}>
+                        <div>
+                          <div> {labels[label]}</div>
+                          {initialData
+                            .filter((item) => item.name === label)
+                            .map((filteredItem, index) => (
+                              <div key={index}>
+                                <label>
+                                  <input
+                                    type="checkbox"
+                                    id={`${label}-${index}`}
+                                    name={`${filteredItem.name}-${index}`}
+                                    value={filteredItem.savings_value}
+                                    // 체크 박스 추적관리
+                                    checked={!!checkedItems[`${filteredItem.name}-${index}`]}
+                                    // onChange 작성 부분
+                                    onChange={handleCheckboxChange}
+                                    disabled={
+                                      hasResultData ||
+                                      (filteredItem.name === "transportation" && isTransportationOption)
+                                    }
+                                  />
+                                  <span>{filteredItem.advice_text}</span>
+                                </label>
+                              </div>
+                            ))}
+                        </div>
+                        <div>
+                          <h3>부분별 실천목표</h3>
+                          {barChatData
+                            .filter((item) => item.name === labels[label])
+                            .map((filterBarchartItem, index) => (
+                              <div key={index} className="barChart" style={{ width: "70%" }}>
+                                <TargetBarchart barChatData={[filterBarchartItem]} />
+                              </div>
+                            ))}
+                        </div>
+                      </div>
+                    )
+                )}
+                <div>
+                  <h3>월간 CO₂ 저감목표</h3>
+                  <div className="barChart" style={{ width: "70%", height: "300px" }}>
+                    <div style={{ width: "100%", height: "270px" }}>
+                      <TargetBarchartTotal barChartDataTotal={barChartDataTotal} />
                     </div>
                     <div>
-                      <h3>부분별 실천목표</h3>
-                      {barChatData
-                        .filter((item) => item.name === labels[label])
-                        .map((filterBarchartItem, index) => (
-                          <div key={index} className="barChart" style={{ width: "70%" }}>
-                            <TargetBarchart barChatData={[filterBarchartItem]} />
-                          </div>
-                        ))}
+                      <span>총 합계 </span>
+                      <span>{categorySavings.total}kg</span>
                     </div>
                   </div>
-                )
-            )}
-            <div>
-              <h3>월간 CO₂ 저감목표</h3>
-              <div className="barChart" style={{ width: "70%", height: "300px" }}>
-                <div style={{ width: "100%", height: "270px" }}>
-                  <TargetBarchartTotal barChartDataTotal={barChartDataTotal} />
-                </div>
-                <div>
-                  <span>총 합계 </span>
-                  <span>{categorySavings.total}kg</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div>
-          <div>
+        <div className="result_box">
+          <div className="item_title">
             <p>종합평가</p>
           </div>
           <div>
             <h2>{userData.username}님의 종합평가입니다.</h2>
           </div>
           <div className="barChart" style={{ width: "70%", height: "300px" }}>
-            <ComprehensiveChart data={barChatData}/>
+            <ComprehensiveChart data={barChatData} />
           </div>
         </div>
       </div>
+      {!hasResultData && (
+        <>
+          <button onClick={onClickCarbonFootprint}>탄소계산기 다시하기</button>
+          <button onClick={onSaveClick}>저장</button>
+        </>
+      )}
       <button onClick={saveAsImage}>이미지로 저장하기</button>
-    </div>
+    </>
   );
 }
 

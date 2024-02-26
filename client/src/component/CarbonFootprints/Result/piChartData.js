@@ -65,7 +65,7 @@ export default class piChartForm extends PureComponent {
     const { data } = this.props;
 
     return (
-      <ResponsiveContainer width="100%" height={300}>
+      <ResponsiveContainer width="120%" height={300}>
         <PieChart>
           <Pie
             activeIndex={this.state.activeIndex}
