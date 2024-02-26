@@ -127,6 +127,10 @@ function CarbonFootprint() {
     <div id="wrap">
       <Header />
       <div className="inner">
+        <div>
+          <h1>탄소발자국 계산기</h1>
+          <p>내가 생활 속에서 배출하는 이산화탄소의 양은 얼마일까요?</p>
+        </div>
         <div className="carbon-box">
           <div className="menu-container">
             <div className="tab-container">
