@@ -3,10 +3,11 @@ import Header from '../component/Header';
 import { useNavigate } from 'react-router-dom';
 import { getPost } from '../store/store';
 import { useDispatch } from 'react-redux';
-import Pagination from '../component/campaign/Pagination';
 import TextList from '../component/campaign/TextList';
 import Footer from '../component/Footer';
 import {gsap} from "gsap";
+
+
 
 const Main = () => {
   const navigate = useNavigate();
@@ -36,9 +37,9 @@ const Main = () => {
   useEffect(()=>{
     document.querySelector(".main-visual").style.height = window.innerHeight + "px";
 
-    gsap.to(".main-visual .txt", { duration: 0.8, y: 0, opacity: 1, delay: 0.4, ease: "power2.out" });
-    gsap.to(".main-visual .sub-txt", { duration: 0.8, y: 0, opacity: 1, delay: 0.5, ease: "power2.out" });
-    gsap.to(".main-visual .btn_more", { duration: 0.8, y: 0, opacity: 1, delay: 0.7, ease: "power2.out" });
+    gsap.to(".main-visual .txt", { duration: 1, y: 0, opacity: 1, delay: 0.4, ease: "power2.out" });
+    gsap.to(".main-visual .sub-txt", { duration: 1, y: 0, opacity: 1, delay: 0.5, ease: "power2.out" });
+    gsap.to(".main-visual .btn_more", { duration: 1, y: 0, opacity: 1, delay: 0.7, ease: "power2.out" });
   });
 
   // 데이터 불러옴
