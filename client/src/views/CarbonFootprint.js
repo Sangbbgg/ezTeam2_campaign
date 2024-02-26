@@ -7,12 +7,11 @@ import Result from "../component/CarbonFootprints/Result";
 import Practice from "../component/CarbonFootprints/Practice";
 // ---------------------------------------------------------
 
-
 function CarbonFootprint() {
   // const userId = 179870; //개발용 user_id
   const storedUserData = sessionStorage.getItem("userData");
   const userData = JSON.parse(storedUserData);
-  console.log("세션확인:",userData)
+  console.log("세션확인:", userData);
 
   // const userData = {
   //   userid: 179870,
@@ -125,29 +124,31 @@ function CarbonFootprint() {
   };
 
   return (
-    <>
+    <div id="wrap">
       <Header />
-      <div className="carbon-box">
-      <div className="menu-container">
-        <div className="tab-container">
-          <ul className="tab-menu">
-            {!newResultData && (
-              <li className={tabItemClass("consumption")} onClick={() => handleTabChange("consumption")}>
-                계산하기
-              </li>
-            )}
-            <li className={tabItemClass("result")} onClick={() => handleTabChange("result")}>
-              결과보기
-            </li>
-            <li className={tabItemClass("practice")} onClick={() => handleTabChange("practice")}>
-              생활속 실천방안
-            </li>
-          </ul>
+      <div className="inner">
+        <div className="carbon-box">
+          <div className="menu-container">
+            <div className="tab-container">
+              <ul className="tab-menu">
+                {!newResultData && (
+                  <li className={tabItemClass("consumption")} onClick={() => handleTabChange("consumption")}>
+                    계산하기
+                  </li>
+                )}
+                <li className={tabItemClass("result")} onClick={() => handleTabChange("result")}>
+                  결과보기
+                </li>
+                <li className={tabItemClass("practice")} onClick={() => handleTabChange("practice")}>
+                  생활속 실천방안
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="content-container">{renderContent()}</div>
         </div>
       </div>
-      <div className="content-container">{renderContent()}</div>
-      </div>
-    </>
+    </div>
   );
 }
 
