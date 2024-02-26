@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "../../Styles/CarbonFootprint.css";
 
 function Consumption({ inputData, initialData, onResultSubmit }) {
   // console.log("계산공식 :", initialData);
