@@ -77,7 +77,7 @@ const Main = () => {
   }, [campaignList]);
   
   const MainCampaignList = () => {
-    const firstThreeItems = campaignList.slice(0, 3); 
+    const firstThreeItems = campaignList.slice(0, 6); 
     return firstThreeItems;
   };
   
