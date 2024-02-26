@@ -904,22 +904,73 @@ app.delete('/delete-account/:userId/:userType', (req, res) => {
   const userId = req.params.userId;
   const userType = req.params.userType;
 
-  // userType을 확인하여 적절한 테이블을 결정합니다 (다른 사용자 유형에 대해 다른 테이블을 가질 수 있습니다).
   const tableName = (userType === 'admin') ? 'admin_table' : 'user';
 
-  const deleteQuery = `DELETE FROM ${tableName} WHERE userid = ?`;
+  // 주문 테이블에서 해당 유저 아이디를 NULL로 업데이트합니다.
+  const updateOrdersQuery = `UPDATE orders SET userid = NULL WHERE userid = ?`;
 
-  connection.query(deleteQuery, [userId], (error, results) => {
-    if (error) {
-      console.error('사용자 삭제 오류:', error);
-      res.status(500).json({ success: false, message: '사용자 삭제 오류' });
+  connection.query(updateOrdersQuery, [userId], (updateError, updateResults) => {
+    if (updateError) {
+      console.error('주문 테이블 업데이트 오류:', updateError);
+      res.status(500).json({ success: false, message: '주문 테이블 업데이트 오류' });
     } else {
-      console.log('사용자가 성공적으로 삭제되었습니다');
-      res.status(200).json({ success: true, message: '사용자가 성공적으로 삭제되었습니다' });
+      console.log('주문 테이블이 성공적으로 업데이트되었습니다');
+
+      // 사용자 테이블에서 사용자를 삭제합니다.
+      const deleteQuery = `DELETE FROM ${tableName} WHERE userid = ?`;
+
+      connection.query(deleteQuery, [userId], (error, results) => {
+        if (error) {
+          console.error('사용자 삭제 오류:', error);
+          res.status(500).json({ success: false, message: '사용자 삭제 오류' });
+        } else {
+          console.log('사용자가 성공적으로 삭제되었습니다');
+
+          if (tableName === 'user') {
+            const deleteCommentsQuery = `DELETE FROM campaign_comments WHERE userid = ?`;
+            connection.query(deleteCommentsQuery, [userId], (commentsError, commentsResults) => {
+              if (commentsError) {
+                console.error('관련 댓글 삭제 오류:', commentsError);
+              } else {
+                console.log('관련 댓글이 성공적으로 삭제되었습니다');
+              }
+            });
+          }
+
+          res.status(200).json({ success: true, message: '사용자가 성공적으로 삭제되었습니다' });
+        }
+      });
     }
   });
 });
+//---------------------------아이디 비밀번호 찾기--------------------------------------------------
+//핸드폰번호와 이름 입력시 아이디 알려주기(Email)
+//Email 과 이름 입력시 비밀번호 재설정
 
+
+app.post("/find", (req, res) => {
+  const { username, phonenumber } = req.body;
+
+  // MySQL에서 사용자 검색 쿼리 작성
+  const sql = "SELECT * FROM user WHERE username = ? AND phonenumber = ?";
+
+  // 쿼리 실행
+  connection.query(sql, [username, phonenumber], (err, result) => {
+    if (err) {
+      console.error("사용자 검색 오류:", err);
+      res.status(500).json({ error: "사용자 검색 중 오류가 발생했습니다." });
+    } else {
+      if (result.length > 0) {
+        // 사용자를 찾았을 경우
+        const user = result[0];
+        res.json({ email: user.email });
+      } else {
+        // 사용자를 찾지 못했을 경우
+        res.status(404).json({ error: "일치하는 사용자가 없습니다." });
+      }
+    }
+  });
+});
 
 
 

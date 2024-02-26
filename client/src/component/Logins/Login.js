@@ -104,6 +104,9 @@ function LoginPage() {
           <div>
             <Link to="/Register">회원가입 필요하십니까?</Link>
           </div>
+          <div>
+            <Link to="/Find">회원ID찾기</Link>
+          </div>
           {loginStatus && <div>{loginStatus}</div>}
           </from>
         </form>
