@@ -6,7 +6,7 @@ import Consumption from "../component/CarbonFootprints/Consumption";
 import Result from "../component/CarbonFootprints/Result";
 import Practice from "../component/CarbonFootprints/Practice";
 // ---------------------------------------------------------
-import Footer from '../component/Footer';
+import Footer from "../component/Footer";
 
 function CarbonFootprint() {
   // const userId = 179870; //개발용 user_id
@@ -147,34 +147,37 @@ function CarbonFootprint() {
 
   return (
     <div id="wrap">
-      <Header />
-      <div className="inner">
-        <div className="title_box">
-          <div>
-            <h1 className="forest_green_text">탄소발자국 계산기</h1>
-            <p>내가 생활 속에서 배출하는 이산화탄소의 양은 얼마일까요?</p>
-          </div>
+      <div className="title_box">
+        <div>
+          <h1 className="forest_green_text">탄소발자국 계산기</h1>
+          <p>내가 생활 속에서 배출하는 이산화탄소의 양은 얼마일까요?</p>
         </div>
-        <div className="menu-container">
-          <div className="tab-container">
-            <ul className="tab-menu">
-              {!newResultData && (
-                <li className={tabItemClass("consumption")} onClick={() => handleTabChange("consumption")}>
-                  계산하기
-                </li>
-              )}
-              <li className={tabItemClass("result")} onClick={() => handleTabChange("result")}>
-                결과보기
-              </li>
-              <li className={tabItemClass("practice")} onClick={() => handleTabChange("practice")}>
-                생활속 실천방안
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className="content-container">{renderContent()}</div>
       </div>
-      <Footer/>
+      <div className="tanso_bg">
+
+        <Header />
+        <div className="inner">
+          <div className="menu-container">
+            <div className="tab-container">
+              <ul className="tab-menu">
+                {!newResultData && (
+                  <li className={tabItemClass("consumption")} onClick={() => handleTabChange("consumption")}>
+                    계산하기
+                  </li>
+                )}
+                <li className={tabItemClass("result")} onClick={() => handleTabChange("result")}>
+                  결과보기
+                </li>
+                <li className={tabItemClass("practice")} onClick={() => handleTabChange("practice")}>
+                  생활속 실천방안
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="content-container">{renderContent()}</div>
+        </div>
+        <Footer />
+      </div>
     </div>
   );
 }

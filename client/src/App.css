@@ -452,27 +452,28 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 
 /* ------------------------------- 탄소 발자국 ------------------------------- */
 /* 상단 title */
-.title_box {padding: 16px 24px;}
+.title_box {padding: 16px 24px; margin: 0 auto; width: 1024px;}
 .title_box > div {justify-content: flex-start;}
 .title_box > div > div h1 {font-size: 24px;}
-.title_box > div  p {font-size: 13px;}
-.forest_green_text {color: #25B058 ;font-weight: 700;}
+.title_box > div > p {font-size: 13px;}
+.forest_green_text {color: #25B058 ; font-weight: 700;}
 
-.menu-container {width: 100%; margin: 20px auto 50px; padding: 10px 0;}
-.tab-container {background-color:#e1f0de; border-radius: 20px; margin: 0 100px;}
+.menu-container {width: 100%; margin: 0 auto; padding: 50px 0 30px 0;}
+.tab-container {background-color:rgba(255, 255, 255, 0.9); border-radius: 20px; margin: 0 100px;}
 .menu-container .tab-menu{display: flex; padding: 5px; justify-content:space-evenly; margin: 0;}
 .menu-container .tab-menu .tab-item{width: 30%; height: 35px; padding-top: 7px; text-align: center; border-radius: 20px; background-color: white;}
 .menu-container .tab-menu .tab-item.tab-item.active{background-color:#25B058; color: white;}
 
+.tanso_bg{background-image: url('../public/img/—Pngtree—an\ wooden\ boardwalk\ leads\ through_13298664.jpg');opacity: 0.9; background-size: cover; background-attachment: fixed;}
 /* 계산하기 */
 .top_box{margin-bottom: 10px;}
-.top_box .title_info{padding: 10px; border: 2px solid #e1f0de; border-radius: 8px; font-size: 18px;}
+.top_box .title_info{padding: 10px; background-color:rgba(255, 255, 255, 0.9); border: 2px solid #e1f0de; border-radius: 8px; font-size: 18px;}
 .weight_600 {font-weight: 600; color: #454c53}
 
 .totalbox{display:grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 10px;}
 .item_title{height: 50px; font-size: 20px; padding: 10px 10px; border-bottom: 1px solid #e1f0de;}
-.totalbox .box_item_wrap{height: 400px; background-color: white; border: 2px solid #e1f0de; border-radius: 8px; display: flex; flex-direction: column}
-.totalbox .box_item_wrap.active{border: 2px solid #25B058;}
+.totalbox .box_item_wrap{height: 400px; background-color:rgba(255, 255, 255, 0.9); border: 2px solid #e1f0de; border-radius: 8px; display: flex; flex-direction: column}
+.totalbox .box_item_wrap.active{border: 3px solid #228E0C;}
 .totalbox .box_item_wrap .box_item{padding: 10px 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-around;}
 .totalbox .box_item_wrap:last-child{grid-column: 1 / -1; margin-bottom: 10px;}
 
@@ -511,7 +512,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 /* 결과보기 */
 
 /* 사용량 분석 */
-.result_box{border: 2px solid #E5F5EB; border-radius: 8px; margin-bottom: 80px;}
+.result_box{border: 2px solid #E5F5EB; border-radius: 8px; margin-bottom: 80px; background-color:rgba(255, 255, 255, 0.95);}
 .result_box .result_box_content{padding: 30px 20px;}
 .pi_chart_wrap{display: flex; align-items: center; margin-bottom: 60px; border-bottom: 2px solid #E5F5EB;}
 .pi_chart_wrap .pi_chart_wrap_right{height: 200px; display: flex; flex-direction: column; justify-content: space-around;}
@@ -521,7 +522,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .pi_chart_wrap .pi_chart_wrap_right > p{font-size: 14px;}
 
 .barChart-container{display: flex; justify-content: space-between;}
-.bar_chart{width: 180px; height: 280px; border:2px solid #E5F5EB; border-radius: 8px;}
+.bar_chart{width: 180px; height: 280px; border:2px solid #3AB868; border-radius: 8px;}
 
 /* 실천목표 */
 .result_box_content > h2{font-size: 20px; text-align: center; margin-top: 25px;}
@@ -529,6 +530,16 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .result_box_content .select_category > ul{width: 100%; display: flex; align-items: center; justify-content: center;  gap: 10px;}
 .result_box_content .select_category > ul > .select_tap{width: 8%; height: 40px; display: flex; align-items: center; justify-content: center; background-color: #e1f0de; border-radius: 8px;}
 .result_box_content .select_category > ul > .select_tap.active{background-color: #25B058; color:white;}
+
+.select_content {display: grid; grid-template-columns: 1fr 1fr;}
+.select_content .category{grid-column: 1/-1; padding: 20px;}
+.select_content .category > div{display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; grid-column: 1 / -1; width: 100%;}
+.select_content .category > div > div{padding: 12px; border: 1px solid #999; border-radius: 8px;}
+
+
+.select_content .target_co2saving{grid-column: 1/2;}
+.select_content .target_category{grid-column: 2/3;}
+
 
 
 

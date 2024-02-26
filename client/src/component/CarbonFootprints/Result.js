@@ -377,58 +377,62 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
                 {Object.keys(labels).map(
                   (label) =>
                     selectTargetTap === label && (
-                      <div key={label} className={label}>
-                        <div>
-                          <div> {labels[label]}</div>
-                          {initialData
-                            .filter((item) => item.name === label)
-                            .map((filteredItem, index) => (
-                              <div key={index}>
-                                <label>
-                                  <input
-                                    type="checkbox"
-                                    id={`${label}-${index}`}
-                                    name={`${filteredItem.name}-${index}`}
-                                    value={filteredItem.savings_value}
-                                    // 체크 박스 추적관리
-                                    checked={!!checkedItems[`${filteredItem.name}-${index}`]}
-                                    // onChange 작성 부분
-                                    onChange={handleCheckboxChange}
-                                    disabled={
-                                      hasResultData ||
-                                      (filteredItem.name === "transportation" && isTransportationOption)
-                                    }
-                                  />
-                                  <span>{filteredItem.advice_text}</span>
-                                </label>
-                              </div>
-                            ))}
+                      <div key={label} className="select_content">
+                        <div className="category">
+                          {" "}
+                          <span>{labels[label]}</span>
+                          <div>
+                            {initialData
+                              .filter((item) => item.name === label)
+                              .map((filteredItem, index) => (
+                                <div key={index}>
+                                  <label for={`${filteredItem.name}-${index}`}>
+                                    <input
+                                      type="checkbox"
+                                      id={`${label}-${index}`}
+                                      name={`${filteredItem.name}-${index}`}
+                                      value={filteredItem.savings_value}
+                                      // 체크 박스 추적관리
+                                      checked={!!checkedItems[`${filteredItem.name}-${index}`]}
+                                      // onChange 작성 부분
+                                      onChange={handleCheckboxChange}
+                                      disabled={
+                                        hasResultData ||
+                                        (filteredItem.name === "transportation" && isTransportationOption)
+                                      }
+                                    />
+                                    <span>{filteredItem.advice_text}</span>
+                                  </label>
+                                </div>
+                              ))}
+                          </div>
                         </div>
-                        <div>
+                        <div className="target_co2saving">
+                          <h3>월간 CO₂ 저감목표</h3>
+                          <div className="barChart" style={{ width: "70%", height: "300px" }}>
+                            <div style={{ width: "100%", height: "270px" }}>
+                              <TargetBarchartTotal barChartDataTotal={barChartDataTotal} />
+                            </div>
+                            <div>
+                              <span>총 합계 </span>
+                              <span>{categorySavings.total}kg</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="target_category">
                           <h3>부분별 실천목표</h3>
                           {barChatData
                             .filter((item) => item.name === labels[label])
                             .map((filterBarchartItem, index) => (
-                              <div key={index} className="barChart" style={{ width: "70%" }}>
+                              <div key={index} className="barChart" style={{ width: "70%", height: "300px" }}>
                                 <TargetBarchart barChatData={[filterBarchartItem]} />
+                                {console.log(filterBarchartItem)}
                               </div>
                             ))}
                         </div>
                       </div>
                     )
                 )}
-                <div>
-                  <h3>월간 CO₂ 저감목표</h3>
-                  <div className="barChart" style={{ width: "70%", height: "300px" }}>
-                    <div style={{ width: "100%", height: "270px" }}>
-                      <TargetBarchartTotal barChartDataTotal={barChartDataTotal} />
-                    </div>
-                    <div>
-                      <span>총 합계 </span>
-                      <span>{categorySavings.total}kg</span>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
