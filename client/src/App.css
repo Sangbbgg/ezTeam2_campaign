@@ -451,11 +451,63 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 
 
 /* ------------------------------- 탄소 발자국 ------------------------------- */
-.menu-container {padding: 140px 100px;}
-.tab-container {background-color:aliceblue; border-radius: 20px;}
-.menu-container .tab-menu{display: flex; padding: 5px; justify-content:space-between;}
+/* 상단 title */
+.title_box {padding: 16px 24px;}
+.title_box > div {justify-content: flex-start;}
+.title_box > div > div h1 {font-size: 24px;}
+.title_box > div  p {font-size: 13px;}
+.forest_green_text {color: #25B058 ;font-weight: 700;}
+
+.menu-container {width: 100%; margin: 0 auto; padding: 10px 0;}
+.tab-container {background-color:#e1f0de; border-radius: 20px;margin: 0 100px;}
+.menu-container .tab-menu{display: flex; padding: 5px; justify-content:space-between;margin: 0;}
 .menu-container .tab-menu .tab-item{width: 30%; height: 35px; padding-top: 7px; text-align: center; border-radius: 20px; background-color: white;}
 .menu-container .tab-menu .tab-item.tab-item.active{background-color:#228E0C; color: white;}
+
+/* 계산하기 */
+.top_box{margin-bottom: 10px;}
+.top_box .title_info{padding: 10px; border: 2px solid #e1f0de; border-radius: 5px; font-size: 15px;}
+.weight_600 {font-weight: 600; color: #454c53}
+
+.totalbox{display:grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 10px;}
+.item_title{height: 50px; font-size: 20px; padding: 10px 10px; border-bottom: 1px solid #e1f0de;}
+.totalbox .box_item_wrap{height: 400px; background-color: white; border: 2px solid #e1f0de; border-radius: 10px; display: flex; flex-direction: column}
+.totalbox .box_item_wrap.active{border: 2px solid #25B058;}
+.totalbox .box_item_wrap .box_item{padding: 10px 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-around;}
+.totalbox .box_item_wrap:last-child{grid-column: 1 / -1; margin-bottom: 10px;}
+
+.totalbox .box_item .input_box{display: flex; width: 100%; justify-content: space-between; margin: 15px 0 15px;}
+.totalbox .box_item .input_box .input_box_left{display: flex; align-items: center;}
+.totalbox .box_item .input_box .input_box_left > p{width: 100px;}
+.totalbox .box_item .input_box .input_box_right{display: flex; align-items: center;  flex-grow: 1}
+.totalbox .box_item .input_box .input_box_right > input{height: 40px; flex-grow: 1}
+.totalbox .box_item .input_box .input_box_right > span{width: 50px; text-align: center;}
+.totalbox .box_item .input_box .radioBox{height: 40px; display: flex; flex-grow: 1; justify-content: space-between; gap: 8px;}
+.totalbox .box_item .input_box .radioBox > div{display: flex; align-items: center; justify-content: space-around; border: 1px solid #228E0C; border-radius: 5px; flex-grow: 1; flex-shrink: 1; flex-basis: 25%; gap: 8px; padding-left: 5px;}
+.totalbox .box_item .input_box .radioBox > div > label{ flex-grow: 1;}
+.totalbox .box_item .cost_formula{display: grid;  grid-template-columns: 1fr auto;}
+.totalbox .box_item .cost_formula > span{grid-column: 1; text-align: end;}
+.totalbox .box_item .cost_formula > p{grid-column: 2; display: block;}
+
+.bottom_box {margin-bottom: 200px;}
+.bottom_box .bottom_box_title{  padding: 10px 12px; border-radius: 8px 8px 0px 0px; background: #25B058; width: 220px; height: 44px}
+.bottom_box .bottom_box_title > h3{color: white; text-align: center;}
+.bottom_box .bottom_box_content{background-color: #E5F5EB; padding: 10px auto;}
+
+.bottom_box .box_item{padding: 10px 32px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-around;}
+.bottom_box .box_item .input_box{display: flex; width: 100%; justify-content: space-between; margin: 15px 0 15px;}
+.bottom_box .box_item .input_box .input_box_left{display: flex; align-items: center;}
+.bottom_box .box_item .input_box .input_box_left > p{width: 100px;}
+.bottom_box .box_item .input_box .input_box_right{display: flex; align-items: center;  flex-grow: 1}
+.bottom_box .box_item .input_box .input_box_right > input{height: 40px; flex-grow: 1}
+.bottom_box .box_item .input_box .input_box_right > span{width: 50px; text-align: center;}
+
+.bottom_box .bottom_box_info > p{margin: 20px 10px;}
+
+.bottom_box .bottom_box_button_box{display: flex;}
+.bottom_box .bottom_box_button_box > button {width: 150px; height: 50px; background-color: #25B058; border-radius: 8px; color: white; margin-left: auto}
+
+
 
 
 

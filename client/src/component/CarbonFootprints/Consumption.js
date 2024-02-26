@@ -18,8 +18,12 @@ function Consumption({ inputData, initialData, onResultSubmit }) {
   };
 
   // parent_category_id가 transportation, waste인 데이터 필터링 및 정렬
-  const transportationOptions = initialData.filter((item) => item.parent_category_id === parent_category_id.transportation).sort((a, b) => a.id - b.id);
-  const wasteOptions = initialData.filter((item) => item.parent_category_id === parent_category_id.waste).sort((a, b) => a.id - b.id);
+  const transportationOptions = initialData
+    .filter((item) => item.parent_category_id === parent_category_id.transportation)
+    .sort((a, b) => a.id - b.id);
+  const wasteOptions = initialData
+    .filter((item) => item.parent_category_id === parent_category_id.waste)
+    .sort((a, b) => a.id - b.id);
 
   // 교통 부분의 라디오 버튼 변경 핸들러
   const handleTransportChange = (e) => {
@@ -146,154 +150,188 @@ function Consumption({ inputData, initialData, onResultSubmit }) {
     });
   }, [inputValue]);
 
+  const [activeBox, setAtiveBox] = useState(null);
+
+  const handleActivebox = (boxname) => {
+    return setAtiveBox(boxname);
+  };
+
   return (
     <>
       <div className="top_box">
-        <div className="title_info">월간 사용량(권장)을 입력해주세요</div>
+        <div className="title_info">
+          <span className="weight_600">월간 사용량(권장)</span>을 입력해주세요
+        </div>
       </div>
       <div className="totalbox">
         {initialData
           .filter((item) => item.parent_category_id === null)
           .map((item) => (
-            <div key={item.id} className="box_item">
+            <div
+              key={item.id}
+              className={`box_item_wrap ${activeBox === item.id ? "active" : ""}`}
+              onClick={() => handleActivebox(item.id)}
+            >
               <div className="item_title">{item.label}</div>
-              {/* 교통 부분 라디오 버튼 구현 */}
-              {item.category_name === "transportation" && (
-                <div>
-                  <p>승용차 종류</p>
-                  <div className="radioBox">
-                    {/* 이 div가 모든 라디오 버튼들을 감싸는 컨테이너 역할을 합니다. */}
-                    {transportationOptions.map((option, idx) => (
-                      <div key={option.id}>
-                        <input
-                          type="radio"
-                          name="radioOption"
-                          value={idx} // ID를 0부터 시작하는 값으로 설정
-                          checked={inputValue.radioOption === `${idx}`}
-                          onChange={handleTransportChange}
-                        />
-                        {option.sublabel}
-                      </div>
-                    ))}
-                    {/* 교통 부분 추가 라디오 버튼 */}
-                    {item.category_name === "transportation" && (
-                      <div>
-                        <input
-                          type="radio"
-                          name="radioOption"
-                          value={transportationOptions.length.toString()} // 별도의 라디오 버튼 값
-                          checked={inputValue.radioOption === transportationOptions.length.toString()}
-                          onChange={handleTransportChange}
-                        />
-                        차량 없음
-                      </div>
-                    )}
-                  </div>
-                </div>
-              )}
-              {/* unit이 있고 category_name이 "waste"가 아닌 경우에만 입력 필드 생성 */}
-              {item.unit && item.category_name !== "waste" && (
-                <>
-                  <p>{item.label} 사용량</p>
+              <div className="box_item">
+                {/* 교통 부분 라디오 버튼 구현 */}
+                {item.category_name === "transportation" && (
                   <div className="input_box">
-                    <input
-                      type="number"
-                      name={item.category_name}
-                      placeholder="숫자 입력..."
-                      value={inputValue[item.category_name]}
-                      onChange={handleChange}
-                      disabled={item.category_name === "transportation" && inputValue.radioOption === "3"} // 네 번째 라디오 버튼 선택 시 비활성화
-                    />
-                    <span>{item.unit}/월</span>
+                    <div className="input_box_left">
+                      <p>승용차 종류</p>
+                    </div>
+                    <div className="radioBox">
+                      {/* 이 div가 모든 라디오 버튼들을 감싸는 컨테이너 역할을 합니다. */}
+                      {transportationOptions.map((option, idx) => (
+                        <div key={option.id}>
+                          <input
+                            type="radio"
+                            name="radioOption"
+                            id={`radioOption${option.id}`}
+                            value={idx} // ID를 0부터 시작하는 값으로 설정
+                            checked={inputValue.radioOption === `${idx}`}
+                            onChange={handleTransportChange}
+                          />
+                          <label for={`radioOption${option.id}`}>{option.sublabel}</label>
+                        </div>
+                      ))}
+                      {/* 교통 부분 추가 라디오 버튼 */}
+                      {item.category_name === "transportation" && (
+                        <div>
+                          <input
+                            type="radio"
+                            name="radioOption"
+                            id="radioOption8"
+                            value={transportationOptions.length.toString()} // 별도의 라디오 버튼 값
+                            checked={inputValue.radioOption === transportationOptions.length.toString()}
+                            onChange={handleTransportChange}
+                          />
+                          <label for="radioOption8">차량 없음</label>
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </>
-              )}
-              {/* 폐기물 관련 입력 필드 구현 */}
-              {item.category_name === "waste" &&
-                initialData
-                  .filter((subItem) => subItem.parent_category_id === item.id)
-                  .map((subItem) => (
-                    <div key={subItem.id}>
-                      <p>폐기물 사용량</p>
-                      <div className="input_box">
+                )}
+
+                {/* unit이 있고 category_name이 "waste"가 아닌 경우에만 입력 필드 생성 */}
+                {item.unit && item.category_name !== "waste" && (
+                  <>
+                    <div className="input_box">
+                      <div className="input_box_left">
+                        <p>{item.label} 사용량</p>
+                      </div>
+                      <div className="input_box_right">
                         <input
                           type="number"
-                          name={subItem.category_name}
-                          placeholder={"숫자 입력..."}
-                          value={inputValue[subItem.category_name]}
-                          onChange={(e) => {
-                            // 선택된 폐기물 입력값 설정 및 다른 필드 초기화
-                            const newConsumption = {
-                              ...inputValue,
-                              kg: subItem.category_name === "kg" ? e.target.value : "",
-                              l: subItem.category_name === "l" ? e.target.value : "",
-                              [subItem.category_name]: e.target.value,
-                            };
-                            setInputValue(newConsumption);
-                          }}
+                          name={item.category_name}
+                          placeholder="숫자 입력..."
+                          value={inputValue[item.category_name]}
+                          onChange={handleChange}
+                          disabled={item.category_name === "transportation" && inputValue.radioOption === "3"} // 네 번째 라디오 버튼 선택 시 비활성화
                         />
-                        <span>{subItem.unit}/월</span>
+                        <span>{item.unit}/월</span>
                       </div>
                     </div>
-                  ))}
-              {/* 각 구역 마지막 부분에 출력값 입력 필드 추가 */}
-              <p>CO₂발생량</p>
-              <div className="input_box">
-                <input
-                  type="number"
-                  placeholder="출력값"
-                  value={co2Emission[item.category_name]} // 예시로 입력값을 그대로 출력; 실제 로직에 따라 변경 필요
-                  readOnly
-                />
-                <span>kg/월</span>
-              </div>
-              <div>
-                <span>
-                  <span>
-                    {item.category_name === "transportation" ? (
-                      <>
-                        <span>{item.label} CO₂발생량 |</span>
-                        {transportationOptions.map((option, idx) => (
-                          <span key={idx}>
-                            {option.sublabel}: (이동거리 / {option.cost_formula})
-                          </span>
-                        ))}
-                      </>
-                    ) : item.category_name === "waste" ? (
-                      <>
-                        <span>
-                          {item.label} CO₂발생량 |
-                          {wasteOptions.map((option, idx) => (
-                            <span key={idx}>
-                              {option.unit}: (폐기물사용량 * {option.cost_formula})
-                            </span>
-                          ))}
-                        </span>
-                      </>
-                    ) : (
+                  </>
+                )}
+                {/* 폐기물 관련 입력 필드 구현 */}
+                {item.category_name === "waste" &&
+                  initialData
+                    .filter((subItem) => subItem.parent_category_id === item.id)
+                    .map((subItem) => (
+                      <div key={subItem.id} className="input_box">
+                        <div className="input_box_left">
+                          <p>폐기물 사용량</p>
+                        </div>
+                        <div className="input_box_right">
+                          <input
+                            type="number"
+                            name={subItem.category_name}
+                            placeholder={"숫자 입력..."}
+                            value={inputValue[subItem.category_name]}
+                            onChange={(e) => {
+                              // 선택된 폐기물 입력값 설정 및 다른 필드 초기화
+                              const newConsumption = {
+                                ...inputValue,
+                                kg: subItem.category_name === "kg" ? e.target.value : "",
+                                l: subItem.category_name === "l" ? e.target.value : "",
+                                [subItem.category_name]: e.target.value,
+                              };
+                              setInputValue(newConsumption);
+                            }}
+                          />
+                          <span>{subItem.unit}/월</span>
+                        </div>
+                      </div>
+                    ))}
+                {/* 각 구역 마지막 부분에 출력값 입력 필드 추가 */}
+                <div className="input_box">
+                  <div className="input_box_left">
+                    <p>CO₂발생량</p>
+                  </div>
+                  <div className="input_box_right">
+                    <input
+                      type="number"
+                      placeholder="출력값"
+                      value={co2Emission[item.category_name]} // 예시로 입력값을 그대로 출력; 실제 로직에 따라 변경 필요
+                      readOnly
+                    />
+                    <span>kg/월</span>
+                  </div>
+                </div>
+                <div className="cost_formula">
+                  {item.category_name === "transportation" ? (
+                    <>
+                      <span>{item.label} CO₂발생량 |</span>
+                      {transportationOptions.map((option, idx) => (
+                        <p key={idx}>
+                          {option.sublabel}: (이동거리 / {option.cost_formula})
+                        </p>
+                      ))}
+                    </>
+                  ) : item.category_name === "waste" ? (
+                    <>
+                      <span>{item.label} CO₂발생량 | </span>
+                      {wasteOptions.map((option, idx) => (
+                        <p key={idx}>
+                          {option.unit}: (폐기물사용량 * {option.cost_formula})
+                        </p>
+                      ))}
+                    </>
+                  ) : (
+                    <>
+                      <span>{item.label} CO₂발생량 | </span>
                       <p>
-                        {item.label} CO₂발생량 | ({item.label} 사용량 {item.cost_formula})
+                        ({item.label} 사용량 {item.cost_formula})
                       </p>
-                    )}
-                  </span>
-                </span>
+                    </>
+                  )}
+                </div>
               </div>
             </div>
           ))}
       </div>
       <div className="bottom_box">
-        <h3>전체 에너지원CO₂ 발생 합계</h3>
-        <div>
-          <p>CO₂ 발생량</p>
-          <input
-            type="number"
-            placeholder="total"
-            value={co2Emission.total} // 예시로 입력값을 그대로 출력; 실제 로직에 따라 변경 필요
-            readOnly
-          />
+        <div className="bottom_box_title">
+          <h3>전체 에너지원CO₂ 발생 합계</h3>
         </div>
-
-        <div>
+        <div className="bottom_box_content">
+          <div className="box_item">
+            <div className="input_box">
+              <div className="input_box_left">
+                <p>CO₂ 발생량</p>
+              </div>
+              <div className="input_box_right">
+                <input type="number" placeholder="total" value={co2Emission.total} readOnly />
+                <span>kg/월</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="bottom_box_info">
+          <p>※ 생활 속에서 발생되는 이산화탄소의 양을 계산해보고 이산화탄소 발생을줄이는 실천방법도 확인하세요!</p>
+        </div>
+        <div className="bottom_box_button_box">
           <button onClick={handleSubmit}>제출하기</button>
         </div>
       </div>

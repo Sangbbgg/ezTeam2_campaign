@@ -6,6 +6,7 @@ import Consumption from "../component/CarbonFootprints/Consumption";
 import Result from "../component/CarbonFootprints/Result";
 import Practice from "../component/CarbonFootprints/Practice";
 // ---------------------------------------------------------
+import Footer from '../component/Footer';
 
 function CarbonFootprint() {
   // const userId = 179870; //개발용 user_id
@@ -44,7 +45,9 @@ function CarbonFootprint() {
   useEffect(() => {
     const checkData = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/carbonFootprint/check/${userData.userid}/${currentDate}`);
+        const response = await fetch(
+          `http://localhost:8000/api/carbonFootprint/check/${userData.userid}/${currentDate}`
+        );
         const data = await response.json();
         if (data.hasData) {
           setNewResultData(data.data);
@@ -107,15 +110,34 @@ function CarbonFootprint() {
     }
     switch (activeTab) {
       case "consumption":
-        return <Consumption inputData={consumptionData} initialData={initialData.carbonFootprintData} onResultSubmit={handleResultSubmit} />;
+        return (
+          <Consumption
+            inputData={consumptionData}
+            initialData={initialData.carbonFootprintData}
+            onResultSubmit={handleResultSubmit}
+          />
+        );
       case "result":
         // 서버의 userData가 있으면 그 값을, 없으면 로컬의 resultData를 사용
         const dataToShow = userEmissionData || newResultData;
-        return <Result initialData={initialData.calculationAdviceData} resultData={dataToShow} userData={userData} isTransportationOption={isTransportationOption} />;
+        return (
+          <Result
+            initialData={initialData.calculationAdviceData}
+            resultData={dataToShow}
+            userData={userData}
+            isTransportationOption={isTransportationOption}
+          />
+        );
       case "practice":
         return <Practice />;
       default:
-        return <Consumption inputData={consumptionData} initialData={initialData.carbonFootprintData} onResultSubmit={handleResultSubmit} />;
+        return (
+          <Consumption
+            inputData={consumptionData}
+            initialData={initialData.carbonFootprintData}
+            onResultSubmit={handleResultSubmit}
+          />
+        );
     }
   };
 
@@ -127,31 +149,32 @@ function CarbonFootprint() {
     <div id="wrap">
       <Header />
       <div className="inner">
-        <div>
-          <h1>탄소발자국 계산기</h1>
-          <p>내가 생활 속에서 배출하는 이산화탄소의 양은 얼마일까요?</p>
-        </div>
-        <div className="carbon-box">
-          <div className="menu-container">
-            <div className="tab-container">
-              <ul className="tab-menu">
-                {!newResultData && (
-                  <li className={tabItemClass("consumption")} onClick={() => handleTabChange("consumption")}>
-                    계산하기
-                  </li>
-                )}
-                <li className={tabItemClass("result")} onClick={() => handleTabChange("result")}>
-                  결과보기
-                </li>
-                <li className={tabItemClass("practice")} onClick={() => handleTabChange("practice")}>
-                  생활속 실천방안
-                </li>
-              </ul>
-            </div>
+        <div className="title_box">
+          <div>
+            <h1 className="forest_green_text">탄소발자국 계산기</h1>
+            <p>내가 생활 속에서 배출하는 이산화탄소의 양은 얼마일까요?</p>
           </div>
-          <div className="content-container">{renderContent()}</div>
         </div>
+        <div className="menu-container">
+          <div className="tab-container">
+            <ul className="tab-menu">
+              {!newResultData && (
+                <li className={tabItemClass("consumption")} onClick={() => handleTabChange("consumption")}>
+                  계산하기
+                </li>
+              )}
+              <li className={tabItemClass("result")} onClick={() => handleTabChange("result")}>
+                결과보기
+              </li>
+              <li className={tabItemClass("practice")} onClick={() => handleTabChange("practice")}>
+                생활속 실천방안
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className="content-container">{renderContent()}</div>
       </div>
+      <Footer/>
     </div>
   );
 }
