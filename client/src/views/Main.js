@@ -7,6 +7,15 @@ import TextList from '../component/campaign/TextList';
 import Footer from '../component/Footer';
 import {gsap} from "gsap";
 
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+
+
+// import required modules
+import { Navigation } from 'swiper/modules';
 
 
 const Main = () => {
@@ -110,13 +119,17 @@ const Main = () => {
           </div>
 
           <div className="cont-area">
+            <Swiper navigation={true} modules={[Navigation]} slidesPerView={3} spaceBetween={30} className="mySwiper">
+                
             {mainCampaignList.map((data, i) => {
               return (
-                <TextList campaignList={data} key={i} />
+                <SwiperSlide>
+                  <TextList campaignList={data} key={i} />
+                </SwiperSlide>
               )
             })}
+            </Swiper>
           </div>
-          
         </div>
       </section>
 
