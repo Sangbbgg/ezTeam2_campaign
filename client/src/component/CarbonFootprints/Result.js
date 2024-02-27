@@ -50,12 +50,14 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
   // console.log("??", hasResultData);
   // console.log("유저 결과 :", userData);
   // console.log("추천 실천과제 :", initialData);
-  // console.log("resultData :", resultData);
+  console.log("resultData :", resultData);
   // console.log("targetEmissions :", targetEmissions.transportation);
   // console.log("교통 라디오 옵션(차량없음) :", isTransportationOption);
   // console.log("barChatData :", barChatData);
-  // console.log("barChatDataTotal :", categorySavings);
+  console.log("barChatDataTotal :", categorySavings);
   // const userId = 104716;
+
+  // resultData.total(유저) / categorySavings.total(목표) / averageData.total(평균) 데이터셋 작성 -> targetBarChart작성
 
   const averageData = {
     // 평균 데이터
