@@ -68,6 +68,42 @@ const Main = () => {
     const firstThreeItems = campaignList.slice(0, 6); 
     return firstThreeItems;
   };
+
+//   let arrSclAniEleY = [];
+//   let sclElement = document.querySelectorAll(".scroll-motion");
+
+//   function _getScrollObjY() {
+//     Array.prototype.forEach.call(sclElement, function(el, i) {
+//       arrSclAniEleY.push(parseInt(el.offsetTop) + 150);
+//       arrSclAniEleY.push(parseInt(el.offsetTop) + 90);
+//     });
+//   }
+
+// _getScrollObjY();
+
+var _getScrollObjY = function() {
+  var _arrY = [];
+  var scrollMotions = document.querySelectorAll(".scroll-motion");
+
+  scrollMotions.forEach(function(el) {
+    var offsetTop = el.getBoundingClientRect().top + window.pageYOffset;
+    _arrY.push(parseInt(offsetTop));
+  });
+
+  return _arrY;
+};
+
+window.addEventListener("scroll", function() {
+  var scrollMotions = document.querySelectorAll(".scroll-motion");
+  var scrollY = window.scrollY || window.pageYOffset;
+
+  scrollMotions.forEach(function(el, q) {
+    if (scrollY + window.innerHeight > _getScrollObjY()[q]) {
+      el.classList.add("active");
+    }
+  });
+});
+
   
   return (
     <div id="wrap" className='main'>
@@ -76,7 +112,7 @@ const Main = () => {
       <section className="main-visual">
         <div className="img-wrap">
           <video id="main_video0" src={process.env.PUBLIC_URL + '/img/main-video.mp4'} autoPlay loop muted preload="auto" playsInline></video>
-          {/* <img src={process.env.PUBLIC_URL + '/img/bg-key-visual.jpg'} alt="Default Campaign Image" /> */}
+          {/* <img src={process.env.PUBLIC_URL + '/img/bg-key-visual5.jpg'} alt="Default Campaign Image" /> */}
         </div>
 
         <div className="txt-wrap">
@@ -95,17 +131,14 @@ const Main = () => {
       {/* 캠페인 소개 */}
       <section className="campaign">
       <div className="inner">
-        <div className="txt-area">
+        <div className="txt-area scroll-motion">
           <p className="sec-tit">캠페인</p>
           <p className="sec-txt">우리는 탄소중립 난제를 해결하고 녹색성장을 이끌기 위해 모였습니다.</p>
         </div>
 
-        <div className="custom-swiper-navigation">
-          <button className="swiper-button-prev"></button>
-          <button className="swiper-button-next"></button>
-        </div>
+      
 
-        <div className="cont-area">
+        <div className="cont-area scroll-motion">
           <Swiper loop={true} slidesPerView={3} spaceBetween={30} className="mySwiper" onSwiper={setSwiper} modules={[Navigation]} 
             navigation={{ // navigation 활성화
               prevEl: '.swiper-button-prev',
@@ -118,6 +151,11 @@ const Main = () => {
               </SwiperSlide>
             ))}
           </Swiper>
+
+          <div className="custom-swiper-navigation">
+            <button className="swiper-button-prev"></button>
+            <button className="swiper-button-next"></button>
+          </div>
         </div>
       </div>
     </section>
