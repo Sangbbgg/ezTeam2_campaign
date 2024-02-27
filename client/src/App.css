@@ -241,6 +241,8 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .container .cont .img-wrap {position: relative; overflow: hidden; width: auto; height: 277px;}
 .container .cont .img-wrap img {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1); width: 100%; height: 100%; transition: transform .3s ease-out; object-fit: cover;}
 
+.campaign-wrap .group-box {display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px;}
+.campaign-wrap .btn-write {padding: 10px 14px; color: #fff; background-color: #228e0c;}
 .campaign-wrap {margin-top: 20px; padding-bottom: 200px;}
 .campaign-wrap .cont .title {min-height: 56px; font-size: 18px; color: #000; text-align: left; overflow: hidden; white-space: normal; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; word-break: keep-all;}
 .campaign-wrap .txt-wrap {display: block; margin-top: 14px;}
@@ -248,8 +250,6 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .campaign-wrap .txt-wrap .username {font-size: 14px; text-align: right; color: #777;}
 .campaign-wrap .txt-wrap .date {font-size: 14px; text-align: right; color: #777;}
 
-
-/* 글 목록 */
 
 /* 글쓰기 */
 .campaign-write {margin: 0 auto; padding: 140px 40px; width: 80%;}
@@ -275,7 +275,8 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .campaign-detail .regi-info .date {position: relative; margin-left: 14px; padding-left: 16px;}
 .campaign-detail .regi-info .date::before {content: ""; position: absolute; top: 6px; left: 0; width: 1px; height: 10px; background-color: #ccc;}
 .campaign-detail .body-area {margin: 40px 0; font-size: 18px;}
-.campaign-detail .body-area p {font-size: 16px;}
+.campaign-detail .body-area img {width: 300px; height: 300px;}
+.campaign-detail .body-area p {font-size: 16px; }
 
 .content-wrap {position: relative;}
 
@@ -318,7 +319,6 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .pagination button.active {font-weight: 700; color: #fff; background-color: #228e0c; border-radius: 4px;}
 .pagination button span {word-break: keep-all;}
 
-.btn-link {margin-top: 60px; padding: 10px 14px; color: #fff; background-color: #228e0c;}
 
 /* 검색 input */
 .search-wrap {display: flex; justify-content: center; margin: 40px 0 80px;}
@@ -327,7 +327,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .btn-search {margin-left: 20px; padding: 4px 16px; height: 40px; font-size: 14px; background-color: #fff; border: 1px solid #000;}
 
 /* 탭 */
-.tab-area {display: flex; justify-content: center; margin-bottom: 40px;}
+.tab-area {display: flex; justify-content: center;}
 .tab-area .btn-tab.active {border-bottom: 1px solid #000;}
 .tab-area .btn-tab + .btn-tab {margin-left: 20px;}
 

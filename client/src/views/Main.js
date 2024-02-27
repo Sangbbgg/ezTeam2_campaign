@@ -133,13 +133,13 @@ window.addEventListener("scroll", function() {
       <div className="inner">
         <div className="txt-area scroll-motion">
           <p className="sec-tit">캠페인</p>
-          <p className="sec-txt">우리는 탄소중립 난제를 해결하고 녹색성장을 이끌기 위해 모였습니다.</p>
+          <p className="sec-txt">우리는 탄소 중립 난제를 해결하고 녹색 성장을 이끌어내기 위해 모이고 있습니다.</p>
         </div>
 
       
 
         <div className="cont-area scroll-motion">
-          <Swiper loop={true} slidesPerView={3} spaceBetween={30} className="mySwiper" onSwiper={setSwiper} modules={[Navigation]} 
+          <Swiper loop={true} slidesPerView={3} spaceBetween={20} className="mySwiper" onSwiper={setSwiper} modules={[Navigation]} 
             navigation={{ // navigation 활성화
               prevEl: '.swiper-button-prev',
               nextEl: '.swiper-button-next'

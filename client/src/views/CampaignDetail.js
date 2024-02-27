@@ -121,30 +121,28 @@ const CampaignDetail = (props) => {
 
       {/* 작성자 정보 */}
       <div className="writer-info">
-        {/* <p className="author-id">{"회원번호: " + curList?.userid}</p> */}
         <p className="author-id">{curList?.username}</p>
-        {/* <p className="date">{curList?.date.slice(0, 10).replace("T", "")}</p> */}
         <p className="date">{new Date(curList?.date).toLocaleDateString()}</p>
       </div>
       
       {/* 진행 기간 */}
-        {
-          curList?.end_date != null ? (
-            <div className="period-area">
-              <p className='period-tit'>진행기간</p>
-            
-              <div className="date-wrap">
-                {curList?.start_date != null ? (
-                  <p className="start-date">{new Date(curList?.start_date).toLocaleDateString()}</p>
-                ) : null}
-                  <span>~</span>
-                {curList?.end_date != null ? (
-                  <p className="end-date">{new Date(curList?.end_date).toLocaleDateString()}</p>
-                ) : null}
-              </div>
+      {
+        curList?.end_date != null ? (
+          <div className="period-area">
+            <p className='period-tit'>진행기간</p>
+          
+            <div className="date-wrap">
+              {curList?.start_date != null ? (
+                <p className="start-date">{new Date(curList?.start_date).toLocaleDateString()}</p>
+              ) : null}
+                <span>~</span>
+              {curList?.end_date != null ? (
+                <p className="end-date">{new Date(curList?.end_date).toLocaleDateString()}</p>
+              ) : null}
             </div>
-          ): null
-        }
+          </div>
+        ): null
+      }
 
 
       {/* 본문 내용 */}
@@ -164,7 +162,6 @@ const CampaignDetail = (props) => {
           </div>
         ):null
       }
-      
 
       {/* 하단 버튼 영역 */}
       <div className="bottom-area">
