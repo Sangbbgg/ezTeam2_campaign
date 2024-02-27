@@ -63,8 +63,17 @@ const WriteEditor = ({ value, handleChangeQuill }) => {
           ["blockquote"],
           [{ list: "ordered" }, { list: "bullet" }],
           [{ color: [] }, { background: [] }],
-          [{ align: [] }, "link"],
+          [{ align: [] }, "link", "image"],
         ],
+        handlers: {
+          // 이미지 처리는 우리가 직접 imageHandler라는 함수로 처리할 것이다.
+          image: imageHandler,
+        },
+      },
+      
+      imageResize: {
+        parchment: Quill.import('parchment'),
+        modules: ['Resize', 'DisplaySize']
       },
     }
   }, []);
