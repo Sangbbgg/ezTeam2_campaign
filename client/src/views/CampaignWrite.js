@@ -31,6 +31,7 @@ const CampaignWrite = () => {
 
   const renderAddrDiv = () => {
     if (selOpt === "장소없음") {
+      document.querySelector("#map").style.display = "none";
       return null;
     }
 
@@ -136,8 +137,7 @@ const CampaignWrite = () => {
       map: map,
     });
   
-    function sample5_execDaumPostcode() {
-      console.log("!!!!!!!!!!!!!!!");
+    function executeAddressSearch() {
       new window.daum.Postcode({
         oncomplete: function (data) {
           const addr = data.address; // 최종 주소 변수
@@ -171,32 +171,29 @@ const CampaignWrite = () => {
       }).open();
     }
   
-    // Add event listener to the search button
     const searchButton = document.getElementById("searchButton");
     if (searchButton) {
-      searchButton.addEventListener("click", sample5_execDaumPostcode);
+      searchButton.addEventListener("click", executeAddressSearch);
     }
   
-    // Cleanup event listener on unmount
     return () => {
       if (searchButton) {
-        searchButton.removeEventListener("click", sample5_execDaumPostcode);
+        searchButton.removeEventListener("click", executeAddressSearch);
       }
     };
-  }, [selOpt]); // Add selOpt as a dependency
+  }, [selOpt]); 
   
 
   let [mainImg,setMainImg] = useState("");
-    const setPreviewImg = (event) => {
-      var reader = new FileReader();
+  const setPreviewImg = (event) => {
+    var reader = new FileReader();
 
-      reader.onload = function(event) {
-        setMainImg(event.target.result);
-      };
+    reader.onload = function(event) {
+      setMainImg(event.target.result);
+    };
 
-      reader.readAsDataURL(event.target.files[0]);
-    }
-      
+    reader.readAsDataURL(event.target.files[0]);
+  }
 
   return (
     <div className="campaign-write">
