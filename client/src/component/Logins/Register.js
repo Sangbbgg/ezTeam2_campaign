@@ -19,16 +19,18 @@ function Register() {
   return (
     <div>
       <form className="Register-form">
-          {/* 각 버튼 클릭 시에 해당 페이지로 이동하는 버튼을 추가합니다 */}
-          <button onClick={() => navigateTo("/Register/personal")}>
-            개인 회원가입
-          </button>
-          <button onClick={() => navigateTo("/Register/corporate")}>
-            기업 회원가입
-          </button>
-          <button onClick={() => navigateTo("/Register/group")}>
-            단체 회원가입
-          </button><br/>
+        <div className="button-container">
+            {/* 각 버튼 클릭 시에 해당 페이지로 이동하는 버튼을 추가합니다 */}
+            <button onClick={() => navigateTo("/Register/personal")}>
+              개인 회원가입
+            </button>
+            <button onClick={() => navigateTo("/Register/corporate")}>
+              기업 회원가입
+            </button>
+            <button onClick={() => navigateTo("/Register/group")}>
+              단체 회원가입
+            </button><br/>
+          </div>
       <Link to="/login">로그인창</Link>
       </form>
     </div>

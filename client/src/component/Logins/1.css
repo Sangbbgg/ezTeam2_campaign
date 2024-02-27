@@ -1,17 +1,94 @@
 
-.login-a{
-  display: flex;
+
+/* 회원가입 폼 */
+  .Register-form {
+    display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-}
+  margin: 20px;
+  background-image: url('https://previews.123rf.com/images/kalinavova/kalinavova1509/kalinavova150900079/45983799-여름-숲-나무입니다-자연-녹색-나무-햇빛-배경입니다-하늘.jpg'); /* 이미지 경로에 맞게 수정 */
+  background-size: cover;
+  background-position: center;
+  padding: 20px;
+  }
+  
+  .Register-form button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    border-radius: 8px;
+  }
+  
+  .Register-form button:hover {
+    background-color: #568958;
+  }
+  
+  .Register-form .button-container {
+    display: flex;
+    flex-direction: column; /* 버튼들을 세로로 나열합니다. */
+    width: 50%;
+  }
+  
+  .Register-form a {
+    color: #e9f8ea;
+    text-decoration: none;
+    font-size: 18px;
+   background-color: #568958;
+   border-radius: 8px;
+   width: 30%;
+  }
+  
+  .Register-form a:hover {
+    text-decoration: underline;
+  }
 
+  /* 유저 */
+  .Register-form-user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 20px;
+    background-image: url('https://previews.123rf.com/images/kalinavova/kalinavova1509/kalinavova150900079/45983799-여름-숲-나무입니다-자연-녹색-나무-햇빛-배경입니다-하늘.jpg'); /* 이미지 경로에 맞게 수정 */
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+  }
+  
+  .input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .input-group input {
+    margin-right: 10px;
+    
+    flex: 1;
+  }
+
+  .check-btn {
+    background-color: green;
+    color: white;
+    border-radius: 5px;
+    font-size: 18px;
+    width: 40px;
+    text-align: center;
+  }
+  
   .RegesterBtn {
     background-color: #4caf50;
     color: white;
+    margin-top: 10px;
+    border-radius: 5px;
   }
-  .Btn{
-    background-color: #4caf50;
-    color: white;
+  
+  
 
-  }
+

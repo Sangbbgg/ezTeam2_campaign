@@ -19,29 +19,21 @@ import { Navigation } from 'swiper/modules';
 
 
 const Main = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const app = useRef();  // 범위 지정용 ref 생성
-  const circle = useRef();
-  
+  const [swiper, setSwiper] = useState(null);
+
+  useEffect(() => {
+    if (swiper) {
+      swiper.navigation.init();
+      swiper.navigation.update();
+    }
+  }, [swiper]);
   
   // 글 목록
   const [campaignList, setCampaignList] = useState([]); // 캠페인 목록을 저장 
   const [mainCampaignList, setmainCampaignList] = useState([]); // 캠페인 목록을 저장 
-  const [totalPostsCount, setTotalPostsCount] = useState(0); // 탭별 전체 포스트 개수를 저장
 
-  // 페이지네이션
-  
-  // useEffect(() => {
-  //   let ctx = gsap.context(() => {
-  //     gsap.to(".box", { rotation: 360 });
-  //     gsap.to(circle.current, { rotation: 360 }); // 
-  //   }, app); // <- * 생성한 ref 이름을 써줘야 한다 * 
-    
-    
-  //   return () => ctx.revert();
-  // }, []);
 
   useEffect(()=>{
     document.querySelector(".main-visual").style.height = window.innerHeight + "px";
@@ -60,10 +52,6 @@ const Main = () => {
           let arrPost = [...res.payload];
           // 새로운 데이터가 불러와졌을 때 역순으로 정렬하여 최신 글이 위로 오도록 함
           setCampaignList(arrPost.reverse());
-          // // 초기 필터링 결과로 전체 포스트를 설정
-          // setFilteredResults(arrPost);
-          // // 전체 포스트 개수 설정
-          // setTotalPostsCount(arrPost.length);
         }
       })
       .catch((err) => console.log(err));
@@ -81,20 +69,14 @@ const Main = () => {
     return firstThreeItems;
   };
   
-
-
   return (
     <div id="wrap" className='main'>
-      {/* <div ref={app} className="App">
-        <div className="box">selector</div>
-        <div className="circle" ref={circle}>Ref</div>
-      </div> */}
-
       <Header />
       {/* 키비주얼 영역 */}
       <section className="main-visual">
         <div className="img-wrap">
-          <img src={process.env.PUBLIC_URL + '/img/bg-key-visual.jpg'} alt="Default Campaign Image" />
+          <video id="main_video0" src={process.env.PUBLIC_URL + '/img/main-video.mp4'} autoPlay loop muted preload="auto" playsInline></video>
+          {/* <img src={process.env.PUBLIC_URL + '/img/bg-key-visual.jpg'} alt="Default Campaign Image" /> */}
         </div>
 
         <div className="txt-wrap">
@@ -112,26 +94,34 @@ const Main = () => {
 
       {/* 캠페인 소개 */}
       <section className="campaign">
-        <div className="inner">
-          <div className="txt-area">
-            <p className="sec-tit">캠페인</p>
-            <p className="sec-txt">우리는 탄소중립 난제를 해결하고 녹색성장을 이끌기 위해 모였습니다.</p>
-          </div>
-
-          <div className="cont-area">
-            <Swiper navigation={true} modules={[Navigation]} slidesPerView={3} spaceBetween={30} className="mySwiper">
-                
-            {mainCampaignList.map((data, i) => {
-              return (
-                <SwiperSlide>
-                  <TextList campaignList={data} key={i} />
-                </SwiperSlide>
-              )
-            })}
-            </Swiper>
-          </div>
+      <div className="inner">
+        <div className="txt-area">
+          <p className="sec-tit">캠페인</p>
+          <p className="sec-txt">우리는 탄소중립 난제를 해결하고 녹색성장을 이끌기 위해 모였습니다.</p>
         </div>
-      </section>
+
+        <div className="custom-swiper-navigation">
+          <button className="swiper-button-prev"></button>
+          <button className="swiper-button-next"></button>
+        </div>
+
+        <div className="cont-area">
+          <Swiper loop={true} slidesPerView={3} spaceBetween={30} className="mySwiper" onSwiper={setSwiper} modules={[Navigation]} 
+            navigation={{ // navigation 활성화
+              prevEl: '.swiper-button-prev',
+              nextEl: '.swiper-button-next'
+            }}
+          >
+            {mainCampaignList.map((data, i) => (
+              <SwiperSlide key={i}>
+                <TextList campaignList={data} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </div>
+    </section>
+
 
       <section className='carbon'>
       <div className="inner">

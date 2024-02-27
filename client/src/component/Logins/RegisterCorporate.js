@@ -161,84 +161,102 @@ axios.post('http://localhost:8000/regester', {
 
   return (
     <div>
-      <input
-        type="text"
-        placeholder="사용자명"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <br />
-      <input
-        type="password"
-        placeholder="비밀번호"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <br/>
-
-      <input
-        type="password"
-        placeholder="비밀번호 확인"
-        value={confirmPassword}
-        onChange={(e) => setConfirmPassword(e.target.value)}
-      />
-      <br />
-      <input
-      type="text"
-      placeholder="사업자번호"
-      value={businessnumber}
-      onChange={(e) => setBusinessNumber(e.target.value)}
-      />
-       <button onClick={()=>{handlebusinessnumberCheck(); setIsbusinessnumberDuplication(false);}}>확인</button>
-      {/* 사업자 유효성 검사 02/14 김민호 */}
-      <br/>
-      <input
-        type="text"
-        placeholder="이메일"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <button onClick={()=>{handleEmailDuplicationCheck(); setIsDuplicateChecked(false);}}>확인</button>
-      {/* 이메일 유효성 검사 02/14 김민호 */}
-      <br />
-
-       <input
-        type="text"
-        placeholder="핸드폰번호"
-        value={phonenumber}
-        onChange={(e) => setphonenumber(e.target.value)}
-      />
-
-      <br />
-      <input
-        type="text"
-        placeholder="주소"
-        value={address}
-        onChange={(e) => setAddress(e.target.value)}
-      />
-    
-      <button onClick={handle.clickButton}>선택</button>
-      {openPostcode && (
-        <DaumPostcode
-          onComplete={handle.selectAddress}
-          autoClose={false}
-          defaultQuery=""
-        />
-      )}
-      <br/>
-      <input
-        type="text"
-        placeholder="상세주소"
-        value={detailedaddress}
-        onChange={(e) => setdetailedaddress(e.target.value)}
-      />
-      <br/>
-      <button className="RegesterBtn" onClick={handleRegesterClick}>
-        가입완료
-      </button>
-      <div>
-        <Link to="/login">로그인창</Link>
-      </div>
+      <form className="Register-form-user">
+          <div className="input-group">
+            <input
+              type="text"
+              placeholder="사용자명"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </div>
+          <div className="input-group">
+            <input
+              type="password"
+              placeholder="비밀번호"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div className="input-group">
+            <input
+              type="password"
+              placeholder="비밀번호 확인"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          </div>
+          <div className="input-group">
+            <input
+              type="text"
+              placeholder="사업자번호"
+              value={businessnumber}
+              onChange={(e) => setBusinessNumber(e.target.value)}
+            />
+            <button
+              className="check-btn"
+              onClick={() => { handlebusinessnumberCheck(); setIsbusinessnumberDuplication(false); }}
+            >
+              확인
+            </button>
+          </div>
+          <div className="input-group">
+            <input
+              type="text"
+              placeholder="이메일"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <button
+              className="check-btn"
+              onClick={() => { handleEmailDuplicationCheck(); setIsDuplicateChecked(false); }}
+            >
+              확인
+            </button>
+          </div>
+          <div className="input-group">
+            <input
+              type="text"
+              placeholder="핸드폰번호"
+              value={phonenumber}
+              onChange={(e) => setphonenumber(e.target.value)}
+            />
+          </div>
+          <div className="input-group">
+            <input
+              type="text"
+              placeholder="주소"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
+            <button className="check-btn" onClick={handle.clickButton}>
+              선택
+            </button>
+          </div>
+          <div className="input-group">
+            {openPostcode && (
+              <DaumPostcode
+                onComplete={handle.selectAddress}
+                autoClose={false}
+                defaultQuery=""
+              />
+            )}
+          </div>
+          <div className="input-group">
+            <input
+              type="text"
+              placeholder="상세주소"
+              value={detailedaddress}
+              onChange={(e) => setdetailedaddress(e.target.value)}
+            />
+          </div>
+          <button className="RegesterBtn" onClick={handleRegesterClick}>
+            가입완료
+          </button>
+          <div>
+            <Link to="/login">로그인창</Link>
+          </div>
+      </form>
     </div>
   );
 }
