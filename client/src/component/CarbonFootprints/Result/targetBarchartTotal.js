@@ -30,7 +30,7 @@ export default class CustomBarChart extends PureComponent {
     };
 
     return (
-      <ResponsiveContainer width="100%" height={barChartDataTotal.length * 10}>
+      <ResponsiveContainer width="100%" height={barChartDataTotal.length * 11}>
         {barChartDataTotal.map((entry, index) => (
           <BarChart
             key={`bar-chart-${index}`}
@@ -39,7 +39,7 @@ export default class CustomBarChart extends PureComponent {
             height={60}
             data={[entry]}
             margin={{
-              top: 20,
+              top: 10,
               right: 80,
               left: -10,
               bottom: 5,
@@ -49,7 +49,7 @@ export default class CustomBarChart extends PureComponent {
             <YAxis dataKey="name" type="category" width={80} axisLine={false} tickLine={false} />
             <Tooltip content={<CustomTooltip />} cursor={false} />
 
-            <Bar dataKey="value" barSize={30} fill={entry.color}>
+            <Bar dataKey="value" barSize={30} fill={entry.color} radius={[0,20,20,0]}>
                 <Cell key={`cell-${index}`} fill={entry.color} />
                 <LabelList dataKey="value" content={<CustomLabel />} />
             </Bar>
