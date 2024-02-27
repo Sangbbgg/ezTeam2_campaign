@@ -521,7 +521,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .bottom_box .box_item .input_box .input_box_right .co2Emission{height: 40px; flex-grow: 1; font-size: 15px; color: #32B562;}
 .bottom_box .box_item .input_box .input_box_right > span{width: 50px; text-align: center;}
 
-.bottom_box .bottom_box_info > p{margin: 20px 10px;}
+.bottom_box .bottom_box_info > p{margin: 20px 10px; font-weight: 700; background-color:#E8F6ED;}
 
 .bottom_box .bottom_box_button_box{display: flex;}
 .bottom_box .bottom_box_button_box > button {width: 150px; height: 50px; background-color: #25B058; border-radius: 8px; color: white; margin-left: auto}
@@ -530,7 +530,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 
 /* 사용량 분석 */
 .result_box{border: 2px solid #E5F5EB; border-radius: 8px; margin-bottom: 80px; background-color:rgba(255, 255, 255, 0.95);}
-.result_box .result_box_content{padding: 30px 20px;}
+.result_box .result_box_content{padding: 30px 40px;}
 .pi_chart_wrap{display: flex; align-items: center; margin-bottom: 60px; border-bottom: 2px solid #E5F5EB;}
 .pi_chart_wrap .pi_chart_wrap_right{height: 200px; display: flex; flex-direction: column; justify-content: space-around;}
 .pi_chart_wrap .result_conment_right{display: flex; flex-direction: column; justify-content: space-between;}
@@ -542,18 +542,18 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .bar_chart{width: 180px; height: 280px; border:2px solid #3AB868; border-radius: 8px;}
 
 /* 실천목표 */
-.result_box_content > h2{font-size: 20px; text-align: center; margin-top: 25px;}
+.result_box_content > h2{font-size: 20px; text-align: center; margin: 25px;}
 .result_box_content .select_category{display: flex; align-items: center; margin: 40px 0 15px;}
 .result_box_content .select_category > ul{width: 100%; display: flex; align-items: center; justify-content: center;  gap: 10px;}
 .result_box_content .select_category > ul > .select_tap{width: 8%; height: 40px; display: flex; align-items: center; justify-content: center; background-color: #e1f0de; border-radius: 8px;}
 .result_box_content .select_category > ul > .select_tap.active{background-color: #25B058; color:white;}
 
-.select_content {display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 10px;}
+.select_content {display: grid; grid-template-columns: 1.1fr 1fr; gap: 10px;}
 .select_content .category{grid-column: 1/-1; padding: 20px; border-radius: 8px; margin-bottom: 20px;}
 .select_content .category > .category_title{padding: 0 10px 15px; font-size: 20px;}
 .select_content .category > div{display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; grid-column: 1 / -1; width: 100%;}
 .select_content .category > div > div{padding: 12px; border: 1px solid #999; border-radius: 8px; background-color: white; display: flex; flex-direction: column; justify-content: center;}
-.select_content .category > div > div > label{display: flex; align-items: center; gap: 10px;}
+.select_content .category > div > div > label{display: flex; align-items: center; gap: 5px;}
 
 
 .select_content .target_co2saving{grid-column: 1/2; border: 1px solid #aaa; border-radius: 8px;}
@@ -565,10 +565,17 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .select_content .total_target_co2saving > span{color: #0078C3; font-weight: 700; font-size: 20px;}
 
 /* 종합평가 */
+.result_bottom_box{margin: 30px; border: 1px solid #aaa; border-radius: 8px; background-color:rgba(255, 255, 255, 0.95);}
+.result_bottom_box .result_box_content{background-color: #f3f3f3; border-radius:0px 0px 8px 8px; display: grid; grid-template-columns: 1fr 1fr; gap: 35px;}
+.result_bottom_box .result_box_content_item{border-radius: 8px; background-color: white;}
+.result_bottom_box .result_box_content_item > div{font-size: 18px; padding: 10px 20px;}
+.result_bottom_box .result_box_content_item > div > p{margin: 20px 0 40px 0;}
+.result_bottom_box .result_box_content_item > div > .handle_box{background-color: #3AB868; border-radius: 8px; display: flex; flex-direction: column; align-items: center; padding: 20px; gap: 20px;}
+.result_bottom_box .result_box_content_item > div > .handle_box > p{color: white;}
+.result_bottom_box .result_box_content_item > div > .handle_box .save_button{width: 100%; display: flex; justify-content: space-around; gap: 10px;}
+.result_bottom_box .result_box_content_item > div > .handle_box .save_button > button{border-radius: 8px; height: 70px; flex: 1; background-color: white;}
 
-
-
-
+.result_total{}
 
 
 

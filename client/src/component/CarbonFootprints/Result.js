@@ -271,40 +271,7 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
     return Math.max(0, resultData[category] - categorySavings[category]).toFixed(1);
   }
 
-  const data11 = [
-    {
-      subject: "전기",
-      A: 120,
-      B: 110,
-      fullMark: 100,
-    },
-    {
-      subject: "가스",
-      A: 98,
-      B: 130,
-      fullMark: 30,
-    },
-    {
-      subject: "수도",
-      A: 86,
-      B: 130,
-      fullMark: 300,
-    },
-    {
-      subject: "교통",
-      A: 99,
-      B: 100,
-      fullMark: 405,
-    },
-    {
-      subject: "폐기물",
-      A: 85,
-      B: 90,
-      fullMark: 20,
-    },
-  ];
-
-  console.log("barChatData", barChatData);
+  // console.log("barChatData", barChatData);
   return (
     <>
       <div ref={captureRef}>
@@ -358,9 +325,9 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
               <div>
                 <div className="select_category">
                   <ul>
-                    {Object.keys(labels).map((key,idx) => (
+                    {Object.keys(labels).map((key) => (
                       <li key={key} className={`select_tap ${selectTap === key ? "active" : ""} `} onClick={() => handleSubTapClick(key)}>
-                        {labels[key]}{console.log("???",Object.keys(labels))}
+                        {labels[key]}
                       </li>
                     ))}
                   </ul>
@@ -416,15 +383,13 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
                             .map((filterBarchartItem, index) => (
                               <div key={index} className="barChart" style={{ width: "100%", height: "280px" }}>
                                 <TargetBarchart barChatData={[filterBarchartItem]} />
-                                {console.log(filterBarchartItem)}
                               </div>
                             ))}
                         </div>
-
                         <div className="total_target_co2saving">
-                            <p>총 합계 </p>
-                            <span>{categorySavings.total}kg</span>
-                          </div>
+                          <p>총 합계</p>
+                          <span>{categorySavings.total}kg</span>
+                        </div>
                       </div>
                     )
                 )}
@@ -432,26 +397,74 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
             </div>
           </div>
         </div>
-
         <div className="result_box">
           <div className="item_title">
             <p>종합평가</p>
           </div>
-          <div>
-            <h2>{userData.username}님의 종합평가입니다.</h2>
+          <div className="result_box_content">
+            <h2>
+              <span className="forest_green_text">{userData.username}</span>님의 종합평가입니다.
+            </h2>
+
+            <div className="result_total">
+              <div className="result_total_left">
+                <h3>이산화탄소 배출현황 및 목표</h3>
+                <p>
+                  우리집의 이산화탄소 배출량은 총 {}이며, 비슷한 규모의 다른 가정보다 약 {}더많이 배출하고 있습니다.
+                </p>
+                <p>부문별로 보면 전기,가스,수도,교통,폐기물의 5개 부문 중 {}부문에서 다른 가정보다 이산화탄소 배출이 많습니다. </p>
+                {/* 많은 배출이 없다면 "적습니다."조건문 적용 */}
+              </div>
+              <div>total_chart구역</div>
+            </div>
           </div>
-          <div className="barChart" style={{ width: "70%", height: "300px" }}>
-            <ComprehensiveChart data={barChatData} />
+
+          <div className="result_bottom_box">
+            <div className="item_title">
+              <p>부문별 배출현황 및 목표</p>
+            </div>
+
+            <div className="result_box_content">
+              {Object.keys(labels).map((label) => (
+                <div key={label} className="result_box_content_item">
+                  <div>
+                    <span className={`forest_${label}_text`}>{labels[label]}</span>
+                  </div>
+                  {barChatData
+                    .filter((item) => item.name === labels[label])
+                    .map((filterBarchartItem, index) => (
+                      <div key={index} className="barChart" style={{ width: "100%", height: "250px" }}>
+                        <TargetBarchart barChatData={[filterBarchartItem]} />
+                      </div>
+                    ))}
+                </div>
+              ))}
+              <div className="result_box_content_item">
+                <div>
+                  <p>
+                    {userData.username}님 가정에서 이산화탄소 배출을 줄이는 실천을 하시면 약 {}의 이산화탄소를 줄일 수 있습니다.
+                  </p>
+                  <div className="handle_box">
+                    {!hasResultData && (
+                      <>
+                        <p>최종결과를 저장하세요.</p>
+                        <div className="save_button">
+                          <button onClick={onClickCarbonFootprint}>
+                            탄소계산기
+                            <br /> 다시하기
+                          </button>
+                          <button onClick={onSaveClick}>저장</button>
+                        </div>
+                      </>
+                    )}
+                    <button onClick={saveAsImage}>이미지로 저장하기</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      {!hasResultData && (
-        <>
-          <button onClick={onClickCarbonFootprint}>탄소계산기 다시하기</button>
-          <button onClick={onSaveClick}>저장</button>
-        </>
-      )}
-      <button onClick={saveAsImage}>이미지로 저장하기</button>
     </>
   );
 }
