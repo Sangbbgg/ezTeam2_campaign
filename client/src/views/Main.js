@@ -71,16 +71,12 @@ const Main = () => {
   
   return (
     <div id="wrap" className='main'>
-      {/* <div ref={app} className="App">
-        <div className="box">selector</div>
-        <div className="circle" ref={circle}>Ref</div>
-      </div> */}
-
       <Header />
       {/* 키비주얼 영역 */}
       <section className="main-visual">
         <div className="img-wrap">
-          <img src={process.env.PUBLIC_URL + '/img/bg-key-visual.jpg'} alt="Default Campaign Image" />
+          <video id="main_video0" src={process.env.PUBLIC_URL + '/img/main-video.mp4'} autoPlay loop muted preload="auto" playsInline></video>
+          {/* <img src={process.env.PUBLIC_URL + '/img/bg-key-visual.jpg'} alt="Default Campaign Image" /> */}
         </div>
 
         <div className="txt-wrap">
