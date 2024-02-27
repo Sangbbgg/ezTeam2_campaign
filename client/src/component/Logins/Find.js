@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./1.css"
 
 function Find() {
   const [username, setUsername] = useState("");
@@ -17,7 +18,7 @@ function Find() {
       // 응답으로 받은 이메일을 설정합니다.
       setEmail(response.data.email);
   } catch (error) {
-    if (error.response.status === 404) {
+    if (error.response && error.response.status === 404) {
       // 사용자를 찾지 못했을 때의 처리
       setEmail("일치하는 사용자가 없습니다.");
     } else {
