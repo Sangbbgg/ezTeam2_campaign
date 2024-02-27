@@ -102,28 +102,30 @@ const Campaign = () => {
   return (
     <div id="wrap">
       <Header/>
-      <div className="inner">
-        <button className="btn-link" onClick={()=>{navigate('/campaign/write')}}>글쓰기</button>
-        <div className="search-wrap">
-          <input type="text" placeholder="검색어를 입력하세요" onChange={(e) => setSearchInput(e.target.value)} />
-          <button className="btn-search" onClick={handleSearchButtonClick}>검색</button>
-        </div>
-        <div className="campaign-wrap">
-          <div className="tab-area">
-            {/* 각 탭 클릭시 handleTabClick 함수 호출 */}
-            <button className='btn-tab active' onClick={() => handleTabClick(0)}>전체</button>
-            <button className='btn-tab' onClick={() => handleTabClick(1)}>개인</button>
-            <button className='btn-tab' onClick={() => handleTabClick(2)}>기업</button>
-            <button className='btn-tab' onClick={() => handleTabClick(3)}>단체</button>
+      <div className="content-w">
+        <div className="inner">
+          <button className="btn-link" onClick={()=>{navigate('/campaign/write')}}>글쓰기</button>
+          <div className="search-wrap">
+            <input type="text" placeholder="검색어를 입력하세요" onChange={(e) => setSearchInput(e.target.value)} />
+            <button className="btn-search" onClick={handleSearchButtonClick}>검색</button>
           </div>
-          <div className="container">
-            {/* 검색 결과에 따라 글목록 나열 */}
-            {postsData(filteredResults).map((data, i) => (
-              <TextList campaignList={data} key={i} />
-            ))}
+          <div className="campaign-wrap">
+            <div className="tab-area">
+              {/* 각 탭 클릭시 handleTabClick 함수 호출 */}
+              <button className='btn-tab active' onClick={() => handleTabClick(0)}>전체</button>
+              <button className='btn-tab' onClick={() => handleTabClick(1)}>개인</button>
+              <button className='btn-tab' onClick={() => handleTabClick(2)}>기업</button>
+              <button className='btn-tab' onClick={() => handleTabClick(3)}>단체</button>
+            </div>
+            <div className="container">
+              {/* 검색 결과에 따라 글목록 나열 */}
+              {postsData(filteredResults).map((data, i) => (
+                <TextList campaignList={data} key={i} />
+              ))}
+            </div>
+            {/* 페이지네이션 컴포넌트 */}
+            <Pagination listLimit={listLimit} page={page} setPage={setPage} totalPosts={totalPostsCount} />
           </div>
-          {/* 페이지네이션 컴포넌트 */}
-          <Pagination listLimit={listLimit} page={page} setPage={setPage} totalPosts={totalPostsCount} />
         </div>
       </div>
       <Footer/>

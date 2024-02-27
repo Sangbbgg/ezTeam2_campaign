@@ -123,8 +123,8 @@ header .utils button + button {margin-left: 10px;}
 
 
 /* 푸터 */
-footer {width: 100%; background: #fff ;padding: 100px 0px;}
-footer .inner {width: 1024px; margin: 0px auto;}
+footer {width: 100%; background: #fff ;padding: 80px 0px; border-top: 1px solid #ddd;}
+footer .inner {margin: 0px auto; width: 1024px;}
 footer .inner .top {width: 100%; border-bottom: 1px solid #000; padding-bottom: 20px;}
 footer .inner .top h1 {float: left;font: 24px/1 'Righteous', cursive; color: #000;}
 footer .logo {z-index: 10; width: 56px; height:60px; background: url("../public/img/logo-blk.png") no-repeat center 2px / cover;}
@@ -181,6 +181,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 
 .main-visual .img-wrap img {display: block; width: auto; height: auto; animation-duration: 3s; animation-name: zoom; animation-fill-mode: forwards;}
 
+
 @keyframes zoom {
   0% {transform: scale(1);}
   100% {transform: scale(1.05);}
@@ -198,10 +199,19 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
   100% {top: 100%;}
 }
 
+.custom-swiper-navigation {position: absolute; top: 300px; width: 100%;}
+.swiper-button-next {right: -60px !important;}
+.swiper-button-prev {left: -60px !important;}
+.swiper-button-prev:after, .swiper-button-next:after {color: #fff;}
+
 .main .campaign {position: relative; padding: 160px 0; background: url("../public/img/bg-main-campaign.jpg") no-repeat center / cover;}
 .main .campaign .txt-area {text-align: center;}
 .main .campaign .sec-tit {font-size: 42px; font-weight: 500; color: #fff;}
 .main .campaign .sec-txt {margin-top: 28px; font-size: 18px; color: #fff;}
+/* .main .campaign .swiper {width: calc(1024px + 200px);}
+.main .campaign .swiper .swiper-wrapper {    padding: 100px;
+  border: 2px solid red;
+  width: 1024px;} */
 .main .campaign .cont-area {display: flex; position: relative; margin-top: 40px;}
 .main .campaign .cont {position: relative; width: 100%; overflow: hidden;}
 /* .main .campaign .cont {width: calc((100%  - 40px) / 3); position: relative; margin-right: 20px; overflow: hidden;} */
@@ -224,8 +234,9 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 
 
 /* ------------------------------- 캠페인 ------------------------------- */
-#wrap {position: relative; padding-top: 80px; overflow-x: hidden;}
+#wrap {position: relative; overflow-x: hidden;}
 .inner {position: relative; margin: 0 auto; width: 1024px;}
+.content-w {position: relative; padding-top: 80px; background-color: #fff;}
 
 .container {display: flex; flex-wrap: wrap;}
 .container .cont {position: relative; margin-right: 20px; width: calc((100%  - 40px) / 3); overflow: hidden;}
@@ -247,7 +258,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 
 /* 글쓰기 */
 .campaign-write {margin: 0 auto; padding: 140px 40px; width: 80%;}
-.campaign-write input {padding: 4px 12px; border: 0; color: #000;background-color: #e1f0de;}
+.campaign-write input {padding: 4px 12px; border: 0; color: #000; background-color: #e1f0de;}
 .campaign-write .title {margin: 0 auto; padding: 4px 12px; width: 100%; border: 0;  color: #000; background-color: #e1f0de;}
 .campaign-write .title::placeholder {color: #777;} 
 .campaign-write .content {margin-top: 20px; width: 100%; min-height: 400px; color: #000;}
@@ -318,7 +329,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .search-wrap {display: flex; justify-content: center; margin: 40px 0 80px;}
 .search-wrap input {margin-bottom: 0; padding: 6px; width: 340px; height: 40px; font-size: 16px; border: 0; border-bottom: 1px solid #000;}
 .search-wrap input::placeholder {font-size: 16px; color: #999;}
-.btn-search {margin-left: 20px; padding: 4px 16px; height: 40px; font-size: 14px; border: 1px solid #000;}
+.btn-search {margin-left: 20px; padding: 4px 16px; height: 40px; font-size: 14px; background-color: #fff; border: 1px solid #000;}
 
 /* 탭 */
 .tab-area {display: flex; justify-content: center; margin-bottom: 40px;}
