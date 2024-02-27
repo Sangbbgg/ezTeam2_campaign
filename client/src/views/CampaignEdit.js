@@ -84,10 +84,7 @@ const CampaignEdit = () => {
       }).open();
     }
     
-    
-    
-
-    document.getElementById('searchButton').addEventListener('click', executeAddressSearch);
+    return executeAddressSearch; // executeAddressSearch 함수를 반환하여 다른 곳에서 호출할 수 있도록 함
   };
 
   const handleChange = (e) => {
@@ -111,6 +108,11 @@ const CampaignEdit = () => {
     }
   };
 
+  const handleSearchButtonClick = () => {
+    const executeSearch = initializeMap(write.latitude, write.longitude);
+    executeSearch();
+  };
+
   const [selOpt, setSelOpt] = useState("오프라인");
 
   const onChangeRadio = (e) => {
@@ -120,14 +122,17 @@ const CampaignEdit = () => {
 
   const renderAddrDiv = () => {
     if(selOpt === "장소없음"){
+      document.querySelector("#map").style.display = "none";
       return null;
+    } else {
+      document.querySelector("#map").style.display = "block";
     }
 
     return (
       <div className='addr-div'>
         <div className="search-w">
           <input className="address-txt" type="text" id="sample5_address" defaultValue={write.address} placeholder="주소를 입력하세요." />
-          <input className="btn-search" type="button" id="searchButton" value="주소 검색" />
+          <input className="btn-search" type="button" id="searchButton" value="주소 검색" onClick={handleSearchButtonClick} />
         </div>
         <input className="addr-detail" type="text" id="" value={write.address_detail} placeholder="상세주소를 입력하세요." onChange={(e) => setWrite((prev) => ({ ...prev, address_detail: e.target.value }))}/>
 
@@ -191,7 +196,7 @@ const CampaignEdit = () => {
                 {/* selOpt이 해당 라디오 버튼의 value와 일치한다면, 해당 버튼에 체크 */}
 
                 {renderAddrDiv()}
-                {console.log(write)}
+                {/* {console.log(write)} */}
               
               <div id="map" style={{ width: '300px', height: '300px', marginTop: '10px'}}></div>
             </div>
