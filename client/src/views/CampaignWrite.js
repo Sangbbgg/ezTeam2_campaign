@@ -202,11 +202,33 @@ const CampaignWrite = () => {
   // console.log(address)
   // console.log(latitude, longitude)
   // @@@@@@@@@@@@@@@@@@@@ 지도 @@@@@@@@@@@@@@@@@@@@
+  let [mainImg,setMainImg] = useState("");
+    const setPreviewImg = (event) => {
+
+        var reader = new FileReader();
+
+        reader.onload = function(event) {
+            setMainImg(event.target.result);
+        };
+
+        reader.readAsDataURL(event.target.files[0]);
+    }
+      
 
   return (
     <div className="campaign-write">
       <Header />
       <h2>캠페인(글쓰기) 페이지입니다.</h2>
+
+    {/* 이미지 업로드 */}
+    <input type="file" id="image" accept="image/*" 
+                style={{border: "solid 1px lightgray", borderRadius: "5px"}}
+                onChange={setPreviewImg}/>
+                
+            {/* 이미지 미리보기 */}
+	        <img alt="메인사진" src={mainImg} style={{maxWidth:"100px"}}></img>
+
+
       <div className="content-wrap">
         <form>
           <div className="body-area">
