@@ -36,6 +36,7 @@ export default class CustomBarChart extends PureComponent {
               position: "top",
               formatter: (value) => `${value}kg`,
             }}
+            radius={[25,25,0,0]}
           />
           <Bar
             yAxisId="right"
@@ -44,8 +45,9 @@ export default class CustomBarChart extends PureComponent {
             fill={`rgba(${parseInt(barChatData[0].color.slice(1, 3), 16)}, ${parseInt(barChatData[0].color.slice(3, 5), 16)}, ${parseInt(barChatData[0].color.slice(5, 7), 16)}, 0.5)`}
             barSize={50}
             label={{ position: "top", formatter: (value) => `${value}kg` }}
+            radius={[25,25,0,0]}
           />
-          <Bar yAxisId="right" dataKey="target" name={<span style={{ color: "black" }}>목표</span>} fill="#F4DD7C" barSize={50} label={{ position: "top", formatter: (value) => `${value}kg` }} />
+          <Bar yAxisId="right" dataKey="target" name={<span style={{ color: "black" }}>목표</span>} fill="#F4DD7C" barSize={50} label={{ position: "top", formatter: (value) => `${value}kg` }} radius={[25,25,0,0]}/>
         </BarChart>
       </ResponsiveContainer>
     );

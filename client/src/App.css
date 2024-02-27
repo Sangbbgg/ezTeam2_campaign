@@ -462,7 +462,18 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .title_box > div {justify-content: flex-start;}
 .title_box > div > div h1 {font-size: 24px;}
 .title_box > div > p {font-size: 13px;}
+
 .forest_green_text {color: #25B058 ; font-weight: 700;}
+.forest_electricity_text {color: #457CE8 ; font-weight: 700;}
+.forest_gas_text {color: #FE842A ; font-weight: 700;}
+.forest_water_text {color: #AC73FF ; font-weight: 700;}
+.forest_transportation_text {color: #FE6A8E ; font-weight: 700;}
+.forest_waste_text {color: #5CD1A6 ; font-weight: 700;}
+.forest_electricity_bg {background-color: RGBA(69, 124, 232 ,0.2) ;}
+.forest_gas_bg {background-color: RGBA(254, 132, 42 ,0.2) ;}
+.forest_water_bg {background-color: RGBA(172, 115, 255 ,0.2) ;}
+.forest_transportation_bg {background-color: RGBA(254, 106, 142 ,0.2) ;}
+.forest_waste_bg {background-color: RGBA(92, 209, 166 ,0.2) ;}
 
 .menu-container {width: 100%; margin: 0 auto; padding: 50px 0 30px 0;}
 .tab-container {background-color:rgba(255, 255, 255, 0.9); border-radius: 20px; margin: 0 100px;}
@@ -477,7 +488,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .weight_600 {font-weight: 600; color: #454c53}
 
 .totalbox{display:grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 10px;}
-.item_title{height: 50px; font-size: 20px; padding: 10px 10px; border-bottom: 1px solid #e1f0de;}
+.item_title{height: 50px; font-size: 20px; padding: 10px 10px; border-bottom: 1px solid #999;}
 .totalbox .box_item_wrap{height: 400px; background-color:rgba(255, 255, 255, 0.9); border: 2px solid #e1f0de; border-radius: 8px; display: flex; flex-direction: column}
 .totalbox .box_item_wrap.active{border: 3px solid #228E0C;}
 .totalbox .box_item_wrap .box_item{padding: 10px 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-around;}
@@ -537,16 +548,23 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .result_box_content .select_category > ul > .select_tap{width: 8%; height: 40px; display: flex; align-items: center; justify-content: center; background-color: #e1f0de; border-radius: 8px;}
 .result_box_content .select_category > ul > .select_tap.active{background-color: #25B058; color:white;}
 
-.select_content {display: grid; grid-template-columns: 1fr 1fr;}
-.select_content .category{grid-column: 1/-1; padding: 20px;}
+.select_content {display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 10px;}
+.select_content .category{grid-column: 1/-1; padding: 20px; border-radius: 8px; margin-bottom: 20px;}
+.select_content .category > .category_title{padding: 0 10px 15px; font-size: 20px;}
 .select_content .category > div{display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; grid-column: 1 / -1; width: 100%;}
-.select_content .category > div > div{padding: 12px; border: 1px solid #999; border-radius: 8px;}
+.select_content .category > div > div{padding: 12px; border: 1px solid #999; border-radius: 8px; background-color: white; display: flex; flex-direction: column; justify-content: center;}
+.select_content .category > div > div > label{display: flex; align-items: center; gap: 10px;}
 
 
-.select_content .target_co2saving{grid-column: 1/2;}
-.select_content .target_category{grid-column: 2/3;}
+.select_content .target_co2saving{grid-column: 1/2; border: 1px solid #aaa; border-radius: 8px;}
+.select_content .target_co2saving > .item_title > h3{font-size: 18px; margin-left: 20px;}
+.select_content .target_category{grid-column: 2/3; border: 1px solid #aaa; border-radius: 8px;}
+.select_content .target_category > .item_title > h3{font-size: 18px; margin-left: 20px}
+.select_content .total_target_co2saving{display: flex; justify-content: space-between; padding: 0 50px 0 25px;}
+.select_content .total_target_co2saving > p{font-weight: 700; font-size: 20px;}
+.select_content .total_target_co2saving > span{color: #0078C3; font-weight: 700; font-size: 20px;}
 
-
+/* 종합평가 */
 
 
 

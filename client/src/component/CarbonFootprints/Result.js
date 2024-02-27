@@ -325,19 +325,14 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
                 <div className="result_conment_right">
                   <h2>결과안내</h2>
                   <p>
-                    <span className="forest_green_text">{userData.username}</span>님의 이산화탄소(CO₂) 발생량
-                    통계입니다.
+                    <span className="forest_green_text">{userData.username}</span>님의 이산화탄소(CO₂) 발생량 통계입니다.
                   </p>
                 </div>
                 <p>
-                  <span className="forest_green_text">{userData.username}</span>님의 가정은 이산화탄소 배출량은 총{" "}
-                  {resultData.total}kg 이며,
+                  <span className="forest_green_text">{userData.username}</span>님의 가정은 이산화탄소 배출량은 총 {resultData.total}kg 이며,
                   <br /> 비슷한 다른 가정 평균 <span className="forest_green_text">{averageData.total}kg</span> 보다 약{" "}
-                  <span className="forest_green_text">
-                    {((resultData.total / averageData.total) * 100 - 100).toFixed(1)}%
-                  </span>{" "}
-                  더 많이 배출하고 있습니다. 아래의 그래프를 보고 어느 부분에서 이산화탄소를 많이 발생하고 있는지 비교해
-                  보세요.
+                  <span className="forest_green_text">{((resultData.total / averageData.total) * 100 - 100).toFixed(1)}%</span> 더 많이 배출하고 있습니다. 아래의 그래프를 보고 어느 부분에서
+                  이산화탄소를 많이 발생하고 있는지 비교해 보세요.
                 </p>
               </div>
             </div>
@@ -363,13 +358,9 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
               <div>
                 <div className="select_category">
                   <ul>
-                    {Object.keys(labels).map((key) => (
-                      <li
-                        key={key}
-                        className={`select_tap ${selectTap === key ? "active" : ""} `}
-                        onClick={() => handleSubTapClick(key)}
-                      >
-                        {labels[key]}
+                    {Object.keys(labels).map((key,idx) => (
+                      <li key={key} className={`select_tap ${selectTap === key ? "active" : ""} `} onClick={() => handleSubTapClick(key)}>
+                        {labels[key]}{console.log("???",Object.keys(labels))}
                       </li>
                     ))}
                   </ul>
@@ -378,9 +369,10 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
                   (label) =>
                     selectTargetTap === label && (
                       <div key={label} className="select_content">
-                        <div className="category">
-                          {" "}
-                          <span>{labels[label]}</span>
+                        <div className={`category forest_${label}_bg`}>
+                          <div className={`category_title forest_${label}_text`}>
+                            <span>{labels[label]}</span>
+                          </div>
                           <div>
                             {initialData
                               .filter((item) => item.name === label)
@@ -396,10 +388,7 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
                                       checked={!!checkedItems[`${filteredItem.name}-${index}`]}
                                       // onChange 작성 부분
                                       onChange={handleCheckboxChange}
-                                      disabled={
-                                        hasResultData ||
-                                        (filteredItem.name === "transportation" && isTransportationOption)
-                                      }
+                                      disabled={hasResultData || (filteredItem.name === "transportation" && isTransportationOption)}
                                     />
                                     <span>{filteredItem.advice_text}</span>
                                   </label>
@@ -408,28 +397,34 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
                           </div>
                         </div>
                         <div className="target_co2saving">
-                          <h3>월간 CO₂ 저감목표</h3>
-                          <div className="barChart" style={{ width: "70%", height: "300px" }}>
+                          <div className="item_title">
+                            <h3>월간 CO₂ 저감목표</h3>
+                          </div>
+                          <div className="barChart" style={{ width: "100%", height: "280px" }}>
                             <div style={{ width: "100%", height: "270px" }}>
                               <TargetBarchartTotal barChartDataTotal={barChartDataTotal} />
                             </div>
-                            <div>
-                              <span>총 합계 </span>
-                              <span>{categorySavings.total}kg</span>
-                            </div>
                           </div>
                         </div>
+
                         <div className="target_category">
-                          <h3>부분별 실천목표</h3>
+                          <div className="item_title">
+                            <h3>부분별 실천목표</h3>
+                          </div>
                           {barChatData
                             .filter((item) => item.name === labels[label])
                             .map((filterBarchartItem, index) => (
-                              <div key={index} className="barChart" style={{ width: "70%", height: "300px" }}>
+                              <div key={index} className="barChart" style={{ width: "100%", height: "280px" }}>
                                 <TargetBarchart barChatData={[filterBarchartItem]} />
                                 {console.log(filterBarchartItem)}
                               </div>
                             ))}
                         </div>
+
+                        <div className="total_target_co2saving">
+                            <p>총 합계 </p>
+                            <span>{categorySavings.total}kg</span>
+                          </div>
                       </div>
                     )
                 )}
