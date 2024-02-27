@@ -4,7 +4,6 @@ import Header from "../component/Header";
 import axios from "axios";
 import WriteEditor from "../component/campaign/WriteEditor";
 import DatePicker from "react-datepicker";
-import DaumPostcode from "react-daum-postcode";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -12,7 +11,6 @@ const CampaignWrite = () => {
   // 상호형 작성
   const storedUserData = sessionStorage.getItem("userData");
   const userData = JSON.parse(storedUserData);
-  console.log("유저아이디:", userData.userid);
 
   const navigate = useNavigate();
   const [startDate, setStartDate] = useState(new Date("2024/01/01"));
@@ -39,27 +37,10 @@ const CampaignWrite = () => {
     return (
       <div className="addr-div">
         <div className="search-w">
-          <input
-            className="address-txt"
-            type="text"
-            id="sample5_address"
-            placeholder="주소를 입력하세요."
-          />
-          <input
-            className="btn-search"
-            type="button"
-            id="searchButton"
-            value="주소 검색"
-          />
+          <input className="address-txt" type="text" id="sample5_address" placeholder="주소를 입력하세요."/>
+          <input className="btn-search" type="button" id="searchButton" value="주소 검색"/>
         </div>
-        <input
-          className="addr-detail"
-          value={addressDetail}
-          onChange={(e) => setAddressDetail(e.target.value)}
-          type="text"
-          id=""
-          placeholder="상세주소를 입력하세요."
-        />
+        <input className="addr-detail" value={addressDetail} onChange={(e) => setAddressDetail(e.target.value)} type="text" id="" placeholder="상세주소를 입력하세요."/>
       </div>
     );
   };
@@ -144,7 +125,7 @@ const CampaignWrite = () => {
       center: new window.daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
       level: 3, // 지도의 확대 레벨
     };
-
+  
     //지도를 미리 생성
     const map = new window.daum.maps.Map(mapContainer, mapOption);
     //주소-좌표 변환 객체를 생성
@@ -154,15 +135,16 @@ const CampaignWrite = () => {
       position: new window.daum.maps.LatLng(37.537187, 127.005476),
       map: map,
     });
-
+  
     function sample5_execDaumPostcode() {
+      console.log("!!!!!!!!!!!!!!!");
       new window.daum.Postcode({
         oncomplete: function (data) {
           const addr = data.address; // 최종 주소 변수
-
+  
           // 주소 정보를 해당 필드에 넣는다.
           document.getElementById("sample5_address").value = addr;
-
+  
           // 주소로 상세 정보를 검색
           geocoder.addressSearch(data.address, function (results, status) {
             // 정상적으로 검색이 완료됐으면
@@ -177,69 +159,58 @@ const CampaignWrite = () => {
               map.setCenter(coords);
               marker.setPosition(coords);
               console.log(data);
-
+  
               setAddress(addr);
               setLatitude(coords.Ma);
               setLongitude(coords.La);
-
+  
               // Ma 위도 La경도
             }
           });
         },
       }).open();
     }
-
-    document
-      .getElementById("searchButton")
-      .addEventListener("click", sample5_execDaumPostcode);
-
+  
+    // Add event listener to the search button
+    const searchButton = document.getElementById("searchButton");
+    if (searchButton) {
+      searchButton.addEventListener("click", sample5_execDaumPostcode);
+    }
+  
     // Cleanup event listener on unmount
-    // return () => {
-    //   document.getElementById('searchButton').removeEventListener('click', sample5_execDaumPostcode);
-    // };
-  }, []);
+    return () => {
+      if (searchButton) {
+        searchButton.removeEventListener("click", sample5_execDaumPostcode);
+      }
+    };
+  }, [selOpt]); // Add selOpt as a dependency
+  
 
-  // console.log(address)
-  // console.log(latitude, longitude)
-  // @@@@@@@@@@@@@@@@@@@@ 지도 @@@@@@@@@@@@@@@@@@@@
   let [mainImg,setMainImg] = useState("");
     const setPreviewImg = (event) => {
+      var reader = new FileReader();
 
-        var reader = new FileReader();
+      reader.onload = function(event) {
+        setMainImg(event.target.result);
+      };
 
-        reader.onload = function(event) {
-            setMainImg(event.target.result);
-        };
-
-        reader.readAsDataURL(event.target.files[0]);
+      reader.readAsDataURL(event.target.files[0]);
     }
       
 
   return (
     <div className="campaign-write">
       <Header />
-      <h2>캠페인(글쓰기) 페이지입니다.</h2>
-
-    {/* 이미지 업로드 */}
-    <input type="file" id="image" accept="image/*" 
-                style={{border: "solid 1px lightgray", borderRadius: "5px"}}
-                onChange={setPreviewImg}/>
-                
-            {/* 이미지 미리보기 */}
-	        <img alt="메인사진" src={mainImg} style={{maxWidth:"100px"}}></img>
-
+      {/* 이미지 업로드 */}
+      <input type="file" id="image" accept="image/*" style={{border: "solid 1px lightgray", borderRadius: "5px"}} onChange={setPreviewImg}/>
+            
+      {/* 이미지 미리보기 */}
+      <img alt="메인사진" src={mainImg} style={{maxWidth:"100px"}}></img>
 
       <div className="content-wrap">
         <form>
           <div className="body-area">
-            <input
-              className="title"
-              type="text"
-              name="title"
-              value={write.title}
-              placeholder="제목을 입력하세요"
-              onChange={handleChange}
-            />
+            <input className="title" type="text" name="title" value={write.title}placeholder="제목을 입력하세요" onChange={handleChange}/>
 
             <div className="calendar-area">
               <p className="cal-tit">진행기간</p>
@@ -273,25 +244,12 @@ const CampaignWrite = () => {
               {/* 주소 라디오 버튼 */}
               <div className="form-group">
                 <div className="form-radio">
-                  <input
-                    type="radio"
-                    id="offline"
-                    name="addr-radio"
-                    value="오프라인"
-                    checked={selOpt === "오프라인"}
-                    onChange={onChangeRadio}
+                  <input type="radio" id="offline" name="addr-radio" value="오프라인" checked={selOpt === "오프라인"} onChange={onChangeRadio}
                   />
                   <label htmlFor="offline">오프라인</label>
                 </div>
                 <div className="form-radio">
-                  <input
-                    type="radio"
-                    id="noaddress"
-                    name="addr-radio"
-                    value="장소없음"
-                    checked={selOpt === "장소없음"}
-                    onChange={onChangeRadio}
-                  />
+                  <input type="radio" id="noaddress" name="addr-radio" value="장소없음" checked={selOpt === "장소없음"} onChange={onChangeRadio}/>
                   <label htmlFor="noaddress">장소없음</label>
                 </div>
               </div>
@@ -299,22 +257,12 @@ const CampaignWrite = () => {
 
               {renderAddrDiv()}
 
-              <div
-                id="map"
-                style={{
-                  width: "300px",
-                  height: "300px",
-                  marginTop: "10px",
-                  display: "none",
-                }}
+              <div id="map" style={{width: "300px", height: "300px", marginTop: "10px", display: "none",}}
               ></div>
             </div>
             {/* // @@@@@@@@@@@@@@@@@@@@ 지도 @@@@@@@@@@@@@@@@@@@@  */}
 
-            <WriteEditor
-              handleChangeQuill={handleChangeQuill}
-              value={write.body}
-            />
+            <WriteEditor handleChangeQuill={handleChangeQuill} value={write.body}/>
 
             <input
               className="author-id"
@@ -331,15 +279,7 @@ const CampaignWrite = () => {
             <br></br>
           </div>
         </form>
-        <button
-          type="text"
-          className="btn-tolist pos-right"
-          onClick={() => {
-            navigate(-1);
-          }}
-        >
-          목록
-        </button>
+        <button type="text" className="btn-tolist pos-right" onClick={() => {navigate(-1);}}>목록</button>
       </div>
     </div>
   );
