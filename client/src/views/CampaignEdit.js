@@ -53,7 +53,7 @@ const CampaignEdit = () => {
       map: map,
     });
 
-    function sample5_execDaumPostcode() {
+    function executeAddressSearch() {
       new window.daum.Postcode({
         oncomplete: function (data) {
           const addr = data.address; // 최종 주소 변수
@@ -87,7 +87,7 @@ const CampaignEdit = () => {
     
     
 
-    document.getElementById('searchButton').addEventListener('click', sample5_execDaumPostcode);
+    document.getElementById('searchButton').addEventListener('click', executeAddressSearch);
   };
 
   const handleChange = (e) => {
