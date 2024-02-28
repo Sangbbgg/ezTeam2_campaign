@@ -40,7 +40,6 @@ const Main = () => {
 
     gsap.to(".main-visual .txt", { duration: 1, y: 0, opacity: 1, delay: 0.4, ease: "power2.out" });
     gsap.to(".main-visual .sub-txt", { duration: 1, y: 0, opacity: 1, delay: 0.5, ease: "power2.out" });
-    gsap.to(".main-visual .btn_more", { duration: 1, y: 0, opacity: 1, delay: 0.7, ease: "power2.out" });
   });
 
   // 데이터 불러옴
