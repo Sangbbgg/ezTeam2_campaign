@@ -15,6 +15,10 @@ const CampaignDetail = (props) => {
   const dispatch = useDispatch();
   const [campaignList, setCampaignList] = useState([]); // 글 리스트
 
+  const storedUserData = sessionStorage.getItem("userData");
+  const userData = JSON.parse(storedUserData);
+  console.log(userData.userid)
+
   const { kakao } = window;
 
   useEffect(() => {
@@ -33,6 +37,7 @@ const CampaignDetail = (props) => {
   
     fetchData();
   }, [id, dispatch]);
+
   
   // useEffect(() => {
   //   const getData = async () => {
@@ -67,6 +72,29 @@ const CampaignDetail = (props) => {
   let curList = campaignList.find(function(data){
     return data.id === parseInt(id);
   });
+
+  // console.log()
+
+  const renderModifyBtn = () => {
+    if (userData.userid === curList?.userid) {
+      return (
+        <div className="bottom-area">
+          <div className="btn-w">
+            <button className="btn-tolist" onClick={()=>{navigate(-1);}}>목록</button>
+            <button className="btn-edit" onClick={()=>{navigate(`/campaign/edit/${curList?.id}`);}}>수정</button>
+            <button className="btn-delete" onClick={handleDelete}>삭제</button>
+          </div>
+        </div>
+      )
+    }
+    return (
+      <div className="bottom-area">
+        <div className="btn-w">
+          <button className="btn-tolist" onClick={()=>{navigate(-1);}}>목록</button>
+        </div>
+      </div>
+    )
+  };
 
   // 글 삭제 버튼
   const handleDelete = async () => {
@@ -167,17 +195,14 @@ const CampaignDetail = (props) => {
           }
 
           {/* 하단 버튼 영역 */}
-          <div className="bottom-area">
+          {renderModifyBtn()}
+          {/* <div className="bottom-area">
             <div className="btn-w">
               <button className="btn-tolist" onClick={()=>{navigate(-1);}}>목록</button>
               <button className="btn-edit" onClick={()=>{navigate(`/campaign/edit/${curList?.id}`);}}>수정</button>
               <button className="btn-delete" onClick={handleDelete}>삭제</button>
             </div>
-            {/* <div className="btn-w">
-              <button className="btn-edit" onClick={()=>{navigate(`/campaign/edit/${curList?.id}`);}}>수정</button>
-              <button className="btn-delete" onClick={handleDelete}>삭제</button>
-            </div> */}
-          </div>
+          </div> */}
 
 
         </div>

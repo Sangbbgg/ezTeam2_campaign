@@ -144,6 +144,7 @@ const Comments = ({ curList }) => {
   return (
     <div className="comment-area">
       <div className="inner">
+        <p className="comment-tit">함께 할 사람들의 이야기</p>
         <div className="write-wrap">
           <div className="write-div">
             <div className="for-padding">
