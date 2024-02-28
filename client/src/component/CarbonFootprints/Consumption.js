@@ -192,7 +192,7 @@ function Consumption({ inputData, initialData, onResultSubmit }) {
                             checked={inputValue.radioOption === `${idx}`}
                             onChange={handleTransportChange}
                           />
-                          <label for={`radioOption${option.id}`}>{option.sublabel}</label>
+                          <label htmlFor={`radioOption${option.id}`}>{option.sublabel}</label>
                         </div>
                       ))}
                       {/* 교통 부분 추가 라디오 버튼 */}
@@ -206,7 +206,7 @@ function Consumption({ inputData, initialData, onResultSubmit }) {
                             checked={inputValue.radioOption === transportationOptions.length.toString()}
                             onChange={handleTransportChange}
                           />
-                          <label for="radioOption8">차량 없음</label>
+                          <label htmlFor="radioOption8">차량 없음</label>
                         </div>
                       )}
                     </div>

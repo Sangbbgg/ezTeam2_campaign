@@ -28,11 +28,17 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
 
   const hasResultData = resultData && resultData.calculation_month;
 
+  //이미지 저장시 표시내용 변경
+  const [isProcessing, setIsProcessing]=useState("");
+  const [isImgProcessing, setIsImgProcessing]=useState("none");
+
   // Ref를 생성하여 캡처하고자 하는 요소에 할당
   const captureRef = useRef(null);
 
   // 캡처 및 이미지 저장 함수
   const saveAsImage = () => {
+    setIsProcessing("none");
+    setIsImgProcessing("");
     if (captureRef.current) {
       html2canvas(captureRef.current).then((canvas) => {
         // 캔버스를 이미지로 변환
@@ -43,6 +49,12 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
         link.download = "result.png";
         link.href = image;
         link.click();
+
+        setIsProcessing("");
+        setIsImgProcessing("none");
+      }).catch(()=>{
+        setIsProcessing("");
+        setIsImgProcessing("none");
       });
     }
   };
@@ -50,11 +62,11 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
   // console.log("??", hasResultData);
   // console.log("유저 결과 :", userData);
   // console.log("추천 실천과제 :", initialData);
-  console.log("resultData :", resultData);
+  // console.log("resultData :", resultData);
   // console.log("targetEmissions :", targetEmissions.transportation);
   // console.log("교통 라디오 옵션(차량없음) :", isTransportationOption);
   // console.log("barChatData :", barChatData);
-  console.log("barChatDataTotal :", categorySavings);
+  // console.log("barChatDataTotal :", categorySavings);
   // const userId = 104716;
 
   // resultData.total(유저) / categorySavings.total(목표) / averageData.total(평균) 데이터셋 작성 -> targetBarChart작성
@@ -282,6 +294,28 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
   }
 
   // console.log("barChatData", barChatData);
+
+  // 평균보다 입력데이터가 높은 항목의 개수를 계산하는 함수
+  function countHigherItems(resultData, averageData) {
+    // 키 값들을 배열로 변환
+    const keys = Object.keys(resultData).filter((key) => key !== "total");
+
+    // reduce 함수를 사용하여 조건을 만족하는 항목의 개수를 카운트
+    const count = keys.reduce((acc, key) => {
+      // 두 데이터의 해당 키 값에 대한 값 비교
+      if (parseFloat(resultData[key]) > parseFloat(averageData[key])) {
+        // 조건을 만족하면 카운트 증가
+        return acc + 1;
+      } else {
+        return acc;
+      }
+    }, 0); // 초기값은 0
+
+    return count;
+  }
+
+  const higherItemCount = countHigherItems(resultData, averageData);
+
   return (
     <>
       <div ref={captureRef}>
@@ -332,8 +366,10 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
               <h2>
                 우리집 실천목표! <span className="forest_green_text">생활 속에서 실천가능한 목표</span>를 선택해주세요.
               </h2>
+
               <div>
-                <div className="select_category">
+                <div className="select_category" style={{ display: toString(isProcessing) }}>
+                  {console.log("isProcessing",isProcessing)}
                   <ul>
                     {Object.keys(labels).map((key) => (
                       <li key={key} className={`select_tap ${selectTap === key ? "active" : ""} `} onClick={() => handleSubTapClick(key)}>
@@ -355,7 +391,7 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
                               .filter((item) => item.name === label)
                               .map((filteredItem, index) => (
                                 <div key={index}>
-                                  <label for={`${filteredItem.name}-${index}`}>
+                                  <label htmlFor ={`${filteredItem.name}-${index}`}>
                                     <input
                                       type="checkbox"
                                       id={`${label}-${index}`}
@@ -367,8 +403,17 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
                                       onChange={handleCheckboxChange}
                                       disabled={hasResultData || (filteredItem.name === "transportation" && isTransportationOption)}
                                     />
-                                    <span>{filteredItem.advice_text}</span>
+                                    <span className={!!checkedItems[`${filteredItem.name}-${index}`] ? `forest_${label}_text` : ""}>{filteredItem.advice_text}</span>
                                   </label>
+                                  {/* ------------------ 사진 저장시만 표시될 항목*/}
+                                  {/* {!!checkedItems[`${filteredItem.name}-${index}`]? (
+                                    <div style={{borderTop: "1px solid #999", marginTop: "10px"}}>
+                                      <span style={{paddingLeft: "15px", color:"red"}}>월간 {checkedItems[`${filteredItem.name}-${index}`]} kg 저감</span>
+                                    </div>
+                                  ) : (
+                                    ""
+                                  )} */}
+                                  {/* ------------------- */}
                                 </div>
                               ))}
                           </div>
@@ -383,8 +428,7 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
                             </div>
                           </div>
                         </div>
-
-                        <div className="target_category">
+                        <div className={"target_category"}>
                           <div className="item_title">
                             <h3>부분별 실천목표</h3>
                           </div>
@@ -422,12 +466,14 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
                 <ul>
                   <li>
                     <p>
-                      우리집의 이산화탄소 배출량은 총 <span className="forest_green_text">{resultData.total} kg</span>이며, 비슷한 규모의 다른 가정보다 약{" "}
-                      <span className="forest_green_text">{(100 - (averageData.total / resultData.total) * 100).toFixed(1)}% 더많이 배출</span>하고 있습니다.
+                      우리집의 이산화탄소 배출량은 총 <span className="forest_green_text">{resultData.total} kg</span>이며, 다른 가정보다 약{" "}
+                      <span className="forest_green_text">{((resultData.total / averageData.total) * 100 - 100).toFixed(1)}% 더많이 배출</span>하고 있습니다.
                     </p>
                   </li>
                   <li>
-                    <p>부문별로 보면 전기,가스,수도,교통,폐기물의 5개 부문 중 {}부문에서 다른 가정보다 이산화탄소 배출이 많습니다. </p>
+                    <p>
+                      부문별로 보면 전기,가스,수도,교통,폐기물의 5개 부문 중 <span className="forest_green_text">{higherItemCount}개 부문</span>에서 다른 가정보다 이산화탄소 배출이 많습니다.{" "}
+                    </p>
                     {/* 많은 배출이 없다면 "적습니다."조건문 적용 */}
                   </li>
                 </ul>
@@ -461,7 +507,8 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
               <div className="result_box_content_item">
                 <div>
                   <p>
-                    {userData.username}님 가정에서 이산화탄소 배출을 줄이는 실천을 하시면 약 {}의 이산화탄소를 줄일 수 있습니다.
+                    <span className="forest_green_text">{userData.username}</span>님 가정에서 이산화탄소 배출을 줄이는 실천을 하시면 약{" "}
+                    <span className="forest_green_text">{categorySavings.total} kg</span>의 이산화탄소를 줄일 수 있습니다.
                   </p>
                   <div className="handle_box">
                     {!hasResultData && (
