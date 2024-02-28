@@ -72,6 +72,7 @@ const CampaignDetail = (props) => {
     return data.id === parseInt(id);
   });
 
+
   // console.log()
 
   const renderModifyBtn = () => {
@@ -205,7 +206,7 @@ const CampaignDetail = (props) => {
                 <p className="sub-txt">&#8251; 문의사항은 메일 / 전화 / 댓글을 이용해주세요</p>
               </div>
             </div>
-            <button className="btn-apply" onClick={()=>{navigate('/campaign/form')}}>신청하기</button>
+            <button className="btn-apply" onClick={()=>{navigate(`/campaign/form/${curList?.id}`)}}>신청하기</button>
           </div>
 
           {/* 본문 내용 */}

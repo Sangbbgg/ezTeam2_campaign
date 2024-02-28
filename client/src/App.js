@@ -30,7 +30,7 @@ function App() {
         <Route path="/campaign/write" element={<CampaignWrite />}></Route>
         <Route path="/campaign/edit/:id" element={<CampaignEdit />}></Route>
         <Route path="/campaign/detail/:id" element={<CampaignDetail />}></Route>
-        <Route path="/campaign/form" element={<CampaignForm />}></Route>
+        <Route path="/campaign/form/:id" element={<CampaignForm />}></Route>
         {/* 상호형 */}
         <Route exact path="/carbonFootprint" element={<CarbonFootprint />} />
         {/* 김민호 */}

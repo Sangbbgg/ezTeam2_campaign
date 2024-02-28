@@ -235,6 +235,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .content-w {position: relative; padding-top: 80px; padding-bottom: 200px; background-color: #fff;}
 #wrap.campaign footer {background: #e1f0de;}
 #wrap.campaign-write footer {background: #e1f0de;}
+#wrap.application-form footer {background: #e1f0de;}
 
 .tit-wrap {position: relative; margin-bottom: 80px;}
 .tit-wrap .tit {font-size: 34px; font-weight: 700; color: #25B058;}

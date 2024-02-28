@@ -14,6 +14,10 @@ const CampaignForm = () => {
   
   const storedUserData = sessionStorage.getItem("userData");
   const userData = JSON.parse(storedUserData);
+  console.log(userData)
+
+  // console.log(campaignList)
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,6 +33,8 @@ const CampaignForm = () => {
   
     fetchData();
   }, [id, dispatch]);
+
+  
 
   return (
     <div id="wrap" className="application-form">
@@ -47,11 +53,11 @@ const CampaignForm = () => {
             <tr>
               <th className="user-name" scope="row">이름</th>
               <td className="user-name">
-                <span className="value_txt">김지수</span>
+                <span className="value_txt">{userData.username}</span>
               </td>
               <th className="user-email" scope="row">이메일</th>
               <td className="user-email">
-                <span className="value_txt">jisoooo17@naver.com</span>
+                <span className="value_txt">{userData.email}</span>
               </td>
             </tr>
 
