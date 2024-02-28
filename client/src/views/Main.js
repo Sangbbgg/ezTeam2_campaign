@@ -164,7 +164,7 @@ window.addEventListener("scroll", function() {
       <div className="inner">
           <div className="txt-area">
             <p className="sec-tit">탄소발자국</p>
-            <p className="sec-txt">우리는 탄소중립 난제를 해결하고 녹색성장을 이끌기 위해 모였습니다.</p>
+            <p className="sec-txt">내가 생활 속에서 배출하는 이산화탄소의 양은 얼마일까요?</p>
           </div>
 
           <div className="cont-area">

@@ -82,6 +82,9 @@ const Header = () => {
                 {/* <a className="one-link" href=""><button className="one-link" onClick={()=>{navigate('/carbonFootprint')}}>탄소발자국</button></a> */}
                 <a className="one-link" href=""><button className="one-link" onClick={()=>navigateWithLoginCheck('/carbonFootprint')}>탄소발자국</button></a>
               </li>
+              <li>
+                <a className="one-link" href=""><button className="one-link" onClick={()=>navigateWithLoginCheck('/mypage')}>MyPage</button></a>
+              </li>
             </ul>
           </div>
 

@@ -20,6 +20,8 @@ import Find from "./component/Logins/Find";
 
 import CarbonFootprint from "./views/CarbonFootprint";
 
+import MyPage from "./views/Mypage";
+
 function App() {
   return (
     <div className="App">
@@ -33,6 +35,7 @@ function App() {
         <Route path="/campaign/form/:id" element={<CampaignForm />}></Route>
         {/* 상호형 */}
         <Route exact path="/carbonFootprint" element={<CarbonFootprint />} />
+        <Route exact path="/mypage" element={<MyPage />} />
         {/* 김민호 */}
         <Route path="/Login" element={<LoginPage />}></Route>
         <Route path="/Modify" element={<Modify />}></Route>

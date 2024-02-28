@@ -167,7 +167,8 @@ function CarbonFootprint() {
     });
 
     if (captureRef.current) {
-      setTimeout(() => {  // result의 엘리먼트 dispay 적용이 되지 않아 1초의 유휴시간 부여
+      setTimeout(() => {
+        // result의 엘리먼트 dispay 적용이 되지 않아 1초의 유휴시간 부여
         html2canvas(captureRef.current, {
           onclone: (canvas) => {
             // html2canvas로 캡처 후 요소를 다시 표시
@@ -191,18 +192,17 @@ function CarbonFootprint() {
   };
 
   return (
-    <div id="wrap" ref={captureRef}>
-      <div className="title_box">
-        <div>
-          <h1 className="forest_green_text">탄소발자국 계산기</h1>
-          <p>내가 생활 속에서 배출하는 이산화탄소의 양은 얼마일까요?</p>
-        </div>
+    <div id="wrap" >
+      <div className="hidden_for_capture">
+        <Header />
       </div>
-      <div className="tanso_bg">
-        <div className="hidden_for_capture">
-          <Header />
-        </div>
+      <div className="content-w tanso_bg" ref={captureRef}>
+        <div className="carbon_wrap"></div>
         <div className="inner">
+          <div className="tit-wrap">
+            <div className="tit">탄소발자국 계산기</div>
+            <div className="txt">내가 생활 속에서 배출하는 이산화탄소의 양은 얼마일까요?</div>
+          </div>
           <div className="menu-container">
             <div className="tab-container">
               <ul className="tab-menu">
@@ -222,8 +222,8 @@ function CarbonFootprint() {
           </div>
           <div className="content-container">{renderContent()}</div>
         </div>
-        <Footer />
       </div>
+      <Footer />
     </div>
   );
 }

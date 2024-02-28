@@ -3,10 +3,8 @@ import PiChart from "./Result/piChartData";
 import BarChart from "./Result/barChart";
 import TargetBarchart from "./Result/targetBarchart";
 import TargetBarchartTotal from "./Result/targetBarchartTotal";
-import ComprehensiveChart from "./Result/comprehensiveChart";
 
 import { useNavigate } from "react-router-dom";
-import html2canvas from "html2canvas";
 
 function Result({ initialData, resultData, userData, isTransportationOption, onSaveImage }) {
   const navigate = useNavigate();
@@ -25,6 +23,7 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
     waste: 0,
     total: 0,
   });
+  const [currentMonth, setCurrentMonth] = useState(null);
 
   const hasResultData = resultData && resultData.calculation_month;
 
@@ -102,6 +101,11 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
       const data = convertToChartData(resultData, averageData, labels, colors, targetEmissions);
       setBarChatData(data);
     }
+
+    // 현재 월 가져오기
+    const date = new Date();
+    const month = date.getMonth() + 1; // getMonth()는 0부터 시작하므로 1을 더해줍니다.
+    setCurrentMonth(month);
   }, [resultData, targetEmissions]);
 
   useEffect(() => {
@@ -215,6 +219,13 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
       console.error("Error saving data: " + error.message);
       alert("데이터 저장에 실패했습니다.");
     }
+
+    // 부드럽게 페이지 상단으로 스크롤
+    window.scrollTo({
+      top: 0, // Y 좌표
+      left: 0, // X 좌표
+      behavior: "smooth", // 부드러운 스크롤 효과
+    });
   };
 
   //목표 분류템 선택
@@ -303,7 +314,7 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
               <PiChart data={data} />
               <div className="pi_chart_wrap_right">
                 <div className="result_conment_right">
-                  <h2>결과안내</h2>
+                  <h2><span className="forest_green_text">{currentMonth}월</span> 결과안내</h2>
                   <p>
                     <span className="forest_green_text">{userData.username}</span>님의 이산화탄소(CO₂) 발생량
                     통계입니다.
@@ -517,7 +528,7 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
 
             <div className="result_total">
               <div className="result_total_left">
-                <h3>이산화탄소 배출현황 및 목표</h3>
+                <h3><span className="forest_green_text">{currentMonth}월</span><br/>이산화탄소 배출현황 및 목표</h3>
                 <ul>
                   <li>
                     <p>

@@ -522,14 +522,13 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 
 .menu-container {width: 100%; margin: 0 auto; padding: 50px 0 30px 0;}
 .tab-container {background-color:rgba(255, 255, 255, 0.9); border-radius: 20px; margin: 0 100px;}
-.menu-container .tab-menu{display: flex; padding: 5px; justify-content:space-evenly; margin: 0;}
-.menu-container .tab-menu .tab-item{width: 30%; height: 35px; padding-top: 7px; text-align: center; border-radius: 20px; background-color: white;}
-.menu-container .tab-menu .tab-item.tab-item.active{background-color:#25B058; color: white;}
+.menu-container .tab-menu{display: flex; padding: 5px; justify-content:space-between; margin: 0;}
+.menu-container .tab-menu .tab-item{flex: 1; height: 35px; line-height: 35px; text-align: center; border-radius: 20px; background-color: white; font-size: 20px;}
+.menu-container .tab-menu .tab-item.active{background-color:#25B058; color: white;}
 
-.tanso_bg{
-  /* background-image: url('../public/img/—Pngtree—an\ wooden\ boardwalk\ leads\ through_13298664.jpg'); */
-  background-color: #E4F1E1;
-  opacity: 0.9; background-size: cover; background-attachment: fixed;}
+.tanso_bg{background-image: url('../public/img/carbon_content_bg.png'); background-size: cover; background-position: center;}
+.carbon_wrap{width: 100vw; height: 20vh; position: absolute; top: 0; background-color: white;}/* 수정필요 */
+
 /* 계산하기 */
 .top_box{margin-bottom: 10px;}
 .top_box .title_info{padding: 10px; background-color:rgba(255, 255, 255, 0.9); border: 2px solid #e1f0de; border-radius: 8px; font-size: 18px;}
@@ -624,7 +623,7 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 .result_bottom_box .result_box_content_item > div > .handle_box .save_button > button{border-radius: 8px; height: 70px; flex: 1; background-color: white;}
 
 .result_total{display: flex; justify-content: space-around; height: 300px; border-radius: 8px; background-color: #f3f3f3; padding: 12px;}
-.result_total .result_total_left{flex: 6; display: flex; flex-direction: column; justify-content: space-evenly;}
+.result_total .result_total_left{flex: 6; display: flex; flex-direction: column; justify-content: space-evenly; padding-left: 20px;}
 .result_total .barChart{flex: 4;}
 .result_total .result_total_left > h3{font-size: 38px;}
 .result_total .result_total_left > ul{padding-left: 20px;}
