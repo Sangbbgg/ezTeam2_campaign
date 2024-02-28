@@ -69,6 +69,14 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
     total: 344.4,
   };
 
+  const resultTotalData = {
+    name: "total",
+    user: resultData.total,
+    average: averageData.total,
+    target: parseFloat(resultData.total - categorySavings.total).toFixed(1),
+    color: "#25B058",
+  };
+
   const labels = {
     electricity: "전기",
     gas: "가스",
@@ -411,13 +419,22 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
             <div className="result_total">
               <div className="result_total_left">
                 <h3>이산화탄소 배출현황 및 목표</h3>
-                <p>
-                  우리집의 이산화탄소 배출량은 총 {}이며, 비슷한 규모의 다른 가정보다 약 {}더많이 배출하고 있습니다.
-                </p>
-                <p>부문별로 보면 전기,가스,수도,교통,폐기물의 5개 부문 중 {}부문에서 다른 가정보다 이산화탄소 배출이 많습니다. </p>
-                {/* 많은 배출이 없다면 "적습니다."조건문 적용 */}
+                <ul>
+                  <li>
+                    <p>
+                      우리집의 이산화탄소 배출량은 총 <span className="forest_green_text">{resultData.total} kg</span>이며, 비슷한 규모의 다른 가정보다 약{" "}
+                      <span className="forest_green_text">{(100 - (averageData.total / resultData.total) * 100).toFixed(1)}% 더많이 배출</span>하고 있습니다.
+                    </p>
+                  </li>
+                  <li>
+                    <p>부문별로 보면 전기,가스,수도,교통,폐기물의 5개 부문 중 {}부문에서 다른 가정보다 이산화탄소 배출이 많습니다. </p>
+                    {/* 많은 배출이 없다면 "적습니다."조건문 적용 */}
+                  </li>
+                </ul>
               </div>
-              <div>total_chart구역</div>
+              <div className="barChart" style={{ width: "100%", height: "280px" }}>
+                <TargetBarchart barChatData={[resultTotalData]} />
+              </div>
             </div>
           </div>
 
