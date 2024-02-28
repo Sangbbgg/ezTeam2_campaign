@@ -535,7 +535,8 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 .weight_600 {font-weight: 600; color: #454c53}
 
 .totalbox{display:grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 10px;}
-.item_title{height: 50px; font-size: 20px; padding: 10px 10px; border-bottom: 1px solid #999;}
+.item_title{display: flex; gap: 10px; height: 50px; font-size: 20px; padding: 10px 10px; border-bottom: 1px solid #999;}
+.step_icon{border-radius: 12px; padding: 5px; width: 35px; display: flex; align-items: center;justify-content: center;}
 .item_title > p{font-weight: 600;}
 .totalbox .box_item_wrap{height: 400px; background-color:rgba(255, 255, 255, 0.9); border: 2px solid #e1f0de; border-radius: 8px; display: flex; flex-direction: column}
 .totalbox .box_item_wrap.active{border: 3px solid #25B058;}
@@ -550,7 +551,7 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 .totalbox .box_item .input_box .input_box_right .co2Emission{font-size: 15px; color: #32B562;}
 .totalbox .box_item .input_box .input_box_right > span{width: 50px; text-align: center;}
 .totalbox .box_item .input_box .radioBox{height: 40px; display: flex; flex-grow: 1; justify-content: space-between; gap: 8px;}
-.totalbox .box_item .input_box .radioBox > div{display: flex; align-items: center; justify-content: space-around; border: 1px solid #25B058; border-radius: 5px; flex-grow: 1; flex-shrink: 1; flex-basis: 25%; gap: 8px; padding-left: 5px;}
+.totalbox .box_item .input_box .radioBox > div{display: flex; align-items: center; justify-content: space-around; border: 1px solid #aaa; border-radius: 5px; flex-grow: 1; flex-shrink: 1; flex-basis: 25%; gap: 8px; padding-left: 5px;}
 .totalbox .box_item .input_box .radioBox > div > label{ flex-grow: 1;}
 .totalbox .box_item .cost_formula{display: grid;  grid-template-columns: 1fr auto;}
 .totalbox .box_item .cost_formula > span{grid-column: 1; text-align: end;}
@@ -569,7 +570,7 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 .bottom_box .box_item .input_box .input_box_right .co2Emission{height: 40px; flex-grow: 1; font-size: 15px; color: #32B562;}
 .bottom_box .box_item .input_box .input_box_right > span{width: 50px; text-align: center;}
 
-.bottom_box .bottom_box_info > p{margin: 20px 10px; font-weight: 700; background-color:#E8F6ED;}
+.bottom_box .bottom_box_info > p{margin: 20px 10px; font-weight: 700;}
 
 .bottom_box .bottom_box_button_box{display: flex;}
 .bottom_box .bottom_box_button_box > button {width: 150px; height: 50px; background-color: #25B058; border-radius: 8px; color: white; margin-left: auto}
@@ -586,8 +587,15 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 .pi_chart_wrap .result_conment_right > p{font-size: 20px;}
 .pi_chart_wrap .pi_chart_wrap_right > p{font-size: 14px;}
 
-.barChart-container{display: flex; justify-content: space-between;}
+.barChart_container{display: flex; justify-content: space-between;}
+.barChart_container .chart_title{display: flex; gap: 10px; padding: 10px;}
 .bar_chart{width: 180px; height: 280px; border:2px solid #3AB868; border-radius: 8px;}
+
+.total{display: flex; padding: 10px 20px;}
+.total .total_chart_label{width: 100px; height: 280px; display: flex; flex-direction: column;}
+.total .total_chart_label .chart_title{height: 55px; display: flex; align-items: center; gap: 10px;}
+.total .total_chart{flex-grow: 1;}
+
 
 /* 실천목표 */
 .result_box_content > h2{font-size: 20px; text-align: center; margin: 25px;}
@@ -598,10 +606,10 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 
 .select_content {display: grid; grid-template-columns: 1.1fr 1fr; gap: 10px;}
 .select_content .category{grid-column: 1/-1; padding: 20px; border-radius: 8px; margin-bottom: 20px;}
-.select_content .category > .category_title{padding: 0 10px 15px; font-size: 20px;}
-.select_content .category > div{display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; grid-column: 1 / -1; width: 100%;}
-.select_content .category > div > div{padding: 12px; border: 1px solid #999; border-radius: 8px; background-color: white; display: flex; flex-direction: column; justify-content: center;}
-.select_content .category > div > div > label{display: flex; align-items: center; gap: 5px;}
+.select_content .category > .category_title{padding: 0 10px 15px; font-size: 20px; display: flex; gap: 10px;}
+.select_content .category > .category_sub{display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; grid-column: 1 / -1; width: 100%;}
+.select_content .category > .category_sub > div{padding: 12px; border: 1px solid #999; border-radius: 8px; background-color: white; display: flex; flex-direction: column; justify-content: center;}
+.select_content .category > .category_sub > div > label{display: flex; align-items: center; gap: 5px;}
 
 .select_content .target_co2saving{grid-column: 1/2; border: 1px solid #aaa; border-radius: 8px;}
 .select_content .target_co2saving > .item_title > h3{font-size: 18px; margin-left: 20px;}
@@ -615,8 +623,9 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 .result_bottom_box{margin: 30px; border: 1px solid #aaa; border-radius: 8px; background-color:rgba(255, 255, 255, 0.95);}
 .result_bottom_box .result_box_content{background-color: #f3f3f3; border-radius:0px 0px 8px 8px; display: grid; grid-template-columns: 1fr 1fr; gap: 35px;}
 .result_bottom_box .result_box_content_item{border-radius: 8px; background-color: white;}
-.result_bottom_box .result_box_content_item > div{font-size: 18px; padding: 10px 20px;}
-.result_bottom_box .result_box_content_item > div > p{margin: 20px 0 40px 0;}
+.result_bottom_box .result_box_content_item .result_box_content_item_title{border-radius: 8px; background-color: white; display: flex; gap: 10px;}
+.result_bottom_box .result_box_content_item > div{font-size: 18px; padding: 20px 20px;}
+.result_bottom_box .result_box_content_item > div > p{margin: 0 0 40px 0;}
 .result_bottom_box .result_box_content_item > div > .handle_box{background-color: #3AB868; border-radius: 8px; display: flex; flex-direction: column; align-items: center; padding: 20px; gap: 20px;}
 .result_bottom_box .result_box_content_item > div > .handle_box > p{color: white;}
 .result_bottom_box .result_box_content_item > div > .handle_box .save_button{width: 100%; display: flex; justify-content: space-around; gap: 10px;}

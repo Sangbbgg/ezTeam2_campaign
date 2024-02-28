@@ -88,6 +88,7 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
       return Object.keys(labels).map((key, index) => {
         const targetKey = key; // labels 객체의 키와 targetEmissions 객체의 키가 서로 매치되어야 함
         return {
+          category: Object.keys(labels)[index],
           name: labels[key],
           user: parseFloat(resultData[key]),
           average: averageData[key],
@@ -314,7 +315,9 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
               <PiChart data={data} />
               <div className="pi_chart_wrap_right">
                 <div className="result_conment_right">
-                  <h2><span className="forest_green_text">{currentMonth}월</span> 결과안내</h2>
+                  <h2>
+                    <span className="forest_green_text">{currentMonth}월</span> 결과안내
+                  </h2>
                   <p>
                     <span className="forest_green_text">{userData.username}</span>님의 이산화탄소(CO₂) 발생량
                     통계입니다.
@@ -333,9 +336,15 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
               </div>
             </div>
 
-            <div className="barChart-container">
+            <div className="barChart_container">
               {barChatData.map((data, index) => (
                 <div key={index} className="bar_chart">
+                  <div className="chart_title">
+                    <div className={`step_icon forest_${data.category}_bg`}>
+                      <img src={`/img/${data.category}_small_icon.svg`} />
+                    </div>
+                    <span className={`forest_${data.category}_text`}>{data.name}</span>
+                  </div>
                   <BarChart barChatData={[data]} />
                 </div>
               ))}
@@ -372,9 +381,12 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
                       <div key={label} className="select_content">
                         <div className={`category forest_${label}_bg`}>
                           <div className={`category_title forest_${label}_text`}>
+                            <div className={"step_icon"} style={{ backgroundColor: "white" }}>
+                              <img src={`/img/${label}_small_icon.svg`} />
+                            </div>
                             <span>{labels[label]}</span>
                           </div>
-                          <div>
+                          <div className="category_sub">
                             {initialData
                               .filter((item) => item.name === label)
                               .map((filteredItem, index) => (
@@ -421,9 +433,24 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
                           <div className="item_title">
                             <h3>월간 CO₂ 저감목표</h3>
                           </div>
-                          <div className="barChart" style={{ width: "100%", height: "280px" }}>
-                            <div style={{ width: "100%", height: "270px" }}>
-                              <TargetBarchartTotal barChartDataTotal={barChartDataTotal} />
+                          <div className="barChart">
+                            <div className="total">
+                              <div className="total_chart_label">
+
+                                {barChatData.map((data) => (
+                                  <div key={data.key} className="chart_title">
+                                    <div className={`step_icon forest_${data.category}_bg`}>
+                                      <img src={`/img/${data.category}_small_icon.svg`} />
+                                    </div>
+                                    <span className={`forest_${data.category}_text`}>{data.name}</span>
+                                  </div>
+                                ))}
+
+                              </div>
+                              <div className="total_chart">
+                                <TargetBarchartTotal barChartDataTotal={barChartDataTotal} />
+                                {console.log("barChartDataTotal", barChartDataTotal)}
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -453,9 +480,12 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
                   <div key={label} className="">
                     <div className={`category forest_${label}_bg`}>
                       <div className={`category_title forest_${label}_text`}>
+                        <div className="step_icon" style={{ backgroundColor: "white" }}>
+                          <img src={`/img/${label}_small_icon.svg`} />
+                        </div>
                         <span>{labels[label]}</span>
                       </div>
-                      <div>
+                      <div className="category_sub">
                         {initialData
                           .filter((item) => item.name === label)
                           .map((filteredItem, index) => (
@@ -528,7 +558,11 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
 
             <div className="result_total">
               <div className="result_total_left">
-                <h3><span className="forest_green_text">{currentMonth}월</span><br/>이산화탄소 배출현황 및 목표</h3>
+                <h3>
+                  <span className="forest_green_text">{currentMonth}월</span>
+                  <br />
+                  이산화탄소 배출현황 및 목표
+                </h3>
                 <ul>
                   <li>
                     <p>
@@ -564,7 +598,10 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
             <div className="result_box_content">
               {Object.keys(labels).map((label) => (
                 <div key={label} className="result_box_content_item">
-                  <div>
+                  <div className="result_box_content_item_title">
+                    <div className={`step_icon forest_${label}_bg`}>
+                      <img src={`/img/${label}_small_icon.svg`} />
+                    </div>
                     <span className={`forest_${label}_text`}>{labels[label]}</span>
                   </div>
                   {barChatData

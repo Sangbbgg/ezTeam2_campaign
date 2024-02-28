@@ -179,7 +179,12 @@ function Consumption({ inputData, initialData, onResultSubmit }) {
               className={`box_item_wrap ${activeBox === item.id ? "active" : ""}`}
               onClick={() => handleActivebox(item.id)}
             >
-              <div className="item_title">{item.label}</div>
+              <div className={`item_title forest_${item.category_name}_text`}>
+                <div className={`step_icon forest_${item.category_name}_bg`}>
+                  <img src={`/img/${item.category_name}_small_icon.svg`} />
+                </div>
+                {item.label}
+              </div>
               <div className="box_item">
                 {/* 교통 부분 라디오 버튼 구현 */}
                 {item.category_name === "transportation" && (

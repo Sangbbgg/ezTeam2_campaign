@@ -10,7 +10,7 @@ export default class CustomBarChart extends PureComponent {
     const maxYAxis = Math.ceil(Math.max(maxLeft, maxRight) / 100) * 100;
 
     return (
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="100%" height={230}>
         <BarChart
           data={barChatData}
           barGap={25}
@@ -38,7 +38,7 @@ export default class CustomBarChart extends PureComponent {
             tick={false}
             domain={[0, maxYAxis]}
           />
-          <Tooltip />
+          <Tooltip formatter={(value, name) => [name, `${value} kg`]} />
           <Legend />
           <Bar
             yAxisId="left"
@@ -64,10 +64,6 @@ export default class CustomBarChart extends PureComponent {
             label={{ position: "top", formatter: (value) => `${value}kg` }}
             radius={[25, 25, 0, 0]}
           />
-
-          <text x={10} y={10} dy={20} textAnchor="start" fill="#666">
-            {barChatData[0].name}
-          </text>
         </BarChart>
       </ResponsiveContainer>
     );

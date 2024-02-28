@@ -36,17 +36,17 @@ export default class CustomBarChart extends PureComponent {
             key={`bar-chart-${index}`}
             layout="vertical"
             width={500}
-            height={60}
+            height={30}
             data={[entry]}
             margin={{
-              top: 10,
+              top: 0,
               right: 80,
-              left: -10,
-              bottom: 5,
+              left: -100,
+              bottom: 0,
             }}
           >
             <XAxis type="number" domain={[0, entry.maxVlaue]} hide />
-            <YAxis dataKey="name" type="category" width={80} axisLine={false} tickLine={false} />
+            <YAxis dataKey="name" type="category" width={80} axisLine={false} tickLine={false} tick={false}/>
             <Tooltip content={<CustomTooltip />} cursor={false} />
 
             <Bar dataKey="value" barSize={30} fill={entry.color} radius={[0,20,20,0]}>

@@ -21,10 +21,10 @@ export default class CustomBarChart extends PureComponent {
             bottom: 5,
           }}
         >
-          <XAxis dataKey="name" axisLine={false} tickLine={false} tick={false} />
+          <XAxis dataKey="name" axisLine={false} tickLine={false} tick={false}/>
           <YAxis yAxisId="left" orientation="left" axisLine={false} tickLine={false} tick={false} domain={[0, maxYAxis]} />
           <YAxis yAxisId="right" orientation="right" axisLine={false} tickLine={false} tick={false} domain={[0, maxYAxis]} />
-          <Tooltip />
+          <Tooltip formatter={(value, name) =>[ name,`${value} kg`]} />
           <Legend />
           <Bar
             yAxisId="left"
