@@ -100,7 +100,7 @@ const Campaign = () => {
   };
 
   return (
-    <div id="wrap">
+    <div id="wrap" className="campaign">
       <Header/>
       <div className="content-w">
         <div className="inner">

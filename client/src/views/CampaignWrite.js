@@ -264,7 +264,7 @@ const CampaignWrite = () => {
               {/* <div className="bottom-area">
                 <button className="btn-submit" type="submit" onClick={handleClick}>등록</button>
               </div> */}
-                <div className="bottom-area">
+              <div className="bottom-area">
                 <div className="btn-w">
                   <button className="btn-edit" type="submit" onClick={handleClick}>등록</button> 
                   <button className="btn-cancel" type="button" onClick={()=>{navigate(-1)}}>취소</button> 

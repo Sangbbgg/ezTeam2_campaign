@@ -6,6 +6,7 @@ import Campaign from "./views/Campaign";
 import CampaignWrite from "./views/CampaignWrite";
 import CampaignDetail from "./views/CampaignDetail";
 import CampaignEdit from "./views/CampaignEdit";
+import CampaignForm from "./views/CampaignForm";
 
 // 김민호(임시)-----------------
 import LoginPage from "./component/Logins/Login";
@@ -29,6 +30,7 @@ function App() {
         <Route path="/campaign/write" element={<CampaignWrite />}></Route>
         <Route path="/campaign/edit/:id" element={<CampaignEdit />}></Route>
         <Route path="/campaign/detail/:id" element={<CampaignDetail />}></Route>
+        <Route path="/campaign/form/:id" element={<CampaignForm />}></Route>
         {/* 상호형 */}
         <Route exact path="/carbonFootprint" element={<CarbonFootprint />} />
         {/* 김민호 */}
