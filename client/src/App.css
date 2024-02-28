@@ -232,8 +232,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 /* #228e0c */
 #wrap {position: relative; padding-top: 80px; overflow-x: hidden;}
 .inner {position: relative; margin: 0 auto; width: 1024px;}
-.content-w {position: relative; padding-top: 80px; padding-bottom: 200px; background-color: #e1f0de;}
-.campaign-detail .content-w {padding-bottom: 0;}
+.content-w {position: relative; padding-top: 80px; padding-bottom: 200px; background-color: #fff;}
 .tit-wrap {position: relative; margin-bottom: 80px;}
 .tit-wrap .tit {font-size: 34px; font-weight: 700; color: #25B058;}
 .tit-wrap .txt {margin-top: 12px; font-size: 16px;}
@@ -270,10 +269,13 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .campaign-write .btn-tolist.pos-right {position: absolute; right: 0; bottom: 0;}
 
 /* 상세 */
-.campaign-detail h2 {top: 12%; padding: 0;}
+#wrap.campaign-detail {padding-top: 0;}
+#wrap.campaign-detail .content-w {position: relative; padding-top: 160px; padding-bottom: 120px; background-color: #e1f0de;}
+.campaign-detail footer {background: #fff;}
+
 .campaign-detail {position: relative;}
 .campaign-detail .title-area {display: flex; justify-content: space-between; margin-bottom: 32px; padding-bottom: 16px; border-bottom: 1px solid #aaa;}
-.campaign-detail .summary-wrap {padding: 40px; background-color: #fff;}
+.campaign-detail .summary-wrap {padding: 40px; background-color: #fff; border-radius: 6px;}
 .campaign-detail .summary-wrap .title {font-size: 24px; font-weight: 500;}
 .campaign-detail .summary-wrap .btn-apply {display: inline-block; padding: 10px 40px; font-size: 18px; font-weight: 500; color: #fff; background-color: #25B058;}
 .campaign-detail .regi-info {display: flex; justify-content: flex-end;}
@@ -286,7 +288,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .campaign-detail .detail-info .info-box .txt-w p {font-size: 16px;}
 .campaign-detail .detail-info .info-box .txt-w .detail-txt {margin-left: 8px;}
 .campaign-detail .detail-info .info-box .tit {margin-right: 14px; word-break: keep-all; font-size: 16px; font-weight: 500;}
-.campaign-detail .writer-info {position: relative; padding: 10px; background-color: #fff; border-radius: 4px;}
+.campaign-detail .writer-info {position: relative; padding: 20px; background-color: #fafafa; border-radius: 4px;}
 .campaign-detail .writer-info .info-tit {margin-bottom: 8px; font-size: 14px ; color: #000;}
 .campaign-detail .writer-info .txt-box {display: flex;}
 .campaign-detail .writer-info p {font-size: 13px;}
@@ -301,7 +303,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .campaign-detail .info-box .date-wrap .tit {margin-bottom: 0;}
 .campaign-detail .info-box .date-wrap span {margin: 0 8px;}
 
-.campaign-detail .body-wrap {position: relative; margin-top: 40px; padding: 40px; background-color: #fff;}
+.campaign-detail .body-wrap {position: relative; margin-top: 40px; padding: 40px; background-color: #fff; border-radius: 6px;}
 .campaign-detail .body-wrap .body-tit {margin-bottom: 20px; padding-bottom: 14px; font-size: 20px; border-bottom: 1px solid #ddd;}
 .campaign-detail .body-area {font-size: 18px;  background-color: #fff;}
 .campaign-detail .body-area img {margin-bottom: 40px; max-width: 400px; height: auto;}
@@ -310,10 +312,10 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 
 
 /* 댓글 영역 */
-.comment-area {position: relative; margin-top: 120px; padding: 80px 0 120px; background: #fafafa;}
+.comment-area {position: relative; margin-top: 80px; padding: 40px; background: #fff; border-radius: 6px;}
 .comment-area .comment-tit {margin-bottom: 20px; font-size: 20px; color: #000;}
 
-.comment-area textarea {background-color: #fafafa;}
+.comment-area textarea {background-color: #fff;}
 .comment-area .write-div {position: relative; border: 1px solid #000;}
 .comment-area .write-div::after {content: ""; display: block; position: absolute; bottom: 48px; left: 16px; width: calc(100% - 32px); height: 1px; background-color: #ccc;}
 .comment-area .for-padding {padding: 14px 14px 48px 14px;}
@@ -403,7 +405,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .daum_popup {z-index: 1;}
 
 /* 상세페이지 - 지도 */
-.map-area.vis-map {display: block; position: relative; margin-top: 40px; padding: 40px; background-color: #fff;}
+.map-area.vis-map {display: block; position: relative; margin-top: 40px; padding: 40px; background-color: #fff; border-radius: 6px;}
 .map-area.vis-map .tit {margin-bottom: 14px; font-size: 20px;margin-bottom: 20px; padding-bottom: 14px; font-size: 20px; border-bottom: 1px solid #ddd;}
 .map-area.vis-map .txt-w {display: flex; flex-wrap: wrap; position: relative; margin-top: 20px; padding-left: 24px; background: url("../public/img/map-marker.svg") no-repeat no-repeat 0 3px; background-size: 20px;}
 .map-area.vis-map .txt-w p {font-size: 16px;}

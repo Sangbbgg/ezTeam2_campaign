@@ -143,53 +143,51 @@ const Comments = ({ curList }) => {
   
   return (
     <div className="comment-area">
-      <div className="inner">
-        <p className="comment-tit">함께 할 사람들의 이야기</p>
-        <div className="write-wrap">
-          <div className="write-div">
-            <div className="for-padding">
-              <textarea className="comment-text" type="text" name="comment_text" value={newComment} placeholder="내용을 입력하세요" onChange={handleChange} />
-            </div>
-            <div className="btn-w">
-              <button className="btn-submit" type="submit" onClick={postComment}>등록</button>
-            </div>
+      <p className="comment-tit">함께 할 사람들의 이야기</p>
+      <div className="write-wrap">
+        <div className="write-div">
+          <div className="for-padding">
+            <textarea className="comment-text" type="text" name="comment_text" value={newComment} placeholder="내용을 입력하세요" onChange={handleChange} />
+          </div>
+          <div className="btn-w">
+            <button className="btn-submit" type="submit" onClick={postComment}>등록</button>
           </div>
         </div>
-        <div className="view-wrap">
-          {
-            comments && comments.length > 0 ? (
-              comments.map((comment, i) =>
-                <div className="comment" key={i}>
-                  <div className="view-div">
-                    {/* {console.log(comment)} */}
-                    <p className="txt">{comment.comment_text}</p>
-                    <div className="regi-w">
-                      <p className='username'>{comment.username}</p>
-                      <p className="date">{new Date(comment.date).toLocaleDateString()}</p>
-                    </div>
-                    <div className="btn-w">
-                      {/* <button className='btn-edit' onClick={(e) => addClsEdit(e, comment.id)}>수정</button> */}
-
-                      {/* 댓글의 ID를 deleteComment 함수로 전달 */}
-                      <button className="btn-delete" onClick={() => deleteComment(comment.id)}>삭제</button>
-                    </div>
+      </div>
+      <div className="view-wrap">
+        {
+          comments && comments.length > 0 ? (
+            comments.map((comment, i) =>
+              <div className="comment" key={i}>
+                <div className="view-div">
+                  {/* {console.log(comment)} */}
+                  <p className="txt">{comment.comment_text}</p>
+                  <div className="regi-w">
+                    <p className='username'>{comment.username}</p>
+                    <p className="date">{new Date(comment.date).toLocaleDateString()}</p>
                   </div>
+                  <div className="btn-w">
+                    {/* <button className='btn-edit' onClick={(e) => addClsEdit(e, comment.id)}>수정</button> */}
 
-                  {/* 댓글 수정 폼 */}
-                  <div className="write-div">
-                    <div className="for-padding">
-                      {/* <textarea className="comment-text" type="text" name="comment_text" value={editComment} placeholder="내용을 입력하세요" onChange={editChange} /> */}
-                    </div>
-                    <div className="btn-w">
-                      {/* <button className="btn-cancel" type="submit" onClick={removeClsEdit}>취소</ button> */}
-                      <button className="btn-submit" type="submit" onClick={postComment}>등록</ button>
-                    </div>
+                    {/* 댓글의 ID를 deleteComment 함수로 전달 */}
+                    <button className="btn-delete" onClick={() => deleteComment(comment.id)}>삭제</button>
                   </div>
                 </div>
-              )
-            ) : null
-          }
-        </div>
+
+                {/* 댓글 수정 폼 */}
+                <div className="write-div">
+                  <div className="for-padding">
+                    {/* <textarea className="comment-text" type="text" name="comment_text" value={editComment} placeholder="내용을 입력하세요" onChange={editChange} /> */}
+                  </div>
+                  <div className="btn-w">
+                    {/* <button className="btn-cancel" type="submit" onClick={removeClsEdit}>취소</ button> */}
+                    <button className="btn-submit" type="submit" onClick={postComment}>등록</ button>
+                  </div>
+                </div>
+              </div>
+            )
+          ) : null
+        }
       </div>
     </div>
   );

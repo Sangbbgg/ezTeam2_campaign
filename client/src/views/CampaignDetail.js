@@ -242,10 +242,10 @@ const CampaignDetail = (props) => {
             </div>
           </div> */}
 
-
-        </div>
           {/* 댓글 */}
           <Comments curList={curList}/>
+        </div>
+          
       </div>
       <Footer/>
     </div>
