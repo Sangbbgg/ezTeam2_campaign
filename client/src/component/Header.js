@@ -53,7 +53,17 @@ const Header = () => {
       };
     }, []);
   
-
+    // 비로그인 유저 라우팅 시도시 경고문구 출력
+    const navigateWithLoginCheck = (path) => {
+      if (!loggedIn) {
+        alert("로그인이 필요한 서비스입니다.");
+        // 로그인 페이지로 이동하거나, 현재 페이지에 머물게 할 수 있습니다.
+        navigate('/Login'); // 로그인 페이지로 바로 이동하는 경우
+      } else {
+        navigate(path);
+      }
+    };
+    
   return (
     <header>
       <h1 className="logo"><button onClick={()=>{navigate('/')}}></button></h1>
@@ -65,10 +75,12 @@ const Header = () => {
                 <button className="one-link" onClick={()=>{navigate('/carbonNeutrality')}}>탄소 중립이란?</button>
               </li> */}
               <li>
-                <a className="one-link" href=""><button className="one-link" onClick={()=>{navigate('/campaign')}}>캠페인</button></a>
+                {/* <a className="one-link" href=""><button className="one-link" onClick={()=>{navigate('/campaign')}}>캠페인</button></a> */}
+                <a className="one-link" href=""><button className="one-link" onClick={()=>navigateWithLoginCheck('/campaign')}>캠페인</button></a>
               </li>
               <li>
-                <a className="one-link" href=""><button className="one-link" onClick={()=>{navigate('/carbonFootprint')}}>탄소발자국</button></a>
+                {/* <a className="one-link" href=""><button className="one-link" onClick={()=>{navigate('/carbonFootprint')}}>탄소발자국</button></a> */}
+                <a className="one-link" href=""><button className="one-link" onClick={()=>navigateWithLoginCheck('/carbonFootprint')}>탄소발자국</button></a>
               </li>
             </ul>
           </div>
