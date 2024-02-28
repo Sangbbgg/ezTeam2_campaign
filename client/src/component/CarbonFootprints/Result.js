@@ -436,7 +436,6 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
                           <div className="barChart">
                             <div className="total">
                               <div className="total_chart_label">
-
                                 {barChatData.map((data) => (
                                   <div key={data.key} className="chart_title">
                                     <div className={`step_icon forest_${data.category}_bg`}>
@@ -445,7 +444,6 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
                                     <span className={`forest_${data.category}_text`}>{data.name}</span>
                                   </div>
                                 ))}
-
                               </div>
                               <div className="total_chart">
                                 <TargetBarchartTotal barChartDataTotal={barChartDataTotal} />
@@ -533,9 +531,22 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
                   <div className="item_title">
                     <h3>월간 CO₂ 저감목표</h3>
                   </div>
-                  <div className="barChart" style={{ width: "100%", height: "280px" }}>
-                    <div style={{ width: "100%", height: "270px" }}>
-                      <TargetBarchartTotal barChartDataTotal={barChartDataTotal} />
+                  <div className="barChart">
+                    <div className="total">
+                      <div className="total_chart_label">
+                        {barChatData.map((data) => (
+                          <div key={data.key} className="chart_title">
+                            <div className={`step_icon forest_${data.category}_bg`}>
+                              <img src={`/img/${data.category}_small_icon.svg`} />
+                            </div>
+                            <span className={`forest_${data.category}_text`}>{data.name}</span>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="total_chart">
+                        <TargetBarchartTotal barChartDataTotal={barChartDataTotal} />
+                        {console.log("barChartDataTotal", barChartDataTotal)}
+                      </div>
                     </div>
                   </div>
                 </div>
