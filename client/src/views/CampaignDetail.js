@@ -157,7 +157,7 @@ const CampaignDetail = (props) => {
             curList?.latitude != null ? (
               <div className="map-area">
                 <p className="tit">위치 안내</p>
-                  <div id="map" style={{width:"500px", height:"400px"}}></div>
+                  <div id="map"></div>
                   <div className="txt-w">
                     <p className="txt">{curList?.address}</p>
                     <p className="detail-txt">{curList?.address_detail}</p>

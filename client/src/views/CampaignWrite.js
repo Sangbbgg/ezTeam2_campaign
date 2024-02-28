@@ -253,8 +253,7 @@ const CampaignWrite = () => {
     
                   {renderAddrDiv()}
     
-                  <div id="map" style={{width: "300px", height: "300px", marginTop: "10px", display: "none",}}
-                  ></div>
+                  <div id="map" style={{display: "none"}}></div>
                 </div>
                 {/* // @@@@@@@@@@@@@@@@@@@@ 지도 @@@@@@@@@@@@@@@@@@@@  */}
     

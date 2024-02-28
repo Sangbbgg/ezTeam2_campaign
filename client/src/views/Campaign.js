@@ -104,6 +104,10 @@ const Campaign = () => {
       <Header/>
       <div className="content-w">
         <div className="inner">
+          <div className="tit-wrap">
+            <div className="tit"> 캠페인</div>
+            <div className="txt"> 우리는 탄소 중립 난제를 해결하고 녹색 성장을 이끌어내기 위해 모이고 있습니다.</div>
+          </div>
           <div className="search-wrap">
             <input type="text" placeholder="검색어를 입력하세요" onChange={(e) => setSearchInput(e.target.value)} />
             <button className="btn-search" onClick={handleSearchButtonClick}>검색</button>

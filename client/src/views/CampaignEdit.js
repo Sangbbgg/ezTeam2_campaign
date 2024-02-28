@@ -202,7 +202,7 @@ const CampaignEdit = () => {
                   {renderAddrDiv()}
                   {/* {console.log(write)} */}
                 
-                <div id="map" style={{ width: '300px', height: '300px', marginTop: '10px'}}></div>
+                <div id="map"></div>
               </div>
               {/* // @@@@@@@@@@@@@@@@@@@@ 지도 @@@@@@@@@@@@@@@@@@@@  */}
 
