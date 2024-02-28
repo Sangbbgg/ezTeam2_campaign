@@ -242,13 +242,13 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .container .cont:nth-child(n+4) {margin-top: 40px;}
 .container .cont:nth-child(3n) {margin-right: 0;}
 .container .cont .img-wrap:hover img {transform: translate(-50%, -50%) scale(1.1);}
-.container .cont .img-wrap {position: relative; overflow: hidden; width: auto; height: 277px;}
+.container .cont .img-wrap {position: relative; overflow: hidden; width: auto; height: 277px; border-radius: 6px;}
 .container .cont .img-wrap img {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1); width: 100%; height: 100%; transition: transform .3s ease-out; object-fit: cover;}
 
 .campaign-wrap .group-box {display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px;}
 .campaign-wrap .btn-write {padding: 10px 30px; color: #fff; background-color: #25B058;}
 .campaign-wrap {margin-top: 20px;}
-.campaign-wrap .cont .title {min-height: 56px; font-size: 18px; color: #000; text-align: left; overflow: hidden; white-space: normal; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; word-break: keep-all;}
+.campaign-wrap .cont .title {min-height: 36px; font-size: 18px; color: #000; text-align: left; overflow: hidden; white-space: normal; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; word-break: keep-all;}
 .campaign-wrap .txt-wrap {display: block; margin-top: 14px;}
 .campaign-wrap .txt-wrap .txt-info {display: flex; justify-content: space-between; margin-top: 10px;}
 .campaign-wrap .txt-wrap .username {font-size: 14px; text-align: right; color: #777;}
@@ -277,7 +277,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .campaign-detail .title-area {display: flex; justify-content: space-between; margin-bottom: 32px; padding-bottom: 16px; border-bottom: 1px solid #aaa;}
 .campaign-detail .summary-wrap {padding: 40px; background-color: #fff; border-radius: 6px;}
 .campaign-detail .summary-wrap .title {font-size: 24px; font-weight: 500;}
-.campaign-detail .summary-wrap .btn-apply {display: inline-block; padding: 10px 40px; font-size: 18px; font-weight: 500; color: #fff; background-color: #25B058;}
+.campaign-detail .summary-wrap .btn-apply {display: inline-block; padding: 10px 40px; font-size: 18px; font-weight: 500; color: #fff; background-color: #25B058; cursor: pointer;}
 .campaign-detail .regi-info {display: flex; justify-content: flex-end;}
 .campaign-detail .regi-info p {font-size: 14px; color: #777;}
 .campaign-detail .regi-info .date {position: relative; margin-left: 14px; padding-left: 16px;}
@@ -371,7 +371,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 
 /* 댓글 */
 /* .view-wrap {padding: 40px 0;} */
-.view-wrap .comment {position: relative; margin: 20px 0; padding-top: 30px; border-bottom: 1px solid #ddd;}
+.view-wrap .comment {position: relative; margin: 20px 0; border-bottom: 1px solid #ddd;}
 .view-wrap .comment .view-div {padding: 12px;}
 .view-wrap .comment .view-div .txt {padding-right: 140px; font-size: 16px;}
 .view-wrap .comment .regi-w {display: flex; justify-content: flex-end; position: absolute; top: 14px; right: 14px;}
@@ -410,6 +410,23 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .map-area.vis-map .txt-w {display: flex; flex-wrap: wrap; position: relative; margin-top: 20px; padding-left: 24px; background: url("../public/img/map-marker.svg") no-repeat no-repeat 0 3px; background-size: 20px;}
 .map-area.vis-map .txt-w p {font-size: 16px;}
 .map-area.vis-map .txt-w .detail-txt {margin-left: 6px}
+
+/* 신청하기 폼 */
+table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
+.form-table {width: 100%;}
+.form-table table {width: 100%; text-align: center; table-layout: fixed;}
+.form-table table > thead {border-top: 1px solid #c9c9c9;}
+.form-table table > thead > tr > th {padding: 21px 10px; color: #000; font-weight: 500; font-size: 16px; line-height: 23px; background-color: #fafafa; vertical-align: middle;}
+.form-table table > thead > tr + tr {border-top: 1px solid #eee}
+.form-table table > tbody {border-top: 1px solid #eee;}
+.form-table table > tbody > tr {border-bottom: 1px solid #eee;} 
+.form-table table > tbody > tr > td {padding: 21px 20px; font-weight: 400; color: #5e5e5e; font-size: 16px; line-height: 22px; background-color: #fff; vertical-align: middle;} 
+.form-table table > colgroup {position: relative; width: 100%;}
+.form-table table.vertical > tbody > tr > th {padding: 20px 30px; text-align: left; font-weight: 500; color: #000; background-color: #fafafa; vertical-align: middle; border-right: 1px solid #eee;} 
+.form-table table.vertical > tbody > tr > td {padding: 20px 30px; text-align: left; vertical-align: middle;} 
+.form-table table.vertical > tbody > tr:last-child {border-bottom: none;} 
+.form-table table.vertical > tbody {border-top: 1px solid #c9c9c9; border-bottom: 1px solid #eee;}
+.form-table table textarea {width: 100%;}
 
 
 
