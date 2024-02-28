@@ -40,7 +40,7 @@ const CampaignForm = () => {
           <table className="vertical">
             <caption></caption>
             <colgroup>
-              <col style={{width: "110px;"}}/>
+              <col style={{width: "110px"}}/>
               <col style={{width: "auto"}} />
             </colgroup>
             <tbody>
@@ -67,7 +67,7 @@ const CampaignForm = () => {
               </tr>
               <tr>
                 <th>신청자 메모</th>
-                <td colspan="3">
+                <td colSpan="3">
                   <textarea name="" id="" cols="30" rows="10"></textarea>
                 </td>
               </tr>
