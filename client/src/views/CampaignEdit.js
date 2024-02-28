@@ -5,6 +5,7 @@ import Header from '../component/Header';
 import WriteEditor from '../component/campaign/WriteEditor';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Footer from "../component/Footer";
 
 const CampaignEdit = () => {
   const navigate = useNavigate();
@@ -142,73 +143,80 @@ const CampaignEdit = () => {
   };
 
   return (
-    <div className="campaign-write edit">
+    <div id="wrap" className="campaign-write edit">
       <Header/>
-      <h2>캠페인(수정) 페이지입니다.</h2>
-      <div className="content-wrap">
-        <form>
-          <div className="content-wrap">
-            <input className="title" type="text" name="title" value={write.title} placeholder="제목을 입력하세요" onChange={handleChange} />
-
-            <div className="calendar-area">
-              <p className="cal-tit">진행기간</p>
-              <div className="calendar">
-                
-                <DatePicker
-                  className="start-date"
-                  dateFormat="yyyy.MM.dd"
-                  selected={write.start_date}
-                  onChange={(date) => setWrite((prev) => ({ ...prev, start_date: date }))}
-                  selectsStart
-                  startDate={write.start_date}
-                  endDate={write.end_date}
-                />
-                <DatePicker
-                  className="end-date"
-                  dateFormat="yyyy.MM.dd"
-                  selected={write.end_date}
-                  onChange={(date) => setWrite((prev) => ({ ...prev, end_date: date }))}
-                  selectsEnd
-                  startDate={write.start_date}
-                  endDate={write.end_date}
-                  minDate={write.start_date}
-                />
+      <div className="content-w">
+        <div className="inner">
+          <div className="form-w">
+            <form>
+              <div className="txt-box">
+                <p className="title">캠페인 제목</p>
+                <input type="text" name="title" value={write.title} placeholder="제목을 입력하세요" onChange={handleChange} />
               </div>
-            </div>
-            
-            <WriteEditor value={write.body} handleChangeQuill={handleChangeQuill} />
 
-            {/* // @@@@@@@@@@@@@@@@@@@@ 지도 @@@@@@@@@@@@@@@@@@@@  */}
-            <div className='address-area'>
-              <div className="addr-tit">주소</div>
-
-              {/* 주소 라디오 버튼 */}
-              <div className="form-group">
-                <div className="form-radio">
-                  <input type="radio" id="offline" name="addr-radio" value="오프라인" checked={selOpt === "오프라인"} onChange={onChangeRadio}/>
-                  <label htmlFor="offline">오프라인</label>
-                </div>
-                <div className="form-radio">
-                  <input type="radio" id="noaddress" name="addr-radio" value="장소없음" checked={selOpt === "장소없음"} onChange={onChangeRadio}/>
-                  <label htmlFor="noaddress">장소없음</label>
+              <div className="calendar-area">
+                <p className="cal-tit">진행기간</p>
+                <div className="calendar">
+                  
+                  <DatePicker
+                    className="start-date"
+                    dateFormat="yyyy.MM.dd"
+                    selected={write.start_date}
+                    onChange={(date) => setWrite((prev) => ({ ...prev, start_date: date }))}
+                    selectsStart
+                    startDate={write.start_date}
+                    endDate={write.end_date}
+                  />
+                  <DatePicker
+                    className="end-date"
+                    dateFormat="yyyy.MM.dd"
+                    selected={write.end_date}
+                    onChange={(date) => setWrite((prev) => ({ ...prev, end_date: date }))}
+                    selectsEnd
+                    startDate={write.start_date}
+                    endDate={write.end_date}
+                    minDate={write.start_date}
+                  />
                 </div>
               </div>
-                {/* selOpt이 해당 라디오 버튼의 value와 일치한다면, 해당 버튼에 체크 */}
-
-                {renderAddrDiv()}
-                {/* {console.log(write)} */}
               
-              <div id="map" style={{ width: '300px', height: '300px', marginTop: '10px'}}></div>
-            </div>
-            {/* // @@@@@@@@@@@@@@@@@@@@ 지도 @@@@@@@@@@@@@@@@@@@@  */}
+              <WriteEditor value={write.body} handleChangeQuill={handleChangeQuill} />
 
-            <div className="bottom-area">
-              <button className="btn-cancel" type="button" onClick={()=>{navigate(-1)}}>취소</button> 
-              <button className="btn-edit" type="submit" onClick={handleClick}>수정</button> 
-            </div>
+              {/* // @@@@@@@@@@@@@@@@@@@@ 지도 @@@@@@@@@@@@@@@@@@@@  */}
+              <div className='address-area'>
+                <div className="addr-tit">주소</div>
+
+                {/* 주소 라디오 버튼 */}
+                <div className="form-group">
+                  <div className="form-radio">
+                    <input type="radio" id="offline" name="addr-radio" value="오프라인" checked={selOpt === "오프라인"} onChange={onChangeRadio}/>
+                    <label htmlFor="offline">오프라인</label>
+                  </div>
+                  <div className="form-radio">
+                    <input type="radio" id="noaddress" name="addr-radio" value="장소없음" checked={selOpt === "장소없음"} onChange={onChangeRadio}/>
+                    <label htmlFor="noaddress">장소없음</label>
+                  </div>
+                </div>
+                  {/* selOpt이 해당 라디오 버튼의 value와 일치한다면, 해당 버튼에 체크 */}
+
+                  {renderAddrDiv()}
+                  {/* {console.log(write)} */}
+                
+                <div id="map" style={{ width: '300px', height: '300px', marginTop: '10px'}}></div>
+              </div>
+              {/* // @@@@@@@@@@@@@@@@@@@@ 지도 @@@@@@@@@@@@@@@@@@@@  */}
+
+              <div className="bottom-area">
+                <div className="btn-w">
+                  <button className="btn-edit" type="submit" onClick={handleClick}>수정</button> 
+                  <button className="btn-cancel" type="button" onClick={()=>{navigate(-1)}}>취소</button> 
+                </div>
+              </div>
+            </form>
           </div>
-        </form>
+        </div>
       </div>
+      <Footer/>
     </div>
   );
 };

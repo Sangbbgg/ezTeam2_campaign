@@ -4,6 +4,7 @@ import Header from "../component/Header";
 import axios from "axios";
 import WriteEditor from "../component/campaign/WriteEditor";
 import DatePicker from "react-datepicker";
+import Footer from "../component/Footer";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -118,7 +119,6 @@ const CampaignWrite = () => {
       }
     }
   };
-  
 
   useEffect(() => {
     const mapContainer = document.getElementById("map"); // 지도를 표시할 div
@@ -187,97 +187,96 @@ const CampaignWrite = () => {
   let [mainImg,setMainImg] = useState("");
   const setPreviewImg = (event) => {
     var reader = new FileReader();
-
     reader.onload = function(event) {
       setMainImg(event.target.result);
     };
-
     reader.readAsDataURL(event.target.files[0]);
   }
 
   return (
-    <div className="campaign-write">
+    <div id="wrap" className="campaign-write">
       <Header />
-      {/* 이미지 업로드 */}
-      <input type="file" id="image" accept="image/*" style={{border: "solid 1px lightgray", borderRadius: "5px"}} onChange={setPreviewImg}/>
-            
-      {/* 이미지 미리보기 */}
-      <img alt="메인사진" src={mainImg} style={{maxWidth:"100px"}}></img>
-
-      <div className="content-wrap">
-        <form>
-          <div className="body-area">
-            <input className="title" type="text" name="title" value={write.title}placeholder="제목을 입력하세요" onChange={handleChange}/>
-
-            <div className="calendar-area">
-              <p className="cal-tit">진행기간</p>
-              <div className="calendar">
-                <DatePicker
-                  className="start-date"
-                  dateFormat="yyyy.MM.dd"
-                  selected={startDate}
-                  onChange={(date) => setStartDate(date)}
-                  selectsStart
-                  startDate={startDate}
-                  endDate={endDate}
-                />
-                <DatePicker
-                  className="end-date"
-                  dateFormat="yyyy.MM.dd"
-                  selected={endDate}
-                  onChange={(date) => setEndDate(date)}
-                  selectsEnd
-                  startDate={startDate}
-                  endDate={endDate}
-                  minDate={startDate}
-                />
-              </div>
-            </div>
-
-            {/* // @@@@@@@@@@@@@@@@@@@@ 지도 @@@@@@@@@@@@@@@@@@@@  */}
-            <div className="address-area">
-              <div className="addr-tit">주소</div>
-
-              {/* 주소 라디오 버튼 */}
-              <div className="form-group">
-                <div className="form-radio">
-                  <input type="radio" id="offline" name="addr-radio" value="오프라인" checked={selOpt === "오프라인"} onChange={onChangeRadio}
-                  />
-                  <label htmlFor="offline">오프라인</label>
+      <div className="content-w">
+        <div className="inner">
+          {/* 이미지 업로드 */}
+          <input type="file" id="image" accept="image/*" style={{border: "solid 1px lightgray", borderRadius: "5px"}} onChange={setPreviewImg}/>
+          
+          {/* 이미지 미리보기 */}
+          <img alt="메인사진" src={mainImg} style={{maxWidth:"100px"}}></img>
+  
+          <div className="form-w">
+            <form>
+              <div className="body-area">
+                <input className="title" type="text" name="title" value={write.title}placeholder="제목을 입력하세요" onChange={handleChange}/>
+    
+                <div className="calendar-area">
+                  <p className="cal-tit">진행기간</p>
+                  <div className="calendar">
+                    <DatePicker
+                      className="start-date"
+                      dateFormat="yyyy.MM.dd"
+                      selected={startDate}
+                      onChange={(date) => setStartDate(date)}
+                      selectsStart
+                      startDate={startDate}
+                      endDate={endDate}
+                    />
+                    <DatePicker
+                      className="end-date"
+                      dateFormat="yyyy.MM.dd"
+                      selected={endDate}
+                      onChange={(date) => setEndDate(date)}
+                      selectsEnd
+                      startDate={startDate}
+                      endDate={endDate}
+                      minDate={startDate}
+                    />
+                  </div>
                 </div>
-                <div className="form-radio">
-                  <input type="radio" id="noaddress" name="addr-radio" value="장소없음" checked={selOpt === "장소없음"} onChange={onChangeRadio}/>
-                  <label htmlFor="noaddress">장소없음</label>
+    
+                {/* // @@@@@@@@@@@@@@@@@@@@ 지도 @@@@@@@@@@@@@@@@@@@@  */}
+                <div className="address-area">
+                  <div className="addr-tit">주소</div>
+    
+                  {/* 주소 라디오 버튼 */}
+                  <div className="form-group">
+                    <div className="form-radio">
+                      <input type="radio" id="offline" name="addr-radio" value="오프라인" checked={selOpt === "오프라인"} onChange={onChangeRadio}/>
+                      <label htmlFor="offline">오프라인</label>
+                    </div>
+                    <div className="form-radio">
+                      <input type="radio" id="noaddress" name="addr-radio" value="장소없음" checked={selOpt === "장소없음"} onChange={onChangeRadio}/>
+                      <label htmlFor="noaddress">장소없음</label>
+                    </div>
+                  </div>
+                  {/* selOpt이 해당 라디오 버튼의 value와 일치한다면, 해당 버튼에 체크 */}
+    
+                  {renderAddrDiv()}
+    
+                  <div id="map" style={{width: "300px", height: "300px", marginTop: "10px", display: "none",}}
+                  ></div>
+                </div>
+                {/* // @@@@@@@@@@@@@@@@@@@@ 지도 @@@@@@@@@@@@@@@@@@@@  */}
+    
+                <WriteEditor handleChangeQuill={handleChangeQuill} value={write.body}/>
+    
+                <input className="author-id" type="number" name="userid" value={write.userid} onChange={handleChange}/>
+              </div>
+              {/* <div className="bottom-area">
+                <button className="btn-submit" type="submit" onClick={handleClick}>등록</button>
+              </div> */}
+                <div className="bottom-area">
+                <div className="btn-w">
+                  <button className="btn-edit" type="submit" onClick={handleClick}>등록</button> 
+                  <button className="btn-cancel" type="button" onClick={()=>{navigate(-1)}}>취소</button> 
                 </div>
               </div>
-              {/* selOpt이 해당 라디오 버튼의 value와 일치한다면, 해당 버튼에 체크 */}
-
-              {renderAddrDiv()}
-
-              <div id="map" style={{width: "300px", height: "300px", marginTop: "10px", display: "none",}}
-              ></div>
-            </div>
-            {/* // @@@@@@@@@@@@@@@@@@@@ 지도 @@@@@@@@@@@@@@@@@@@@  */}
-
-            <WriteEditor handleChangeQuill={handleChangeQuill} value={write.body}/>
-
-            <input
-              className="author-id"
-              type="number"
-              name="userid"
-              value={write.userid}
-              onChange={handleChange}
-            />
+            </form>
           </div>
-          <div className="bottom-area">
-            <button className="btn-submit" type="submit" onClick={handleClick}>
-              등록
-            </button>{" "}
-            <br></br>
-          </div>
-        </form>
-        <button type="text" className="btn-tolist pos-right" onClick={() => {navigate(-1);}}>목록</button>
+          {/* <button type="text" className="btn-tolist pos-right" onClick={() => {navigate(-1);}}>목록</button> */}
+        </div>
       </div>
+      <Footer/>
     </div>
   );
 };

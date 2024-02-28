@@ -7,6 +7,7 @@ import axios from 'axios';
 import Comments from '../component/campaign/Comments';
 import DOMPurify from "isomorphic-dompurify"
 import "react-quill/dist/quill.core.css"
+import Footer from "../component/Footer";
 
 const CampaignDetail = (props) => {
   const navigate = useNavigate();
@@ -108,73 +109,82 @@ const CampaignDetail = (props) => {
 
 
   return (
-    <div className="campaign-detail">
+    <div id="wrap" className="campaign-detail">
       <Header/>
-      {/* 제목 영역 */}
-      <div className="title-area">
-        <p className="title">{curList?.title}</p>
-        <div className="regi-info">
-          
-          <p className="views">{"조회수: " + parseInt(curList?.views + 1)}</p>
-        </div>
-      </div>
-
-      {/* 작성자 정보 */}
-      <div className="writer-info">
-        <p className="author-id">{curList?.username}</p>
-        <p className="date">{new Date(curList?.date).toLocaleDateString()}</p>
-      </div>
-      
-      {/* 진행 기간 */}
-      {
-        curList?.end_date != null ? (
-          <div className="period-area">
-            <p className='period-tit'>진행기간</p>
-          
-            <div className="date-wrap">
-              {curList?.start_date != null ? (
-                <p className="start-date">{new Date(curList?.start_date).toLocaleDateString()}</p>
-              ) : null}
-                <span>~</span>
-              {curList?.end_date != null ? (
-                <p className="end-date">{new Date(curList?.end_date).toLocaleDateString()}</p>
-              ) : null}
+      <div className="content-w">
+        <div className="inner">
+          {/* 제목 영역 */}
+          <div className="title-area">
+            <p className="title">{curList?.title}</p>
+            <div className="regi-info">
+              
+              <p className="views">{"조회수: " + parseInt(curList?.views + 1)}</p>
             </div>
           </div>
-        ): null
-      }
 
-
-      {/* 본문 내용 */}
-      <div className="body-area" dangerouslySetInnerHTML={{
-        __html: DOMPurify.sanitize(curList?.body),
-      }}></div>
-
-      {
-        curList?.latitude != null ? (
-          <div className="map-area">
-            <p className="tit">위치 안내</p>
-              <div id="map" style={{width:"500px", height:"400px"}}></div>
-              <div className="txt-w">
-                <p className="txt">{curList?.address}</p>
-                <p className="detail-txt">{curList?.address_detail}</p>
-              </div>
+          {/* 작성자 정보 */}
+          <div className="writer-info">
+            <p className="author-id">{curList?.username}</p>
+            <p className="date">{new Date(curList?.date).toLocaleDateString()}</p>
           </div>
-        ):null
-      }
+          
+          {/* 진행 기간 */}
+          {
+            curList?.end_date != null ? (
+              <div className="period-area">
+                <p className='period-tit'>진행기간</p>
+              
+                <div className="date-wrap">
+                  {curList?.start_date != null ? (
+                    <p className="start-date">{new Date(curList?.start_date).toLocaleDateString()}</p>
+                  ) : null}
+                    <span>~</span>
+                  {curList?.end_date != null ? (
+                    <p className="end-date">{new Date(curList?.end_date).toLocaleDateString()}</p>
+                  ) : null}
+                </div>
+              </div>
+            ): null
+          }
 
-      {/* 하단 버튼 영역 */}
-      <div className="bottom-area">
-        <button className="btn-tolist" onClick={()=>{navigate(-1);}}>목록</button>
-        <div className="btn-w">
-          <button className="btn-edit" onClick={()=>{navigate(`/campaign/edit/${curList?.id}`);}}>수정</button>
-          <button className="btn-delete" onClick={handleDelete}>삭제</button>
+
+          {/* 본문 내용 */}
+          <div className="body-area" dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(curList?.body),
+          }}></div>
+
+          {
+            curList?.latitude != null ? (
+              <div className="map-area">
+                <p className="tit">위치 안내</p>
+                  <div id="map" style={{width:"500px", height:"400px"}}></div>
+                  <div className="txt-w">
+                    <p className="txt">{curList?.address}</p>
+                    <p className="detail-txt">{curList?.address_detail}</p>
+                  </div>
+              </div>
+            ):null
+          }
+
+          {/* 하단 버튼 영역 */}
+          <div className="bottom-area">
+            <div className="btn-w">
+              <button className="btn-tolist" onClick={()=>{navigate(-1);}}>목록</button>
+              <button className="btn-edit" onClick={()=>{navigate(`/campaign/edit/${curList?.id}`);}}>수정</button>
+              <button className="btn-delete" onClick={handleDelete}>삭제</button>
+            </div>
+            {/* <div className="btn-w">
+              <button className="btn-edit" onClick={()=>{navigate(`/campaign/edit/${curList?.id}`);}}>수정</button>
+              <button className="btn-delete" onClick={handleDelete}>삭제</button>
+            </div> */}
+          </div>
+
+
+          {/* 댓글 */}
+          <Comments curList={curList}/>
         </div>
       </div>
-
-
-      {/* 댓글 */}
-      <Comments curList={curList}/>
+      <Footer/>
     </div>
   );
 };
