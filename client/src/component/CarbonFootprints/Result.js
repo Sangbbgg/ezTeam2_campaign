@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import PiChart from "./Result/piChartData";
 import BarChart from "./Result/barChart";
 import TargetBarchart from "./Result/targetBarchart";
@@ -8,7 +8,7 @@ import ComprehensiveChart from "./Result/comprehensiveChart";
 import { useNavigate } from "react-router-dom";
 import html2canvas from "html2canvas";
 
-function Result({ initialData, resultData, userData, isTransportationOption }) {
+function Result({ initialData, resultData, userData, isTransportationOption, onSaveImage }) {
   const navigate = useNavigate();
 
   const [barChatData, setBarChatData] = useState([]);
@@ -27,37 +27,6 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
   });
 
   const hasResultData = resultData && resultData.calculation_month;
-
-  //이미지 저장시 표시내용 변경
-  const [isProcessing, setIsProcessing]=useState("");
-  const [isImgProcessing, setIsImgProcessing]=useState("none");
-
-  // Ref를 생성하여 캡처하고자 하는 요소에 할당
-  const captureRef = useRef(null);
-
-  // 캡처 및 이미지 저장 함수
-  const saveAsImage = () => {
-    setIsProcessing("none");
-    setIsImgProcessing("");
-    if (captureRef.current) {
-      html2canvas(captureRef.current).then((canvas) => {
-        // 캔버스를 이미지로 변환
-        const image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-
-        // 이미지 다운로드
-        const link = document.createElement("a");
-        link.download = "result.png";
-        link.href = image;
-        link.click();
-
-        setIsProcessing("");
-        setIsImgProcessing("none");
-      }).catch(()=>{
-        setIsProcessing("");
-        setIsImgProcessing("none");
-      });
-    }
-  };
 
   // console.log("??", hasResultData);
   // console.log("유저 결과 :", userData);
@@ -318,7 +287,7 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
 
   return (
     <>
-      <div ref={captureRef}>
+      <div>
         <div className="top_box">
           <div className="title_info">
             <span className="weight_600">결과 페이지</span>
@@ -336,14 +305,19 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
                 <div className="result_conment_right">
                   <h2>결과안내</h2>
                   <p>
-                    <span className="forest_green_text">{userData.username}</span>님의 이산화탄소(CO₂) 발생량 통계입니다.
+                    <span className="forest_green_text">{userData.username}</span>님의 이산화탄소(CO₂) 발생량
+                    통계입니다.
                   </p>
                 </div>
                 <p>
-                  <span className="forest_green_text">{userData.username}</span>님의 가정은 이산화탄소 배출량은 총 {resultData.total}kg 이며,
+                  <span className="forest_green_text">{userData.username}</span>님의 가정은 이산화탄소 배출량은 총{" "}
+                  {resultData.total}kg 이며,
                   <br /> 비슷한 다른 가정 평균 <span className="forest_green_text">{averageData.total}kg</span> 보다 약{" "}
-                  <span className="forest_green_text">{((resultData.total / averageData.total) * 100 - 100).toFixed(1)}%</span> 더 많이 배출하고 있습니다. 아래의 그래프를 보고 어느 부분에서
-                  이산화탄소를 많이 발생하고 있는지 비교해 보세요.
+                  <span className="forest_green_text">
+                    {((resultData.total / averageData.total) * 100 - 100).toFixed(1)}%
+                  </span>{" "}
+                  더 많이 배출하고 있습니다. 아래의 그래프를 보고 어느 부분에서 이산화탄소를 많이 발생하고 있는지 비교해
+                  보세요.
                 </p>
               </div>
             </div>
@@ -366,13 +340,16 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
               <h2>
                 우리집 실천목표! <span className="forest_green_text">생활 속에서 실천가능한 목표</span>를 선택해주세요.
               </h2>
-
-              <div>
-                <div className="select_category" style={{ display: toString(isProcessing) }}>
-                  {console.log("isProcessing",isProcessing)}
+              {/* 이미지 저장시 hidden처리될 구역 */}
+              <div className="hidden_for_capture">
+                <div className="select_category">
                   <ul>
                     {Object.keys(labels).map((key) => (
-                      <li key={key} className={`select_tap ${selectTap === key ? "active" : ""} `} onClick={() => handleSubTapClick(key)}>
+                      <li
+                        key={key}
+                        className={`select_tap ${selectTap === key ? "active" : ""} `}
+                        onClick={() => handleSubTapClick(key)}
+                      >
                         {labels[key]}
                       </li>
                     ))}
@@ -391,7 +368,7 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
                               .filter((item) => item.name === label)
                               .map((filteredItem, index) => (
                                 <div key={index}>
-                                  <label htmlFor ={`${filteredItem.name}-${index}`}>
+                                  <label htmlFor={`${filteredItem.name}-${index}`}>
                                     <input
                                       type="checkbox"
                                       id={`${label}-${index}`}
@@ -401,18 +378,29 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
                                       checked={!!checkedItems[`${filteredItem.name}-${index}`]}
                                       // onChange 작성 부분
                                       onChange={handleCheckboxChange}
-                                      disabled={hasResultData || (filteredItem.name === "transportation" && isTransportationOption)}
+                                      disabled={
+                                        hasResultData ||
+                                        (filteredItem.name === "transportation" && isTransportationOption)
+                                      }
                                     />
-                                    <span className={!!checkedItems[`${filteredItem.name}-${index}`] ? `forest_${label}_text` : ""}>{filteredItem.advice_text}</span>
+                                    <span
+                                      className={
+                                        !!checkedItems[`${filteredItem.name}-${index}`] ? `forest_${label}_text` : ""
+                                      }
+                                    >
+                                      {filteredItem.advice_text}
+                                    </span>
                                   </label>
                                   {/* ------------------ 사진 저장시만 표시될 항목*/}
-                                  {/* {!!checkedItems[`${filteredItem.name}-${index}`]? (
-                                    <div style={{borderTop: "1px solid #999", marginTop: "10px"}}>
-                                      <span style={{paddingLeft: "15px", color:"red"}}>월간 {checkedItems[`${filteredItem.name}-${index}`]} kg 저감</span>
+                                  {!!checkedItems[`${filteredItem.name}-${index}`] ? (
+                                    <div style={{ borderTop: "1px solid #999", marginTop: "10px" }}>
+                                      <span style={{ paddingLeft: "15px", color: "red" }}>
+                                        월간 {checkedItems[`${filteredItem.name}-${index}`]} kg 저감
+                                      </span>
                                     </div>
                                   ) : (
                                     ""
-                                  )} */}
+                                  )}
                                   {/* ------------------- */}
                                 </div>
                               ))}
@@ -428,7 +416,7 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
                             </div>
                           </div>
                         </div>
-                        <div className={"target_category"}>
+                        <div className="target_category">
                           <div className="item_title">
                             <h3>부분별 실천목표</h3>
                           </div>
@@ -448,6 +436,73 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
                     )
                 )}
               </div>
+              {/* 이미지 저장시 visibility처리될 구역 */}
+              <div className="visibility_for_capture select_content" style={{ display: "none" }}>
+                {Object.keys(labels).map((label) => (
+                  <div key={label} className="">
+                    <div className={`category forest_${label}_bg`}>
+                      <div className={`category_title forest_${label}_text`}>
+                        <span>{labels[label]}</span>
+                      </div>
+                      <div>
+                        {initialData
+                          .filter((item) => item.name === label)
+                          .map((filteredItem, index) => (
+                            <div key={index}>
+                              <label htmlFor={`${filteredItem.name}-${index}`}>
+                                <input
+                                  type="checkbox"
+                                  id={`${label}-${index}`}
+                                  name={`${filteredItem.name}-${index}`}
+                                  value={filteredItem.savings_value}
+                                  // 체크 박스 추적관리
+                                  checked={!!checkedItems[`${filteredItem.name}-${index}`]}
+                                  // onChange 작성 부분
+                                  onChange={handleCheckboxChange}
+                                  disabled={
+                                    hasResultData || (filteredItem.name === "transportation" && isTransportationOption)
+                                  }
+                                />
+                                <span
+                                  className={
+                                    !!checkedItems[`${filteredItem.name}-${index}`] ? `forest_${label}_text` : ""
+                                  }
+                                >
+                                  {filteredItem.advice_text}
+                                </span>
+                              </label>
+                              {/* ------------------ 사진 저장시만 표시될 항목*/}
+                              {!!checkedItems[`${filteredItem.name}-${index}`] ? (
+                                <div style={{ borderTop: "1px solid #999", marginTop: "10px" }}>
+                                  <span style={{ paddingLeft: "15px", color: "red" }}>
+                                    월간 {checkedItems[`${filteredItem.name}-${index}`]} kg 저감
+                                  </span>
+                                </div>
+                              ) : (
+                                ""
+                              )}
+                              {/* ------------------- */}
+                            </div>
+                          ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                <div className="target_co2saving">
+                  <div className="item_title">
+                    <h3>월간 CO₂ 저감목표</h3>
+                  </div>
+                  <div className="barChart" style={{ width: "100%", height: "280px" }}>
+                    <div style={{ width: "100%", height: "270px" }}>
+                      <TargetBarchartTotal barChartDataTotal={barChartDataTotal} />
+                    </div>
+                  </div>
+                </div>
+                <div className="total_target_co2saving">
+                  <p>총 합계</p>
+                  <span>{categorySavings.total}kg</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -466,13 +521,19 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
                 <ul>
                   <li>
                     <p>
-                      우리집의 이산화탄소 배출량은 총 <span className="forest_green_text">{resultData.total} kg</span>이며, 다른 가정보다 약{" "}
-                      <span className="forest_green_text">{((resultData.total / averageData.total) * 100 - 100).toFixed(1)}% 더많이 배출</span>하고 있습니다.
+                      우리집의 이산화탄소 배출량은 총 <span className="forest_green_text">{resultData.total} kg</span>
+                      이며, 다른 가정보다 약{" "}
+                      <span className="forest_green_text">
+                        {((resultData.total / averageData.total) * 100 - 100).toFixed(1)}% 더많이 배출
+                      </span>
+                      하고 있습니다.
                     </p>
                   </li>
                   <li>
                     <p>
-                      부문별로 보면 전기,가스,수도,교통,폐기물의 5개 부문 중 <span className="forest_green_text">{higherItemCount}개 부문</span>에서 다른 가정보다 이산화탄소 배출이 많습니다.{" "}
+                      부문별로 보면 전기,가스,수도,교통,폐기물의 5개 부문 중{" "}
+                      <span className="forest_green_text">{higherItemCount}개 부문</span>에서 다른 가정보다 이산화탄소
+                      배출이 많습니다.{" "}
                     </p>
                     {/* 많은 배출이 없다면 "적습니다."조건문 적용 */}
                   </li>
@@ -507,8 +568,9 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
               <div className="result_box_content_item">
                 <div>
                   <p>
-                    <span className="forest_green_text">{userData.username}</span>님 가정에서 이산화탄소 배출을 줄이는 실천을 하시면 약{" "}
-                    <span className="forest_green_text">{categorySavings.total} kg</span>의 이산화탄소를 줄일 수 있습니다.
+                    <span className="forest_green_text">{userData.username}</span>님 가정에서 이산화탄소 배출을 줄이는
+                    실천을 하시면 약 <span className="forest_green_text">{categorySavings.total} kg</span>의
+                    이산화탄소를 줄일 수 있습니다.
                   </p>
                   <div className="handle_box">
                     {!hasResultData && (
@@ -523,7 +585,7 @@ function Result({ initialData, resultData, userData, isTransportationOption }) {
                         </div>
                       </>
                     )}
-                    <button onClick={saveAsImage}>이미지로 저장하기</button>
+                    <button onClick={onSaveImage}>이미지로 저장하기</button>
                   </div>
                 </div>
               </div>

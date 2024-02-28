@@ -537,6 +537,7 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 
 .totalbox{display:grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 10px;}
 .item_title{height: 50px; font-size: 20px; padding: 10px 10px; border-bottom: 1px solid #999;}
+.item_title > p{font-weight: 600;}
 .totalbox .box_item_wrap{height: 400px; background-color:rgba(255, 255, 255, 0.9); border: 2px solid #e1f0de; border-radius: 8px; display: flex; flex-direction: column}
 .totalbox .box_item_wrap.active{border: 3px solid #25B058;}
 .totalbox .box_item_wrap .box_item{padding: 10px 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-around;}
@@ -603,7 +604,6 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 .select_content .category > div > div{padding: 12px; border: 1px solid #999; border-radius: 8px; background-color: white; display: flex; flex-direction: column; justify-content: center;}
 .select_content .category > div > div > label{display: flex; align-items: center; gap: 5px;}
 
-
 .select_content .target_co2saving{grid-column: 1/2; border: 1px solid #aaa; border-radius: 8px;}
 .select_content .target_co2saving > .item_title > h3{font-size: 18px; margin-left: 20px;}
 .select_content .target_category{grid-column: 2/3; border: 1px solid #aaa; border-radius: 8px;}
@@ -631,7 +631,7 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 .result_total .result_total_left > ul > li{list-style-type:disc;}
 .result_total .result_total_left > ul > li > p{font-size: 14px;}
 
-
+.visibility_for_capture{display: flex; flex-direction: column;}
 
 
 

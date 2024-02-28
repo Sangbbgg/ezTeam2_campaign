@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import Header from "../component/Header";
 // 내부 컴포넌트 분류---------------------------------------
@@ -7,6 +7,8 @@ import Result from "../component/CarbonFootprints/Result";
 import Practice from "../component/CarbonFootprints/Practice";
 // ---------------------------------------------------------
 import Footer from "../component/Footer";
+
+import html2canvas from "html2canvas";
 
 function CarbonFootprint() {
   // const userId = 179870; //개발용 user_id
@@ -126,6 +128,7 @@ function CarbonFootprint() {
             resultData={dataToShow}
             userData={userData}
             isTransportationOption={isTransportationOption}
+            onSaveImage={saveAsImage}
           />
         );
       case "practice":
@@ -135,7 +138,7 @@ function CarbonFootprint() {
           <Consumption
             inputData={consumptionData}
             initialData={initialData.carbonFootprintData}
-            onResultSubmit={handleResultSubmit}
+            saveAsImage={handleResultSubmit}
           />
         );
     }
@@ -145,8 +148,50 @@ function CarbonFootprint() {
     return `tab-item ${activeTab === tabName ? "active" : ""}`;
   };
 
+  // Ref를 생성하여 캡처하고자 하는 요소에 할당
+  const captureRef = useRef(null);
+
+  // 캡처 및 이미지 저장 함수
+  const saveAsImage = () => {
+    const elementsToHide = document.querySelectorAll(".hidden_for_capture");
+    const elementsToVisibility = document.querySelectorAll(".visibility_for_capture");
+
+    // html2canvas로 캡처 전에 class 숨기기
+    elementsToHide.forEach((element) => {
+      element.style.display = "none";
+    });
+
+    // html2canvas로 캡처 전에 class 보이기
+    elementsToVisibility.forEach((element) => {
+      element.style.display = "";
+    });
+
+    if (captureRef.current) {
+      setTimeout(() => {  // result의 엘리먼트 dispay 적용이 되지 않아 1초의 유휴시간 부여
+        html2canvas(captureRef.current, {
+          onclone: (canvas) => {
+            // html2canvas로 캡처 후 요소를 다시 표시
+            elementsToHide.forEach((element) => {
+              element.style.display = "";
+            });
+            elementsToVisibility.forEach((element) => {
+              element.style.display = "none";
+            });
+          },
+        }).then((canvas) => {
+          // 캔버스를 이미지로 변환 후 다운로드
+          const image = canvas.toDataURL("image/png");
+          const link = document.createElement("a");
+          link.download = "result.png";
+          link.href = image;
+          link.click();
+        });
+      }, 1000);
+    }
+  };
+
   return (
-    <div id="wrap">
+    <div id="wrap" ref={captureRef}>
       <div className="title_box">
         <div>
           <h1 className="forest_green_text">탄소발자국 계산기</h1>
@@ -154,8 +199,9 @@ function CarbonFootprint() {
         </div>
       </div>
       <div className="tanso_bg">
-
-        <Header />
+        <div className="hidden_for_capture">
+          <Header />
+        </div>
         <div className="inner">
           <div className="menu-container">
             <div className="tab-container">
