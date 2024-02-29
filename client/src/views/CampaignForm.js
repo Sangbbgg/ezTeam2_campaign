@@ -8,33 +8,40 @@ import Footer from "../component/Footer";
 
 const CampaignForm = () => {
   const navigate = useNavigate();
-  const [campaignList, setCampaignList] = useState([]); // 글 리스트
-  const {id} = useParams();
   const dispatch = useDispatch();
-  
+  const {id} = useParams();
   const storedUserData = sessionStorage.getItem("userData");
   const userData = JSON.parse(storedUserData);
-  console.log(userData)
 
-  // console.log(campaignList)
+  const [formWrite, setFormWrite] = useState({
+    company: "",
+    memo: "",
+    userid: userData.userid, 
+  });
+  console.log(id)
 
+  const handleChange = (e) => {
+    setFormWrite((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // 게시물 데이터 요청
-        const result = await dispatch(getPost());
-        setCampaignList(result.payload);
-
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
+  const handleClick = async (e) => {
+    e.preventDefault();
+    let submitData = {
+      company: formWrite.company,
+      memo: formWrite.memo,
+      userid: formWrite.userid,
     };
-  
-    fetchData();
-  }, [id, dispatch]);
 
-  
+    try {
+      await axios.post(`http://localhost:8000/campaign/detail/${id}/form`, submitData);
+      // 요청 성공 시 적절한 작업 수행
+      // navigate(-1);
+    } catch (err) {
+      console.log(err);
+      // 요청 실패 시 에러 처리
+    }
+  };
+  console.log(`http://localhost:8000/campaign/detail/${id}/form`)
 
   return (
     <div id="wrap" className="application-form">
@@ -64,18 +71,19 @@ const CampaignForm = () => {
               <tr>
                 <th className="user-name" scope="row">전화번호</th>
                 <td className="user-name">
-                  <span className="value_txt">010-1234-1234</span>
+                  <span className="value_txt">{userData.phonenumber}</span>
                 </td>
                 <th className="user-email" scope="row">소속</th>
                 <td className="user-company">
-                  <input type="text" />
+                  <input type="text" name="company" value={formWrite.company} onChange={handleChange} />
                 </td>
               </tr>
               <tr>
                 <th>신청자 메모</th>
                 <td colSpan="3">
-                  <textarea name="" id="" cols="30" rows="10"></textarea>
+                  <textarea value={formWrite.memo} placeholder="내용을 입력하세요" onChange={(e) => setFormWrite({...formWrite, memo: e.target.value})} />
                 </td>
+                {console.log(formWrite)}
               </tr>
               {/* <tr>
                 <th scope="row">제목</th>
@@ -87,7 +95,8 @@ const CampaignForm = () => {
 
         <div className="bottom-area">
           <div className="btn-w">
-            <button className="btn-edit" type="submit">신청</button> 
+            <button className="btn-submit" onClick={handleClick}>신청</button>
+
             <button className="btn-cancel" type="button" onClick={()=>{navigate(-1)}}>취소</button> 
           </div>
         </div>
