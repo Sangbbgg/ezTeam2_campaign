@@ -69,7 +69,6 @@ const CampaignEdit = () => {
             // 정상적으로 검색이 완료됐으면
             if (status === window.daum.maps.services.Status.OK) {
               const result = results[0]; //첫번째 결과의 값을 활용
-              console.log(result)
               // 해당 주소에 대한 좌표를 받아서
               const coords = new window.daum.maps.LatLng(result.y, result.x);
               // 지도를 보여준다.
@@ -98,7 +97,6 @@ const CampaignEdit = () => {
     setWrite((prev) => ({ ...prev, body: value }));
   };
 
-  console.log(write)
   const handleClick = async (e) => {
     e.preventDefault();
     const confirmUpdate = window.confirm("글을 수정하시겠습니까?");

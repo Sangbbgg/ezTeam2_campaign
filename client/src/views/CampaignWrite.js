@@ -183,32 +183,18 @@ const CampaignWrite = () => {
     };
   }, [selOpt]); 
   
-
-  let [mainImg,setMainImg] = useState("");
-  const setPreviewImg = (event) => {
-    var reader = new FileReader();
-    reader.onload = function(event) {
-      setMainImg(event.target.result);
-    };
-    reader.readAsDataURL(event.target.files[0]);
-  }
-
   return (
     <div id="wrap" className="campaign-write">
       <Header />
       <div className="content-w">
         <div className="inner">
-          {/* 이미지 업로드 */}
-          <input type="file" id="image" accept="image/*" style={{border: "solid 1px lightgray", borderRadius: "5px"}} onChange={setPreviewImg}/>
-          
-          {/* 이미지 미리보기 */}
-          <img alt="메인사진" src={mainImg} style={{maxWidth:"100px"}}></img>
-  
           <div className="form-w">
             <form>
+              <div className="txt-box">
+                <p className="title">캠페인 제목</p>
+                <input type="text" name="title" value={write.title || ""} placeholder="제목을 입력하세요" onChange={handleChange} />
+              </div>
               <div className="body-area">
-                <input className="title" type="text" name="title" value={write.title}placeholder="제목을 입력하세요" onChange={handleChange}/>
-    
                 <div className="calendar-area">
                   <p className="cal-tit">진행기간</p>
                   <div className="calendar">
@@ -266,7 +252,7 @@ const CampaignWrite = () => {
               </div> */}
               <div className="bottom-area">
                 <div className="btn-w">
-                  <button className="btn-edit" type="submit" onClick={handleClick}>등록</button> 
+                  <button className="btn-submit" type="submit" onClick={handleClick}>등록</button> 
                   <button className="btn-cancel" type="button" onClick={()=>{navigate(-1)}}>취소</button> 
                 </div>
               </div>

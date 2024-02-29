@@ -309,7 +309,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .campaign-detail .body-wrap {position: relative; margin-top: 40px; padding: 40px; background-color: #fff; border-radius: 6px;}
 .campaign-detail .body-wrap .body-tit {margin-bottom: 20px; padding-bottom: 14px; font-size: 20px; border-bottom: 1px solid #ddd;}
 .campaign-detail .body-area {font-size: 18px;  background-color: #fff;}
-.campaign-detail .body-area img {margin-bottom: 40px; max-width: 400px; height: auto;}
+.campaign-detail .body-area img {margin-bottom: 40px; max-width: 944px; height: auto;}
 .campaign-detail .body-area p {font-size: 16px; }
 .campaign-detail .bottom-area .btn-w {background-color: #fff;}
 
@@ -332,7 +332,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 
 
 /* 버튼 영역 */
-.bottom-area {margin-top: 80px; display: flex; justify-content: center;}
+.bottom-area {position: relative; margin-top: 80px; display: flex; justify-content: center; z-index: 1;}
 .bottom-area.pos-right {justify-content: right;}
 .bottom-area .btn-w {padding: 30px 40px; background-color: #e1f0de; box-shadow: 0 4px 6px -2px #00000012, 0 10px 15px -3px #0000001f; border-radius: 12px;}
 .bottom-area button + button {margin-left: 8px;}
@@ -370,7 +370,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .calendar-area .cal-tit {margin-bottom: 14px; font-size: 20px;}
 .calendar {display: flex;}
 .calendar > div:nth-child(2) {margin-left: 12px;}
-.calendar input {margin: 0 auto; padding: 4px 12px; width: 100%; border: 0; color: #000; background-color: #e1f0de;}
+.calendar input {margin: 0 auto; padding: 4px 12px; min-width: 240px; border: 0; color: #000; background-color: #e1f0de;}
 
 /* 댓글 */
 /* .view-wrap {padding: 40px 0;} */
@@ -402,6 +402,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .address-area {position: relative; margin-top: 80px;}
 .address-area input {margin-bottom: 0;}
 .address-area .addr-tit {margin-bottom: 14px; font-size: 20px;}
+.address-area .address-txt {min-width: 240px;}
 .address-area .addr-div .search-w {display: flex; justify-content: flex-start;}
 .address-area .addr-div .addr-detail {margin-top: 10px; width: 100%;}
 .address-area .addr-div .btn-search {min-width: 88px; background-color: #fff; border: 1px solid #000; cursor: pointer;}

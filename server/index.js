@@ -165,6 +165,43 @@ app.put("/campaign/increase-views/:id", (req, res) => {
   });
 });
 
+// 신청하기 버튼 클릭 시 사용자가 입력한 정보가 들어가도록 요청
+app.post("/campaign/detail/:id/form", (req, res) => {
+  const postId = req.params.id;
+  const { userid, company, memo } = req.body; 
+  
+  // 사용자가 입력한 userid, company, memo, postId 값을 쿼리에 삽입
+  const values = [userid, company, memo, postId];
+  const q = 'INSERT INTO campaign_form (userid, company, memo, post_id) VALUES (?, ?, ?, ?)';
+  
+  connection.query(q, values, (err, data) => {
+    if (err) {
+      console.error("Error inserting data:", err);
+      return res.status(500).json({ error: "Failed to submit the form." });
+    }
+    return res.json({ message: "Message has been sent successfully" });
+  });
+});
+
+app.get("/campaign/detail/:id/form", (req, res) => {
+  const postId = req.params.id;
+  const q = `
+    SELECT cc.*, u.username
+    FROM campaign_form cc
+    INNER JOIN user u ON cc.userid = u.userid
+    WHERE cc.post_id = ?`;
+  
+  connection.query(q, [postId], (err, data) => { 
+    if(err) return res.status(500).json(err);
+    return res.status(200).json(data); 
+  });
+});
+
+
+
+
+
+
 
 // -------------- 댓글 --------------
 // 댓글 등록
