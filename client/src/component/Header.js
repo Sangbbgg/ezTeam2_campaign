@@ -82,9 +82,6 @@ const Header = () => {
                 {/* <a className="one-link" href=""><button className="one-link" onClick={()=>{navigate('/carbonFootprint')}}>탄소발자국</button></a> */}
                 <a className="one-link" href=""><button className="one-link" onClick={()=>navigateWithLoginCheck('/carbonFootprint')}>탄소발자국</button></a>
               </li>
-              <li>
-                <a className="one-link" href=""><button className="one-link" onClick={()=>navigateWithLoginCheck('/mypage')}>MyPage</button></a>
-              </li>
             </ul>
           </div>
 
@@ -102,6 +99,7 @@ const Header = () => {
               <button>
                 <Link to="/modify">정보 수정</Link>
               </button>
+              <button className="one-link" onClick={()=>navigateWithLoginCheck('/mypage')}><a className="one-link" href="">MyPage</a></button>
             </>
           ) : (
             // 로그아웃 상태일 때 로그인과 회원가입 버튼 표시

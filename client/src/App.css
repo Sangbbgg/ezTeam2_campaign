@@ -536,7 +536,7 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 
 .totalbox{display:grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 10px;}
 .item_title{display: flex; gap: 10px; height: 50px; font-size: 20px; padding: 10px 10px; border-bottom: 1px solid #999;}
-.step_icon{border-radius: 12px; padding: 5px; width: 35px; display: flex; align-items: center;justify-content: center;}
+.step_icon{border-radius: 12px; padding: 5px; width: 35px; display: flex; align-items: center; justify-content: center;}
 .item_title > p{font-weight: 600;}
 .totalbox .box_item_wrap{height: 400px; background-color:rgba(255, 255, 255, 0.9); border: 2px solid #e1f0de; border-radius: 8px; display: flex; flex-direction: column}
 .totalbox .box_item_wrap.active{border: 3px solid #25B058;}

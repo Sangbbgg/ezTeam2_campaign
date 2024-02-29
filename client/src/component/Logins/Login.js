@@ -50,11 +50,9 @@ function LoginPage() {
   };
   
   return (
-    <div className="login-page">
-      <div className="form">
-        <form className="login-form">
+    <div className="form">
+        <form className="form-login">
           {/* 로그인 아이디 비밀번호 표시 */}
-          <from className="login-a">
           <input
             id="id"
             type="text"
@@ -69,24 +67,25 @@ function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           /><br/>
-          
+      
           {/* 체크박스 표시  */}
-          <div>
-          <input
-              type="checkbox"
-              id="personalCheckbox"
-              checked={userTypes===1}
-              onChange={() => handleCheckboxChange(1)}
-            />
-            <label htmlFor="personalCheckbox">개인</label>
-
+          <div className='form-login-check'>
+            <input
+                type="checkbox"
+                id="personalCheckbox"
+                checked={userTypes===1}
+                onChange={() => handleCheckboxChange(1)}
+              />
+              <label 
+              htmlFor="personalCheckbox">개인</label>
             <input
               type="checkbox"
               id="businessCheckbox"
               checked={userTypes===2}
               onChange={() => handleCheckboxChange(2)}
             />
-            <label htmlFor="businessCheckbox">기업</label>
+            <label 
+            htmlFor="businessCheckbox">기업</label>
 
             <input
               type="checkbox"
@@ -94,23 +93,24 @@ function LoginPage() {
               checked={userTypes===3}
               onChange={() => handleCheckboxChange(3)}
             />
-            <label htmlFor="organizationCheckbox">단체</label>
+            <label 
+            htmlFor="organizationCheckbox">단체</label>
           </div>
+          
+           
           {/* 로그인 버튼 표시 */}
-          <button className="Btn" onClick={(e) => 
+          <button onClick={(e) => 
             { e.preventDefault(); console.log('버튼 클릭됨'); LoginPageJs() ; }}>
             로그인
           </button>
-          <div>
-            <Link to="/Register">회원가입 필요하십니까?</Link>
-          </div>
-          <div>
+          <div className='form-login-link'>
+            <Link to="/Register">회원가입</Link>
             <Link to="/Find">회원ID찾기</Link>
+      
           </div>
+          
           {loginStatus && <div>{loginStatus}</div>}
-          </from>
         </form>
-      </div>
     </div>
   );
 }
