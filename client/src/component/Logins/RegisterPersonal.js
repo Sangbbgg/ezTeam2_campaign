@@ -24,44 +24,51 @@ function RegisterPersonal() {
   };
   
   // 이메일 유효성 검사 02/14 김민호
-  const handleEmailDuplicationCheck = (event) => {
+  const handleEmailDuplicationCheck = async (event) => {
     event.preventDefault();
+    console.log("이메일 중복 확인 시작");
+
     if (!email) {
       alert('이메일을 입력해주세요!');
       return;
     }
-    // 클라이언트가 서버에 이메일 중복 확인을 요청합니다./0214 김민호
-    axios.post('http://localhost:8000/checkEmailDuplication', { email })
-      .then(response => {
-        console.log('서버 응답:', response.data);
-        alert(response.data.message);
-        setEmailDuplication(response.data.success);
+    try {
+      const response = await axios.post('http://localhost:8000/checkEmailDuplication', { email });
+      console.log('서버 응답:', response.data);
+      alert(response.data.message);
+      setEmailDuplication(response.data.success);
 
-        if (response.data.success) {
-          setIsDuplicateChecked(true);
-        }
-      })
-      .catch(error => {
-        console.error('이메일 중복 확인 중 오류:', error);
-        alert('이메일 중복 확인 중 오류가 발생했습니다.');
-      });
+      if (response.data.success) {
+        setIsDuplicateChecked(true);
+      }else{
+        setIsDuplicateChecked(false);//중복되지 않은경우
+      }
+    } catch (error) {
+      console.error('이메일 중복 확인 중 오류:', error);
+      alert('이메일 중복 확인 중 오류가 발생했습니다.');
+    }
   };
 
-  const handleRegesterClick = () => {
-    if (!username || !email || !password || !confirmPassword || !address) {
-      alert('정보를 모두 입력해주세요!');
-      return;
-    }
-    if (!email) {
-      alert('이메일을 입력해주세요!');
-      return;
-    }
-    // 이메일이 중복되었는지 확인합니다.
-    // 이메일 유효성 검사 02/14 김민호
+
+
+  const handleRegesterClick = (event) => {
+    event.preventDefault();
+    console.log("회원가입 시작");
+
     if (!IsDuplicateChecked) {
       alert('이미 등록된 이메일이거나 이메일 중복 확인을 해주세요.');
       return;
     }
+
+    if (!username || !email || !password || !confirmPassword || !address) {
+      alert('정보를 모두 입력해주세요!');
+      return;
+    }
+   
+
+    // 이메일이 중복되었는지 확인합니다.
+    // 이메일 유효성 검사 02/14 김민호
+  
     // --------이메일 기능 구현 함수 @가 없으면 회원가입이 안되게 해놨음-------
     // if (!email.includes('@')) {
     //   alert('이메일을 입력해주세요!');
@@ -123,8 +130,7 @@ function RegisterPersonal() {
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
-    
-   
+
         <div>
           <input
             type="password"
@@ -132,8 +138,8 @@ function RegisterPersonal() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-  
         </div>
+
         <div>
           <input
             type="password"
@@ -141,19 +147,20 @@ function RegisterPersonal() {
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
-  
         </div>
+
         <div>
-            <input
-              type="text"
-              placeholder="이메일"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <button className="CheckBtn"
-            onClick={() => { handleEmailDuplicationCheck(); setIsDuplicateChecked(false); }}>확인</button>
-            {/* 이메일 유효성 검사 02/14 김민호 */}
+          <input
+            type="text"
+            placeholder="이메일"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <button className="CheckBtn" onClick={handleEmailDuplicationCheck}>
+            확인
+          </button>
         </div>
+
         <div>
           <input
             type="text"
@@ -162,7 +169,7 @@ function RegisterPersonal() {
             onChange={(e) => setphonenumber(e.target.value)}
           />
         </div>
-    
+
         <div>
           <input
             type="text"
@@ -170,9 +177,9 @@ function RegisterPersonal() {
             value={address}
             onChange={(e) => setAddress(e.target.value)}
           />
-        
-          <button className="CheckBtn"
-          onClick={handle.clickButton}>선택</button>
+          <button className="CheckBtn" onClick={handle.clickButton}>
+            선택
+          </button>
           {openPostcode && (
             <DaumPostcode
               onComplete={handle.selectAddress}
@@ -181,6 +188,7 @@ function RegisterPersonal() {
             />
           )}
         </div>
+
         <div>
           <input
             type="text"
@@ -189,12 +197,13 @@ function RegisterPersonal() {
             onChange={(e) => setdetailedaddress(e.target.value)}
           />
         </div>
-  
+
         <div>
           <button className="RegesterBtn" onClick={handleRegesterClick}>
             가입완료
           </button>
         </div>
+
         <div className="Category-Link">
           <Link to="/login">로그인창</Link>
         </div>
