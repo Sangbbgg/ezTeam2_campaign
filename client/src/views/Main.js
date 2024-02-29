@@ -9,6 +9,9 @@ import {gsap} from "gsap";
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+// 0229 상호형 메인 Chart
+import LegendEffectOpacityChart from'../component/CarbonFootprints/Result/LegendEffectOpacityChart';
+
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -168,7 +171,7 @@ window.addEventListener("scroll", function() {
           </div>
 
           <div className="cont-area">
-            
+            <LegendEffectOpacityChart/>
           </div>
           
         </div>
