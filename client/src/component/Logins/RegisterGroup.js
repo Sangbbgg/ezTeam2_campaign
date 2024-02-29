@@ -26,7 +26,10 @@ function RegisterGroup() {
     // setPasswordMatch(true) 또는 setPasswordMatch(false) 등으로 사용
   };
 // 이메일 유효성 검사 02/14 김민호
-const handleEmailDuplicationCheck = () => {
+const handleEmailDuplicationCheck = async(event) => {
+  event.preventDefault();
+  console.log("이메일 중복 확인 시작");
+
   if (!email) {
     alert('이메일을 입력해주세요!');
     return;
@@ -34,24 +37,28 @@ const handleEmailDuplicationCheck = () => {
   
 
   // 클라이언트가 서버에 이메일 중복 확인을 요청합니다./0214 김민호
-  axios.post('http://localhost:8000/checkEmailDuplication', { email })
-    .then(response => {
-      console.log('서버 응답:', response.data);
-      alert(response.data.message);//응답 성공시 표시
-      setEmailDuplication(response.data.success);//이메일 중복여부 확인하는 상태
-      
-      if(response.data.success){
-        setIsDuplicateChecked(true);//중복 문제 없다 알려줌
-      }
-    })
-    .catch(error => {
-      console.error('이메일 중복 확인 중 오류:', error);
-      alert('이메일 중복 확인 중 오류가 발생했습니다.');
-    });
-    
-    
+  try {
+    const response = await axios.post('http://localhost:8000/checkEmailDuplication', { email });
+    console.log('서버 응답:', response.data);
+    alert(response.data.message);
+    setEmailDuplication(response.data.success);
+
+    if (response.data.success) {
+      setIsDuplicateChecked(true);
+    }else{
+      setIsDuplicateChecked(false);//중복되지 않은경우
+    }
+  } catch (error) {
+    console.error('이메일 중복 확인 중 오류:', error);
+    alert('이메일 중복 확인 중 오류가 발생했습니다.');
+  }
 };
-const handleuniquenumberCheck = () => {
+
+
+const handleuniquenumberCheck = async(event) => {
+  event.preventDefault();
+  console.log("사업자 중복 확인 시작");
+
   if (!uniquenumber) {
     alert('고유번호을 입력해주세요!');
     return;
@@ -59,23 +66,27 @@ const handleuniquenumberCheck = () => {
   
 
   // 클라이언트가 서버에 고유번호 중복 확인을 요청합니다./0220 김민호
-  axios.post('http://localhost:8000/checkuniquenumber', { uniquenumber })
-    .then(response => {
+  try{
+    const response=await axios.post('http://localhost:8000/checkuniquenumber', { uniquenumber })
       console.log('서버 응답:', response.data);
       alert(response.data.message);
       setuniquenumberDuplication(response.data.success);
 
       if(response.data.success){
         setIsuniquenumberDuplication(true);
+      }else{
+        setIsuniquenumberDuplication(false);
       }
-    })
-    .catch(error => {
-      console.error('사업자 중복 확인 중 오류:', error);
-      alert('사업자 중복 확인 중 오류가 발생했습니다.');
-    });
+    }
+    catch(error){
+      console.error('단체 중복 확인 중 오류:', error);
+      alert('단체 중복 확인 중 오류가 발생했습니다.');
+    };   
 };
 
-  const handleRigesterClick = () => {
+  const handleRigesterClick = (event) => {
+    event.preventDefault();
+    
     if (!username || !email || !password || !confirmPassword || !address) {
       alert('정보를 모두 입력해주세요!');
       return;
@@ -112,7 +123,7 @@ const handleuniquenumberCheck = () => {
     //   return;
     // }
     
-  // --------사업자 유효성------------------------  
+  // --------단체 유효성------------------------  
   if (!IsuniquenumberDuplication) {
     alert('이미 등록된 고유번호이거나 고유번호 중복 확인을 해주세요.');
     return;
@@ -193,7 +204,7 @@ axios.post('http://localhost:8000/Rigester', {
           />
           <button 
           className="CheckBtn"
-          onClick={()=>{handleuniquenumberCheck(); setIsuniquenumberDuplication(false);}}>확인</button>
+          onClick={handleuniquenumberCheck}>확인</button>
           {/* 고유 유효성 검사 02/20 김민호 */}
         </div>
         <div>
@@ -205,7 +216,7 @@ axios.post('http://localhost:8000/Rigester', {
           />
           <button 
           className="CheckBtn"
-          onClick={()=>{handleEmailDuplicationCheck(); setIsDuplicateChecked(false);}}>확인</button>
+          onClick={handleEmailDuplicationCheck}>확인</button>
           {/* handleEmailDuplicationCheck 함수가 호출해서 이메일 중복확인 작업을 진행하고, 중복방지를 해주는 코드 */}
           {/* 이메일 유효성 검사 02/14 김민호 */}
         </div>
