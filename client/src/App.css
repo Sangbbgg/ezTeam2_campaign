@@ -274,7 +274,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 
 /* 상세 */
 #wrap.campaign-detail {padding-top: 0;}
-#wrap.campaign-detail .content-w {position: relative; padding-top: 160px; padding-bottom: 120px; background-color: #e1f0de;}
+#wrap.campaign-detail .content-w {position: relative; padding-top: 160px; padding-bottom: 120px; background-color: #e1f0de;background-image: url('../public/img/carbon_content_bg.png'); background-size: cover; background-position: center;}
 
 .campaign-detail {position: relative;}
 .campaign-detail .title-area {display: flex; justify-content: space-between; margin-bottom: 32px; padding-bottom: 16px; border-bottom: 1px solid #aaa;}

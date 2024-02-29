@@ -37,6 +37,8 @@ const CampaignEdit = () => {
     fetchData();
   }, [id]);
 
+ 
+
   const initializeMap = (latitude, longitude) => {
     const mapContainer = document.getElementById("map"); // 지도를 표시할 div
     const mapOption = {
@@ -96,6 +98,7 @@ const CampaignEdit = () => {
     setWrite((prev) => ({ ...prev, body: value }));
   };
 
+  console.log(write)
   const handleClick = async (e) => {
     e.preventDefault();
     const confirmUpdate = window.confirm("글을 수정하시겠습니까?");
@@ -116,28 +119,26 @@ const CampaignEdit = () => {
 
   const [selOpt, setSelOpt] = useState("오프라인");
 
+
+  useEffect(()=>{
+    if(write.latitude == null){
+      setSelOpt("장소없음")
+    }
+  }, [write.latitude])
+
   const onChangeRadio = (e) => {
     setSelOpt(e.target.value);
     console.log(e.target.value);
   };
 
   const renderAddrDiv = () => {
-    if(selOpt === "장소없음"){
-      document.querySelector("#map").style.display = "none";
-      return null;
-    } else {
-      document.querySelector("#map").style.display = "block";
-    }
-
     return (
       <div className='addr-div'>
         <div className="search-w">
-          <input className="address-txt" type="text" id="sample5_address" defaultValue={write.address} placeholder="주소를 입력하세요." />
+          <input className="address-txt" type="text" id="sample5_address" defaultValue={write.address || ""} placeholder="주소를 입력하세요." />
           <input className="btn-search" type="button" id="searchButton" value="주소 검색" onClick={handleSearchButtonClick} />
         </div>
-        <input className="addr-detail" type="text" id="" value={write.address_detail} placeholder="상세주소를 입력하세요." onChange={(e) => setWrite((prev) => ({ ...prev, address_detail: e.target.value }))}/>
-
-        {/* <input className="addr-detail" type="text" id=""  value={write.address_detail} placeholder="상세주소를 입력하세요." /> */}
+        <input className="addr-detail" type="text" id="" value={write.address_detail || ""} placeholder="상세주소를 입력하세요." onChange={(e) => setWrite((prev) => ({ ...prev, address_detail: e.target.value }))}/>
       </div>
     )
   };
@@ -151,7 +152,7 @@ const CampaignEdit = () => {
             <form>
               <div className="txt-box">
                 <p className="title">캠페인 제목</p>
-                <input type="text" name="title" value={write.title} placeholder="제목을 입력하세요" onChange={handleChange} />
+                <input type="text" name="title" value={write.title || ""} placeholder="제목을 입력하세요" onChange={handleChange} />
               </div>
 
               <div className="calendar-area">
@@ -180,7 +181,7 @@ const CampaignEdit = () => {
                 </div>
               </div>
               
-              <WriteEditor value={write.body} handleChangeQuill={handleChangeQuill} />
+              <WriteEditor value={write.body || ""} handleChangeQuill={handleChangeQuill} />
 
               {/* // @@@@@@@@@@@@@@@@@@@@ 지도 @@@@@@@@@@@@@@@@@@@@  */}
               <div className='address-area'>
@@ -199,10 +200,10 @@ const CampaignEdit = () => {
                 </div>
                   {/* selOpt이 해당 라디오 버튼의 value와 일치한다면, 해당 버튼에 체크 */}
 
-                  {renderAddrDiv()}
-                  {/* {console.log(write)} */}
-                
-                <div id="map"></div>
+                {/* "장소없음"이 아닐 때만 주소 입력 창을 렌더링 */}
+                {selOpt !== "장소없음" && renderAddrDiv()}
+              
+                <div id="map" style={{ display: selOpt === "장소없음" ? "none" : "block" }}></div>
               </div>
               {/* // @@@@@@@@@@@@@@@@@@@@ 지도 @@@@@@@@@@@@@@@@@@@@  */}
 
