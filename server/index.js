@@ -146,7 +146,7 @@ app.put("/campaign/edit/:id", (req, res) => {
 
 // 유저 정보 가져옴
 app.get("/users", (req, res) => {
-  const q = "SELECT userid, username FROM user";
+  const q = "SELECT userid, username, email, phonenumber FROM user";
   connection.query(q, (err, data) => {
     if (err) {
       console.error("Error executing MySQL query:", err);
@@ -194,7 +194,7 @@ app.post("/campaign/detail/:id/form", (req, res) => {
 app.get("/campaign/detail/:id/form", (req, res) => {
   const postId = req.params.id;
   const q = `
-    SELECT cc.*, u.username
+    SELECT cc.*, u.username, email, phonenumber
     FROM campaign_form cc
     INNER JOIN user u ON cc.userid = u.userid
     WHERE cc.post_id = ?`;

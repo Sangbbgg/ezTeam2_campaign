@@ -13,12 +13,48 @@ const CampaignForm = () => {
   const storedUserData = sessionStorage.getItem("userData");
   const userData = JSON.parse(storedUserData);
 
+  // const [formData, setFormData] = useState();
   const [formWrite, setFormWrite] = useState({
     company: "",
     memo: "",
     userid: userData.userid, 
   });
-  console.log(id)
+  // console.log(userData)
+
+
+  // @@@@@@@@@@@
+const [userInfo, setUserInfo] = useState(null); // 로그인한 사용자 정보를 저장
+const [filteredUserInfo, setFilteredUserInfo] = useState(null); // 로그인한 사용자 정보를 저장
+
+// 페이지가 로드될 때 사용자 정보를 가져오는 useEffect
+useEffect(() => {
+  const fetchUserInfo = async () => {
+    try {
+      const response = await axios.get('http://localhost:8000/users');
+      const userInfo = response.data;
+      const filteredInfo = userInfo.find(item => item.username === userData.username);
+      setFilteredUserInfo(filteredInfo);
+    } catch (error) {
+      console.error('Error fetching user info:', error);
+    }
+  };
+
+  fetchUserInfo();
+}, []);
+
+
+// // let filteredUserInfo = null;
+// useEffect(()=>{
+
+//   if (userInfo !== null) {
+//     filteredUserInfo = userInfo.filter((item) => {
+//       return userData.userid === item.userid;
+//     });
+//   }
+// })
+console.log(filteredUserInfo)
+
+
 
   const handleChange = (e) => {
     setFormWrite((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -31,17 +67,19 @@ const CampaignForm = () => {
       memo: formWrite.memo,
       userid: formWrite.userid,
     };
+    
+    const confirmMsg = window.confirm("신청서를 제출하시겠습니까?");
 
-    try {
-      await axios.post(`http://localhost:8000/campaign/detail/${id}/form`, submitData);
-      // 요청 성공 시 적절한 작업 수행
-      // navigate(-1);
-    } catch (err) {
-      console.log(err);
-      // 요청 실패 시 에러 처리
+    if(confirmMsg){
+  
+      try {
+        await axios.post(`http://localhost:8000/campaign/detail/${id}/form`, submitData);
+        navigate(-1);
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
-  console.log(`http://localhost:8000/campaign/detail/${id}/form`)
 
   return (
     <div id="wrap" className="application-form">
@@ -60,18 +98,18 @@ const CampaignForm = () => {
             <tr>
               <th className="user-name" scope="row">이름</th>
               <td className="user-name">
-                <span className="value_txt">{userData.username}</span>
+                <span className="value_txt">{filteredUserInfo?.username}</span>
               </td>
               <th className="user-email" scope="row">이메일</th>
               <td className="user-email">
-                <span className="value_txt">{userData.email}</span>
+                <span className="value_txt">{filteredUserInfo?.email}</span>
               </td>
             </tr>
 
               <tr>
                 <th className="user-name" scope="row">전화번호</th>
                 <td className="user-name">
-                  <span className="value_txt">{userData.phonenumber}</span>
+                  <span className="value_txt">{filteredUserInfo?.phonenumber}</span>
                 </td>
                 <th className="user-email" scope="row">소속</th>
                 <td className="user-company">
@@ -83,7 +121,6 @@ const CampaignForm = () => {
                 <td colSpan="3">
                   <textarea value={formWrite.memo} placeholder="내용을 입력하세요" onChange={(e) => setFormWrite({...formWrite, memo: e.target.value})} />
                 </td>
-                {console.log(formWrite)}
               </tr>
               {/* <tr>
                 <th scope="row">제목</th>
