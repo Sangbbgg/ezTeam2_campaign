@@ -30,8 +30,9 @@ function Register() {
             <button onClick={() => navigateTo("/Register/group")}>
               단체
             </button><br/>
-          
-          <Link to="/login">로그인창</Link>
+            <div className="Category-Link">
+            <Link to="/login">로그인창</Link>
+          </div>
         </div>
       </form>
     </div>
