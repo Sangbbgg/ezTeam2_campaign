@@ -1,4 +1,4 @@
-// 공통 
+// 공통
 import express from "express";
 import cors from "cors";
 import mysql from "mysql2";
@@ -13,12 +13,11 @@ import session from "express-session"; //0213 김민호 세션 추가
 import MemoryStore from "memorystore"; // MemoryStore import 추가
 const MemoryStoreInstance = MemoryStore(session);
 
-import { fileURLToPath } from "url"; 
+import { fileURLToPath } from "url";
 
 const app = express();
 const port = 8000;
 const __dirname = fileURLToPath(new URL(".", import.meta.url)); // 이미지 저장 관련
-
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -47,7 +46,7 @@ app.get("/", (req, res) => res.send(`Hell'o World!`));
 
 // ------------------- 김지수 -------------------
 // 정적 파일 제공을 위한 미들웨어 추가
-app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
+app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
 
 // 캠페인 글 목록 가져오기
 app.get("/campaign", (req, res) => {
@@ -70,21 +69,21 @@ app.get("/campaign", (req, res) => {
 // 글쓰기 페이지에서 사용자가 입력한 정보가 들어가도록 요청
 app.post("/campaign", (req, res) => {
   // MySQL의 NOW() 함수를 사용하여 현재 시간을 삽입
-  const q = 'INSERT INTO campaign_posts (title, body, date, userid, start_date, end_date, address, address_detail, latitude, longitude) VALUES (?, ?, NOW(), ?, ?, ?, ?, ?, ?, ?)';
+  const q = "INSERT INTO campaign_posts (title, body, date, userid, start_date, end_date, address, address_detail, latitude, longitude) VALUES (?, ?, NOW(), ?, ?, ?, ?, ?, ?, ?)";
 
   // 시작날짜
   const startDateOffset = new Date(req.body.start_date);
-  const formattedStartDate = new Date(startDateOffset.getTime() - (startDateOffset.getTimezoneOffset() * 60000)).toISOString().slice(0, 19).replace('T', ' '); // ISO 형식의 날짜를 MySQL이 인식할 수 있는 형식으로 변환
-  
+  const formattedStartDate = new Date(startDateOffset.getTime() - startDateOffset.getTimezoneOffset() * 60000).toISOString().slice(0, 19).replace("T", " "); // ISO 형식의 날짜를 MySQL이 인식할 수 있는 형식으로 변환
+
   // 종료날짜
   const endDateOffset = new Date(req.body.end_date);
-  const formattedEndDate = new Date(endDateOffset.getTime() - (endDateOffset.getTimezoneOffset() * 60000)).toISOString().slice(0, 19).replace('T', ' '); // ISO 형식의 날짜를 MySQL이 인식할 수 있는 형식으로 변환
+  const formattedEndDate = new Date(endDateOffset.getTime() - endDateOffset.getTimezoneOffset() * 60000).toISOString().slice(0, 19).replace("T", " "); // ISO 형식의 날짜를 MySQL이 인식할 수 있는 형식으로 변환
 
   const values = [req.body.title, req.body.body, req.body.userid, formattedStartDate, formattedEndDate, req.body.address, req.body.address_detail, req.body.latitude, req.body.longitude];
-  console.log(req.body)
+  console.log(req.body);
 
-  connection.query(q, values, (err, data) => { 
-    if(err) return res.json(err);
+  connection.query(q, values, (err, data) => {
+    if (err) return res.json(err);
     return res.json("Message has been sent successfully");
   });
 });
@@ -113,15 +112,14 @@ app.delete("/campaign/detail/:id", (req, res) => {
   });
 });
 
-
 // 글 수정
 app.get("/campaign/detail/:id", (req, res) => {
   const campaignId = req.params.id;
   const q = "SELECT * FROM campaign_posts WHERE id = ?";
   connection.query(q, campaignId, (err, data) => {
-    if(err) return res.status(500).json(err);
-    if(data.length === 0) return res.status(404).json({ message: "글을 찾을 수 없습니다." });
-    return res.json(data[0]); 
+    if (err) return res.status(500).json(err);
+    if (data.length === 0) return res.status(404).json({ message: "글을 찾을 수 없습니다." });
+    return res.json(data[0]);
   });
 });
 
@@ -129,9 +127,19 @@ app.put("/campaign/edit/:id", (req, res) => {
   const campaignId = req.params.id;
   const q = "UPDATE campaign_posts SET `title` = ?, `body` = ?, `start_date` = ?, `end_date` = ?, `address` = ?, `address_detail` = ?, `latitude` = ?, `longitude` = ? WHERE id = ?";
   // start_date와 end_date가 문자열로 넘어오는 것을 Date 객체로 변환하여 사용
-  const values = [req.body.title, req.body.body, new Date(req.body.start_date), new Date(req.body.end_date), req.body.address, req.body.address_detail, req.body.latitude, req.body.longitude, campaignId];
+  const values = [
+    req.body.title,
+    req.body.body,
+    new Date(req.body.start_date),
+    new Date(req.body.end_date),
+    req.body.address,
+    req.body.address_detail,
+    req.body.latitude,
+    req.body.longitude,
+    campaignId,
+  ];
   connection.query(q, values, (err, data) => {
-    if(err) return res.status(500).json(err);
+    if (err) return res.status(500).json(err);
     return res.json("Message has been updated successfully");
   });
 });
@@ -141,19 +149,19 @@ app.get("/users", (req, res) => {
   const q = "SELECT userid, username FROM user";
   connection.query(q, (err, data) => {
     if (err) {
-      console.error('Error executing MySQL query:', err);
+      console.error("Error executing MySQL query:", err);
       return res.json(err);
     }
-    console.log(res)
+    console.log(res);
     return res.json(data);
   });
 });
 
-// 조회수 
+// 조회수
 app.put("/campaign/increase-views/:id", (req, res) => {
   const campaignId = req.params.id;
   const qUpdateViews = "UPDATE campaign_posts SET `views` = `views` + 1 WHERE id = ?";
-  
+
   // 조회수 증가
   connection.query(qUpdateViews, campaignId, (err, result) => {
     if (err) {
@@ -165,24 +173,23 @@ app.put("/campaign/increase-views/:id", (req, res) => {
   });
 });
 
-
 // -------------- 댓글 --------------
 // 댓글 등록
 app.post("/campaign/detail/:id/comments", (req, res) => {
   const postId = req.params.id;
-  const { userid, comment_text } = req.body; 
-  
+  const { userid, comment_text } = req.body;
+
   const values = [postId, userid, comment_text];
-  const q = 'INSERT INTO campaign_comments (post_id, userid, comment_text, date) VALUES (?, ?, ?, NOW())';
-  
-  connection.query(q, values, (err, data) => { 
-    if(err) {
+  const q = "INSERT INTO campaign_comments (post_id, userid, comment_text, date) VALUES (?, ?, ?, NOW())";
+
+  connection.query(q, values, (err, data) => {
+    if (err) {
       console.error(err);
       return res.status(500).json(err);
     }
     // 새로 추가된 댓글의 commentId를 응답 데이터에 추가하여 전송
     const commentId = data.insertId;
-    return res.status(201).json({ 
+    return res.status(201).json({
       message: "Comment has been sent successfully",
       commentId: commentId, // 새로 추가된 댓글의 commentId를 클라이언트로 전송
       date: new Date(),
@@ -198,13 +205,12 @@ app.get("/campaign/detail/:id/comments", (req, res) => {
     FROM campaign_comments cc
     INNER JOIN user u ON cc.userid = u.userid
     WHERE cc.post_id = ?`;
-  
-  connection.query(q, [postId], (err, data) => { 
-    if(err) return res.status(500).json(err);
+
+  connection.query(q, [postId], (err, data) => {
+    if (err) return res.status(500).json(err);
     return res.status(200).json(data); // 댓글 데이터를 반환합니다.
   });
 });
-
 
 //http://localhost:8000/campaign/detail/${curList.id}/comments
 // 댓글 삭제
@@ -244,8 +250,6 @@ app.get("/campaign/detail/:id/comments/:commentId", (req, res) => {
 });
 
 // -------------- 댓글 --------------
-
-
 
 // -------------- 이미지 저장 관련 --------------
 // multer 설정
@@ -295,121 +299,13 @@ const upload = multer({
 });
 
 // 하나의 이미지 파일만 가져온다.
-app.post('/img', upload.single('img'), (req, res) => {
+app.post("/img", upload.single("img"), (req, res) => {
   console.log(req.file); // 이미지 파일 정보 확인
   const IMG_URL = `http://localhost:8000/uploads/${req.file.filename}`;
   res.json({ url: IMG_URL });
 });
 
-
-
 // -------------- 이미지 저장 관련 --------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -553,6 +449,21 @@ app.get("/api/carbonFootprint/check/:userId/:date", async (req, res) => {
   }
 });
 
+// 메인 페이지 차트 data
+app.get("/api/carbonFootprint/main", async (req, res) => {
+  try {
+    const query = `SELECT * FROM user_calculation;`
+    connection.query(query,(err, results) =>{
+      if (err) reject(err);
+      else return res.json(results);
+    });
+  } catch (error) {
+    console.error("Server error:", error);
+    res.status(500).send("Server error");
+  }
+
+});
+
 // POST 라우트 추가
 app.post("/api/carbonFootprint", async (req, res) => {
   const { userId, calculationMonth, electricity, gas, water, transportation, waste, total, checkedItems, categorySavings } = req.body;
@@ -644,6 +555,66 @@ app.post("/api/carbonFootprint", async (req, res) => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // 김민호
 //-------------------------------로그인-----------------------------------------------
 
@@ -652,62 +623,56 @@ const sessionStore = new MemoryStoreInstance({
   checkPeriod: 100000, // 옵션: 세션의 만료 기간을 확인하는 주기 (10초)
 });
 
-app.use(session({
-  secret: 'secretKey', // 랜덤하고 안전한 문자열로 바꾸세요.
-  resave: false,
-  saveUninitialized: true,
-  store: sessionStore,
-  cookie: {
-    maxAge: 100000,
-    httpOnly: true,
-  },
-}));
+app.use(
+  session({
+    secret: "secretKey", // 랜덤하고 안전한 문자열로 바꾸세요.
+    resave: false,
+    saveUninitialized: true,
+    store: sessionStore,
+    cookie: {
+      maxAge: 100000,
+      httpOnly: true,
+    },
+  })
+);
 //-------------------------------로그인------------------------------------
 
 app.post("/login", async (req, res) => {
   console.log(req.session);
-  const { email, password, usertype } = req.body;//usertype 추가 2/14 김민호
-
+  const { email, password, usertype } = req.body; //usertype 추가 2/14 김민호
 
   try {
     // 이메일을 사용하여 데이터베이스에서 사용자를 찾습니다.
-    connection.query(
-      "SELECT * FROM user WHERE email = ?",
-      [email],
-      async (err, result) => {
-        if (err) {
-          console.error("서버에서 에러 발생:", err);
-          res.status(500).send({ success: false, message: "서버 에러 발생" });
-        } else {
-          if (result.length > 0) {
-            const isPasswordMatch = await bcrypt.compare(
-              password,
-              result[0].password
-            );
-            if (isPasswordMatch && usertype == result[0].usertype) {
+    connection.query("SELECT * FROM user WHERE email = ?", [email], async (err, result) => {
+      if (err) {
+        console.error("서버에서 에러 발생:", err);
+        res.status(500).send({ success: false, message: "서버 에러 발생" });
+      } else {
+        if (result.length > 0) {
+          const isPasswordMatch = await bcrypt.compare(password, result[0].password);
+          if (isPasswordMatch && usertype == result[0].usertype) {
             // 0213 김민호 세션스토리 초기화 확인
             if (!req.session) {
               req.session = {};
             }
             //세션데이터 저장(새로운 데이터 추가시 이부분 수정)
-            req.session.usertype = result[0].usertype;//0213 김민호 익스플로우 세션기능 추가
-            req.session.userid = result[0].userid;//0213 김민호 익스플로우 세션기능 추가
-            console.log(req.session)
-              res.send({ success: true, message: "로그인 성공", data: result });
-            } else {
-              res.send({
-                success: false,
-                message: "정보가 일치하지 않습니다.",
-                //가입은 되어 있으나 정보가 맞지 않을 때
-              });
-            }
+            req.session.usertype = result[0].usertype; //0213 김민호 익스플로우 세션기능 추가
+            req.session.userid = result[0].userid; //0213 김민호 익스플로우 세션기능 추가
+            console.log(req.session);
+            res.send({ success: true, message: "로그인 성공", data: result });
           } else {
-            res.send({ success: false, message: "유저 정보가 없습니다." });
-            //가입된 정보가 없을 시 출력
+            res.send({
+              success: false,
+              message: "정보가 일치하지 않습니다.",
+              //가입은 되어 있으나 정보가 맞지 않을 때
+            });
           }
+        } else {
+          res.send({ success: false, message: "유저 정보가 없습니다." });
+          //가입된 정보가 없을 시 출력
         }
       }
-    );
+    });
   } catch (error) {
     console.error("비밀번호 비교 중 오류:", error);
     res.status(500).send({ success: false, message: "서버 에러 발생" });
@@ -717,7 +682,6 @@ app.post("/login", async (req, res) => {
 //---------------------------------- 회원번호---------------------------------------------
 const usedUserNumbers = new Set(); // 중복 방지를 위한 Set
 
-
 async function generateUserid(usertype) {
   // 사용자 유형에 기반한 사용자 ID를 생성하는 로직을 추가합니다.
   // 단순성을 위해 사용자 유형에 따라 접두어를 추가하고 6자리의 랜덤 숫자를 붙입니다.
@@ -726,7 +690,7 @@ async function generateUserid(usertype) {
     business: 2,
     organization: 3,
   }[usertype];
-  
+
   // 0219 추가_상호형
   let randomDigits;
   let userid;
@@ -738,13 +702,12 @@ async function generateUserid(usertype) {
 
   usedUserNumbers.add(userid); // Set에 추가
 
-
   return userid;
 }
 
 //-------------------------------단체고유번호 중복 체크 2/14 김민호---------------------------------
 app.post("/checkuniquenumber", (req, res) => {
-  const { uniquenumber} = req.body;
+  const { uniquenumber } = req.body;
 
   // 데이터베이스에서 이메일이 이미 존재하는지 확인합니다.
   const sql = "SELECT * FROM user WHERE uniquenumber = ?";
@@ -776,7 +739,7 @@ app.post("/checkuniquenumber", (req, res) => {
 
 //-------------------------------사업자 중복 체크 2/14 김민호---------------------------------
 app.post("/checkbusinessnumber", (req, res) => {
-  const { businessnumber} = req.body;
+  const { businessnumber } = req.body;
 
   // 데이터베이스에서 이메일이 이미 존재하는지 확인합니다.
   const sql = "SELECT * FROM user WHERE businessnumber = ?";
@@ -843,7 +806,6 @@ app.post("/regester", async (req, res) => {
   const { username, password, email, address, detailedaddress, phonenumber, usertype: clientUsertype, businessnumber, uniquenumber } = req.body;
 
   try {
-    
     // 비밀번호를 해시화합니다.
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -860,30 +822,25 @@ app.post("/regester", async (req, res) => {
     const serverUsertype = usertypeNumber[clientUsertype];
 
     // MySQL 쿼리를 작성하여 회원 정보를 데이터베이스에 삽입합니다.
-    const sql =
-      "INSERT INTO user (userid, username, email, password, address, detailedaddress, phonenumber, usertype, businessnumber, uniquenumber) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    connection.query(
-      sql,
-      [userid, username, email, hashedPassword, address, detailedaddress, phonenumber, serverUsertype, businessnumber, uniquenumber],
-      (err, result) => {
-        if (err) {
-          // 쿼리 실행 중 에러가 발생한 경우 에러를 처리합니다.
-          console.error("MySQL에 데이터 삽입 중 오류:", err);
-          return res.status(500).json({
-            success: false,
-            message: "회원가입 중 오류가 발생했습니다.",
-            error: err.message,
-          });
-        }
-        // 회원가입이 성공한 경우 응답을 클라이언트에게 보냅니다.
-        console.log("사용자가 성공적으로 등록됨");
-        return res.status(200).json({
-          success: true,
-          message: "사용자가 성공적으로 등록됨",
-          usertype: serverUsertype,
+    const sql = "INSERT INTO user (userid, username, email, password, address, detailedaddress, phonenumber, usertype, businessnumber, uniquenumber) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    connection.query(sql, [userid, username, email, hashedPassword, address, detailedaddress, phonenumber, serverUsertype, businessnumber, uniquenumber], (err, result) => {
+      if (err) {
+        // 쿼리 실행 중 에러가 발생한 경우 에러를 처리합니다.
+        console.error("MySQL에 데이터 삽입 중 오류:", err);
+        return res.status(500).json({
+          success: false,
+          message: "회원가입 중 오류가 발생했습니다.",
+          error: err.message,
         });
       }
-    );
+      // 회원가입이 성공한 경우 응답을 클라이언트에게 보냅니다.
+      console.log("사용자가 성공적으로 등록됨");
+      return res.status(200).json({
+        success: true,
+        message: "사용자가 성공적으로 등록됨",
+        usertype: serverUsertype,
+      });
+    });
   } catch (error) {
     // 회원가입 중 다른 내부적인 오류가 발생한 경우 에러를 처리합니다.
     console.error("회원가입 중 오류:", error);
@@ -896,7 +853,8 @@ app.post("/regester", async (req, res) => {
 });
 //---------------------------회원가입 수정구현----------------------------------------------
 
-app.get("/edit-profile/:userId/:usertype", (req, res) => { // 클라이언트에서 파라미터로 전달 받은값 반영
+app.get("/edit-profile/:userId/:usertype", (req, res) => {
+  // 클라이언트에서 파라미터로 전달 받은값 반영
   const { userId, usertype } = req.params; // userId, usertype 값 획득
   // const usertype = req.session.usertype;
   // const userid = req.session.userData[0].userid;
@@ -920,48 +878,48 @@ app.get("/edit-profile/:userId/:usertype", (req, res) => { // 클라이언트에
       return res.status(404).json({ success: false, message: "사용자 정보를 찾을 수 없습니다." });
     }
 
-    res.json({ usertype : usertype, userId:userId, userData: userData});
+    res.json({ usertype: usertype, userId: userId, userData: userData });
   });
 });
 //---------------------------회원 탈퇴--------------------------------------------------
-app.delete('/delete-account/:userId/:userType', (req, res) => {
+app.delete("/delete-account/:userId/:userType", (req, res) => {
   const userId = req.params.userId;
   const userType = req.params.userType;
 
-  const tableName = (userType === 'admin') ? 'admin_table' : 'user';
+  const tableName = userType === "admin" ? "admin_table" : "user";
 
   // 주문 테이블에서 해당 유저 아이디를 NULL로 업데이트합니다.
   const updateOrdersQuery = `UPDATE orders SET userid = NULL WHERE userid = ?`;
 
   connection.query(updateOrdersQuery, [userId], (updateError, updateResults) => {
     if (updateError) {
-      console.error('주문 테이블 업데이트 오류:', updateError);
-      res.status(500).json({ success: false, message: '주문 테이블 업데이트 오류' });
+      console.error("주문 테이블 업데이트 오류:", updateError);
+      res.status(500).json({ success: false, message: "주문 테이블 업데이트 오류" });
     } else {
-      console.log('주문 테이블이 성공적으로 업데이트되었습니다');
+      console.log("주문 테이블이 성공적으로 업데이트되었습니다");
 
       // 사용자 테이블에서 사용자를 삭제합니다.
       const deleteQuery = `DELETE FROM ${tableName} WHERE userid = ?`;
 
       connection.query(deleteQuery, [userId], (error, results) => {
         if (error) {
-          console.error('사용자 삭제 오류:', error);
-          res.status(500).json({ success: false, message: '사용자 삭제 오류' });
+          console.error("사용자 삭제 오류:", error);
+          res.status(500).json({ success: false, message: "사용자 삭제 오류" });
         } else {
-          console.log('사용자가 성공적으로 삭제되었습니다');
+          console.log("사용자가 성공적으로 삭제되었습니다");
 
-          if (tableName === 'user') {
+          if (tableName === "user") {
             const deleteCommentsQuery = `DELETE FROM campaign_comments WHERE userid = ?`;
             connection.query(deleteCommentsQuery, [userId], (commentsError, commentsResults) => {
               if (commentsError) {
-                console.error('관련 댓글 삭제 오류:', commentsError);
+                console.error("관련 댓글 삭제 오류:", commentsError);
               } else {
-                console.log('관련 댓글이 성공적으로 삭제되었습니다');
+                console.log("관련 댓글이 성공적으로 삭제되었습니다");
               }
             });
           }
 
-          res.status(200).json({ success: true, message: '사용자가 성공적으로 삭제되었습니다' });
+          res.status(200).json({ success: true, message: "사용자가 성공적으로 삭제되었습니다" });
         }
       });
     }
@@ -970,7 +928,6 @@ app.delete('/delete-account/:userId/:userType', (req, res) => {
 //---------------------------아이디 비밀번호 찾기--------------------------------------------------
 //핸드폰번호와 이름 입력시 아이디 알려주기(Email)
 //Email 과 이름 입력시 비밀번호 재설정
-
 
 app.post("/find", (req, res) => {
   const { username, phonenumber } = req.body;
@@ -995,20 +952,5 @@ app.post("/find", (req, res) => {
     }
   });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 app.listen(port, () => console.log(`port${port}`));
