@@ -28,25 +28,22 @@ function Find() {
 };
 
   return (
-    <div>
+    <div className="form">
+      <form className="form-Find">
       <h1>회원 찾기</h1>
-      <label>
-        이름:
-        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-      </label>
+        <input type="text" placeholder="이름" value={username} onChange={(e) => setUsername(e.target.value)} />
       <br />
-      <label>
-        핸드폰 번호:
         <input
           type="text"
+          placeholder="핸드폰번호"
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
         />
-      </label>
       <br />
       <button onClick={handleFindClick}>찾기</button>
       <br />
       {email && <p>가입된 이메일: {email}</p>}
+      </form>
     </div>
   );
 }

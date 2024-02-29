@@ -158,9 +158,9 @@ axios.post('http://localhost:8000/Rigester', {
   
 
   return (
-    <div>
-      <form className="Register-form-user">
-        <div className="input-group">
+    <div className="form-Details">
+      <form className="form-Details-Category">
+        <div>
           <input
             type="text"
             placeholder="사용자명"
@@ -168,7 +168,7 @@ axios.post('http://localhost:8000/Rigester', {
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
-        <div className="input-group">
+        <div>
           <input
             type="password"
             placeholder="비밀번호"
@@ -176,7 +176,7 @@ axios.post('http://localhost:8000/Rigester', {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div className="input-group">
+        <div>
           <input
             type="password"
             placeholder="비밀번호 확인"
@@ -184,7 +184,7 @@ axios.post('http://localhost:8000/Rigester', {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </div>
-        <div className="input-group">
+        <div>
           <input
           type="text"
           placeholder="고유번호"
@@ -192,11 +192,11 @@ axios.post('http://localhost:8000/Rigester', {
           onChange={(e) => setuniquenumber(e.target.value)}
           />
           <button 
-          className="check-btn"
+          className="CheckBtn"
           onClick={()=>{handleuniquenumberCheck(); setIsuniquenumberDuplication(false);}}>확인</button>
           {/* 고유 유효성 검사 02/20 김민호 */}
         </div>
-        <div className="input-group">
+        <div>
           <input
             type="text"
             placeholder="이메일"
@@ -204,12 +204,12 @@ axios.post('http://localhost:8000/Rigester', {
             onChange={(e) => setEmail(e.target.value)}
           />
           <button 
-          className="check-btn"
+          className="CheckBtn"
           onClick={()=>{handleEmailDuplicationCheck(); setIsDuplicateChecked(false);}}>확인</button>
           {/* handleEmailDuplicationCheck 함수가 호출해서 이메일 중복확인 작업을 진행하고, 중복방지를 해주는 코드 */}
           {/* 이메일 유효성 검사 02/14 김민호 */}
         </div>
-        <div className="input-group">
+        <div>
           <input
             type="text"
             placeholder="핸드폰번호"
@@ -217,7 +217,7 @@ axios.post('http://localhost:8000/Rigester', {
             onChange={(e) => setphonenumber(e.target.value)}
           />
         </div>
-        <div className="input-group">
+        <div>
           <input
             type="text"
             placeholder="주소"
@@ -226,7 +226,7 @@ axios.post('http://localhost:8000/Rigester', {
           />
         
           <button
-          className="check-btn" 
+          className="CheckBtn" 
           onClick={handle.clickButton}>선택</button>
           {openPostcode && (
             <DaumPostcode
@@ -236,7 +236,7 @@ axios.post('http://localhost:8000/Rigester', {
             />
           )}
         </div>
-        <div className="input-group">
+        <div>
           <input
             type="text"
             placeholder="상세주소"
@@ -244,10 +244,12 @@ axios.post('http://localhost:8000/Rigester', {
             onChange={(e) => setdetailedaddress(e.target.value)}
           />
         </div>
+        <div>
           <button className="RegesterBtn" onClick={handleRigesterClick}>
             가입완료
           </button>
-          <div>
+        </div>
+          <div className="Category-Link">
             <Link to="/login">로그인창</Link>
           </div>
       </form>
