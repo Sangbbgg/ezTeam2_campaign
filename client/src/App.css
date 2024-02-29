@@ -641,6 +641,8 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 
 .visibility_for_capture{display: flex; flex-direction: column;}
 
+/* 메인 chart */
+.mainchart_wrap{padding: 10px 80px 10px ;}
 
 
 
