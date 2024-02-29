@@ -24,7 +24,8 @@ function RegisterPersonal() {
   };
   
   // 이메일 유효성 검사 02/14 김민호
-  const handleEmailDuplicationCheck = () => {
+  const handleEmailDuplicationCheck = (event) => {
+    event.preventDefault();
     if (!email) {
       alert('이메일을 입력해주세요!');
       return;
@@ -112,78 +113,93 @@ function RegisterPersonal() {
   };
 
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="사용자명"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <br />
-      <input
-        type="password"
-        placeholder="비밀번호"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <br/>
-
-      <input
-        type="password"
-        placeholder="비밀번호 확인"
-        value={confirmPassword}
-        onChange={(e) => setConfirmPassword(e.target.value)}
-      />
-      <br />
-
-      <input
-        type="text"
-        placeholder="이메일"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <button onClick={() => { handleEmailDuplicationCheck(); setIsDuplicateChecked(false); }}>확인</button>
-      {/* 이메일 유효성 검사 02/14 김민호 */}
-      <br />
-
-      <input
-        type="text"
-        placeholder="핸드폰번호"
-        value={phonenumber}
-        onChange={(e) => setphonenumber(e.target.value)}
-      />
-
-      <br />
-      <input
-        type="text"
-        placeholder="주소"
-        value={address}
-        onChange={(e) => setAddress(e.target.value)}
-      />
+    <form className="form-Details">
+      <div className="form-Details-Category">
+        <div>
+          <input
+            type="text"
+            placeholder="사용자명"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
     
-      <button onClick={handle.clickButton}>선택</button>
-      {openPostcode && (
-        <DaumPostcode
-          onComplete={handle.selectAddress}
-          autoClose={false}
-          defaultQuery=""
-        />
-      )}
-      <br/>
-      <input
-        type="text"
-        placeholder="상세주소"
-        value={detailedaddress}
-        onChange={(e) => setdetailedaddress(e.target.value)}
-      />
-      <br/>
-      <button className="RegesterBtn" onClick={handleRegesterClick}>
-        가입완료
-      </button>
-      <div>
-        <Link to="/login">로그인창</Link>
+   
+        <div>
+          <input
+            type="password"
+            placeholder="비밀번호"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+  
+        </div>
+        <div>
+          <input
+            type="password"
+            placeholder="비밀번호 확인"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+  
+        </div>
+        <div>
+            <input
+              type="text"
+              placeholder="이메일"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <button className="CheckBtn"
+            onClick={() => { handleEmailDuplicationCheck(); setIsDuplicateChecked(false); }}>확인</button>
+            {/* 이메일 유효성 검사 02/14 김민호 */}
+        </div>
+        <div>
+          <input
+            type="text"
+            placeholder="핸드폰번호"
+            value={phonenumber}
+            onChange={(e) => setphonenumber(e.target.value)}
+          />
+        </div>
+    
+        <div>
+          <input
+            type="text"
+            placeholder="주소"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+          />
+        
+          <button className="CheckBtn"
+          onClick={handle.clickButton}>선택</button>
+          {openPostcode && (
+            <DaumPostcode
+              onComplete={handle.selectAddress}
+              autoClose={false}
+              defaultQuery=""
+            />
+          )}
+        </div>
+        <div>
+          <input
+            type="text"
+            placeholder="상세주소"
+            value={detailedaddress}
+            onChange={(e) => setdetailedaddress(e.target.value)}
+          />
+        </div>
+  
+        <div>
+          <button className="RegesterBtn" onClick={handleRegesterClick}>
+            가입완료
+          </button>
+        </div>
+        <div className="Category-Link">
+          <Link to="/login">로그인창</Link>
+        </div>
       </div>
-    </div>
+    </form>
   );
 }
 

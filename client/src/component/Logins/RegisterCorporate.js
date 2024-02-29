@@ -160,9 +160,9 @@ axios.post('http://localhost:8000/regester', {
   
 
   return (
-    <div>
-      <form className="Register-form-user">
-          <div className="input-group">
+    <form className="form-Details">
+      <div className="form-Details-Category">
+          <div>
             <input
               type="text"
               placeholder="사용자명"
@@ -170,7 +170,7 @@ axios.post('http://localhost:8000/regester', {
               onChange={(e) => setUsername(e.target.value)}
             />
           </div>
-          <div className="input-group">
+          <div>
             <input
               type="password"
               placeholder="비밀번호"
@@ -178,7 +178,7 @@ axios.post('http://localhost:8000/regester', {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <div className="input-group">
+          <div>
             <input
               type="password"
               placeholder="비밀번호 확인"
@@ -186,7 +186,7 @@ axios.post('http://localhost:8000/regester', {
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </div>
-          <div className="input-group">
+          <div>
             <input
               type="text"
               placeholder="사업자번호"
@@ -194,13 +194,13 @@ axios.post('http://localhost:8000/regester', {
               onChange={(e) => setBusinessNumber(e.target.value)}
             />
             <button
-              className="check-btn"
+              className="CheckBtn"
               onClick={() => { handlebusinessnumberCheck(); setIsbusinessnumberDuplication(false); }}
             >
               확인
             </button>
           </div>
-          <div className="input-group">
+          <div>
             <input
               type="text"
               placeholder="이메일"
@@ -208,13 +208,13 @@ axios.post('http://localhost:8000/regester', {
               onChange={(e) => setEmail(e.target.value)}
             />
             <button
-              className="check-btn"
+              className="CheckBtn"
               onClick={() => { handleEmailDuplicationCheck(); setIsDuplicateChecked(false); }}
             >
               확인
             </button>
           </div>
-          <div className="input-group">
+          <div>
             <input
               type="text"
               placeholder="핸드폰번호"
@@ -222,18 +222,18 @@ axios.post('http://localhost:8000/regester', {
               onChange={(e) => setphonenumber(e.target.value)}
             />
           </div>
-          <div className="input-group">
+          <div>
             <input
               type="text"
               placeholder="주소"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
             />
-            <button className="check-btn" onClick={handle.clickButton}>
+            <button className="CheckBtn" onClick={handle.clickButton}>
               선택
             </button>
           </div>
-          <div className="input-group">
+          <div>
             {openPostcode && (
               <DaumPostcode
                 onComplete={handle.selectAddress}
@@ -242,22 +242,24 @@ axios.post('http://localhost:8000/regester', {
               />
             )}
           </div>
-          <div className="input-group">
+          <div>
             <input
               type="text"
               placeholder="상세주소"
               value={detailedaddress}
               onChange={(e) => setdetailedaddress(e.target.value)}
             />
-          </div>
-          <button className="RegesterBtn" onClick={handleRegesterClick}>
-            가입완료
-          </button>
-          <div>
+            </div>
+            <div>
+              <button className="RegesterBtn" onClick={handleRegesterClick}>
+                가입완료
+              </button>
+            </div>
+          <div className="Category-Link">
             <Link to="/login">로그인창</Link>
           </div>
-      </form>
-    </div>
+        </div>
+    </form>
   );
 }
 

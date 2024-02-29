@@ -44,17 +44,19 @@ function Modify() {
 
   console.log(userData);// 상호형
   return (
-    <div>
+    <form className="form-Details">
+      <div className="form-Details-Modify">
       <h2>정보 수정 페이지</h2>
-      <p>회원번호: {userData.userid}</p>
-      <p>회원이름: {userData.username}</p>
-      <p>회원아이디: {userData.email}</p>
-      <p>회원주소: {userData.address}</p>
-      <p>회원상세주소:{userData.detailedaddress}</p>
-      <p>핸드폰번호:{userData.phonenumber}</p>
-      {/* 기타 사용자 정보 표시 */}
+        <p>회원번호: {userData.userid}</p>
+        <p>회원이름: {userData.username}</p>
+        <p>회원아이디: {userData.email}</p>
+        <p>회원주소: {userData.address}</p>
+        <p>회원상세주소:{userData.detailedaddress}</p>
+        <p>핸드폰번호:{userData.phonenumber}</p>
+        {/* 기타 사용자 정보 표시 */}
       <button onClick={handleDeleteAccount}>회원 탈퇴</button>
-    </div>
+      </div>
+    </form>
   );
 }
 
