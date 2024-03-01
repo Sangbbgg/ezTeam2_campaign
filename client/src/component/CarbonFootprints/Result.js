@@ -337,8 +337,8 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
             </div>
 
             <div className="barChart_container">
-              {barChatData.map((data, index) => (
-                <div key={index} className="bar_chart">
+              {barChatData.map((data) => (
+                <div key={data.name} className="bar_chart">
                   <div className="chart_title">
                     <div className={`step_icon forest_${data.category}_bg`}>
                       <img src={`/img/${data.category}_small_icon.svg`} />
@@ -437,9 +437,9 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
                             <div className="total">
                               <div className="total_chart_label">
                                 {barChatData.map((data) => (
-                                  <div key={data.key} className="chart_title">
+                                  <div key={data.key}  className="chart_title">
                                     <div className={`step_icon forest_${data.category}_bg`}>
-                                      <img src={`/img/${data.category}_small_icon.svg`} />
+                                      <img src={`/img/${data.category}_small_icon.svg`}  alt={`${data.name} icon`}/>
                                     </div>
                                     <span className={`forest_${data.category}_text`}>{data.name}</span>
                                   </div>
@@ -447,7 +447,6 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
                               </div>
                               <div className="total_chart">
                                 <TargetBarchartTotal barChartDataTotal={barChartDataTotal} />
-                                {console.log("barChartDataTotal", barChartDataTotal)}
                               </div>
                             </div>
                           </div>
@@ -545,7 +544,6 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
                       </div>
                       <div className="total_chart">
                         <TargetBarchartTotal barChartDataTotal={barChartDataTotal} />
-                        {console.log("barChartDataTotal", barChartDataTotal)}
                       </div>
                     </div>
                   </div>
