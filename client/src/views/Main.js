@@ -10,7 +10,7 @@ import {gsap} from "gsap";
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // 0229 상호형 메인 Chart
-import LegendEffectOpacityChart from'../component/CarbonFootprints/Result/legendEffectOpacityChart';
+import LegendEffectOpacityChart from'../component/CarbonFootprints/Result/LegendEffectOpacityChart';
 
 // Import Swiper styles
 import 'swiper/css';
