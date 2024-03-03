@@ -124,7 +124,7 @@ header .utils button + button {margin-left: 10px;}
 
 /* 푸터 */
 footer {width: 100%; background: #fff; padding: 80px 0px;}
-footer .inner {margin: 0px auto; width: 1024px;}
+footer .inner {margin: 0px auto; width: 1200px;}
 footer .inner .top {width: 100%; border-bottom: 1px solid #000; padding-bottom: 20px;}
 footer .inner .top h1 {float: left;font: 24px/1 'Righteous', cursive; color: #000;}
 footer .logo {z-index: 10; width: 56px; height:60px; background: url("../public/img/logo-blk.png") no-repeat center 2px / cover;}
@@ -137,7 +137,7 @@ footer .inner .bottom address {width: 100%; font-style: normal; font-size: 13px;
 footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 
 
-/* @media screen and (max-width: 1024px) {
+/* @media screen and (max-width: 1200px) {
   header {height: 60px;}
   header .logo {left: 30px; width: 50px; height: 28px;}
   header .utils {display: none;}
@@ -210,7 +210,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .main .campaign .swiper-button-prev {left: -80px !important;}
 .main .campaign .swiper-button-prev:after, .swiper-button-next:after {color: #fff;}
 .main .campaign .cont {position: relative; width: 100%; overflow: hidden;}
-.main .campaign .cont .img-wrap {width: 100%; position: relative; width: auto; height: 277px; overflow: hidden;}
+.main .campaign .cont .img-wrap {width: 100%; position: relative; width: auto; height: 277px; overflow: hidden; border-radius: 8px;}
 .main .campaign .cont .img-wrap img {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1); width: 100%; height: 100%; transition: transform .3s ease-out; object-fit: cover;}
 .main .campaign .cont .img-wrap:hover img {transform: translate(-50%, -50%) scale(1.1);}
 .main .campaign .cont .txt-wrap .title {margin-top: 18px; font-size: 16px; color: #fff;}
@@ -226,7 +226,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 /* ------------------------------- 캠페인 ------------------------------- */
 /* #228e0c */
 #wrap {position: relative; padding-top: 80px; overflow-x: hidden;}
-.inner {position: relative; margin: 0 auto; width: 1024px;}
+.inner {position: relative; margin: 0 auto; width: 1200px;}
 .content-w {position: relative; padding-top: 80px; padding-bottom: 200px; background-color: #fff;}
 #wrap.campaign footer {background: #e1f0de;}
 #wrap.campaign-write footer {background: #e1f0de;}
@@ -238,18 +238,18 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 
 .container {display: flex; flex-wrap: wrap;}
 .container .cont {position: relative; margin-right: 20px; width: calc((100%  - 40px) / 3); overflow: hidden;}
-.container .cont:nth-child(n+4) {margin-top: 40px;}
+.container .cont:nth-child(n+4) {margin-top: 50px;}
 .container .cont:nth-child(3n) {margin-right: 0;}
 .container .cont .img-wrap:hover img {transform: translate(-50%, -50%) scale(1.1);}
 .container .cont .img-wrap {position: relative; overflow: hidden; width: auto; height: 277px; border-radius: 6px;}
 .container .cont .img-wrap img {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1); width: 100%; height: 100%; transition: transform .3s ease-out; object-fit: cover;}
 
-.campaign-wrap .group-box {display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px;}
-.campaign-wrap .btn-write {padding: 10px 30px; color: #fff; background-color: #25B058;}
-.campaign-wrap {margin-top: 20px;}
-.campaign-wrap .cont .title {min-height: 36px; font-size: 18px; color: #000; text-align: left; overflow: hidden; white-space: normal; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; word-break: keep-all;}
+.campaign .group-box {display: flex; justify-content: space-between; align-items: flex-end;}
+.campaign .btn-write {margin-bottom: 20px; padding: 10px 30px; color: #fff; background-color: #25B058;}
+.campaign-wrap {padding: 30px 30px 60px; background-color: #e1f0de;}
+.campaign-wrap .cont .title {min-height: 32px; font-size: 18px; color: #000; text-align: left; overflow: hidden; white-space: normal; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; word-break: keep-all;}
 .campaign-wrap .txt-wrap {display: block; margin-top: 14px;}
-.campaign-wrap .txt-wrap .txt-info {display: flex; justify-content: space-between; margin-top: 10px;}
+.campaign-wrap .txt-wrap .txt-info {display: flex; justify-content: space-between; margin-top: 20px;}
 .campaign-wrap .txt-wrap .username {font-size: 14px; text-align: right; color: #777;}
 .campaign-wrap .txt-wrap .date {font-size: 14px; text-align: right; color: #777;}
 
@@ -329,7 +329,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 /* 버튼 영역 */
 .bottom-area {position: relative; margin-top: 80px; display: flex; justify-content: center; z-index: 1;}
 .bottom-area.pos-right {justify-content: right;}
-.bottom-area .btn-w {padding: 30px 40px; background-color: #e1f0de; box-shadow: 0 4px 6px -2px #00000012, 0 10px 15px -3px #0000001f; border-radius: 12px;}
+.bottom-area .btn-w {display: flex; padding: 30px 40px; background-color: #e1f0de; box-shadow: 0 4px 6px -2px #00000012, 0 10px 15px -3px #0000001f; border-radius: 12px;}
 .bottom-area button + button {margin-left: 8px;}
 .bottom-area button {padding: 10px 30px; color: #fff; background-color: #25B058; border: 1px solid #25B058;}
 .bottom-area .btn-cancel {background-color: #fff; color: #000; border: 1px solid #000;}
@@ -357,8 +357,9 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 
 /* 탭 */
 .tab-area {display: flex; justify-content: center;}
-.tab-area .btn-tab.active {border-bottom: 1px solid #000;}
-.tab-area .btn-tab + .btn-tab {margin-left: 20px;}
+.tab-area .btn-tab {padding: 10px 24px;}
+.tab-area .btn-tab.active {background-color: #e1f0de; border-radius: 6px 6px 0 0;}
+/* .tab-area .btn-tab + .btn-tab {margin-left: 20px;} */
 
 /* 캘린더 */
 .calendar-area {margin-top: 60px;}
@@ -499,7 +500,7 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 
 /* ------------------------------- 탄소 발자국 ------------------------------- */
 /* 상단 title */
-.title_box {padding: 16px 24px; margin: 0 auto; width: 1024px;}
+.title_box {padding: 16px 24px; margin: 0 auto; width: 1200px;}
 .title_box > div {justify-content: flex-start;}
 .title_box > div > div h1 {font-size: 24px;}
 .title_box > div > p {font-size: 13px;}

@@ -74,6 +74,7 @@ console.log(filteredUserInfo)
   
       try {
         await axios.post(`http://localhost:8000/campaign/detail/${id}/form`, submitData);
+        alert("신청이 완료되었습니다.");
         navigate(-1);
       } catch (err) {
         console.log(err);
