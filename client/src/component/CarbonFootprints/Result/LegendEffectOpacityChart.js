@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from 'react-router-dom';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
 const Example = () => {
+  const navigate = useNavigate();
   const [mainInitialData, setMainInitialData] = useState(null);
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth()); // 현재 월을 기본값으로 설정
-  const [opacity, setOpacity] = useState({ user: 1, average: 1 });
+  const [opacity, setOpacity] = useState({ user: 0.3, average: 0.3 });
 
   const handleMouseEnter = (o) => {
     const { dataKey } = o;
-    setOpacity({ ...opacity, [dataKey]: 0.5 });
+    setOpacity({ ...opacity, [dataKey]: 1 });
   };
 
   const handleMouseLeave = (o) => {
     const { dataKey } = o;
-    setOpacity({ ...opacity, [dataKey]: 1 });
+    setOpacity({ ...opacity, [dataKey]: 0.3 });
   };
 
   const handleMonthChange = (e) => {
@@ -34,15 +36,8 @@ const Example = () => {
     fetchInitialData();
   }, []);
 
-  const averageData = {
-    // 평균 데이터
-    electricity: 32.5,
-    gas: 38.9,
-    water: 1.6,
-    transportation: 270.8,
-    waste: 0.6,
-    total: 344.4,
-  };
+  // 평균 데이터
+  const averageData = { electricity: 32.5, gas: 38.9, water: 1.6, transportation: 270.8, waste: 0.6, total: 344.4 };
 
   const labels = {
     electricity: "전기",
@@ -53,7 +48,14 @@ const Example = () => {
     total: "total",
   };
 
-  const colors = ["#316EE6", "#FE7713", "#A364FF", "#FE5A82", "#4ACC9C", "#FF8042"];
+  const colors = {
+    전기: "#457CE8",
+    가스: "#FE842A",
+    수도: "#AC73FF",
+    교통: "#FE6A8E",
+    폐기물: "#5CD1A6",
+    total: "#F4DD7C",
+  };
 
   // ################################################################################################################### user data set (consol.log)
   // console.log("mainInitialData", mainInitialData);
@@ -145,51 +147,142 @@ const Example = () => {
   // ################################################################################################################### chart데이터 월단위 분할 (consol.log)
   // console.log("filteredData", filteredData);
 
+  const CustomTick = (props) => {
+    const { x, y, payload } = props;
+
+    const color = colors[payload.value] || "#000000"; // 기본 색상은 검정색으로 설정
+
+    return (
+      <g transform={`translate(${x},${y})`}>
+        <text x={0} y={0} dy={25} fill={color} fontSize="18px" fontWeight="bold" textAnchor="middle">
+          <tspan>{payload.value}</tspan>
+        </text>
+      </g>
+    );
+  };
+
+  const CustomTooltip = ({ active, payload }) => {
+    if (active && payload && payload.length) {
+      // payload[0]는 현재 호버링되고 있는 데이터 포인트의 정보를 담고 있습니다.
+      const data = payload[0].payload; // 툴팁에 표시될 전체 데이터 객체를 가져옵니다.
+
+      // 데이터 객체에서 name, average, user 값을 추출합니다.
+      const { name, average, user } = data;
+
+      // 색상은 name을 키로 사용하여 colors 객체에서 동적으로 결정합니다.
+      const color = colors[name] || "#000"; // 기본값으로 검정색을 설정합니다.
+
+      return (
+        <div
+          style={{
+            fontSize: "20px",
+            fontWeight: "bold",
+            lineHeight: 3,
+            backgroundColor: "#fff",
+            border: "1px solid #ccc",
+            borderRadius: "8px",
+            padding: "0 20px",
+          }}
+        >
+          <p style={{ color: color, fontWeight: "bold" }}>-{name} 평균-</p>
+          <p style={{ color: "#ccc" }}>{`평균: ${average} kg`}</p>
+          <p style={{ color: color }}>{`사용자: ${user} kg`}</p>
+        </div>
+      );
+    }
+
+    return null;
+  };
+
+  const carbonNavigate=()=>{
+    navigate("/carbonFootprint")
+  }
+
+  // console.log(loggedIn)
   return (
     <div style={{ width: "100%" }}>
       <div className="mainchart_wrap">
-        <select onChange={handleMonthChange} value={selectedMonth}>
-          {uniqueMonthsData.map((month, index) => (
-            <option key={index} value={month}>
-              {month}월
-            </option>
-          ))}
-        </select>
-        {filteredData.length !== 0 ? (
-          <div>
-            여러분의 {selectedMonth}월의 평균 탄소배출 총량은 {filteredData[0].usertotal}kg/월 입니다.
+        <div className="mainchart_title">
+          <div className="mainchart_title_month">
+            <select onChange={handleMonthChange} value={selectedMonth}>
+              {uniqueMonthsData.map((month, index) => (
+                <option key={index} value={month}>
+                  {month}월
+                </option>
+              ))}
+            </select>
           </div>
-        ) : (
-          <div>아직 {selectedMonth}월의 평균 탄소배출 총량은 집계 되지 않았어요</div>
-        )}
+          <div className="mainchart_title_left">
+            {filteredData.length !== 0 ? (
+              <>
+                <p>
+                  여러분의 <span className="forest_green_text">{selectedMonth}월</span>의 <br />
+                  평균 탄소배출 평균(총량)은 <span className="forest_green_text">{filteredData[0].usertotal} kg</span>
+                  /월 입니다.
+                </p>
+              </>
+            ) : (
+              <>아직 {selectedMonth}월의 평균 탄소배출 총량은 집계 되지 않았어요</>
+            )}
+          </div>
+        </div>
+        <div className="mainchart_content">
+          <ResponsiveContainer width="100%" height={500}>
+            <LineChart
+              width={500}
+              height={300}
+              data={filteredData}
+              margin={{
+                top: 50,
+                right: 20,
+                left: 20,
+                bottom: 5,
+              }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" tick={<CustomTick />} />
+              <YAxis />
+              <Tooltip content={CustomTooltip} />
+
+              <Legend
+                wrapperStyle={{ fontSize: "25px", fontWeight: "bold", lineHeight: 3 }}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                formatter={(value) => {
+                  if (value === "average") return "평균";
+                  if (value === "user") return "빵끗";
+                  return value;
+                }}
+              />
+              <Line
+                type="monotone"
+                dataKey="average"
+                strokeOpacity={opacity.average}
+                stroke="#F4DD7C"
+                activeDot={{ r: 10 }}
+                strokeWidth={5}
+                dot={{ strokeWidth: 1, r: 8, stroke: "#fff", fill: "#F4DD7C" }}
+              />
+              <Line
+                type="monotone"
+                dataKey="user"
+                strokeOpacity={opacity.user}
+                stroke="#82ca9d"
+                activeDot={{ r: 20 }}
+                strokeWidth={5}
+                dot={{ strokeWidth: 1, r: 8, stroke: "#fff", fill: "#82ca9d" }}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+        <div className="mainchart_content_bottom">
+          <button onClick={carbonNavigate}>
+            내 탄소발자국
+            <br />
+            계산하러가기
+          </button>
+        </div>
       </div>
-      <ResponsiveContainer width="100%" height={500}>
-        <LineChart
-          width={500}
-          height={300}
-          data={filteredData}
-          margin={{
-            top: 50,
-            right: 50,
-            left: 0,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} />
-          <Line
-            type="monotone"
-            dataKey="average"
-            strokeOpacity={opacity.average}
-            stroke="#8884d8"
-            activeDot={{ r: 10 }}
-          />
-          <Line type="monotone" dataKey="user" strokeOpacity={opacity.user} stroke="#82ca9d" activeDot={{ r: 10 }} />
-        </LineChart>
-      </ResponsiveContainer>
     </div>
   );
 };

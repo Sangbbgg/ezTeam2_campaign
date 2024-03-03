@@ -6,7 +6,7 @@ import TargetBarchartTotal from "./Result/targetBarchartTotal";
 
 import { useNavigate } from "react-router-dom";
 
-function Result({ initialData, resultData, userData, isTransportationOption, onSaveImage }) {
+function Result({ initialData, resultData, userData, isTransportationOption, onSaveImage, setUserValueSave }) {
   const navigate = useNavigate();
 
   const [barChatData, setBarChatData] = useState([]);
@@ -211,6 +211,8 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
       if (!response.ok) {
         throw new Error("Failed to save data");
       }
+      
+      setUserValueSave(true);
 
       // 데이터 저장 성공 후 알림 표시
       alert("데이터가 성공적으로 저장되었습니다. 메인 페이지로 이동합니다.");
@@ -437,9 +439,9 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
                             <div className="total">
                               <div className="total_chart_label">
                                 {barChatData.map((data) => (
-                                  <div key={data.key}  className="chart_title">
+                                  <div key={data.key} className="chart_title">
                                     <div className={`step_icon forest_${data.category}_bg`}>
-                                      <img src={`/img/${data.category}_small_icon.svg`}  alt={`${data.name} icon`}/>
+                                      <img src={`/img/${data.category}_small_icon.svg`} alt={`${data.name} icon`} />
                                     </div>
                                     <span className={`forest_${data.category}_text`}>{data.name}</span>
                                   </div>

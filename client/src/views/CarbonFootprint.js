@@ -43,6 +43,8 @@ function CarbonFootprint() {
 
   // console.log("세션:",sessionStorage)
 
+  const [userValueSave, setUserValueSave] = useState(false);
+
   // 사용자의 이번 달 데이터 존재 여부를 확인하고, 결과에 따라 탭을 설정
   useEffect(() => {
     const checkData = async () => {
@@ -54,7 +56,7 @@ function CarbonFootprint() {
         if (data.hasData) {
           setNewResultData(data.data);
           setActiveTab("result");
-          console.log(data.data);
+          // console.log(data.data);
         } else {
           fetchInitialData();
           setActiveTab("consumption");
@@ -88,21 +90,25 @@ function CarbonFootprint() {
         return; // userData도 없고 resultData도 없으면 여기서 함수 종료
       }
     }
-    if (tabName === "practice") {
-      const userResponse = window.confirm(
-        '"결과보기"의 저장을 하셨나요? \n 저장을 않하셨다면 "실천목표"가 초기화 됩니다. \n\n "취소"버튼을 누르시면 저장버튼으로 이동 합니다.'
-      );
 
-      if (userResponse) {
-        // 사용자가 '확인'을 클릭했을 때 실행할 코드
+    if (tabName === "practice") {
+      if (userValueSave) {
         setActiveTab(tabName);
-      } else {
-        return window.scrollTo({
-          top: 3200,
-          behavior: "smooth", // 부드러운 스크롤 효과
-        });
+      } else if (!newResultData) {
+        const userResponse = window.confirm(
+          '"결과보기"의 저장을 하셨나요? \n 저장을 않하셨다면 "실천목표"가 초기화 됩니다. \n\n "취소"버튼을 누르시면 저장버튼으로 이동 합니다.'
+        );
+        if (!userResponse) {
+          return window.scrollTo({
+            top: 3200,
+            behavior: "smooth", // 부드러운 스크롤 효과
+          });
+        } else {
+          setActiveTab(tabName);
+        }
       }
     }
+
     // 위의 조건을 만족하면 탭 변경
     setActiveTab(tabName);
   };
@@ -143,6 +149,7 @@ function CarbonFootprint() {
             userData={userData}
             isTransportationOption={isTransportationOption}
             onSaveImage={saveAsImage}
+            setUserValueSave={setUserValueSave}
           />
         );
       case "practice":
