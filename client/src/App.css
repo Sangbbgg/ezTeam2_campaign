@@ -334,7 +334,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 /* 버튼 영역 */
 .bottom-area {position: relative; margin-top: 80px; display: flex; justify-content: center; z-index: 1;}
 .bottom-area.pos-right {justify-content: right;}
-.bottom-area .btn-w {padding: 30px 40px; background-color: #e1f0de; box-shadow: 0 4px 6px -2px #00000012, 0 10px 15px -3px #0000001f; border-radius: 12px;}
+.bottom-area .btn-w {display: flex; padding: 30px 40px; background-color: #e1f0de; box-shadow: 0 4px 6px -2px #00000012, 0 10px 15px -3px #0000001f; border-radius: 12px;}
 .bottom-area button + button {margin-left: 8px;}
 .bottom-area button {padding: 10px 30px; color: #fff; background-color: #25B058; border: 1px solid #25B058;}
 .bottom-area .btn-cancel {background-color: #fff; color: #000; border: 1px solid #000;}
