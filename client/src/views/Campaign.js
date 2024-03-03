@@ -112,7 +112,6 @@ const Campaign = () => {
             <input type="text" placeholder="검색어를 입력하세요" onChange={(e) => setSearchInput(e.target.value)} />
             <button className="btn-search" onClick={handleSearchButtonClick}>검색</button>
           </div>
-          <div className="campaign-wrap">
             <div className="group-box">
               <div className="tab-area">
                 {/* 각 탭 클릭시 handleTabClick 함수 호출 */}
@@ -124,6 +123,7 @@ const Campaign = () => {
 
               <button className="btn-write" onClick={()=>{navigate('/campaign/write')}}>글쓰기</button>
             </div>
+          <div className="campaign-wrap">
           
             <div className="container">
               {/* 검색 결과에 따라 글목록 나열 */}
@@ -131,9 +131,9 @@ const Campaign = () => {
                 <TextList campaignList={data} key={i} />
               ))}
             </div>
-            {/* 페이지네이션 컴포넌트 */}
-            <Pagination listLimit={listLimit} page={page} setPage={setPage} totalPosts={totalPostsCount} />
           </div>
+          {/* 페이지네이션 컴포넌트 */}
+          <Pagination listLimit={listLimit} page={page} setPage={setPage} totalPosts={totalPostsCount} />
         </div>
       </div>
       <Footer/>
