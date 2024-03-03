@@ -218,12 +218,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 
 
 
-/* 탄소발자국 */
-.main .carbon {position: relative; padding: 160px 0;}
 
-.main .carbon .txt-area {text-align: center;}
-.main .carbon .sec-tit {font-size: 42px; font-weight: 500; color: #000;}
-.main .carbon .sec-txt {margin-top: 28px; font-size: 18px; color: #000;}
 
 
 
@@ -649,20 +644,44 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 
 .visibility_for_capture{display: flex; flex-direction: column;}
 
-/* 메인 chart */
-.mainchart_wrap{padding: 10px 80px 10px ;}
-
-
 /* 실천방안 */
-
 .result_box .practice_box> img{width: 100%; border-radius: 8px;}
 
 
+/* main */
+
+/* 탄소발자국 */
+.main .carbon {position: relative; padding: 160px 0; background-color: #E2E7F5; z-index: 1; overflow: hidden;}
+.main .carbon::after{
+  content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white; 
+    mask-image: linear-gradient(to top, black 5%, transparent 100%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.main .carbon .txt-area {text-align: center;}
+.main .carbon .sec-tit {font-size: 42px; font-weight: 500; color: #000;}
+.main .carbon .sec-txt {margin-top: 28px; font-size: 18px; color: #000;}
+
+/* 메인 chart */
+.mainchart_wrap{padding: 30px 30px;}
+.mainchart_wrap .mainchart_title{display: flex; gap: 30px; align-items: center; padding: 0 60px;}
+.mainchart_wrap .mainchart_title .mainchart_title_month{flex-grow: 0.5; height: 80px; display: flex; justify-content: center;}
+.mainchart_wrap .mainchart_title .mainchart_title_month > select{width:100%; font-size: 30px; padding: 20px 20px; color: #25B058; font-weight: 600; background: url(../public/img/arrow-down-3101.svg) no-repeat 80% 55%; background-size: 25px; border-radius: 15px; border: 0px; -webkit-appearance: none; -moz-appearance: none; appearance: none;}
+
+.mainchart_wrap .mainchart_title .mainchart_title_left{flex-grow: 1.5; display: flex;}
+.mainchart_wrap .mainchart_title .mainchart_title_left > p{font-size: 30px;}
 
 
 
-
-
+.mainchart_wrap .mainchart_content_bottom{padding: 15px 30px; display: flex; justify-content: end;}
+.mainchart_wrap .mainchart_content_bottom > button{font-size: 20px; width: 200px; height: 80px; background-color: #25B058; border-radius: 8px; color: white; margin-left: auto}
 
 
 
