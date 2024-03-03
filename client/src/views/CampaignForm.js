@@ -92,7 +92,9 @@ console.log(filteredUserInfo)
           <table className="vertical">
             <caption></caption>
             <colgroup>
-              <col style={{width: "110px"}}/>
+              <col style={{width: "160px"}}/>
+              <col style={{width: "auto"}} />
+              <col style={{width: "160px"}}/>
               <col style={{width: "auto"}} />
             </colgroup>
             <tbody>
