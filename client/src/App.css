@@ -528,7 +528,8 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 .menu-container .tab-menu .tab-item.active{background-color:#25B058; color: white;}
 
 .tanso_bg{background-image: url('../public/img/carbon_content_bg.png'); background-size: cover; background-position: center;}
-.carbon_wrap{width: 100vw; height: 28vh; position: absolute; top: 0; background-color: white; mask-image: linear-gradient(to bottom, black 50%, transparent 100%);}/* 수정필요 */
+.carbon_wrap{width: 100vw; height: 28vh; position: absolute; top: 0; background-color: white; mask-image: linear-gradient(to bottom, black 50%, transparent 100%);}
+/* 수정필요 */
 
 /* 계산하기 */
 .top_box{margin-bottom: 10px;}

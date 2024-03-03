@@ -3,7 +3,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 
 const Example = () => {
   const [mainInitialData, setMainInitialData] = useState(null);
-  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1); // 현재 월을 기본값으로 설정
+  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth()); // 현재 월을 기본값으로 설정
   const [opacity, setOpacity] = useState({ user: 1, average: 1 });
 
   const handleMouseEnter = (o) => {
@@ -55,12 +55,12 @@ const Example = () => {
 
   const colors = ["#316EE6", "#FE7713", "#A364FF", "#FE5A82", "#4ACC9C", "#FF8042"];
 
-  // user data set
-  console.log("mainInitialData", mainInitialData);
-  // 평균 data set
-  console.log("averageData", averageData);
+  // ################################################################################################################### user data set (consol.log)
+  // console.log("mainInitialData", mainInitialData);
+  // ################################################################################################################### 평균 data set (consol.log)
+  // console.log("averageData", averageData);
 
-  // user data 변경
+  // user data 변경 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
   // 조건 : 1)년도는 1개년도 고정, 2)항목(5개)별 평균값
 
   // 변경 data-----------------
@@ -73,18 +73,22 @@ const Example = () => {
   //     usertotal: mainInitialData.total의 평균,
   //     averagetotal: averageData.total값,
   //   }];
+  // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
   // 함수작성 부분
   const transformData = (mainInitialData) => {
     if (!mainInitialData || mainInitialData.length === 0) {
-      return [];
+      return { transformed: [], months: [] };
     }
 
     const groupedByMonth = {};
+    const uniqueMonths = new Set();
 
     // 월별로 데이터 그룹화
     mainInitialData.forEach((item) => {
       const month = new Date(item.calculation_month).getMonth() + 1;
+      uniqueMonths.add(month);
+
       if (!groupedByMonth[month]) {
         groupedByMonth[month] = [];
       }
@@ -124,24 +128,32 @@ const Example = () => {
       }));
     });
 
-    return transformed;
+    // 고유 월 목록 반환
+    const months = Array.from(uniqueMonths).sort((a, b) => a - b);
+
+    return { transformed, months };
   };
 
-  const transformedData = transformData(mainInitialData);
-  console.log("transformedData", transformedData);
+  const transformedData = transformData(mainInitialData).transformed;
+  const uniqueMonthsData = transformData(mainInitialData).months;
+  // ################################################################################################################### chart데이터 및 user데이터 월단위 fillter (consol.log)
+  // console.log("transformedData", transformedData);
+  // console.log("uniqueMonthsData", uniqueMonthsData);
 
   // 변환된 데이터를 현재 선택된 월에 따라 필터링
   const filteredData = transformedData.filter((data) => data.currentMonth === selectedMonth);
-  console.log("filteredData", filteredData);
+  // ################################################################################################################### chart데이터 월단위 분할 (consol.log)
+  // console.log("filteredData", filteredData);
 
   return (
     <div style={{ width: "100%" }}>
       <div className="mainchart_wrap">
         <select onChange={handleMonthChange} value={selectedMonth}>
-          <option value="1">1월</option>
-          <option value="2">2월</option>
-          <option value="11">11월</option>
-          <option value="12">12월</option>
+          {uniqueMonthsData.map((month, index) => (
+            <option key={index} value={month}>
+              {month}월
+            </option>
+          ))}
         </select>
         {filteredData.length !== 0 ? (
           <div>
@@ -168,7 +180,13 @@ const Example = () => {
           <YAxis />
           <Tooltip />
           <Legend onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} />
-          <Line type="monotone" dataKey="average" strokeOpacity={opacity.average} stroke="#8884d8" activeDot={{ r: 10 }} />
+          <Line
+            type="monotone"
+            dataKey="average"
+            strokeOpacity={opacity.average}
+            stroke="#8884d8"
+            activeDot={{ r: 10 }}
+          />
           <Line type="monotone" dataKey="user" strokeOpacity={opacity.user} stroke="#82ca9d" activeDot={{ r: 10 }} />
         </LineChart>
       </ResponsiveContainer>

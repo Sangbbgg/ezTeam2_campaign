@@ -14,7 +14,7 @@ function CarbonFootprint() {
   // const userId = 179870; //개발용 user_id
   const storedUserData = sessionStorage.getItem("userData");
   const userData = JSON.parse(storedUserData);
-  console.log("세션확인:", userData);
+  // console.log("세션확인:", userData);
 
   // const userData = {
   //   userid: 179870,
@@ -88,8 +88,22 @@ function CarbonFootprint() {
         return; // userData도 없고 resultData도 없으면 여기서 함수 종료
       }
     }
+    if (tabName === "practice") {
+      const userResponse = window.confirm(
+        '"결과보기"의 저장을 하셨나요? \n 저장을 않하셨다면 "실천목표"가 초기화 됩니다. \n\n "취소"버튼을 누르시면 저장버튼으로 이동 합니다.'
+      );
 
-    // 위의 조건을 만족하지 않으면 탭 변경
+      if (userResponse) {
+        // 사용자가 '확인'을 클릭했을 때 실행할 코드
+        setActiveTab(tabName);
+      } else {
+        return window.scrollTo({
+          top: 3200,
+          behavior: "smooth", // 부드러운 스크롤 효과
+        });
+      }
+    }
+    // 위의 조건을 만족하면 탭 변경
     setActiveTab(tabName);
   };
 
@@ -192,7 +206,7 @@ function CarbonFootprint() {
   };
 
   return (
-    <div id="wrap" >
+    <div id="wrap">
       <div className="hidden_for_capture">
         <Header />
       </div>
