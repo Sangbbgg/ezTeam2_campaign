@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
 const Example = () => {
@@ -7,6 +7,7 @@ const Example = () => {
   const [mainInitialData, setMainInitialData] = useState(null);
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth()); // 현재 월을 기본값으로 설정
   const [opacity, setOpacity] = useState({ user: 0.3, average: 0.3 });
+  const [isLoggedin, setIsLoggedin] = useState("");
 
   const handleMouseEnter = (o) => {
     const { dataKey } = o;
@@ -34,7 +35,9 @@ const Example = () => {
       }
     };
     fetchInitialData();
-  }, []);
+
+    setIsLoggedin(sessionStorage.length);
+  }, [isLoggedin]);
 
   // 평균 데이터
   const averageData = { electricity: 32.5, gas: 38.9, water: 1.6, transportation: 270.8, waste: 0.6, total: 344.4 };
@@ -193,14 +196,32 @@ const Example = () => {
 
     return null;
   };
+  // console.log(sessionStorage.length);
+  const carbonNavigate = () => {
+    if (isLoggedin === 0) {
+      alert("로그인이 필요한 서비스입니다.");
+      navigate("/Login");
+    } else {
+      navigate("/carbonFootprint");
+      navigate("/carbonFootprint");
+      window.scrollTo({
+        top: 0, // Y 좌표
+        left: 0, // X 좌표
+        behavior: "smooth", // 부드러운 스크롤 효과
+      });
+    }
+  };
 
-  const carbonNavigate=()=>{
-    navigate("/carbonFootprint")
-  }
-
-  // console.log(loggedIn)
   return (
     <div style={{ width: "100%" }}>
+      <div className="main_chart_img_left">
+        <img src="/img/main_chart_img_left.jpg" />
+        {/* <img className="main_chart_img_left" src="/img/Wind_turbine_bro.svg"/> */}
+      </div>
+      <div className="main_chart_img_right">
+        {/* <img src="/img/foot.png" /> */}
+        <img className="main_chart_img_left" src="/img/foot_3.svg"/>
+      </div>
       <div className="mainchart_wrap">
         <div className="mainchart_title">
           <div className="mainchart_title_month">
@@ -227,25 +248,25 @@ const Example = () => {
           </div>
         </div>
         <div className="mainchart_content">
-          <ResponsiveContainer width="100%" height={500}>
+          <ResponsiveContainer width="100%" height={450}>
             <LineChart
               width={500}
-              height={300}
+              height={400}
               data={filteredData}
               margin={{
-                top: 50,
-                right: 20,
+                top: 20,
+                right: 40,
                 left: 20,
-                bottom: 5,
+                bottom: 15,
               }}
             >
-              <CartesianGrid strokeDasharray="3 3" />
+              <CartesianGrid strokeDasharray="7 7" />
               <XAxis dataKey="name" tick={<CustomTick />} />
               <YAxis />
               <Tooltip content={CustomTooltip} />
 
               <Legend
-                wrapperStyle={{ fontSize: "25px", fontWeight: "bold", lineHeight: 3 }}
+                wrapperStyle={{ fontSize: "25px", fontWeight: "bold", lineHeight: 2 }}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
                 formatter={(value) => {
@@ -253,6 +274,10 @@ const Example = () => {
                   if (value === "user") return "빵끗";
                   return value;
                 }}
+                height={80}
+                iconSize={50}
+                layout="horizontal"
+                verticalAlign="top"
               />
               <Line
                 type="monotone"

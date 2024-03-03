@@ -17,6 +17,7 @@ const Header = () => {
     const handleLogout = () => {
       sessionStorage.removeItem("loggedIn");
       sessionStorage.removeItem("userData"); //0210 상호형 추가
+      sessionStorage.removeItem("usertype"); //0303 상호형 추가
       setLoggedIn(false);
       navigate("/"); //0210 상호형 추가
     };
