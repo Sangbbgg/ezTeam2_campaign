@@ -681,7 +681,7 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 /* main */
 
 /* 탄소발자국 */
-.main .carbon {position: relative; padding: 160px 0; background-color: white; z-index: 1; overflow: hidden;}
+.main .carbon {position: relative; padding: 90px 0 50px 0; background-color: white; z-index: 1; overflow: hidden;}
 .main .carbon::after{
   content: '';
     position: absolute;
@@ -715,9 +715,9 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 .mainchart_wrap .mainchart_content_bottom > button{font-size: 20px; width: 200px; height: 80px; background-color: #25B058; border-radius: 8px; color: white; margin-left: auto}
 
 .main_chart_img_left{position: absolute; z-index: -1; left: -30%;}
-.main_chart_img_left > img{width: 480px; height: 610px; transition: opacity 2s ease; opacity: 0;}
+.main_chart_img_left > img{width: 480px; height: 610px; transition: opacity 3s ease; opacity: 0;}
 .main_chart_img_right{position: absolute; right:20%; top:-5% }
-.main_chart_img_right > img{width: 500px; height: 500px; fill: #0078C3; transition: opacity 2s ease; opacity: 0; }
+.main_chart_img_right > img{width: 500px; height: 500px; fill: #0078C3; transition: opacity 3s ease; opacity: 0; }
 
 
 
@@ -793,3 +793,5 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 .form-login-link{display: flex; justify-content: end; gap: 10px; margin-top: 20px;}
 
 /* 회원가입 */
+
+
