@@ -11,7 +11,7 @@ function LoginPage() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const [loginStatus, setloginStatus] = useState('');
-  const [userTypes, setUserTypes] = useState([]);
+  const [userTypes, setUserTypes] = useState(1);
 
   const [activeTab, setActiveTab] = useState("personalCheckbox");
 
@@ -87,7 +87,6 @@ function LoginPage() {
                   value={email}
                   onChange={(e) => setemail(e.target.value)}
                 />
-                <br />
                 <input
                   className='login-input'
                   type="password"
@@ -97,13 +96,12 @@ function LoginPage() {
                 />
 
                 {/* 로그인 버튼 표시 */}
-                <button onClick={(e) => { e.preventDefault(); console.log('버튼 클릭됨'); LoginPageJs(); }}>
+                <button className='login-button' onClick={(e) => { e.preventDefault(); console.log('버튼 클릭됨'); LoginPageJs(); }}>
                   로그인
                 </button>
                 <div className='form-login-link'>
                   <Link to="/Register">회원가입</Link>
                   <Link to="/Find">회원ID찾기</Link>
-
                 </div>
               </div>
               {loginStatus && <div>{loginStatus}</div>}
