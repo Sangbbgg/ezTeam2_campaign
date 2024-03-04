@@ -245,12 +245,11 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .summary-wrap .writer-info .sub-txt {margin-top: 8px; color: #666;}
 .summary-wrap .info-box {display: flex; align-items: center;}
 .summary-wrap .info-box + .info-box {margin-top: 8px;}
-/* .info-box {display: flex; align-items: center; margin-top: 20px; padding: 20px; background-color: #e1f0de;} */
-/* .campaign-detail .info-box .tit {} */
 .summary-wrap .info-box .date-wrap {display: flex;}
 .summary-wrap .info-box .date-wrap p {font-size: 16px; word-break: keep-all;}
 .summary-wrap .info-box .date-wrap .tit {margin-bottom: 0;}
 .summary-wrap .info-box .date-wrap span {margin: 0 8px;}
+
 
 /* 내가 쓴 글 영역 */
 .mypage {position: relative;}
@@ -261,10 +260,13 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .mypost-w .mypost:nth-child(n+3) {margin-top: 20px;}
 .mypost-w .title-area {margin-bottom: 20px;}
 .mypost-w .title-area .title {margin-bottom: 0; min-height: 32px; font-size: 18px; color: #000; text-align: left; overflow: hidden; white-space: normal; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; word-break: keep-all;}
+.mypost-w .regi-info {min-width: 70px;}
 .mypost-w .regi-info .date::before {display: none;}
 
 .btn-view {margin-top: 20px; padding: 10px 30px; color: #fff; font-size: 16px; background-color: #25B058; border: 1px solid #25B058;}
 
+/* 쓴 글이 없을 경우 */
+.no-data {font-size: 18px;}
 
 
 

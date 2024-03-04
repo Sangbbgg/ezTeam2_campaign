@@ -20,7 +20,6 @@ function Mypage() {
       .then((res) => {
         if (res.payload) {
           let arrPost = [...res.payload];
-          console.log(arrPost);
           setMypostList(arrPost.reverse());
         }
       })
@@ -38,78 +37,77 @@ function Mypage() {
 
             {/* 내가 쓴 캠페인 글 */}
             <div className="mycont-wrap">
-            <h3 className="title">내가 쓴 글</h3>
+              <h3 className="title">내가 쓴 글</h3>
+              {
+                mypostList.filter(item => item.userid === userData.userid).map((post, index) => (
+                  console.log(index, post)
+              ))
+              
+              }
               <div className="mypost-w">
-                {mypostList.filter(item => item.userid === userData.userid).map((post, index) => (
-                  <div className="mypost summary-wrap" key={index}>
-                    <div className="title-area">
-                      <p className="title">{post.title}</p>
-                      <div className="regi-info">
-                      
-                      {/* <p className="views">{"조회수: " + parseInt(post.views + 1)}</p> */}
-                      <p className="date">{new Date(post.date).toLocaleDateString()}</p>
+                {mypostList.filter(item => item.userid === userData.userid).length > 0 ? (
+                  mypostList.filter(item => item.userid === userData.userid).map((post, index) => (
+                    <div className="mypost summary-wrap" key={index}>
+                      <div className="title-area">
+                        <p className="title">{post.title}</p>
+                        <div className="regi-info">
+                          {/* <p className="views">{"조회수: " + parseInt(post.views + 1)}</p> */}
+                          <p className="date">{new Date(post.date).toLocaleDateString()}</p>
+                        </div>
                       </div>
-                    </div>
-
-                    <div className="info-area">
-                      <div className="detail-info">
-                        {/* 캠페인 기간 */}
-                        {
-                          post.end_date != null ? (
+                      <div className="info-area">
+                        <div className="detail-info">
+                          {/* 캠페인 기간 */}
+                          {post.end_date && (
                             <div className="info-box">
-                              <p className='tit'>캠페인 기간</p>
-                            
+                              <p className="tit">캠페인 기간</p>
                               <div className="date-wrap">
-                                {post.start_date != null ? (
+                                {post.start_date && (
                                   <p className="start-date">{new Date(post.start_date).toLocaleDateString()}</p>
-                                ) : null}
-                                  <span>~</span>
-                                {post.end_date != null ? (
+                                )}
+                                <span>~</span>
+                                {post.end_date && (
                                   <p className="end-date">{new Date(post.end_date).toLocaleDateString()}</p>
-                                ) : null}
+                                )}
                               </div>
                             </div>
-                          ): null
-                        }
-
-                        {/* 접수 기간 */}
-                        {
-                          post.end_date != null ? (
+                          )}
+                          {/* 접수 기간 */}
+                          {post.reception_end_date && (
                             <div className="info-box">
-                              <p className='tit'>접수 기간</p>
-                            
+                              <p className="tit">접수 기간</p>
                               <div className="date-wrap">
-                                {post.reception_start_date != null ? (
+                                {post.reception_start_date && (
                                   <p className="start-date">{new Date(post.reception_start_date).toLocaleDateString()}</p>
-                                ) : null}
-                                  <span>~</span>
-                                {post.reception_end_date != null ? (
+                                )}
+                                <span>~</span>
+                                {post.reception_end_date && (
                                   <p className="end-date">{new Date(post.reception_end_date).toLocaleDateString()}</p>
-                                ) : null}
+                                )}
                               </div>
                             </div>
-                          ): null
-                        }
-
-                        {/* 위치 정보 */}
-                        {
-                          post.latitude != null ? (
+                          )}
+                          {/* 위치 정보 */}
+                          {post.latitude && (
                             <div className="info-box">
                               <p className="tit">캠페인 장소</p>
-                                <div className="txt-w">
-                                  <p className="txt">{post.address}</p>
-                                  <p className="detail-txt">{post.address_detail}</p>
-                                </div>
+                              <div className="txt-w">
+                                <p className="txt">{post.address}</p>
+                                <p className="detail-txt">{post.address_detail}</p>
+                              </div>
                             </div>
-                          ):null
-                        }
+                          )}
+                        </div>
                       </div>
+                      <button className="btn-view" onClick={() => {navigate(`/campaign/detail/${post.id}`)}}>보러가기</button>
                     </div>
-                    <button className='btn-view' onClick={()=>{navigate(`/campaign/detail/${post.id}`)}} >보러가기</button>
-                  </div>
-                ))}
+                  ))
+                ) : (
+                  <p className='no-data'>내가 쓴 글이 없습니다.</p>
+                )}
               </div>
-            </div>
+        </div>
+
         </div>
       </div>
       <Footer />
