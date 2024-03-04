@@ -78,19 +78,19 @@ app.post("/campaign", (req, res) => {
 
   // 캠페인 시작날짜
   const startDateOffset = new Date(req.body.start_date);
-  const formattedStartDate = new Date(startDateOffset.getTime() - startDateOffset.getTimezoneOffset() * 60000).toISOString().slice(0, 19).replace("T", " "); // ISO 형식의 날짜를 MySQL이 인식할 수 있는 형식으로 변환
+  const formattedStartDate = new Date(startDateOffset.getTime() - startDateOffset.getTimezoneOffset() * 60000).toISOString().split('T')[0]; // ISO 형식의 날짜를 MySQL이 인식할 수 있는 형식으로 변환
 
   // 캠페인 종료날짜
   const endDateOffset = new Date(req.body.end_date);
-  const formattedEndDate = new Date(endDateOffset.getTime() - endDateOffset.getTimezoneOffset() * 60000).toISOString().slice(0, 19).replace("T", " "); // ISO 형식의 날짜를 MySQL이 인식할 수 있는 형식으로 변환
+  const formattedEndDate = new Date(endDateOffset.getTime() - endDateOffset.getTimezoneOffset() * 60000).toISOString().split('T')[0]; // ISO 형식의 날짜를 MySQL이 인식할 수 있는 형식으로 변환
 
   // 캠페인 접수 시작날짜
   const receptionStartDateOffset = new Date(req.body.reception_start_date);
-  const formattedReceptionStartDate = new Date(receptionStartDateOffset.getTime() - receptionStartDateOffset.getTimezoneOffset() * 60000).toISOString().slice(0, 19).replace("T", " ");
+  const formattedReceptionStartDate = new Date(receptionStartDateOffset.getTime() - receptionStartDateOffset.getTimezoneOffset() * 60000).toISOString().split('T')[0];
 
   // 캠페인 접수 종료날짜
   const receptionEndDateOffset = new Date(req.body.reception_end_date);
-  const formattedReceptionEndDate = new Date(receptionEndDateOffset.getTime() - receptionEndDateOffset.getTimezoneOffset() * 60000).toISOString().slice(0, 19).replace("T", " ");
+  const formattedReceptionEndDate = new Date(receptionEndDateOffset.getTime() - receptionEndDateOffset.getTimezoneOffset() * 60000).toISOString().split('T')[0];
 
   const values = [req.body.title, req.body.body, req.body.userid, formattedStartDate, formattedEndDate, formattedReceptionStartDate, formattedReceptionEndDate, req.body.address, req.body.address_detail, req.body.latitude, req.body.longitude];
 
@@ -99,6 +99,7 @@ app.post("/campaign", (req, res) => {
     return res.json("Message has been sent successfully");
   });
 });
+
 
 
 // 글 삭제
@@ -138,13 +139,15 @@ app.get("/campaign/detail/:id", (req, res) => {
 
 app.put("/campaign/edit/:id", (req, res) => {
   const campaignId = req.params.id;
-  const q = "UPDATE campaign_posts SET `title` = ?, `body` = ?, `start_date` = ?, `end_date` = ?, `address` = ?, `address_detail` = ?, `latitude` = ?, `longitude` = ? WHERE id = ?";
+  const q = "UPDATE campaign_posts SET `title` = ?, `body` = ?, `start_date` = ?, `end_date` = ?, `reception_start_date` = ?, `reception_end_date` = ?, `address` = ?, `address_detail` = ?, `latitude` = ?, `longitude` = ? WHERE id = ?";
   // start_date와 end_date가 문자열로 넘어오는 것을 Date 객체로 변환하여 사용
   const values = [
     req.body.title,
     req.body.body,
     new Date(req.body.start_date),
     new Date(req.body.end_date),
+    new Date(req.body.reception_start_date),
+    new Date(req.body.reception_end_date),
     req.body.address,
     req.body.address_detail,
     req.body.latitude,

@@ -215,6 +215,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .main .campaign .cont .img-wrap:hover img {transform: translate(-50%, -50%) scale(1.1);}
 .main .campaign .cont .txt-wrap .title {margin-top: 18px; font-size: 16px; color: #fff;}
 .main .campaign .cont .txt-wrap .txt-info {display: none;}
+.main footer{background-color: #e1f0de;}
 
 
 

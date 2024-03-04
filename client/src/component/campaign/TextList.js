@@ -18,15 +18,20 @@ const TextList = ({campaignList}) => {
   // campaignList.body 내부의 이미지 src 추출
   const imageSrcList = extractImageSrc(campaignList.body);
 
-  // 캠페인 종료 날짜와 오늘 날짜 비교
+  // 접수 종료 날짜와 오늘 날짜 비교
   const today = new Date(new Date().toUTCString());
-  const campaignEndDate = new Date(campaignList.end_date);
-  campaignEndDate.setDate(campaignEndDate.getDate() + 1);
-  const isCampaignInProgress = campaignEndDate >= today;
+  const receptionEndDate = new Date(campaignList.reception_end_date);
+  receptionEndDate.setDate(receptionEndDate.getDate() + 1);
+  console.log(receptionEndDate + "마감일")
+  console.log(today + "오늘")
+  const isReceptionInProgress = receptionEndDate >= today;
+  // console.log(isReceptionInProgress)
+  //Sun Feb 25 2024 00:00:00 GMT+0900 (한국 표준시)마감일
+  //Mon Mar 04 2024 10:41:53 GMT+0900 (한국 표준시)오늘
 
-  // 접수중인 캠페인일 경우 노출되는 badge
+  // 뱃지 
   const renderBadge = () => {
-    if(isCampaignInProgress){
+    if(isReceptionInProgress){
       return <span className="badge inprogress">접수중</span>
     } else {
       return <span className="badge completed">마감</span>
