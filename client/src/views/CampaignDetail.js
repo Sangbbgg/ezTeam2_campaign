@@ -154,7 +154,7 @@ const CampaignDetail = (props) => {
 
             <div className="info-area">
               <div className="detail-info">
-                {/* 진행 기간 */}
+                {/* 캠페인 기간 */}
                 {
                   curList?.end_date != null ? (
                     <div className="info-box">
@@ -172,6 +172,26 @@ const CampaignDetail = (props) => {
                     </div>
                   ): null
                 }
+
+                {/* 접수 기간 */}
+                {
+                  curList?.end_date != null ? (
+                    <div className="info-box">
+                      <p className='tit'>접수 기간</p>
+                    
+                      <div className="date-wrap">
+                        {curList?.reception_start_date != null ? (
+                          <p className="start-date">{new Date(curList?.reception_start_date).toLocaleDateString()}</p>
+                        ) : null}
+                          <span>~</span>
+                        {curList?.reception_end_date != null ? (
+                          <p className="end-date">{new Date(curList?.reception_end_date).toLocaleDateString()}</p>
+                        ) : null}
+                      </div>
+                    </div>
+                  ): null
+                }
+
                 {/* 위치 정보 */}
                 {
                   curList?.latitude != null ? (

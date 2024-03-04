@@ -72,27 +72,34 @@ app.get("/campaign", (req, res) => {
   });
 });
 
-// 글쓰기 페이지에서 사용자가 입력한 정보가 들어가도록 요청
 app.post("/campaign", (req, res) => {
   // MySQL의 NOW() 함수를 사용하여 현재 시간을 삽입
-  const q = "INSERT INTO campaign_posts (title, body, date, userid, start_date, end_date, address, address_detail, latitude, longitude) VALUES (?, ?, NOW(), ?, ?, ?, ?, ?, ?, ?)";
+  const q = "INSERT INTO campaign_posts (title, body, date, userid, start_date, end_date, reception_start_date, reception_end_date, address, address_detail, latitude, longitude) VALUES (?, ?, NOW(), ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-  // 시작날짜
+  // 캠페인 시작날짜
   const startDateOffset = new Date(req.body.start_date);
   const formattedStartDate = new Date(startDateOffset.getTime() - startDateOffset.getTimezoneOffset() * 60000).toISOString().slice(0, 19).replace("T", " "); // ISO 형식의 날짜를 MySQL이 인식할 수 있는 형식으로 변환
 
-  // 종료날짜
+  // 캠페인 종료날짜
   const endDateOffset = new Date(req.body.end_date);
   const formattedEndDate = new Date(endDateOffset.getTime() - endDateOffset.getTimezoneOffset() * 60000).toISOString().slice(0, 19).replace("T", " "); // ISO 형식의 날짜를 MySQL이 인식할 수 있는 형식으로 변환
 
-  const values = [req.body.title, req.body.body, req.body.userid, formattedStartDate, formattedEndDate, req.body.address, req.body.address_detail, req.body.latitude, req.body.longitude];
-  console.log(req.body);
+  // 캠페인 접수 시작날짜
+  const receptionStartDateOffset = new Date(req.body.reception_start_date);
+  const formattedReceptionStartDate = new Date(receptionStartDateOffset.getTime() - receptionStartDateOffset.getTimezoneOffset() * 60000).toISOString().slice(0, 19).replace("T", " ");
+
+  // 캠페인 접수 종료날짜
+  const receptionEndDateOffset = new Date(req.body.reception_end_date);
+  const formattedReceptionEndDate = new Date(receptionEndDateOffset.getTime() - receptionEndDateOffset.getTimezoneOffset() * 60000).toISOString().slice(0, 19).replace("T", " ");
+
+  const values = [req.body.title, req.body.body, req.body.userid, formattedStartDate, formattedEndDate, formattedReceptionStartDate, formattedReceptionEndDate, req.body.address, req.body.address_detail, req.body.latitude, req.body.longitude];
 
   connection.query(q, values, (err, data) => {
     if (err) return res.json(err);
     return res.json("Message has been sent successfully");
   });
 });
+
 
 // 글 삭제
 app.delete("/campaign/detail/:id", (req, res) => {

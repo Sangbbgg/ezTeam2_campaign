@@ -24,18 +24,14 @@ const TextList = ({campaignList}) => {
   campaignEndDate.setDate(campaignEndDate.getDate() + 1);
   const isCampaignInProgress = campaignEndDate >= today;
 
-  
-
-  // 진행중인 캠페인일 경우 노출되는 badge
+  // 접수중인 캠페인일 경우 노출되는 badge
   const renderBadge = () => {
     if(isCampaignInProgress){
-      return <span className="badge inprogress">진행중</span>
+      return <span className="badge inprogress">접수중</span>
     } else {
-      return <span className="badge completed">종료</span>
+      return <span className="badge completed">마감</span>
     }
   }
-
-  
   
   return (
     <button className="cont" onClick={()=>{navigate(`/campaign/detail/${campaignList.id}`)}}>
