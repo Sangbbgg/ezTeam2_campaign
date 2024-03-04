@@ -35,16 +35,17 @@ function Mypage() {
             <div className="tit"> Mypage</div>
           </div>
 
-            {/* 내가 쓴 캠페인 글 */}
-            <div className="mycont-wrap">
+          {/* 내가 쓴 캠페인 글 */}
+          <div className="mycont-wrap">
               <h3 className="title">내가 쓴 글</h3>
-              {
+              {/* {
                 mypostList.filter(item => item.userid === userData.userid).map((post, index) => (
                   console.log(index, post)
               ))
               
-              }
-              <div className="mypost-w">
+              } */}
+            <div className="cont-area">
+              <div className="post-list">
                 {mypostList.filter(item => item.userid === userData.userid).length > 0 ? (
                   mypostList.filter(item => item.userid === userData.userid).map((post, index) => (
                     <div className="mypost summary-wrap" key={index}>
@@ -106,7 +107,17 @@ function Mypage() {
                   <p className='no-data'>내가 쓴 글이 없습니다.</p>
                 )}
               </div>
-        </div>
+            </div>
+
+          </div>
+
+          {/* 내가 신청한 캠페인 */}
+          <div className="mycont-wrap">
+            <h3 className="title">신청한 캠페인</h3>
+            <div className="cont-area">
+              
+            </div>
+          </div>
 
         </div>
       </div>

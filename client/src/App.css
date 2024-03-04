@@ -219,7 +219,28 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 
 
 /* ------------------------------- 마이페이지 -------------------------------*/
+
+/* 공통 */
 .mypage {position: relative;}
+.mycont-wrap + .mycont-wrap {margin-top: 80px;}
+.mycont-wrap .title {font-size: 22px; margin-bottom: 24px;}
+.no-data {font-size: 18px;}
+
+
+
+/* 내가 쓴 글 영역 */
+.post-list {display: flex; flex-wrap: wrap;}
+.post-list .mypost {margin-right: 20px; width: calc((100%  - 40px) / 2);}
+.post-list .mypost:nth-child(2n) {margin-right: 0;}
+.post-list .mypost:nth-child(n+3) {margin-top: 20px;}
+.post-list .title-area {margin-bottom: 20px;}
+.post-list .title-area .title {margin-bottom: 0; min-height: 32px; font-size: 18px; color: #000; text-align: left; overflow: hidden; white-space: normal; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; word-break: keep-all;}
+.post-list .regi-info {min-width: 70px;}
+.post-list .regi-info .date::before {display: none;}
+
+.btn-view {margin-top: 20px; padding: 10px 30px; color: #fff; font-size: 16px; background-color: #25B058; border: 1px solid #25B058;}
+
+
 
 
 /* 마이페이지 내가 쓴 글 & 캠페인 상세 공통 */
@@ -251,22 +272,6 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .summary-wrap .info-box .date-wrap span {margin: 0 8px;}
 
 
-/* 내가 쓴 글 영역 */
-.mypage {position: relative;}
-.mycont-wrap .title {font-size: 22px; margin-bottom: 24px;}
-.mypost-w {display: flex; flex-wrap: wrap;}
-.mypost-w .mypost {margin-right: 20px; width: calc((100%  - 40px) / 2);}
-.mypost-w .mypost:nth-child(2n) {margin-right: 0;}
-.mypost-w .mypost:nth-child(n+3) {margin-top: 20px;}
-.mypost-w .title-area {margin-bottom: 20px;}
-.mypost-w .title-area .title {margin-bottom: 0; min-height: 32px; font-size: 18px; color: #000; text-align: left; overflow: hidden; white-space: normal; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; word-break: keep-all;}
-.mypost-w .regi-info {min-width: 70px;}
-.mypost-w .regi-info .date::before {display: none;}
-
-.btn-view {margin-top: 20px; padding: 10px 30px; color: #fff; font-size: 16px; background-color: #25B058; border: 1px solid #25B058;}
-
-/* 쓴 글이 없을 경우 */
-.no-data {font-size: 18px;}
 
 
 
