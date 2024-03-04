@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import './1.css'
+// import './1.css'
 
 function Modify() {
   const [userData, setUserData] = useState({}); // 사용자 데이터를 저장할 상태

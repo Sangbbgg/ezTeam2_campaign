@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import DaumPostcode from "react-daum-postcode";
 import { handlePostcode } from "./Handle/Postcodehandle";
 import axios from 'axios';
-import './1.css';
+// import './1.css';
 
 function RegisterCorporate() {
   const [username, setUsername] = useState('');//이름
