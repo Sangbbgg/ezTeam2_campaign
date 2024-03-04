@@ -254,9 +254,16 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 
 /* 내가 쓴 글 영역 */
 .mypage {position: relative;}
-.mycont-w .title {font-size: 20px; margin-bottom: 14px;}
-.mycont-w .post + .post {margin-top: 30px;}
+.mycont-wrap .title {font-size: 22px; margin-bottom: 24px;}
+.mypost-w {display: flex; flex-wrap: wrap;}
+.mypost-w .mypost {margin-right: 20px; width: calc((100%  - 40px) / 2);}
+.mypost-w .mypost:nth-child(2n) {margin-right: 0;}
+.mypost-w .mypost:nth-child(n+3) {margin-top: 20px;}
+.mypost-w .title-area {margin-bottom: 20px;}
+.mypost-w .title-area .title {margin-bottom: 0; min-height: 32px; font-size: 18px; color: #000; text-align: left; overflow: hidden; white-space: normal; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; word-break: keep-all;}
+.mypost-w .regi-info .date::before {display: none;}
 
+.btn-view {margin-top: 20px; padding: 10px 30px; color: #fff; font-size: 16px; background-color: #25B058; border: 1px solid #25B058;}
 
 
 
@@ -318,6 +325,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 #wrap.campaign-detail .content-w {position: relative; padding-top: 160px; padding-bottom: 120px; background-color: #e1f0de;background-image: url('../public/img/carbon_content_bg.png'); background-size: cover; background-position: center;}
 
 .campaign-detail {position: relative;}
+.campaign-detail .summary-wrap {background-color: #fff;}
 .campaign-detail .body-wrap {position: relative; margin-top: 40px; padding: 40px; background-color: #fff; border-radius: 6px;}
 .campaign-detail .body-wrap .body-tit {margin-bottom: 20px; padding-bottom: 14px; font-size: 20px; border-bottom: 1px solid #ddd;}
 .campaign-detail .body-area {font-size: 18px;  background-color: #fff;}
