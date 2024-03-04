@@ -14,8 +14,10 @@ const CampaignWrite = () => {
   const userData = JSON.parse(storedUserData);
 
   const navigate = useNavigate();
-  const [startDate, setStartDate] = useState(new Date("2024/01/01"));
-  const [endDate, setEndDate] = useState(new Date("2024/01/01"));
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+  const [receptionStartDate, setReceptionStartDate] = useState(new Date());
+  const [receptionEndDate, setReceptionEndDate] = useState(new Date());
 
   // 지도
   const [address, setAddress] = useState("");
@@ -52,12 +54,14 @@ const CampaignWrite = () => {
       ...prev,
       start_date: startDate,
       end_date: endDate,
+      reception_start_date: receptionStartDate,
+      reception_end_date: receptionEndDate,
       address: address,
       address_detail: addressDetail,
       latitude: latitude,
       longitude: longitude,
     }));
-  }, [startDate, endDate, address, addressDetail, latitude, longitude]);
+  }, [startDate, endDate, receptionStartDate, receptionEndDate, address, addressDetail, latitude, longitude]);
 
   const [write, setWrite] = useState({
     title: "",
@@ -90,6 +94,8 @@ const CampaignWrite = () => {
         userid: write.userid,
         start_date: startDate,
         end_date: endDate,
+        reception_start_date: receptionStartDate,
+        reception_end_date: receptionEndDate,
       };
   
       // "장소없음"이 선택되었을 때만 주소 관련 필드를 null로 설정
@@ -195,8 +201,9 @@ const CampaignWrite = () => {
                 <input type="text" name="title" value={write.title || ""} placeholder="제목을 입력하세요" onChange={handleChange} />
               </div>
               <div className="body-area">
+                {/* 캠페인 기간 */}
                 <div className="calendar-area">
-                  <p className="cal-tit">진행기간</p>
+                  <p className="cal-tit">캠페인 기간</p>
                   <div className="calendar">
                     <DatePicker
                       className="start-date"
@@ -216,6 +223,32 @@ const CampaignWrite = () => {
                       startDate={startDate}
                       endDate={endDate}
                       minDate={startDate}
+                    />
+                  </div>
+                </div>
+              
+              {/* 접수 기간 */}
+                <div className="calendar-area">
+                  <p className="cal-tit">접수 기간</p>
+                  <div className="calendar">
+                    <DatePicker
+                      className="start-date"
+                      dateFormat="yyyy.MM.dd"
+                      selected={receptionStartDate}
+                      onChange={(date) => setReceptionStartDate(date)}
+                      selectsStart
+                      startDate={receptionStartDate}
+                      endDate={receptionEndDate}
+                    />
+                    <DatePicker
+                      className="end-date"
+                      dateFormat="yyyy.MM.dd"
+                      selected={receptionEndDate}
+                      onChange={(date) => setReceptionEndDate(date)}
+                      selectsEnd
+                      startDate={receptionStartDate}
+                      endDate={receptionEndDate}
+                      minDate={receptionStartDate}
                     />
                   </div>
                 </div>

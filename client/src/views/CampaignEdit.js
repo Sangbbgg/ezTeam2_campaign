@@ -16,6 +16,8 @@ const CampaignEdit = () => {
     body: "",
     start_date: "",
     end_date: "",
+    reception_start_date: "",
+    reception_end_date: "",
     address: "",
     address_detail: "",
     latitude: "",
@@ -26,8 +28,8 @@ const CampaignEdit = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`http://localhost:8000/campaign/detail/${id}`);
-        const { title, body, start_date, end_date, address, address_detail, latitude, longitude } = response.data;
-        setWrite({ title, body, start_date: new Date(start_date), end_date: new Date(end_date), address, address_detail, latitude, longitude });
+        const { title, body, start_date, end_date, reception_start_date, reception_end_date, address, address_detail, latitude, longitude } = response.data;
+        setWrite({ title, body, start_date: new Date(start_date), end_date: new Date(end_date), reception_start_date: new Date(reception_start_date), reception_end_date: new Date(reception_end_date), address, address_detail, latitude, longitude });
         initializeMap(latitude, longitude);
       } catch (error) {
         console.error(error);
@@ -154,9 +156,8 @@ const CampaignEdit = () => {
               </div>
 
               <div className="calendar-area">
-                <p className="cal-tit">진행기간</p>
+                <p className="cal-tit">캠페인 기간</p>
                 <div className="calendar">
-                  
                   <DatePicker
                     className="start-date"
                     dateFormat="yyyy.MM.dd"
@@ -175,6 +176,31 @@ const CampaignEdit = () => {
                     startDate={write.start_date}
                     endDate={write.end_date}
                     minDate={write.start_date}
+                  />
+                </div>
+              </div>
+              
+              <div className="calendar-area">
+                <p className="cal-tit">접수 기간</p>
+                <div className="calendar">
+                  <DatePicker
+                    className="start-date"
+                    dateFormat="yyyy.MM.dd"
+                    selected={write.reception_start_date}
+                    onChange={(date) => setWrite((prev) => ({ ...prev, reception_start_date: date }))}
+                    selectsStart
+                    startDate={write.reception_start_date}
+                    endDate={write.reception_end_date}
+                  />
+                  <DatePicker
+                    className="end-date"
+                    dateFormat="yyyy.MM.dd"
+                    selected={write.reception_end_date}
+                    onChange={(date) => setWrite((prev) => ({ ...prev, reception_end_date: date }))}
+                    selectsEnd
+                    startDate={write.reception_start_date}
+                    endDate={write.reception_end_date}
+                    minDate={write.reception_start_date}
                   />
                 </div>
               </div>
