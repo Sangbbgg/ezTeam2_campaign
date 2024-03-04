@@ -84,6 +84,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
 /* ------------------------------- 공통 ------------------------------- */
 html.scl-lock, body.scl-lock {overflow: hidden;}
 
+/* 헤더 */
 header {position: fixed; left: 0; top: 0; width: 100%; height: 80px; background-color: #fff; transition: top .6s ease, background-color .6s ease; z-index: 10;}
 header.hide {top: -80px;}
 header .logo {position: absolute; top: 50%; left: 50px; transform: translateY(-50%); z-index: 10; width: 56px; height:60px;}
@@ -120,7 +121,6 @@ header .utils {position: absolute; right: 50px; z-index: 3;}
 header .utils button {font-size: 13px; color: #000;}
 header .utils button a {font-size: 13px; color: #000;}
 header .utils button + button {margin-left: 10px;}
-
 
 /* 푸터 */
 footer {width: 100%; background: #fff; padding: 80px 0px;}
@@ -210,12 +210,66 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .main .campaign .swiper-button-prev {left: -80px !important;}
 .main .campaign .swiper-button-prev:after, .swiper-button-next:after {color: #fff;}
 .main .campaign .cont {position: relative; width: 100%; overflow: hidden;}
-.main .campaign .cont .img-wrap {width: 100%; position: relative; width: auto; height: 277px; overflow: hidden; border-radius: 8px;}
+.main .campaign .cont .img-wrap {width: 100%; position: relative; width: auto; height: 367px; overflow: hidden; border-radius: 8px;}
 .main .campaign .cont .img-wrap img {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1); width: 100%; height: 100%; transition: transform .3s ease-out; object-fit: cover;}
 .main .campaign .cont .img-wrap:hover img {transform: translate(-50%, -50%) scale(1.1);}
 .main .campaign .cont .txt-wrap .title {margin-top: 18px; font-size: 16px; color: #fff;}
 .main .campaign .cont .txt-wrap .txt-info {display: none;}
 .main footer{background-color: #e1f0de;}
+
+
+/* ------------------------------- 마이페이지 -------------------------------*/
+
+/* 공통 */
+.mypage {position: relative;}
+.mycont-wrap + .mycont-wrap {margin-top: 80px;}
+.mycont-wrap .title {font-size: 22px; margin-bottom: 24px;}
+.no-data {font-size: 18px;}
+
+
+
+/* 내가 쓴 글 영역 */
+.post-list {display: flex; flex-wrap: wrap;}
+.post-list .mypost {margin-right: 20px; width: calc((100%  - 40px) / 2);}
+.post-list .mypost:nth-child(2n) {margin-right: 0;}
+.post-list .mypost:nth-child(n+3) {margin-top: 20px;}
+.post-list .title-area {margin-bottom: 20px;}
+.post-list .title-area .title {margin-bottom: 0; min-height: 32px; font-size: 18px; color: #000; text-align: left; overflow: hidden; white-space: normal; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; word-break: keep-all;}
+.post-list .regi-info {min-width: 70px;}
+.post-list .regi-info .date::before {display: none;}
+
+.btn-view {margin-top: 20px; padding: 10px 30px; color: #fff; font-size: 16px; background-color: #25B058; border: 1px solid #25B058;}
+
+
+
+
+/* 마이페이지 내가 쓴 글 & 캠페인 상세 공통 */
+.summary-wrap .title-area {display: flex; justify-content: space-between; margin-bottom: 32px; padding-bottom: 16px; border-bottom: 1px solid #aaa;}
+.summary-wrap {padding: 40px; background-color: #f5f5f5; border-radius: 6px;}
+.summary-wrap .title {font-size: 24px; font-weight: 500;}
+.summary-wrap .btn-apply {display: inline-block; padding: 10px 40px; font-size: 18px; font-weight: 500; color: #fff; background-color: #25B058; cursor: pointer;}
+.summary-wrap .regi-info {display: flex; justify-content: flex-end; min-width: 160px;}
+.summary-wrap .regi-info p {font-size: 14px; color: #777;}
+.summary-wrap .regi-info .date {position: relative; margin-left: 14px; padding-left: 16px;}
+.summary-wrap .regi-info .date::before {content: ""; position: absolute; top: 6px; left: 0; width: 1px; height: 10px; background-color: #ccc;}
+.summary-wrap .info-area {display: flex; justify-content: space-between; position: relative; margin: 10px 0;}
+.summary-wrap .detail-info {margin-right: 20px;}
+.summary-wrap .detail-info .info-box .txt-w {display: flex;}
+.summary-wrap .detail-info .info-box .txt-w p {font-size: 16px;}
+.summary-wrap .detail-info .info-box .txt-w .detail-txt {margin-left: 8px;}
+.summary-wrap .detail-info .info-box .tit {margin-right: 14px; word-break: keep-all; font-size: 16px; font-weight: 500;}
+.summary-wrap .writer-info {position: relative; padding: 20px; background-color: #fafafa; border-radius: 4px;}
+.summary-wrap .writer-info .info-tit {margin-bottom: 8px; font-size: 14px ; color: #000;}
+.summary-wrap .writer-info .txt-box {display: flex;}
+.summary-wrap .writer-info p {font-size: 13px;}
+.summary-wrap .writer-info .tit {margin-right: 12px; color: #666;}
+.summary-wrap .writer-info .sub-txt {margin-top: 8px; color: #666;}
+.summary-wrap .info-box {display: flex; align-items: center;}
+.summary-wrap .info-box + .info-box {margin-top: 8px;}
+.summary-wrap .info-box .date-wrap {display: flex;}
+.summary-wrap .info-box .date-wrap p {font-size: 16px; word-break: keep-all;}
+.summary-wrap .info-box .date-wrap .tit {margin-bottom: 0;}
+.summary-wrap .info-box .date-wrap span {margin: 0 8px;}
 
 
 
@@ -238,12 +292,15 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .tit-wrap .txt {margin-top: 12px; font-size: 16px;}
 
 .container {display: flex; flex-wrap: wrap;}
-.container .cont {position: relative; margin-right: 20px; width: calc((100%  - 40px) / 3); overflow: hidden;}
+.container .cont {position: relative; margin-right: 20px; width: calc((100%  - 40px) / 3); background-color: #fff; overflow: hidden; box-shadow: 0 4px 6px -2px #00000001, 0 10px 15px -3px #0000000c;}
 .container .cont:nth-child(n+4) {margin-top: 50px;}
 .container .cont:nth-child(3n) {margin-right: 0;}
-.container .cont .img-wrap {position: relative; overflow: hidden; width: auto; height: 277px; border-radius: 6px;}
+.container .cont .img-wrap {position: relative; overflow: hidden; width: auto; height: 366px;}
 .container .cont .img-wrap:hover img {transform: translate(-50%, -50%) scale(1.1);}
 .container .cont .img-wrap img {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1); width: 100%; height: 100%; transition: transform .3s ease-out; object-fit: cover;}
+.container .cont .img-wrap img {position: absolute; top: 0; left: 0; transform: scale(1); width: 100%; transition: transform .3s ease-out; object-fit: cover;}
+.container .cont .img-wrap:hover img {transform: scale(1.1);}
+
 .container .cont .badge {position: absolute; bottom: 10px; left: 10px; padding: 2px; width: 40px; height: 24px; font-size: 12px; color: #fff; background-color: #777; border-radius: 4px;}
 .container .cont .badge.inprogress {background-color: #ea3737; }
 
@@ -251,7 +308,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .campaign .btn-write {margin-bottom: 20px; padding: 10px 30px; color: #fff; background-color: #25B058;}
 .campaign-wrap {padding: 30px 30px 60px; background-color: #e1f0de;}
 .campaign-wrap .cont .title {min-height: 32px; font-size: 18px; color: #000; text-align: left; overflow: hidden; white-space: normal; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; word-break: keep-all;}
-.campaign-wrap .txt-wrap {display: block; position: relative; margin-top: 14px;}
+.campaign-wrap .txt-wrap {display: block; position: relative; padding: 14px;}
 .campaign-wrap .txt-wrap .txt-info {display: flex; justify-content: space-between; margin-top: 20px;}
 .campaign-wrap .txt-wrap .username {font-size: 14px; text-align: right; color: #777;}
 .campaign-wrap .txt-wrap .date {font-size: 14px; text-align: right; color: #777;}
@@ -275,35 +332,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 #wrap.campaign-detail .content-w {position: relative; padding-top: 160px; padding-bottom: 120px; background-color: #e1f0de;background-image: url('../public/img/carbon_content_bg.png'); background-size: cover; background-position: center;}
 
 .campaign-detail {position: relative;}
-.campaign-detail .title-area {display: flex; justify-content: space-between; margin-bottom: 32px; padding-bottom: 16px; border-bottom: 1px solid #aaa;}
-.campaign-detail .summary-wrap {padding: 40px; background-color: #fff; border-radius: 6px;}
-.campaign-detail .summary-wrap .title {font-size: 24px; font-weight: 500;}
-.campaign-detail .summary-wrap .btn-apply {display: inline-block; padding: 10px 40px; font-size: 18px; font-weight: 500; color: #fff; background-color: #25B058; cursor: pointer;}
-.campaign-detail .regi-info {display: flex; justify-content: flex-end; min-width: 160px;}
-.campaign-detail .regi-info p {font-size: 14px; color: #777;}
-.campaign-detail .regi-info .date {position: relative; margin-left: 14px; padding-left: 16px;}
-.campaign-detail .regi-info .date::before {content: ""; position: absolute; top: 6px; left: 0; width: 1px; height: 10px; background-color: #ccc;}
-.campaign-detail .info-area {display: flex; justify-content: space-between; position: relative; margin: 10px 0;}
-.campaign-detail .detail-info {margin-right: 20px;}
-.campaign-detail .detail-info .info-box .txt-w {display: flex;}
-.campaign-detail .detail-info .info-box .txt-w p {font-size: 16px;}
-.campaign-detail .detail-info .info-box .txt-w .detail-txt {margin-left: 8px;}
-.campaign-detail .detail-info .info-box .tit {margin-right: 14px; word-break: keep-all; font-size: 16px; font-weight: 500;}
-.campaign-detail .writer-info {position: relative; padding: 20px; background-color: #fafafa; border-radius: 4px;}
-.campaign-detail .writer-info .info-tit {margin-bottom: 8px; font-size: 14px ; color: #000;}
-.campaign-detail .writer-info .txt-box {display: flex;}
-.campaign-detail .writer-info p {font-size: 13px;}
-.campaign-detail .writer-info .tit {margin-right: 12px; color: #666;}
-.campaign-detail .writer-info .sub-txt {margin-top: 8px; color: #666;}
-.campaign-detail .info-box {display: flex; align-items: center;}
-.campaign-detail .info-box + .info-box {margin-top: 8px;}
-/* .info-box {display: flex; align-items: center; margin-top: 20px; padding: 20px; background-color: #e1f0de;} */
-/* .campaign-detail .info-box .tit {} */
-.campaign-detail .info-box .date-wrap {display: flex;}
-.campaign-detail .info-box .date-wrap p {font-size: 16px; word-break: keep-all;}
-.campaign-detail .info-box .date-wrap .tit {margin-bottom: 0;}
-.campaign-detail .info-box .date-wrap span {margin: 0 8px;}
-
+.campaign-detail .summary-wrap {background-color: #fff;}
 .campaign-detail .body-wrap {position: relative; margin-top: 40px; padding: 40px; background-color: #fff; border-radius: 6px;}
 .campaign-detail .body-wrap .body-tit {margin-bottom: 20px; padding-bottom: 14px; font-size: 20px; border-bottom: 1px solid #ddd;}
 .campaign-detail .body-area {font-size: 18px;  background-color: #fff;}

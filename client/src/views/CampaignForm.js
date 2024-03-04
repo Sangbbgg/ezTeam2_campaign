@@ -23,7 +23,7 @@ const CampaignForm = () => {
 
 
   // @@@@@@@@@@@
-const [userInfo, setUserInfo] = useState(null); // 로그인한 사용자 정보를 저장
+// const [userInfo, setUserInfo] = useState(null); // 로그인한 사용자 정보를 저장
 const [filteredUserInfo, setFilteredUserInfo] = useState(null); // 로그인한 사용자 정보를 저장
 
 // 페이지가 로드될 때 사용자 정보를 가져오는 useEffect
