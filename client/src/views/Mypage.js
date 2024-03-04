@@ -26,21 +26,21 @@ function Mypage() {
 
   return (
     <div id="wrap">
-      {/* 내가 쓴 캠페인 글 */}
-      <div className="mypost">
-        <ul>
-          {mypostList.filter(item => item.userid === userData.userid).map((post, index) => (
-            <li key={index}>{post.title}</li>
-          ))}
-        </ul>
-      </div>
-
       <Header />
       <div className="content-w">
         <div className="inner">
           <div className="tit-wrap">
             <div className="tit"> Mypage</div>
           </div>
+
+            {/* 내가 쓴 캠페인 글 */}
+            <div className="mypost-w">
+              <div>
+                {mypostList.filter(item => item.userid === userData.userid).map((post, index) => (
+                  <p key={index}>{post.title}</p>
+                ))}
+              </div>
+            </div>
         </div>
       </div>
       <Footer />
