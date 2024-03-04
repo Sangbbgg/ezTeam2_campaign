@@ -210,7 +210,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .main .campaign .swiper-button-prev {left: -80px !important;}
 .main .campaign .swiper-button-prev:after, .swiper-button-next:after {color: #fff;}
 .main .campaign .cont {position: relative; width: 100%; overflow: hidden;}
-.main .campaign .cont .img-wrap {width: 100%; position: relative; width: auto; height: 277px; overflow: hidden; border-radius: 8px;}
+.main .campaign .cont .img-wrap {width: 100%; position: relative; width: auto; height: 367px; overflow: hidden; border-radius: 8px;}
 .main .campaign .cont .img-wrap img {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1); width: 100%; height: 100%; transition: transform .3s ease-out; object-fit: cover;}
 .main .campaign .cont .img-wrap:hover img {transform: translate(-50%, -50%) scale(1.1);}
 .main .campaign .cont .txt-wrap .title {margin-top: 18px; font-size: 16px; color: #fff;}
@@ -238,12 +238,15 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .tit-wrap .txt {margin-top: 12px; font-size: 16px;}
 
 .container {display: flex; flex-wrap: wrap;}
-.container .cont {position: relative; margin-right: 20px; width: calc((100%  - 40px) / 3); overflow: hidden;}
+.container .cont {position: relative; margin-right: 20px; width: calc((100%  - 40px) / 3); background-color: #fff; overflow: hidden; box-shadow: 0 4px 6px -2px #00000001, 0 10px 15px -3px #0000000c;}
 .container .cont:nth-child(n+4) {margin-top: 50px;}
 .container .cont:nth-child(3n) {margin-right: 0;}
-.container .cont .img-wrap {position: relative; overflow: hidden; width: auto; height: 277px; border-radius: 6px;}
+.container .cont .img-wrap {position: relative; overflow: hidden; width: auto; height: 366px;}
 .container .cont .img-wrap:hover img {transform: translate(-50%, -50%) scale(1.1);}
 .container .cont .img-wrap img {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1); width: 100%; height: 100%; transition: transform .3s ease-out; object-fit: cover;}
+.container .cont .img-wrap img {position: absolute; top: 0; left: 0; transform: scale(1); width: 100%; transition: transform .3s ease-out; object-fit: cover;}
+.container .cont .img-wrap:hover img {transform: scale(1.1);}
+
 .container .cont .badge {position: absolute; bottom: 10px; left: 10px; padding: 2px; width: 40px; height: 24px; font-size: 12px; color: #fff; background-color: #777; border-radius: 4px;}
 .container .cont .badge.inprogress {background-color: #ea3737; }
 
@@ -251,7 +254,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .campaign .btn-write {margin-bottom: 20px; padding: 10px 30px; color: #fff; background-color: #25B058;}
 .campaign-wrap {padding: 30px 30px 60px; background-color: #e1f0de;}
 .campaign-wrap .cont .title {min-height: 32px; font-size: 18px; color: #000; text-align: left; overflow: hidden; white-space: normal; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; word-break: keep-all;}
-.campaign-wrap .txt-wrap {display: block; position: relative; margin-top: 14px;}
+.campaign-wrap .txt-wrap {display: block; position: relative; padding: 14px;}
 .campaign-wrap .txt-wrap .txt-info {display: flex; justify-content: space-between; margin-top: 20px;}
 .campaign-wrap .txt-wrap .username {font-size: 14px; text-align: right; color: #777;}
 .campaign-wrap .txt-wrap .date {font-size: 14px; text-align: right; color: #777;}
