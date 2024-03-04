@@ -106,7 +106,6 @@ window.addEventListener("scroll", function() {
   });
 });
 
-  
   return (
     <div id="wrap" className='main'>
       <Header />

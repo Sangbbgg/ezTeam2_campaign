@@ -681,7 +681,7 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 /* main */
 
 /* 탄소발자국 */
-.main .carbon {position: relative; padding: 160px 0; background-color: white; z-index: 1; overflow: hidden;}
+.main .carbon {position: relative; padding: 90px 0 50px 0; background-color: white; z-index: 1; overflow: hidden;}
 .main .carbon::after{
   content: '';
     position: absolute;
@@ -715,9 +715,9 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 .mainchart_wrap .mainchart_content_bottom > button{font-size: 20px; width: 200px; height: 80px; background-color: #25B058; border-radius: 8px; color: white; margin-left: auto}
 
 .main_chart_img_left{position: absolute; z-index: -1; left: -30%;}
-.main_chart_img_left > img{width: 480px; height: 610px;}
+.main_chart_img_left > img{width: 480px; height: 610px; transition: opacity 3s ease; opacity: 0;}
 .main_chart_img_right{position: absolute; right:20%; top:-5% }
-.main_chart_img_right > img{width: 500px; height: 500px; fill: #0078C3; opacity: 0.8;}
+.main_chart_img_right > img{width: 500px; height: 500px; fill: #0078C3; transition: opacity 3s ease; opacity: 0; }
 
 
 
@@ -773,19 +773,25 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 
 
 /* ------------------------------- 로그인 회원가입 ------------------------------- */
+/* 로그인 */
 .login-inner {position: relative; margin: 0 auto; width: 1200px;}
 .login{display: flex; flex-direction: column; align-items: center;}
-.form-login{width: 500px; border: 1px solid #ccc; border-radius: 8px; padding: 40px 50px 50px 50px;}
+.form-login{width: 500px; border: 1px solid #ccc; border-radius: 8px; padding: 50px 50px 30px 50px;}
 .form-login > h3{font-size: 34px; font-weight: 700; color:#3AB868; margin:0 0 20px 0; background:none}
 .form-login .tab-wrap {padding-right: 40%;}
-.form-login .tab-wrap .tab-item-wrap{display: flex;}
-.form-login .tab-wrap .tab-item-wrap .tab-item{flex-grow: 1; height: 30px; background-color: white; border: 1px solid #ccc; border-bottom: none; border-radius: 8px 8px 0 0; display: flex; align-items: center; justify-content: center;}
-.form-login .tab-wrap .tab-item-wrap .tab-item.active{color: #3AB868; font-weight: 700;}
+.form-login .tab-wrap .tab-item-wrap{display: flex; position: relative; bottom: -1px;}
+.form-login .tab-wrap .tab-item-wrap .tab-item{flex-grow: 1; height: 30px; background-color: white; border: 1px solid #ccc; border-radius: 8px 8px 0 0; display: flex; align-items: center; justify-content: center;}
+.form-login .tab-wrap .tab-item-wrap .tab-item.active{color: #3AB868; font-weight: 700; border-bottom: none; }
 
-.form-login .input-wrap {padding: 5%; border: 1px solid #ccc; display: flex; flex-direction: column; gap: 5px;}
+.form-login .input-wrap {padding: 30px 30px 10px 30px; border: 1px solid #ccc; display: flex; flex-direction: column; gap: 20px;}
 
 
-.form-login .login-input{width: 100%;}
+.form-login .login-input{width: 100%; border: 1px solid #ccc}
 
+.login-button{color: white; background-color: #25B058; height: 45px; margin-top: 20px;}
+
+.form-login-link{display: flex; justify-content: end; gap: 10px; margin-top: 20px;}
+
+/* 회원가입 */
 
 
