@@ -30,22 +30,6 @@ function Mypage() {
       .catch((err) => console.log(err));
   }, []);
 
-  // useEffect(() => {
-  //   const fetchUserInfo = async () => {
-  //     try {
-  //       const response = await axios.get(`http://localhost:8000/campaign/detail/${id}/form`);
-  //       const userInfo = response.data;
-  //       const filteredInfo = userInfo.find(item => item.username === userData.username);
-  //       setmyApplication(filteredInfo);
-  //     } catch (error) {
-  //       console.error('Error fetching user info:', error);
-  //     }
-  //   };
-  
-  //   fetchUserInfo();
-  // }, []);
-  
-
   return (
     <div id="wrap" className="mypage">
       <Header />
