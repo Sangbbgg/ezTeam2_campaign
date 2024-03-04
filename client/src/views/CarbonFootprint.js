@@ -21,7 +21,7 @@ function CarbonFootprint() {
   //   username: "상호형",
   //   usertype: "1",
   // };
-// 확인용
+
   const currentDate = new Date().toISOString().slice(0, 10); // 현재 날짜를 'YYYY-MM-DD' 형식으로
 
   const [activeTab, setActiveTab] = useState("consumption"); // 탭 핸들링
