@@ -212,15 +212,31 @@ const Example = () => {
     }
   };
 
+  // 배경이미지 에니메이션 효과
+  window.onscroll = function () {
+    var windowScroll = window.scrollY; // 현재 스크롤 위치
+    var desiredScrollPosition = 1600; // 이미지가 선명해지기 시작할 스크롤 위치
+
+    var images = document.querySelectorAll(".main_chart_img img"); // 두 이미지 모두 선택
+
+    images.forEach((image) => {
+      if (windowScroll >= desiredScrollPosition) {
+        image.style.opacity = 1; // 스크롤 위치에 도달하면 이미지를 선명하게
+      } else {
+        image.style.opacity = 0; // 그렇지 않으면 이미지를 투명하게
+      }
+    });
+  };
+
   return (
     <div style={{ width: "100%" }}>
-      <div className="main_chart_img_left">
-        <img src="/img/main_chart_img_left.jpg" />
+      <div className="main_chart_img_left main_chart_img">
+        <img src="/img/main_chart_img_left_bg.png" />
         {/* <img className="main_chart_img_left" src="/img/Wind_turbine_bro.svg"/> */}
       </div>
-      <div className="main_chart_img_right">
+      <div className="main_chart_img_right main_chart_img">
         {/* <img src="/img/foot.png" /> */}
-        <img className="main_chart_img_left" src="/img/foot_3.svg"/>
+        <img className="main_chart_img_left" src="/img/foot_3.svg" />
       </div>
       <div className="mainchart_wrap">
         <div className="mainchart_title">

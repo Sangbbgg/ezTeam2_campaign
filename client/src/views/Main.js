@@ -106,7 +106,6 @@ window.addEventListener("scroll", function() {
   });
 });
 
-  
   return (
     <div id="wrap" className='main'>
       <Header />
@@ -163,7 +162,7 @@ window.addEventListener("scroll", function() {
     </section>
 
 
-      <section className='carbon'>
+    <section className='carbon'>
       <div className="inner">
           <div className="txt-area">
             <p className="sec-tit">탄소발자국</p>
@@ -176,7 +175,7 @@ window.addEventListener("scroll", function() {
           
         </div>
 
-      </section>
+    </section>
       <Footer/>
     </div>
   );
