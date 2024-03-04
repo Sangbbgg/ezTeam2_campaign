@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getPost } from '../store/store';
+import axios from 'axios';
 import Header from "../component/Header";
 import Footer from "../component/Footer";
 
 function Mypage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const {id} = useParams();
+
   const storedUserData = sessionStorage.getItem("userData");
   const userData = JSON.parse(storedUserData);
 
   // 글 목록
-  const [mypostList, setMypostList] = useState([]); // 캠페인 목록을 저장 
+  const [mypostList, setMypostList] = useState([]); // 내가 쓴 글 
+  const [myApplication, setmyApplication] = useState([]); // 신청한 캠페인 목록 
 
   // 캠페인 데이터 불러옴
   useEffect(() => {
@@ -25,6 +29,22 @@ function Mypage() {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  // useEffect(() => {
+  //   const fetchUserInfo = async () => {
+  //     try {
+  //       const response = await axios.get(`http://localhost:8000/campaign/detail/${id}/form`);
+  //       const userInfo = response.data;
+  //       const filteredInfo = userInfo.find(item => item.username === userData.username);
+  //       setmyApplication(filteredInfo);
+  //     } catch (error) {
+  //       console.error('Error fetching user info:', error);
+  //     }
+  //   };
+  
+  //   fetchUserInfo();
+  // }, []);
+  
 
   return (
     <div id="wrap" className="mypage">
@@ -115,7 +135,11 @@ function Mypage() {
           <div className="mycont-wrap">
             <h3 className="title">신청한 캠페인</h3>
             <div className="cont-area">
-              
+              {/* {
+                mypostList.filter(item => item.userid === userData.userid).map((post, index) => (
+                  console.log(index, post)
+              ))
+              } */}
             </div>
           </div>
 
