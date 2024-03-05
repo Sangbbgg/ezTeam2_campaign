@@ -43,17 +43,35 @@ useEffect(() => {
 }, []);
 
 
+const [myApplication, setMyApplication] = useState([]);
 
-// // let filteredUserInfo = null;
-// useEffect(()=>{
+// 신청한 캠페인 목록 불러옴
+useEffect(() => {
+  const fetchUserInfo = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8000/campaign/form/all`);
+      const filteredData =  response.data.filter((item)=>{
+        return item.userid === userData.userid
+        
+      })
+      setMyApplication(filteredData);
+    } catch (error) {
+      console.error('Error fetching user info:', error);
+    }
+  };
+  
+  fetchUserInfo();
+}, []);
+console.log(myApplication)
+const test = myApplication.some(item => item.post_id == id);
+// const test1 = myApplication.map((item, i)=>{
+//   console.log(item.post_id == id)
+//   console.log(item.post_id)
+//   return item.post_id == id
+// });
+console.log(test)
+// console.log(test1)
 
-//   if (userInfo !== null) {
-//     filteredUserInfo = userInfo.filter((item) => {
-//       return userData.userid === item.userid;
-//     });
-//   }
-// })
-console.log(filteredUserInfo)
 
 
 
@@ -63,26 +81,36 @@ console.log(filteredUserInfo)
 
   const handleClick = async (e) => {
     e.preventDefault();
-    let submitData = {
-      company: formWrite.company,
-      memo: formWrite.memo,
-      userid: formWrite.userid,
-    };
-    
-    const confirmMsg = window.confirm("신청서를 제출하시겠습니까?");
-
-    if(confirmMsg){
   
-      try {
-        await axios.post(`http://localhost:8000/campaign/form/${id}`, submitData);
-        alert("신청이 완료되었습니다.");
-        navigate(-1);
-      } catch (err) {
-        console.log(err);
+    // myApplication의 각 요소들 중에서 post_id가 입력한 id와 일치하는지 확인합니다.
+    const hasMatchingPost = myApplication.some(item => item.post_id === parseInt(id));
+  
+    // 만약 post_id가 일치하는 요소가 있다면 경고창을 띄웁니다.
+    if (hasMatchingPost) {
+      alert("이미 해당 캠페인에 신청한 내역이 있습니다.");
+      navigate(-1);
+    } else {
+      // post_id가 일치하는 요소가 없다면 신청서를 제출합니다.
+      let submitData = {
+        company: formWrite.company,
+        memo: formWrite.memo,
+        userid: formWrite.userid,
+      };
+  
+      const confirmMsg = window.confirm("신청서를 제출하시겠습니까?");
+  
+      if (confirmMsg) {
+        try {
+          await axios.post(`http://localhost:8000/campaign/form/${id}`, submitData);
+          alert("신청이 완료되었습니다.");
+          navigate(-1);
+        } catch (err) {
+          console.log(err);
+        }
       }
     }
   };
-
+  
   return (
     <div id="wrap" className="application-form">
       <Header/>
