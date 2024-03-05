@@ -156,6 +156,7 @@ function Mypage() {
             {activeTab === 2 && (
               <div  className="mycont-wrap">
                 <h3 className="title">탄소 발자국</h3>
+                11213
                 <div className="cont-area">
                 </div>
             </div>
