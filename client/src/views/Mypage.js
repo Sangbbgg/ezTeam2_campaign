@@ -41,9 +41,7 @@ function Mypage() {
           return item.userid === userData.userid
           
         })
-        filteredData.forEach((item) => {
-          console.log(item.post_id);
-        });
+    
         setMyApplication(filteredData);
       } catch (error) {
         console.error('Error fetching user info:', error);
@@ -150,9 +148,9 @@ function Mypage() {
                             </div>
                           ))
                         ) : (
-                          <div class="no-data-w">
-                            <div class="no-data">
-                              <p class="tit">내가 쓴 글이 없습니다.</p>
+                          <div className="no-data-w">
+                            <div className="no-data">
+                              <p className="tit">내가 쓴 글이 없습니다.</p>
                             </div>
                           </div>
                         )}
