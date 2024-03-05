@@ -54,7 +54,7 @@ function Modify() {
         <p>회원상세주소:{userData.detailedaddress}</p>
         <p>핸드폰번호:{userData.phonenumber}</p>
         {/* 기타 사용자 정보 표시 */}
-      <button onClick={handleDeleteAccount}>회원 탈퇴</button>
+      {/* <button onClick={handleDeleteAccount}>회원 탈퇴</button> */}
       </div>
     </form>
   );
