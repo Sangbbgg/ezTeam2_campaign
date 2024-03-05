@@ -27,12 +27,12 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
 
   const hasResultData = resultData && resultData.calculation_month;
 
-  console.log("??", hasResultData);
-  console.log("유저 결과 :", userData);
-  console.log("추천 실천과제 :", initialData);
+  // console.log("??", hasResultData);
+  // console.log("유저 결과 :", userData);
+  // console.log("추천 실천과제 :", initialData);
   // console.log("resultData :", resultData);
   // console.log("targetEmissions :", targetEmissions.transportation);
-  // console.log("교통 라디오 옵션(차량없음) :", isTransportationOption);
+  console.log("교통 라디오 옵션(차량없음) :", isTransportationOption);
   // console.log("barChatData :", barChatData);
   // console.log("barChatDataTotal :", categorySavings);
   // const userId = 104716;
@@ -179,7 +179,7 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
     if (userConfirmed) {
       window.location.href = "/carbonfootprint";
       // 첫 페이지로 리플레시하는 로직
-      navigate("/carbonfootprint");
+      // navigate("/carbonfootprint");
     }
     // 사용자가 '취소'를 클릭했을 때는 아무것도 하지 않음
   };
@@ -369,8 +369,10 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
                     {Object.keys(labels).map((key) => (
                       <li
                         key={key}
-                        className={`select_tap ${selectTap === key ? "active" : ""} `}
-                        onClick={() => handleSubTapClick(key)}
+                        // className={`select_tap ${selectTap === key ? "active" : ""} `} //"교통 : 차량없음"으로 결과페이지를 넘어왔을때 탭 동작 제한
+                        className={`select_tap ${key === 'transportation' && isTransportationOption ? 'disabled' : selectTap === key ? "active" : ""} `}
+                        // onClick={() => handleSubTapClick(key)}
+                        onClick={() => {if (!(key === 'transportation' && isTransportationOption)) {handleSubTapClick(key);}}}
                       >
                         {labels[key]}
                       </li>
