@@ -205,7 +205,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .main .campaign .txt-area.active .sec-txt {transform: translateY(0); opacity: 1;}
 .main .campaign .cont-area {display: flex; position: relative; margin-top: 80px; transform: translateY(80px); opacity: 0; transition: opacity .8s, transform .8s;}
 .main .campaign .cont-area.active {transform: translateY(0); opacity: 1;}
-.main .campaign  .custom-swiper-navigation {position: absolute; top: 140px; width: 100%;}
+.main .campaign  .custom-swiper-navigation {position: absolute; top: 180px; width: 100%;}
 .main .campaign .swiper-button-next {right: -80px !important;}
 .main .campaign .swiper-button-prev {left: -80px !important;}
 .main .campaign .swiper-button-prev:after, .swiper-button-next:after {color: #fff;}
@@ -222,10 +222,14 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 
 /* 공통 */
 .mypage {position: relative;}
-.mycont-wrap + .mycont-wrap {margin-top: 80px;}
-.mycont-wrap .title {font-size: 22px; margin-bottom: 24px;}
-.no-data {font-size: 18px;}
+.mypage .mycont-wrap + .mycont-wrap {margin-top: 80px;}
+.mypage .mycont-wrap .title {font-size: 22px; margin-bottom: 24px;}
+.mypage .tab-wrap .btn-tab {}
+.mypage .tab-wrap .btn-tab.active {background-color: transparent; border-radius: 0; z-index: 1;}
+.mypage .tab-wrap .btn-tab::before {content: ""; display: block; position: absolute; bottom: 6px; left: 8px; width: 0; height: 20px; transform: skewX(-12deg); background-color: #e1f0de; z-index: -1; transition: width .2s;}
+.mypage .tab-wrap .btn-tab.active::before {width: calc(100% - 18px);}
 
+.no-data {font-size: 18px;}
 
 
 /* 내가 쓴 글 영역 */
@@ -388,10 +392,11 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .btn-search {margin-left: 20px; padding: 4px 16px; height: 40px; font-size: 14px; background-color: #fff; border: 1px solid #000;}
 
 /* 탭 */
+.tab-wrap {position: relative;}
 .tab-area {display: flex; justify-content: center;}
-.tab-area .btn-tab {padding: 10px 24px;}
+.tab-area .btn-tab {position: relative; padding: 10px 24px;}
 .tab-area .btn-tab.active {background-color: #e1f0de; border-radius: 6px 6px 0 0;}
-/* .tab-area .btn-tab + .btn-tab {margin-left: 20px;} */
+.content-area {margin-top: 60px;}
 
 /* 캘린더 */
 .calendar-area {margin-top: 60px;}
