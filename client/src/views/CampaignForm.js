@@ -13,67 +13,48 @@ const CampaignForm = () => {
   const storedUserData = sessionStorage.getItem("userData");
   const userData = JSON.parse(storedUserData);
 
-  // const [formData, setFormData] = useState();
+  const [myApplication, setMyApplication] = useState([]);
+  const [filteredUserInfo, setFilteredUserInfo] = useState(null); // 로그인한 사용자 정보를 저장
+
   const [formWrite, setFormWrite] = useState({
     company: "",
     memo: "",
     userid: userData.userid, 
   });
-  // console.log(userData)
 
+  // 페이지가 로드될 때 사용자 정보를 가져오는 useEffect
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/users');
+        const userInfo = response.data;
+        const filteredInfo = userInfo.find(item => item.username === userData.username);
+        setFilteredUserInfo(filteredInfo);
+      } catch (error) {
+        console.error('Error fetching user info:', error);
+      }
+    };
 
-  // @@@@@@@@@@@
-// const [userInfo, setUserInfo] = useState(null); // 로그인한 사용자 정보를 저장
-const [filteredUserInfo, setFilteredUserInfo] = useState(null); // 로그인한 사용자 정보를 저장
+    fetchUserInfo();
+  }, []);
 
-// 페이지가 로드될 때 사용자 정보를 가져오는 useEffect
-useEffect(() => {
-  const fetchUserInfo = async () => {
-    try {
-      const response = await axios.get('http://localhost:8000/users');
-      const userInfo = response.data;
-      const filteredInfo = userInfo.find(item => item.username === userData.username);
-      setFilteredUserInfo(filteredInfo);
-    } catch (error) {
-      console.error('Error fetching user info:', error);
-    }
-  };
-
-  fetchUserInfo();
-}, []);
-
-
-const [myApplication, setMyApplication] = useState([]);
-
-// 신청한 캠페인 목록 불러옴
-useEffect(() => {
-  const fetchUserInfo = async () => {
-    try {
-      const response = await axios.get(`http://localhost:8000/campaign/form/all`);
-      const filteredData =  response.data.filter((item)=>{
-        return item.userid === userData.userid
-        
-      })
-      setMyApplication(filteredData);
-    } catch (error) {
-      console.error('Error fetching user info:', error);
-    }
-  };
-  
-  fetchUserInfo();
-}, []);
-console.log(myApplication)
-const test = myApplication.some(item => item.post_id == id);
-// const test1 = myApplication.map((item, i)=>{
-//   console.log(item.post_id == id)
-//   console.log(item.post_id)
-//   return item.post_id == id
-// });
-console.log(test)
-// console.log(test1)
-
-
-
+  // 신청한 캠페인 목록 불러옴
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8000/campaign/form/all`);
+        const filteredData =  response.data.filter((item)=>{
+          return item.userid === userData.userid
+          
+        })
+        setMyApplication(filteredData);
+      } catch (error) {
+        console.error('Error fetching user info:', error);
+      }
+    };
+    
+    fetchUserInfo();
+  }, []);
 
   const handleChange = (e) => {
     setFormWrite((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -82,15 +63,13 @@ console.log(test)
   const handleClick = async (e) => {
     e.preventDefault();
   
-    // myApplication의 각 요소들 중에서 post_id가 입력한 id와 일치하는지 확인합니다.
+    // 중복 신청 방지
     const hasMatchingPost = myApplication.some(item => item.post_id === parseInt(id));
   
-    // 만약 post_id가 일치하는 요소가 있다면 경고창을 띄웁니다.
     if (hasMatchingPost) {
       alert("이미 해당 캠페인에 신청한 내역이 있습니다.");
       navigate(-1);
     } else {
-      // post_id가 일치하는 요소가 없다면 신청서를 제출합니다.
       let submitData = {
         company: formWrite.company,
         memo: formWrite.memo,
@@ -154,10 +133,6 @@ console.log(test)
                   <textarea value={formWrite.memo} placeholder="내용을 입력하세요" onChange={(e) => setFormWrite({...formWrite, memo: e.target.value})} />
                 </td>
               </tr>
-              {/* <tr>
-                <th scope="row">제목</th>
-                <td>내용</td>
-              </tr> */}
             </tbody>
           </table>
         </div>
