@@ -227,7 +227,7 @@ const CampaignWrite = () => {
                   </div>
                 </div>
               
-              {/* 접수 기간 */}
+                {/* 접수 기간 */}
                 <div className="calendar-area">
                   <p className="cal-tit">접수 기간</p>
                   <div className="calendar">

@@ -105,7 +105,7 @@ const CampaignDetail = (props) => {
               <div className="title-area">
                 <p className="title">{curList.title}</p>
                 <div className="regi-info">
-                  {/* <p className="views">{"조회수: " + parseInt(curList?.views + 1)}</p> */}
+                  <p className="views">{"조회수: " + parseInt(curList?.views + 1)}</p>
                   <p className="date">{new Date(curList.date).toLocaleDateString()}</p>
                 </div>
               </div>
