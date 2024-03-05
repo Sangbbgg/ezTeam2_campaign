@@ -57,7 +57,7 @@ select {font-size: 18px; color: #888; appearance: none; -webkit-appearance: none
 select::-ms-expand {display: none;}
 select:focus, select:active {outline: none;}
 select:disabled {color: #999; background-color: #e9e9e9; opacity: 1;}
-textarea {padding: 10px 20px; width: 100%; font-family: "Noto Sans KR", 'dotum', '돋움', 'gulim', '굴림', sans-serif; font-size: 18px; color: #1f1b1c; -webkit-appearance: none; -webkit-box-shadow: none; box-shadow: none; border-radius: 0; vertical-align: top; background: #fff; border: 1px solid #e5e5e5; resize: none;}
+textarea {padding: 10px; width: 100%; font-family: "Noto Sans KR", 'dotum', '돋움', 'gulim', '굴림', sans-serif; font-size: 18px; color: #1f1b1c; -webkit-appearance: none; -webkit-box-shadow: none; box-shadow: none; border-radius: 0; vertical-align: top; background: #fff; border: 1px solid #e5e5e5; resize: none;}
 textarea:focus, textarea:active {outline: none;}
 textarea::-webkit-input-placeholder {color: #999;}
 textarea:-ms-input-placeholder {color: #999;}
@@ -472,13 +472,13 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 .form-table table > tbody > tr > td {padding: 21px 20px; font-weight: 400; color: #5e5e5e; font-size: 16px; line-height: 22px; background-color: #fff; vertical-align: middle;} 
 .form-table table > colgroup {position: relative; width: 100%;}
 .form-table table.vertical > tbody > tr > th {padding: 20px 30px; text-align: left; font-weight: 500; color: #000; background-color: #fafafa; vertical-align: middle; border-right: 1px solid #eee;} 
-.form-table table.vertical > tbody > tr > td {padding: 20px 30px; text-align: left; vertical-align: middle;} 
-.form-table table.vertical > tbody > tr > td input {padding: 4px 12px; border: 1px solid #ddd;}
-.form-table table.vertical > tbody > tr > td textarea::placeholder {font-size: 16px; color: #999;}
+.form-table table.vertical > tbody > tr > td {padding: 20px 30px; font-size: 14px; text-align: left; vertical-align: middle;} 
+.form-table table.vertical > tbody > tr > td input {padding: 4px 12px; font-size: 14px; border: 1px solid #ddd;}
+.form-table table.vertical > tbody > tr > td textarea::placeholder {font-size: 14px; color: #999;}
 
 .form-table table.vertical > tbody > tr:last-child {border-bottom: none;} 
 .form-table table.vertical > tbody {border-top: 1px solid #c9c9c9; border-bottom: 1px solid #eee;}
-.form-table table textarea {width: 100%;}
+.form-table table textarea {width: 100%; min-height: 80px; font-size: 14px;}
 
 
 

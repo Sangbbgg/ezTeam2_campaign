@@ -46,7 +46,7 @@ const CampaignDetail = (props) => {
       return (
         <div className="bottom-area">
           <div className="btn-w">
-            <button className="btn-tolist" onClick={()=>{navigate(-1);}}>목록</button>
+            <button className="btn-tolist" onClick={()=>{navigate("/campaign");}}>목록</button>
             <button className="btn-edit" onClick={()=>{navigate(`/campaign/edit/${curList?.id}`);}}>수정</button>
             <button className="btn-delete" onClick={handleDelete}>삭제</button>
           </div>
@@ -56,7 +56,7 @@ const CampaignDetail = (props) => {
     return (
       <div className="bottom-area">
         <div className="btn-w">
-          <button className="btn-tolist" onClick={()=>{navigate(-1);}}>목록</button>
+          <button className="btn-tolist" onClick={()=>{navigate("/campaign")}}>목록</button>
         </div>
       </div>
     )

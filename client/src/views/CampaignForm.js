@@ -13,49 +13,48 @@ const CampaignForm = () => {
   const storedUserData = sessionStorage.getItem("userData");
   const userData = JSON.parse(storedUserData);
 
-  // const [formData, setFormData] = useState();
+  const [myApplication, setMyApplication] = useState([]);
+  const [filteredUserInfo, setFilteredUserInfo] = useState(null); // 로그인한 사용자 정보를 저장
+
   const [formWrite, setFormWrite] = useState({
     company: "",
     memo: "",
     userid: userData.userid, 
   });
-  // console.log(userData)
 
+  // 페이지가 로드될 때 사용자 정보를 가져오는 useEffect
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/users');
+        const userInfo = response.data;
+        const filteredInfo = userInfo.find(item => item.username === userData.username);
+        setFilteredUserInfo(filteredInfo);
+      } catch (error) {
+        console.error('Error fetching user info:', error);
+      }
+    };
 
-  // @@@@@@@@@@@
-// const [userInfo, setUserInfo] = useState(null); // 로그인한 사용자 정보를 저장
-const [filteredUserInfo, setFilteredUserInfo] = useState(null); // 로그인한 사용자 정보를 저장
+    fetchUserInfo();
+  }, []);
 
-// 페이지가 로드될 때 사용자 정보를 가져오는 useEffect
-useEffect(() => {
-  const fetchUserInfo = async () => {
-    try {
-      const response = await axios.get('http://localhost:8000/users');
-      const userInfo = response.data;
-      const filteredInfo = userInfo.find(item => item.username === userData.username);
-      setFilteredUserInfo(filteredInfo);
-    } catch (error) {
-      console.error('Error fetching user info:', error);
-    }
-  };
-
-  fetchUserInfo();
-}, []);
-
-
-
-// // let filteredUserInfo = null;
-// useEffect(()=>{
-
-//   if (userInfo !== null) {
-//     filteredUserInfo = userInfo.filter((item) => {
-//       return userData.userid === item.userid;
-//     });
-//   }
-// })
-console.log(filteredUserInfo)
-
-
+  // 신청한 캠페인 목록 불러옴
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8000/campaign/form/all`);
+        const filteredData =  response.data.filter((item)=>{
+          return item.userid === userData.userid
+          
+        })
+        setMyApplication(filteredData);
+      } catch (error) {
+        console.error('Error fetching user info:', error);
+      }
+    };
+    
+    fetchUserInfo();
+  }, []);
 
   const handleChange = (e) => {
     setFormWrite((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -63,26 +62,34 @@ console.log(filteredUserInfo)
 
   const handleClick = async (e) => {
     e.preventDefault();
-    let submitData = {
-      company: formWrite.company,
-      memo: formWrite.memo,
-      userid: formWrite.userid,
-    };
-    
-    const confirmMsg = window.confirm("신청서를 제출하시겠습니까?");
-
-    if(confirmMsg){
   
-      try {
-        await axios.post(`http://localhost:8000/campaign/form/${id}`, submitData);
-        alert("신청이 완료되었습니다.");
-        navigate(-1);
-      } catch (err) {
-        console.log(err);
+    // 중복 신청 방지
+    const hasMatchingPost = myApplication.some(item => item.post_id === parseInt(id));
+  
+    if (hasMatchingPost) {
+      alert("이미 해당 캠페인에 신청한 내역이 있습니다.");
+      navigate(-1);
+    } else {
+      let submitData = {
+        company: formWrite.company,
+        memo: formWrite.memo,
+        userid: formWrite.userid,
+      };
+  
+      const confirmMsg = window.confirm("신청서를 제출하시겠습니까?");
+  
+      if (confirmMsg) {
+        try {
+          await axios.post(`http://localhost:8000/campaign/form/${id}`, submitData);
+          alert("신청이 완료되었습니다.");
+          navigate(-1);
+        } catch (err) {
+          console.log(err);
+        }
       }
     }
   };
-
+  
   return (
     <div id="wrap" className="application-form">
       <Header/>
@@ -126,10 +133,6 @@ console.log(filteredUserInfo)
                   <textarea value={formWrite.memo} placeholder="내용을 입력하세요" onChange={(e) => setFormWrite({...formWrite, memo: e.target.value})} />
                 </td>
               </tr>
-              {/* <tr>
-                <th scope="row">제목</th>
-                <td>내용</td>
-              </tr> */}
             </tbody>
           </table>
         </div>
