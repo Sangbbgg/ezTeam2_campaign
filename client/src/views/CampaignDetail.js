@@ -37,43 +37,9 @@ const CampaignDetail = (props) => {
     fetchData();
   }, [id, dispatch]);
 
-  
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     try {
-  //       const result = await dispatch(getPost());
-  //       setCampaignList(result.payload);
-  //     } catch (error) {
-  //       console.log('실패:', error);
-  //     }
-  //   };
-
-  //   getData();
-  // }, []);
-  
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       // 조회수 증가 요청
-  //       await axios.put(`http://localhost:8000/campaign/increase-views/${id}`);
-  //       // 게시물 데이터 요청
-  //       const response = await axios.get(`http://localhost:8000/campaign/detail/${id}`);
-  //       setCampaignList([response.data]);
-  //       setViews(response.data.views);
-  //     } catch (error) {
-  //       console.error('Error fetching data:', error);
-  //     }
-  //   };
-  
-  //   fetchData();
-  // }, [id]);
-  
   let curList = campaignList.find(function(data){
     return data.id === parseInt(id);
   });
-
-
-  // console.log()
 
   const renderModifyBtn = () => {
     if (userData.userid === curList?.userid) {
@@ -110,11 +76,6 @@ const CampaignDetail = (props) => {
     }
   };
 
-
-  // const mapRender = () => {
-    
-  // }
-
   useEffect(()=>{
     // curList가 존재하고 latitude 및 longitude 속성이 존재하는 경우에만 맵을 생성
     if(curList && curList.latitude && curList.longitude){
@@ -131,10 +92,7 @@ const CampaignDetail = (props) => {
       });
       marker.setMap(map);
     }
-
-
   }, [curList]);
-
 
   return (
     <div id="wrap" className="campaign-detail">
@@ -214,7 +172,9 @@ const CampaignDetail = (props) => {
                   <p className="sub-txt">&#8251; 문의사항은 메일 / 전화 / 댓글을 이용해주세요</p>
                 </div>
               </div>
-              <button className="btn-apply" onClick={() => {navigate(`/campaign/form/${curList.id}`)}}>신청하기</button>
+              <div className="btn-w">
+                <button className="btn-apply" onClick={() => {navigate(`/campaign/form/${curList.id}`)}}>신청하기</button>
+              </div>
             </div>
           )}
 

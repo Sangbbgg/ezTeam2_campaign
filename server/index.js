@@ -212,8 +212,12 @@ app.get("/campaign/form/:id", (req, res) => {
   const q = `
     SELECT cc.*, u.username, email, phonenumber
     FROM campaign_form cc
-    INNER JOIN user u ON cc.userid = u.userid
-    WHERE cc.post_id = ?`;
+    INNER JOIN user u ON cc.userid = u.userid`;
+  // const q = `
+  //   SELECT cc.*, u.username, email, phonenumber
+  //   FROM campaign_form cc
+  //   INNER JOIN user u ON cc.userid = u.userid
+  //   WHERE cc.post_id = ?`;
   
   connection.query(q, [postId], (err, data) => { 
     if(err) return res.status(500).json(err);

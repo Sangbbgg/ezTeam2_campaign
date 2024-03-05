@@ -9,13 +9,12 @@ import Footer from "../component/Footer";
 function Mypage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {id} = useParams();
 
   const storedUserData = sessionStorage.getItem("userData");
   const userData = JSON.parse(storedUserData);
 
   // 글 목록
-  const [mypostList, setMypostList] = useState([]); // 내가 쓴 글 
+  const [campaignList, setCampaignList] = useState([]); // 내가 쓴 글 
   const [myApplication, setMyApplication] = useState([]); // 신청한 캠페인 목록 
 
   // 현재 선택된 탭 인덱스
@@ -27,44 +26,47 @@ function Mypage() {
       .then((res) => {
         if (res.payload) {
           let arrPost = [...res.payload];
-          setMypostList(arrPost.reverse());
+          setCampaignList(arrPost.reverse());
         }
       })
       .catch((err) => console.log(err));
   }, []);
 
-    // 버튼 탭 클릭 이벤트
-    const handleTabClick = (index) => {
-      setActiveTab(index);
-      // 클릭한 탭에 active 클래스 추가
-      const tabList = document.querySelectorAll(".tab-area .btn-tab");
-      tabList.forEach((tab, i) => {
-        if (i === index) {
-          tab.classList.add("active");
-        } else {
-          tab.classList.remove("active");
-        }
-      });
+  // 신청한 캠페인 목록 불러옴
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8000/campaign/form/all`);
+        const filteredData =  response.data.filter((item)=>{
+          return item.userid === userData.userid
+          
+        })
+        filteredData.forEach((item) => {
+          console.log(item.post_id);
+        });
+        setMyApplication(filteredData);
+      } catch (error) {
+        console.error('Error fetching user info:', error);
+      }
     };
 
+    fetchUserInfo();
+  }, []);
 
-    // 페이지가 로드될 때 사용자 정보를 가져오는 useEffect
-// useEffect(() => {
-//   const fetchUserInfo = async () => {
-//     try {
-//       const response = await axios.get(`http://localhost:8000/campaign/detail/${id}/form`);
-//       const userInfo = response.data;
-//       const filteredInfo = userInfo.find(item => item.username === userData.username);
-//       setMyApplication(filteredInfo);
-//     } catch (error) {
-//       console.error('Error fetching user info:', error);
-//     }
-//   };
-
-//   fetchUserInfo();
-// }, []);
-// console.log(myApplication)
-
+  // 버튼 탭 클릭 이벤트
+  const handleTabClick = (index) => {
+    setActiveTab(index);
+    // 클릭한 탭에 active 클래스 추가
+    const tabList = document.querySelectorAll(".tab-area .btn-tab");
+    tabList.forEach((tab, i) => {
+      if (i === index) {
+        tab.classList.add("active");
+      } else {
+        tab.classList.remove("active");
+      }
+    });
+  };
+  
   return (
     <div id="wrap" className="mypage">
       <Header />
@@ -73,7 +75,6 @@ function Mypage() {
           <div className="tit-wrap">
             <div className="tit"> Mypage</div>
           </div>
-
           <div className="tab-wrap">
             {/* 탭 버튼 영역 */}
             <div className="tab-area">
@@ -87,11 +88,10 @@ function Mypage() {
               {/* 내가 쓴 캠페인 글 */}
               {activeTab === 0 && (
                 <div className="mycont-wrap">
-                    <h3 className="title">내가 쓴 글</h3>
                     <div className="cont-area">
-                      <div className="post-list">
-                        {mypostList.filter(item => item.userid === userData.userid).length > 0 ? (
-                          mypostList.filter(item => item.userid === userData.userid).map((post, index) => (
+                      <div className="post-list">        
+                        {campaignList.filter(item => item.userid === userData.userid).length > 0 ? (
+                          campaignList.filter(item => item.userid === userData.userid).map((post, index) => (
                             <div className="mypost summary-wrap" key={index}>
                               <div className="title-area">
                                 <p className="title">{post.title}</p>
@@ -144,11 +144,17 @@ function Mypage() {
                                   )}
                                 </div>
                               </div>
-                              <button className="btn-view" onClick={() => {navigate(`/campaign/detail/${post.id}`)}}>보러가기</button>
+                              <div className="btn-w">
+                                <button className="btn-view" onClick={() => {navigate(`/campaign/detail/${post.id}`)}}>보러가기</button>
+                              </div>
                             </div>
                           ))
                         ) : (
-                          <p className='no-data'>내가 쓴 글이 없습니다.</p>
+                          <div class="no-data-w">
+                            <div class="no-data">
+                              <p class="tit">내가 쓴 글이 없습니다.</p>
+                            </div>
+                          </div>
                         )}
                       </div>
                     </div>
@@ -156,31 +162,96 @@ function Mypage() {
               )}
               {/* 신청한 캠페인 */}
               {activeTab === 1 && (
-                <div  className="mycont-wrap">
-                  {/* 내가 신청한 캠페인 */}
-                    <h3 className="title">신청한 캠페인</h3>
-                    <div className="cont-area">
-                      {/* {
-                        mypostList.filter(item => item.userid === userData.userid).map((post, index) => (
-                          console.log(index, post)
-                      ))
-                      } */}
-                      
+                <div className="mycont-wrap">
+                  <div className="cont-area">
+                    <div className="post-list">
+                      {myApplication.length > 0 ? (
+                        myApplication.map((application, index) => {
+                          const matchedPost = campaignList.find(post => post.id === application.post_id);
+                          if (matchedPost) {
+                            return (
+                              <div className="mypost summary-wrap" key={index}>
+                                <div className="title-area">
+                                  <p className="title">{matchedPost.title}</p>
+                                  <div className="regi-info">
+                                    <p className="date">{new Date(matchedPost.date).toLocaleDateString()}</p>
+                                  </div>
+                                </div>
+                                <div className="info-area">
+                                  <div className="detail-info">
+                                    {/* 캠페인 기간 */}
+                                    {matchedPost.end_date && (
+                                      <div className="info-box">
+                                        <p className="tit">캠페인 기간</p>
+                                        <div className="date-wrap">
+                                          {matchedPost.start_date && (
+                                            <p className="start-date">{new Date(matchedPost.start_date).toLocaleDateString()}</p>
+                                          )}
+                                          <span>~</span>
+                                          {matchedPost.end_date && (
+                                            <p className="end-date">{new Date(matchedPost.end_date).toLocaleDateString()}</p>
+                                          )}
+                                        </div>
+                                      </div>
+                                    )}
+                                    {/* 접수 기간 */}
+                                    {matchedPost.reception_end_date && (
+                                      <div className="info-box">
+                                        <p className="tit">접수 기간</p>
+                                        <div className="date-wrap">
+                                          {matchedPost.reception_start_date && (
+                                            <p className="start-date">{new Date(matchedPost.reception_start_date).toLocaleDateString()}</p>
+                                          )}
+                                          <span>~</span>
+                                          {matchedPost.reception_end_date && (
+                                            <p className="end-date">{new Date(matchedPost.reception_end_date).toLocaleDateString()}</p>
+                                          )}
+                                        </div>
+                                      </div>
+                                    )}
+                                    {/* 위치 정보 */}
+                                    {matchedPost.latitude && (
+                                      <div className="info-box">
+                                        <p className="tit">캠페인 장소</p>
+                                        <div className="txt-w">
+                                          <p className="txt">{matchedPost.address}</p>
+                                          <p className="detail-txt">{matchedPost.address_detail}</p>
+                                        </div>
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                                <div className="btn-w">
+                                  <button className="btn-view" onClick={() => {navigate(`/campaign/detail/${matchedPost.id}`)}}>보러가기</button>
+                                  <button className="btn-view" onClick={() => {navigate(`/campaign/form/${matchedPost.id}/application`)}}>신청서 확인</button>
+                                </div>
+                              </div>
+                            );
+                          } else {
+                            return null; // 일치하는 캠페인이 없는 경우 null 반환
+                          }
+                        })
+                      ) : (
+                        <div class="no-data-w">
+                          <div class="no-data">
+                            <p class="tit">신청한 캠페인이 없습니다.</p>
+                          </div>
+                        </div>
+                      )}
                     </div>
+                  </div>
                 </div>
               )}
+
               {/* 탄소발자국 */}
               {activeTab === 2 && (
                 <div  className="mycont-wrap">
-                  <h3 className="title">탄소 발자국</h3>
                   <div className="cont-area">
                   </div>
               </div>
               )}
             </div>
           </div>
-
-        
         </div>
       </div>
       <Footer />
