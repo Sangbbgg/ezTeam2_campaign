@@ -106,6 +106,7 @@ window.addEventListener("scroll", function() {
   });
 });
 
+console.log("해더스크롤 위치", window.scrollY)
   return (
     <div id="wrap" className='main'>
       <Header />

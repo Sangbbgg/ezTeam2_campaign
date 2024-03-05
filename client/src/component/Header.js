@@ -24,6 +24,7 @@ const Header = () => {
 
     // 헤더 스크롤 모션
     let thisScroll = 0;
+    const carbonHeaderTextColor = 1600; // 0306 상호형 추가
 
     useEffect(() => {
       const handleScroll = () => {
@@ -44,6 +45,16 @@ const Header = () => {
             header.classList.remove("hide");
           }
         }
+
+        // 적용예정 0306 상호형 추가
+        // 스크롤 위치가 1500 이상일 때 'carbon-text-color' 클래스 추가
+        
+        // if (isScrollTop >= carbonHeaderTextColor) {
+        //   header.classList.add("carbon-text-color");
+        // } else {
+        //   header.classList.remove("carbon-text-color");
+        // }
+
         thisScroll = isScrollTop;
       };
   
