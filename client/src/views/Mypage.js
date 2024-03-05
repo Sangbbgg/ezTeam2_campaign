@@ -5,6 +5,8 @@ import { getPost } from '../store/store';
 import axios from 'axios';
 import Header from "../component/Header";
 import Footer from "../component/Footer";
+// user 월별 차트
+import UserMonthChart from "../component/CarbonFootprints/Result/userMonthChart"
 
 function Mypage() {
   const dispatch = useDispatch();
@@ -230,9 +232,9 @@ function Mypage() {
                           }
                         })
                       ) : (
-                        <div class="no-data-w">
-                          <div class="no-data">
-                            <p class="tit">신청한 캠페인이 없습니다.</p>
+                        <div className="no-data-w">
+                          <div className="no-data">
+                            <p className="tit">신청한 캠페인이 없습니다.</p>
                           </div>
                         </div>
                       )}
@@ -246,11 +248,12 @@ function Mypage() {
                 <div  className="mycont-wrap">
                   <div className="cont-area">
 
-                    <div class="no-data-w">
-                      <div class="no-data">
-                        <p class="tit">발자국 계산 내역이 없습니다.</p>
+                    <UserMonthChart />
+                    {/* <div className="no-data-w">
+                      <div className="no-data">
+                        <p className="tit">발자국 계산 내역이 없습니다.</p>
                       </div>
-                    </div>
+                    </div> */}
 
                   </div>
                     </div>
