@@ -245,8 +245,15 @@ function Mypage() {
               {activeTab === 2 && (
                 <div  className="mycont-wrap">
                   <div className="cont-area">
+
+                    <div class="no-data-w">
+                      <div class="no-data">
+                        <p class="tit">발자국 계산 내역이 없습니다.</p>
+                      </div>
+                    </div>
+
                   </div>
-              </div>
+                    </div>
               )}
             </div>
           </div>
