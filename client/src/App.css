@@ -247,8 +247,8 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .post-list .mypost:nth-child(2n) {margin-right: 0;}
 .post-list .mypost:nth-child(n+3) {margin-top: 20px;}
 .post-list .mypost .title-area {margin-bottom: 20px;}
-.post-list .mypost .title-area .title {margin-bottom: 0; min-height: 32px; font-size: 18px; color: #000; text-align: left; overflow: hidden; white-space: normal; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; word-break: keep-all;}
-.post-list .mypost .regi-info {min-width: 70px;}
+.post-list .mypost .title-area .title {margin-bottom: 0; max-height: 30px; font-size: 18px; color: #000; text-align: left; overflow: hidden; white-space: normal; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; word-break: keep-all;}
+.post-list .mypost .regi-info {align-items: center; min-width: 90px;}
 .post-list .mypost .regi-info .date::before {display: none;}
 
 .btn-view {margin-top: 20px; padding: 8px 20px; color: #fff; font-size: 16px; background-color: #25B058; border: 1px solid #25B058;}
@@ -796,7 +796,7 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 .form-login, .form-register{height: 100%; padding: 50px 50px 30px 50px;}
 .form-login {width: 500px; border-right: 1px solid #ccc;}
 .form-register{flex-grow: 1;}
-.title{font-size: 34px; font-weight: 700; color:#3AB868; margin:0 0 20px 0; background:none}
+.form-login .title, .form-register .title {font-size: 34px; font-weight: 700; color:#3AB868; margin:0 0 20px 0; background:none}
 .form-login .tab-wrap {padding-right: 40%;}
 .form-login .tab-wrap .tab-item-wrap{display: flex; position: relative; bottom: -1px;}
 .form-login .tab-wrap .tab-item-wrap .tab-item{flex-grow: 1; height: 40px; background-color: white; border: 1px solid #ccc; border-radius: 8px 8px 0 0; display: flex; align-items: center; justify-content: center;}
