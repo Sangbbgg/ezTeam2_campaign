@@ -27,9 +27,9 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
 
   const hasResultData = resultData && resultData.calculation_month;
 
-  // console.log("??", hasResultData);
-  // console.log("유저 결과 :", userData);
-  // console.log("추천 실천과제 :", initialData);
+  console.log("??", hasResultData);
+  console.log("유저 결과 :", userData);
+  console.log("추천 실천과제 :", initialData);
   // console.log("resultData :", resultData);
   // console.log("targetEmissions :", targetEmissions.transportation);
   // console.log("교통 라디오 옵션(차량없음) :", isTransportationOption);

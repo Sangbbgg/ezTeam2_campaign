@@ -39,7 +39,7 @@ function App() {
         <Route exact path="/carbonFootprint" element={<CarbonFootprint />} />
         <Route exact path="/mypage" element={<MyPage />} />
         {/* 김민호 */}
-        <Route path="/Login" element={<LoginPage />}></Route>
+        <Route path="/Login/" element={<LoginPage />}></Route>
         <Route path="/Modify" element={<Modify />}></Route>
         <Route path="/Register" element={<Register />}></Route>
         <Route path="/Register/personal" element={<RegisterPersonal />}></Route>

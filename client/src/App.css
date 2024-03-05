@@ -792,12 +792,14 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 /* ------------------------------- 로그인 회원가입 ------------------------------- */
 /* 로그인 */
 .login-inner {position: relative; margin: 0 auto; width: 1200px;}
-.login{display: flex; flex-direction: column; align-items: center;}
-.form-login{width: 500px; border: 1px solid #ccc; border-radius: 8px; padding: 50px 50px 30px 50px;}
-.form-login > h3{font-size: 34px; font-weight: 700; color:#3AB868; margin:0 0 20px 0; background:none}
+.login{display: flex; flex-direction: row; align-items: center; height: 500px;  border: 1px solid #ccc; border-radius: 8px; }
+.form-login, .form-register{height: 100%; padding: 50px 50px 30px 50px;}
+.form-login {width: 500px; border-right: 1px solid #ccc;}
+.form-register{flex-grow: 1;}
+.title{font-size: 34px; font-weight: 700; color:#3AB868; margin:0 0 20px 0; background:none}
 .form-login .tab-wrap {padding-right: 40%;}
 .form-login .tab-wrap .tab-item-wrap{display: flex; position: relative; bottom: -1px;}
-.form-login .tab-wrap .tab-item-wrap .tab-item{flex-grow: 1; height: 30px; background-color: white; border: 1px solid #ccc; border-radius: 8px 8px 0 0; display: flex; align-items: center; justify-content: center;}
+.form-login .tab-wrap .tab-item-wrap .tab-item{flex-grow: 1; height: 40px; background-color: white; border: 1px solid #ccc; border-radius: 8px 8px 0 0; display: flex; align-items: center; justify-content: center;}
 .form-login .tab-wrap .tab-item-wrap .tab-item.active{color: #3AB868; font-weight: 700; border-bottom: none; }
 
 .form-login .input-wrap {padding: 30px 30px 10px 30px; border: 1px solid #ccc; display: flex; flex-direction: column; gap: 20px;}
@@ -810,5 +812,7 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 .form-login-link{display: flex; justify-content: end; gap: 10px; margin-top: 20px;}
 
 /* 회원가입 */
-
-
+.register-botton-wrap{display: flex; justify-content: space-around; padding: 80px 50px 50px 50px; height: 70%;}
+.register-botton{width: 30%; border: 1px solid #ccc; border-radius: 8px;}
+.render-register{width: 20%; height: 200px;}
+.login-Link{padding: 0 50px;}

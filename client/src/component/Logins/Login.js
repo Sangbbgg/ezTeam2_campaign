@@ -5,6 +5,8 @@ import axios from "axios";
 
 import Header from "../Header";
 
+import Register from "./Register";
+
 //로그인 페이지 상태 변화 함수
 function LoginPage() {
   const [email, setemail] = useState("");
@@ -73,7 +75,7 @@ function LoginPage() {
           <div className="login">
             <form className="form-login">
               {/* 로그인 아이디 비밀번호 표시 */}
-              <h3>LOGIN</h3>
+              <h3 className="title">LOGIN</h3>
               <div className="tab-wrap">
                 <ul className="tab-item-wrap">
                   {checkTapValues.map((key, index) => (
@@ -125,6 +127,7 @@ function LoginPage() {
               </div>
               {loginStatus && <div>{loginStatus}</div>}
             </form>
+                <Register />
           </div>
         </div>
       </div>
