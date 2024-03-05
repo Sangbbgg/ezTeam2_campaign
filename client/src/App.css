@@ -224,11 +224,13 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .mypage {position: relative;}
 .mypage .mycont-wrap + .mycont-wrap {margin-top: 80px;}
 .mypage .mycont-wrap .title {font-size: 22px; margin-bottom: 24px;}
-.mypage .tab-wrap .btn-tab {}
-.mypage .tab-wrap .btn-tab.active {background-color: transparent; border-radius: 0; z-index: 1;}
-.mypage .tab-wrap .btn-tab::before {content: ""; display: block; position: absolute; bottom: 6px; left: 8px; width: 0; height: 20px; transform: skewX(-12deg); background-color: #e1f0de; z-index: -1; transition: width .2s;}
-.mypage .tab-wrap .btn-tab.active::before {width: calc(100% - 18px);}
+.mypage .tab-area {position: absolute; left: 0; margin-top: -80px;
+}
+.mypage .tab-wrap .btn-tab.active {background-color: transparent; border-radius: 0; z-index: 1;;}
+.mypage .tab-wrap .btn-tab::before {content: ""; display: block; position: absolute; bottom: 6px; left: 12px; width: 0; height: 20px; transform: skewX(-12deg); background-color: #e1f0de; z-index: -1; transition: width .2s;}
+.mypage .tab-wrap .btn-tab.active::before {width: calc(100% - 24px);}
 
+.mypage footer {background-color: #e1f0de;}
 .no-data {font-size: 18px;}
 
 
@@ -237,10 +239,10 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .post-list .mypost {margin-right: 20px; width: calc((100%  - 40px) / 2);}
 .post-list .mypost:nth-child(2n) {margin-right: 0;}
 .post-list .mypost:nth-child(n+3) {margin-top: 20px;}
-.post-list .title-area {margin-bottom: 20px;}
-.post-list .title-area .title {margin-bottom: 0; min-height: 32px; font-size: 18px; color: #000; text-align: left; overflow: hidden; white-space: normal; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; word-break: keep-all;}
-.post-list .regi-info {min-width: 70px;}
-.post-list .regi-info .date::before {display: none;}
+.post-list .mypost .title-area {margin-bottom: 20px;}
+.post-list .mypost .title-area .title {margin-bottom: 0; min-height: 32px; font-size: 18px; color: #000; text-align: left; overflow: hidden; white-space: normal; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; word-break: keep-all;}
+.post-list .mypost .regi-info {min-width: 70px;}
+.post-list .mypost .regi-info .date::before {display: none;}
 
 .btn-view {margin-top: 20px; padding: 10px 30px; color: #fff; font-size: 16px; background-color: #25B058; border: 1px solid #25B058;}
 

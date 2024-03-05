@@ -16,7 +16,7 @@ function Mypage() {
 
   // 글 목록
   const [mypostList, setMypostList] = useState([]); // 내가 쓴 글 
-  const [myApplication, setmyApplication] = useState([]); // 신청한 캠페인 목록 
+  const [myApplication, setMyApplication] = useState([]); // 신청한 캠페인 목록 
 
   // 현재 선택된 탭 인덱스
   const [activeTab, setActiveTab] = useState(0);
@@ -35,8 +35,6 @@ function Mypage() {
 
     // 버튼 탭 클릭 이벤트
     const handleTabClick = (index) => {
-      console.log(index)
-    
       setActiveTab(index);
       // 클릭한 탭에 active 클래스 추가
       const tabList = document.querySelectorAll(".tab-area .btn-tab");
@@ -48,6 +46,24 @@ function Mypage() {
         }
       });
     };
+
+
+    // 페이지가 로드될 때 사용자 정보를 가져오는 useEffect
+// useEffect(() => {
+//   const fetchUserInfo = async () => {
+//     try {
+//       const response = await axios.get(`http://localhost:8000/campaign/detail/${id}/form`);
+//       const userInfo = response.data;
+//       const filteredInfo = userInfo.find(item => item.username === userData.username);
+//       setMyApplication(filteredInfo);
+//     } catch (error) {
+//       console.error('Error fetching user info:', error);
+//     }
+//   };
+
+//   fetchUserInfo();
+// }, []);
+// console.log(myApplication)
 
   return (
     <div id="wrap" className="mypage">
@@ -149,6 +165,7 @@ function Mypage() {
                           console.log(index, post)
                       ))
                       } */}
+                      
                     </div>
                 </div>
               )}
