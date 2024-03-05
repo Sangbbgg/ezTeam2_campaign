@@ -16,12 +16,12 @@ export const getCommentsUrl = createAsyncThunk(
   "data/commentData",
   async (postId) => {
     try {
-      const url = `${dataUrl.home}/detail/${postId}/comments`; // 수정된 부분
+      const url = `${dataUrl.home}/detail/${postId}/comments`;
       const result = await axios.get(url);
       return result.data;
     } catch (error) {
       console.error("Error fetching comments:", error);
-      throw error; // 에러 다시 던지기
+      throw error; // 
     }
   }
 );

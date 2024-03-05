@@ -190,7 +190,7 @@ app.put("/campaign/increase-views/:id", (req, res) => {
 });
 
 // 신청하기 버튼 클릭 시 사용자가 입력한 정보가 들어가도록 요청
-app.post("/campaign/detail/:id/form", (req, res) => {
+app.post("/campaign/form/:id", (req, res) => {
   const postId = req.params.id;
   const { userid, company, memo } = req.body; 
   
@@ -207,7 +207,7 @@ app.post("/campaign/detail/:id/form", (req, res) => {
   });
 });
 
-app.get("/campaign/detail/:id/form", (req, res) => {
+app.get("/campaign/form/:id", (req, res) => {
   const postId = req.params.id;
   const q = `
     SELECT cc.*, u.username, email, phonenumber
