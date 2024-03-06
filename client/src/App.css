@@ -755,8 +755,18 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 .main_chart_img_right{position: absolute; right:20%; top:-5% }
 .main_chart_img_right > img{width: 500px; height: 500px; fill: #0078C3; transition: opacity 3s ease; opacity: 0; }
 
+/* 마이페이지 */
+.sang{position: fixed; top: 20%; right: 5%;} /* 요구사항 정리용*/
 
-
+.carbon-mypage-userchart__wrap{}
+.carbon-mypage__userchart{width: 100%; height: 1000px;border: 1px solid black;}
+.carbon-mypage__chart-wrap{width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;}
+.carbon-mypage__pichart{border: 1px solid #ccc; /*position: relative;*/ width: 700px; height: 500px; display: flex; flex-direction: column; justify-content: center; align-items: center;}
+.carbon-mypage__pichart .carbon-mypage__pichart-title{margin-bottom: -30px;}
+.carbon-mypage__pichart .carbon-mypage__pichart-title > p {font-size: 24px;}
+.carbon-mypage__subpichart{display: flex; flex-direction: column; align-items: center; position: absolute; width: 200px; height: 200px;}
+.carbon-mypage__subpichart .carbon-mypage__subpichart-title{margin-bottom: -15px;}
+.carbon-mypage__subpichart .carbon-mypage__subpichart-title > p {font-size: 16px; font-weight: 500;}
 
 
 
