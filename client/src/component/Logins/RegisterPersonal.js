@@ -123,112 +123,100 @@ function RegisterPersonal() {
     <div id="wrap" className="register personal">
       <div className="content-w">
         <div className="inner">
-        <h2 className="page-tit">회원가입</h2>
+        <h2 className="page-tit">개인 회원</h2>
           <div className="form-w">
             <form className="form-details">
-              <div className="form-details-category">
-                <div className="form-input">
-                  <p className="title">사용자 이름</p>
+              <div className="form-input">
+                <p className="title">사용자 이름</p>
+                <input
+                  type="text"
+                  placeholder="사용자명"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </div>
+              
+              {/*  */}
+              {/* <dl className="pwd-chk">
+                <dt className="f-hm-p1"><label for="confPwNum">비밀번호 확인</label> <span className="point-color" title="필수입력">*</span></dt>
+                <dd className="f-hm-p2">
+                  <div className="form-text login-form-txt">
+                    <input id="confPwNum" type="password" placeholder="비밀번호를 다시 입력해주세요."/> 
+                  </div>
+                </dd>
+              </dl> */}
+              {/*  */}
 
+              <div className="form-input">
+                <p className="title">비밀번호</p>
+                <input
+                  type="password"
+                  placeholder="비밀번호"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <div className="form-input">
+                <p className="title">비밀번호 확인</p>
+                <input
+                  type="password"
+                  placeholder="비밀번호 확인"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+              </div>
+              <div className="form-input">
+                <p className="title">이메일</p>
+                <div className="flex-box">
                   <input
                     type="text"
-                    placeholder="사용자명"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="이메일"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
+                  <button className="btn-check" onClick={handleEmailDuplicationCheck}>확인</button>
                 </div>
-                
-                {/*  */}
-                {/* <dl className="pwd-chk">
-                  <dt className="f-hm-p1"><label for="confPwNum">비밀번호 확인</label> <span className="point-color" title="필수입력">*</span></dt>
-                  <dd className="f-hm-p2">
-                    <div className="form-text login-form-txt">
-                      <input id="confPwNum" type="password" placeholder="비밀번호를 다시 입력해주세요."/> 
-                    </div>
-                  </dd>
-                </dl> */}
-                {/*  */}
-
-                <div className="form-input">
-                  <p className="title">비밀번호</p>
-
-                  <input
-                    type="password"
-                    placeholder="비밀번호"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </div>
-
-                <div className="form-input">
-                  <p className="title">비밀번호 확인</p>
-                  <input
-                    type="password"
-                    placeholder="비밀번호 확인"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                  />
-                </div>
-
-                <div className="form-input">
-                  <p className="title">이메일</p>
-                  <div className="flex-box">
-                    <input
-                      type="text"
-                      placeholder="이메일"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <button className="btn-check" onClick={handleEmailDuplicationCheck}>확인</button>
-                  </div>
-                </div>
-
-                <div className="form-input">
-                  <p className="title">핸드폰</p>
-
+              </div>
+              <div className="form-input">
+                <p className="title">휴대폰 번호</p>
+                <input
+                  type="text"
+                  placeholder="휴대폰 번호"
+                  value={phonenumber}
+                  onChange={(e) => setphonenumber(e.target.value)}
+                />
+              </div>
+              <div className="form-input multiple">
+                <p className="title">주소</p>
+                <div className="flex-box">
                   <input
                     type="text"
-                    placeholder="핸드폰번호"
-                    value={phonenumber}
-                    onChange={(e) => setphonenumber(e.target.value)}
+                    placeholder="주소"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
                   />
+                  <button type="button" className="btn-check" onClick={handle.clickButton}>선택</button>
                 </div>
-
-                <div className="form-input multiple">
-                  <p className="title">주소</p>
-                  <div className="flex-box">
-                    <input
-                      type="text"
-                      placeholder="주소"
-                      value={address}
-                      onChange={(e) => setAddress(e.target.value)}
-                    />
-                    <button type="button" className="btn-check" onClick={handle.clickButton}>
-                      선택
-                    </button>
-                  </div>
-                  {openPostcode && (
-                    <DaumPostcode
-                      onComplete={handle.selectAddress}
-                      autoClose={false}
-                      defaultQuery=""
-                    />
-                  )}
-                  <input
-                    type="text"
-                    placeholder="상세주소"
-                    value={detailedaddress}
-                    onChange={(e) => setdetailedaddress(e.target.value)}
+                {openPostcode && (
+                  <DaumPostcode
+                    onComplete={handle.selectAddress}
+                    autoClose={false}
+                    defaultQuery=""
                   />
-                </div>
+                )}
+                <input
+                  type="text"
+                  placeholder="상세주소"
+                  value={detailedaddress}
+                  onChange={(e) => setdetailedaddress(e.target.value)}
+                />
+              </div>
 
-                <div className="bottom-area">
-                  <div className="btn-w">
-                    <button className="btn-register" onClick={handleRegesterClick}>가입완료</button>
-                    <Link to="/Login">로그인창</Link>
-                  </div>
+              <div className="bottom-area">
+                <div className="btn-w">
+                  <button className="btn-register" onClick={handleRegesterClick}>가입완료</button>
+                  <Link to="/Login">로그인창</Link>
                 </div>
-
               </div>
             </form>
           </div>

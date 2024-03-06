@@ -66,7 +66,7 @@ function Register() {
             </div>
             <div className="btn-w">
               <button className={`register-botton ${addClass()}`} onClick={() => navigateTo("/Register/corporate")}>
-                <img src={process.env.PUBLIC_URL + '/img/icon-register-cooperation.png'} />
+                <img src={process.env.PUBLIC_URL + '/img/icon-register-enterprise.png'} />
               </button>
               <span className="type">기업</span>
             </div>

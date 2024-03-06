@@ -166,106 +166,115 @@ axios.post('http://localhost:8000/regester', {
 
   return (
     <>
-    <form className="form-details">
-      <div className="form-details-category">
-          <div>
-            <input
-              type="text"
-              placeholder="사용자명"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </div>
-          <div>
-            <input
-              type="password"
-              placeholder="비밀번호"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <div>
-            <input
-              type="password"
-              placeholder="비밀번호 확인"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-          </div>
-          <div>
-            <input
-              type="text"
-              placeholder="사업자번호"
-              value={businessnumber}
-              onChange={(e) => setBusinessNumber(e.target.value)}
-            />
-            <button
-              className="btn-check"
-              onClick={handlebusinessnumberCheck}
-            >
-              확인
-            </button>
-          </div>
-          <div>
-            <input
-              type="text"
-              placeholder="이메일"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <button
-              className="btn-check"
-              onClick={handleEmailDuplicationCheck}
-            >
-              확인
-            </button>
-          </div>
-          <div>
-            <input
-              type="text"
-              placeholder="핸드폰번호"
-              value={phonenumber}
-              onChange={(e) => setphonenumber(e.target.value)}
-            />
-          </div>
-          <div>
-            <input
-              type="text"
-              placeholder="주소"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-            />
-            <button type="button" className="btn-check" onClick={handle.clickButton}>
-              선택
-            </button>
-          </div>
-          <div>
-            {openPostcode && (
-              <DaumPostcode
-                onComplete={handle.selectAddress}
-                autoClose={false}
-                defaultQuery=""
-              />
-            )}
-          </div>
-          <div>
-            <input
-              type="text"
-              placeholder="상세주소"
-              value={detailedaddress}
-              onChange={(e) => setdetailedaddress(e.target.value)}
-            />
-            </div>
-            <div>
-              <button className="btn-register" onClick={handleRegesterClick}>
-                가입완료
-              </button>
-            </div>
-          <div className="Category-Link">
-            <Link to="/Login">로그인창</Link>
+    <div id="wrap" className="register enterprise">
+      <div className="content-w">
+        <div className="inner">
+          <div className="page-tit">기업 회원</div>
+          <div className="form-w">
+            <form className="form-details">
+              <div className="form-input">
+                <p className="title">사용자 이름</p>
+                <input
+                  type="text"
+                  placeholder="사용자명"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </div>
+              <div className="form-input">
+                <p className="title">비밀번호</p>
+                <input
+                  type="password"
+                  placeholder="비밀번호"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <div className="form-input">
+                <p className="title">비밀번호 확인</p>
+                <input
+                  type="password"
+                  placeholder="비밀번호 확인"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                />
+              </div>
+              <div className="form-input">
+                <p className="title">사업자번호</p>
+                <div className="flex-box">
+                  <input
+                    type="text"
+                    placeholder="사업자번호"
+                    value={businessnumber}
+                    onChange={(e) => setBusinessNumber(e.target.value)}
+                  />
+                  <button
+                    className="btn-check"
+                    onClick={handlebusinessnumberCheck}
+                  >확인</button>
+                </div>
+              </div>
+              <div className="form-input">
+                <p className="title">이메일</p>
+                <div className="flex-box">
+                  <input
+                    type="text"
+                    placeholder="이메일"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <button
+                    className="btn-check"
+                    onClick={handleEmailDuplicationCheck}
+                  >확인</button>
+                </div>
+              </div>
+              <div className="form-input">
+                <p className="title">휴대폰 번호</p>
+                <input
+                  type="text"
+                  placeholder="휴대폰 번호"
+                  value={phonenumber}
+                  onChange={(e) => setphonenumber(e.target.value)}
+                />
+              </div>
+              <div className="form-input multiple">
+                <p className="title">주소</p>
+                <div className="flex-box">
+                  <input
+                    type="text"
+                    placeholder="주소"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                  />
+                  <button type="button" className="btn-check" onClick={handle.clickButton}>선택</button>
+                </div>
+                {openPostcode && (
+                  <DaumPostcode
+                    onComplete={handle.selectAddress}
+                    autoClose={false}
+                    defaultQuery=""
+                  />
+                )}
+                <input
+                  type="text"
+                  placeholder="상세주소"
+                  value={detailedaddress}
+                  onChange={(e) => setdetailedaddress(e.target.value)}
+                />
+              </div>
+              <div className="bottom-area">
+                <div className="btn-w">
+                  <button className="btn-register" onClick={handleRegesterClick}>가입완료</button>
+                  <Link to="/Login">로그인창</Link>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
-    </form>
+      </div>
+    </div>
+  
     </>
   );
 }

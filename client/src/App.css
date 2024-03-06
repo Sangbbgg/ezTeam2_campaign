@@ -836,7 +836,7 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 .register-botton-wrap .register-botton {width: 180px; height: 180px; background-color: #25B058; border: 1px solid #ccc; border-radius: 50%; transition: transform .4s;}
 .register-botton-wrap .register-botton:hover {transform: translateY(-10px);}
 .register-botton-wrap .register-botton img {width: 80px;}
-.register-botton-wrap .btn-w:nth-child(1) img {width: 90px;}
+/* .register-botton-wrap .btn-w:nth-child(1) img {width: 90px;} */
 /* .render-register{width: 20%; height: 200px;} */
 .login-Link{padding: 0 50px;}
 
@@ -849,13 +849,14 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 
 /* 회원가입 폼 */
 #wrap.register {padding-top: 0; background: #e1f0de;}
-.register .inner {width: 1000px;}
+.register .inner {width: 800px;}
 .form-w .form-input + .form-input {margin-top: 30px;}
+.register .form-w {padding: 100px;}
 .register .form-w .form-input .title {font-size: 16px;}
 .register .form-w .flex-box {width: calc(100% - 140px);}
 .register .form-w .flex-box input {width: calc(100% - 80px);}
 .register .form-w .flex-box + input {margin-top: 10px; margin-left: 140px; width: calc(100% - 140px);}
-.register .form-w .flex-box input + button {margin-left: 20px; min-width: 60px; font-size: 16px; background-color:#fff; border: 1px solid #000;}
+.register .form-w .flex-box input + button {margin-left: 20px; min-width: 60px; font-size: 14px; background-color:#fff; border: 1px solid #000;}
 .register .bottom-area .btn-w {padding: 0; background-color: transparent; box-shadow: none; border-radius: 0;}
 .register .bottom-area a {margin-left: 10px; padding: 10px 30px; font-size: 16px; color: #000; background-color: #fff; border: 1px solid #000;}
 .register .bottom-area button {padding: 10px 30px; font-size: 16px; color: #fff; background-color: #25B058; border: 1px solid #25B058;}
