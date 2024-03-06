@@ -9,13 +9,15 @@ import { getCommentsUrl } from "../../store/store";
 
 const Comments = ({ curList }) => {
   const dispatch = useDispatch();
-  const { id } = useParams(); //현재 페이지의 'postId' 값을 가져옴
+  const { id } = useParams(); 
 
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [loadedComments, setLoadedComments] = useState([]);
-  // const [editComment, setEditComment] = useState("");
   const [userInfo, setUserInfo] = useState(null); // 로그인한 사용자 정보를 저장
+
+  const storedUserData = sessionStorage.getItem("userData");
+  const userData = JSON.parse(storedUserData);
 
   // 페이지가 로드될 때 사용자 정보를 가져오는 useEffect
   useEffect(() => {
@@ -29,10 +31,7 @@ const Comments = ({ curList }) => {
         if (res.payload) {
           let addComments = [...res.payload];
           setComments(addComments.reverse());
-
           setLoadedComments(addComments); // 댓글 수정 시 불러올 데이터 저장
-          // console.log("불러온 데이터:", addComments); 
-          
         }
       })
       .catch((err) => console.log(err));
@@ -43,7 +42,6 @@ const Comments = ({ curList }) => {
     try {
       // 사용자 정보를 가져오는 API 호출
       const response = await axios.get('http://localhost:8000/users');
-      // console.log(response.data)
       setUserInfo(response.data); // 가져온 사용자 정보를 상태에 저장
     } catch (error) {
       console.error('Error fetching user info:', error);
@@ -110,84 +108,50 @@ const Comments = ({ curList }) => {
     }
   };
   
-  // @@@@@@@@@@@@@@@@@@@@@@@@ 댓글 수정 관련 @@@@@@@@@@@@@@@@@@@@@@@@
-  // const editChange = (e) => {
-  //   setEditComment(e.target.value);
-  // };
-
-  // // 댓글 수정 등록
-  // // const editComment = async (e) => {
-  // //   e.preventDefault();
-  // // }
-
-
-  // // 수정버튼 클릭 시 저장된 댓글 내용을 불러옴
-  // const addClsEdit = (e, commentId) => {
-  //   e.target.closest(".comment").classList.add("edit");
-  //   console.log(curList.id, commentId);
-
-  //   const foundComment = loadedComments.find(comment => comment.id === commentId);
-  //   setEditComment(foundComment.comment_text);
-  // }
-
-  // // 취소 버튼
-  // const removeClsEdit = (e) => {
-  //   const confirmCancel = window.confirm("댓글 수정을 취소하시겠습니까?");
-
-  //   if(confirmCancel){
-  //     e.target.closest(".comment").classList.remove("edit");
-  //   }
-  // }
-  // @@@@@@@@@@@@@@@@@@@@@@@@ 댓글 수정 관련 @@@@@@@@@@@@@@@@@@@@@@@@
-
-  
   return (
     <div className="comment-area">
       <p className="comment-tit">함께 할 사람들의 이야기</p>
-      <div className="write-wrap">
-        <div className="write-div">
-          <div className="for-padding">
-            <textarea className="comment-text" type="text" name="comment_text" value={newComment} placeholder="내용을 입력하세요" onChange={handleChange} />
-          </div>
-          <div className="btn-w">
-            <button className="btn-submit" type="submit" onClick={postComment}>등록</button>
+      <div className="comment-w">
+        <div className="write-wrap">
+          <div className="write-div">
+            <div className="for-padding">
+              <textarea className="comment-text" type="text" name="comment_text" value={newComment} placeholder="내용을 입력하세요" onChange={handleChange} />
+            </div>
+            <div className="btn-w">
+              <button className="btn-submit" type="submit" onClick={postComment}>등록</button>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="view-wrap">
-        {
-          comments && comments.length > 0 ? (
-            comments.map((comment, i) =>
-              <div className="comment" key={i}>
-                <div className="view-div">
-                  {/* {console.log(comment)} */}
-                  <p className="txt">{comment.comment_text}</p>
-                  <div className="regi-w">
-                    <p className='username'>{comment.username}</p>
-                    <p className="date">{new Date(comment.date).toLocaleDateString()}</p>
+        <div className="view-wrap">
+          {
+            comments && comments.length > 0 ? (
+              comments.map((comment, i) =>
+                <div className="comment" key={i}>
+                  <div className="view-div">
+                    <div className="regi-w">
+                        <p className='username'>{comment.username}</p>
+                        <p className="date">{new Date(comment.date).toLocaleDateString()}</p>
+                    </div>
+                    <p className="txt">{comment.comment_text}</p>
+                    {userData.userid === curList?.userid && (
+                      <div className="btn-w">
+                        {/* 댓글의 ID를 deleteComment 함수로 전달 */}
+                        <button className="btn-delete" onClick={() => deleteComment(comment.id)}>삭제</button>
+                      </div>
+                    )}
                   </div>
-                  <div className="btn-w">
-                    {/* <button className='btn-edit' onClick={(e) => addClsEdit(e, comment.id)}>수정</button> */}
 
-                    {/* 댓글의 ID를 deleteComment 함수로 전달 */}
-                    <button className="btn-delete" onClick={() => deleteComment(comment.id)}>삭제</button>
+                  {/* 댓글 수정 폼 */}
+                  <div className="write-div">
+                    <div className="btn-w">
+                      <button className="btn-submit" type="submit" onClick={postComment}>등록</ button>
+                    </div>
                   </div>
                 </div>
-
-                {/* 댓글 수정 폼 */}
-                <div className="write-div">
-                  <div className="for-padding">
-                    {/* <textarea className="comment-text" type="text" name="comment_text" value={editComment} placeholder="내용을 입력하세요" onChange={editChange} /> */}
-                  </div>
-                  <div className="btn-w">
-                    {/* <button className="btn-cancel" type="submit" onClick={removeClsEdit}>취소</ button> */}
-                    <button className="btn-submit" type="submit" onClick={postComment}>등록</ button>
-                  </div>
-                </div>
-              </div>
-            )
-          ) : null
-        }
+              )
+            ) : null
+          }
+        </div>
       </div>
     </div>
   );
