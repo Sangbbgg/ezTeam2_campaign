@@ -18,6 +18,7 @@ const Comments = ({ curList }) => {
 
   const storedUserData = sessionStorage.getItem("userData");
   const userData = JSON.parse(storedUserData);
+  console.log(userData)
 
   // 페이지가 로드될 때 사용자 정보를 가져오는 useEffect
   useEffect(() => {
@@ -133,7 +134,7 @@ const Comments = ({ curList }) => {
                         <p className="date">{new Date(comment.date).toLocaleDateString()}</p>
                     </div>
                     <p className="txt">{comment.comment_text}</p>
-                    {userData.userid === curList?.userid && (
+                    {userData.userid === comment.userid && (
                       <div className="btn-w">
                         {/* 댓글의 ID를 deleteComment 함수로 전달 */}
                         <button className="btn-delete" onClick={() => deleteComment(comment.id)}>삭제</button>
