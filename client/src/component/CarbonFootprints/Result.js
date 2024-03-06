@@ -343,7 +343,7 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
                 <div key={data.name} className="bar_chart">
                   <div className="chart_title">
                     <div className={`step_icon forest_${data.category}_bg`}>
-                      <img src={`/img/${data.category}_small_icon.svg`} />
+                      <img src={`/img/${data.category}_small_icon.svg`} alt={`${data.category}_아이콘`}/>
                     </div>
                     <span className={`forest_${data.category}_text`}>{data.name}</span>
                   </div>
@@ -386,7 +386,7 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
                         <div className={`category forest_${label}_bg`}>
                           <div className={`category_title forest_${label}_text`}>
                             <div className={"step_icon"} style={{ backgroundColor: "white" }}>
-                              <img src={`/img/${label}_small_icon.svg`} />
+                              <img src={`/img/${label}_small_icon.svg`} alt={`${label}_아이콘`}/>
                             </div>
                             <span>{labels[label]}</span>
                           </div>
@@ -482,7 +482,7 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
                     <div className={`category forest_${label}_bg`}>
                       <div className={`category_title forest_${label}_text`}>
                         <div className="step_icon" style={{ backgroundColor: "white" }}>
-                          <img src={`/img/${label}_small_icon.svg`} />
+                          <img src={`/img/${label}_small_icon.svg`} alt={`${label}_아이콘`}/>
                         </div>
                         <span>{labels[label]}</span>
                       </div>
@@ -540,7 +540,7 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
                         {barChatData.map((data) => (
                           <div key={data.key} className="chart_title">
                             <div className={`step_icon forest_${data.category}_bg`}>
-                              <img src={`/img/${data.category}_small_icon.svg`} />
+                              <img src={`/img/${data.category}_small_icon.svg`} alt={`${data.category}_아이콘`}/>
                             </div>
                             <span className={`forest_${data.category}_text`}>{data.name}</span>
                           </div>
@@ -613,7 +613,7 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
                 <div key={label} className="result_box_content_item">
                   <div className="result_box_content_item_title">
                     <div className={`step_icon forest_${label}_bg`}>
-                      <img src={`/img/${label}_small_icon.svg`} />
+                      <img src={`/img/${label}_small_icon.svg`} alt={`${label}_아이콘`}/>
                     </div>
                     <span className={`forest_${label}_text`}>{labels[label]}</span>
                   </div>

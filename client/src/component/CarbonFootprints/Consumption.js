@@ -181,7 +181,7 @@ function Consumption({ inputData, initialData, onResultSubmit }) {
             >
               <div className={`item_title forest_${item.category_name}_text`}>
                 <div className={`step_icon forest_${item.category_name}_bg`}>
-                  <img src={`/img/${item.category_name}_small_icon.svg`} />
+                  <img src={`/img/${item.category_name}_small_icon.svg`} alt={`${item.category_name}_이미지`} />
                 </div>
                 {item.label}
               </div>

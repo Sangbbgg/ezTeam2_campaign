@@ -261,8 +261,8 @@ axios.post('http://localhost:8000/regester', {
                 가입완료
               </button>
             </div>
-          <div className="category-link">
-            <Link to="/login">로그인창</Link>
+          <div className="Category-Link">
+            <Link to="/Login">로그인창</Link>
           </div>
         </div>
     </form>

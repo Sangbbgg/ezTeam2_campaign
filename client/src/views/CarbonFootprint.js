@@ -10,10 +10,6 @@ import Footer from "../component/Footer";
 
 import html2canvas from "html2canvas";
 
-// 개발의도 화면설명 구역
-import ConsumptionIntention from "../component/CarbonFootprints/devItention/ConsumptionItention"
-import "../component/CarbonFootprints/devItention/carbonIntention.css"
-
 function CarbonFootprint() {
   // const userId = 179870; //개발용 user_id
   const storedUserData = sessionStorage.getItem("userData");
@@ -217,10 +213,7 @@ function CarbonFootprint() {
   };
 
   return (
-    <div id="wrap">
-      {/* 개발의도 마스크 */}
-      {activeTab ==="consumption" && <ConsumptionIntention />}
-      
+    <div id="wrap">     
       <div className="hidden_for_capture">
         <Header />
       </div>
