@@ -205,7 +205,7 @@ function RegisterPersonal() {
         </div>
 
         <div className="Category-Link">
-          <Link to="/login">로그인창</Link>
+          <Link to="/Login">로그인창</Link>
         </div>
       </div>
     </form>

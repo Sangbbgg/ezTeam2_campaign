@@ -17,11 +17,11 @@ function Register() {
 
   useEffect(() => {
     setIsPage(location.pathname);
-    console.log("page", isPage);
+    // console.log("page", isPage);
     if (isPage === "/Login") {
       setHandlePage(true);
     }
-    console.log("handlePage", handlePage);
+    // console.log("handlePage", handlePage);
   });
 
   const addClass = () => {
@@ -82,7 +82,7 @@ function Register() {
     );
   };
 
-  console.log(addClass());
+  // console.log(addClass());
   return <>{handlePage ? loginRenderpage() : registerRenderReturn()}</>;
 }
 
