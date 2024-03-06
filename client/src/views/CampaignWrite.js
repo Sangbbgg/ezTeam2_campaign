@@ -111,7 +111,7 @@ const CampaignWrite = () => {
         postData = {
           ...postData,
           address: write.address,
-          address_detail: write.address_detail, // 수정된 부분
+          address_detail: write.address_detail, 
           latitude: write.latitude,
           longitude: write.longitude,
         };
@@ -127,7 +127,7 @@ const CampaignWrite = () => {
   };
 
   useEffect(() => {
-    const mapContainer = document.getElementById("map"); // 지도를 표시할 div
+    const mapContainer = document.getElementById("map"); 
     const mapOption = {
       center: new window.daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
       level: 3, // 지도의 확대 레벨
@@ -158,10 +158,10 @@ const CampaignWrite = () => {
               const result = results[0]; //첫번째 결과의 값을 활용
               // 해당 주소에 대한 좌표를 받아서
               const coords = new window.daum.maps.LatLng(result.y, result.x);
-              // 지도를 보여준다.
+              // 지도를 보여줌
               mapContainer.style.display = "block";
               map.relayout();
-              // 지도 중심을 변경한다.
+              // 지도 중심을 변경
               map.setCenter(coords);
               marker.setPosition(coords);
               console.log(data);
@@ -169,8 +169,6 @@ const CampaignWrite = () => {
               setAddress(addr);
               setLatitude(coords.Ma);
               setLongitude(coords.La);
-  
-              // Ma 위도 La경도
             }
           });
         },
@@ -194,6 +192,7 @@ const CampaignWrite = () => {
       <Header />
       <div className="content-w">
         <div className="inner">
+          <h2 className="page-tit">캠페인 글쓰기</h2>
           <div className="form-w">
             <form>
               <div className="txt-box">
@@ -252,8 +251,8 @@ const CampaignWrite = () => {
                     />
                   </div>
                 </div>
-    
-                {/* // @@@@@@@@@@@@@@@@@@@@ 지도 @@@@@@@@@@@@@@@@@@@@  */}
+
+                {/* 주소 검색 */}
                 <div className="address-area">
                   <div className="addr-tit">주소</div>
     
@@ -274,15 +273,10 @@ const CampaignWrite = () => {
     
                   <div id="map" style={{display: "none"}}></div>
                 </div>
-                {/* // @@@@@@@@@@@@@@@@@@@@ 지도 @@@@@@@@@@@@@@@@@@@@  */}
     
                 <WriteEditor handleChangeQuill={handleChangeQuill} value={write.body}/>
     
-                <input className="author-id" type="number" name="userid" value={write.userid} onChange={handleChange}/>
               </div>
-              {/* <div className="bottom-area">
-                <button className="btn-submit" type="submit" onClick={handleClick}>등록</button>
-              </div> */}
               <div className="bottom-area">
                 <div className="btn-w">
                   <button className="btn-submit" type="submit" onClick={handleClick}>등록</button> 
@@ -291,7 +285,6 @@ const CampaignWrite = () => {
               </div>
             </form>
           </div>
-          {/* <button type="text" className="btn-tolist pos-right" onClick={() => {navigate(-1);}}>목록</button> */}
         </div>
       </div>
       <Footer/>

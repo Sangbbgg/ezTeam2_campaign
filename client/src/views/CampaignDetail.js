@@ -6,8 +6,9 @@ import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import Comments from '../component/campaign/Comments';
 import DOMPurify from "isomorphic-dompurify"
-import "react-quill/dist/quill.core.css"
+import "react-quill/dist/quill.core.css";
 import Footer from "../component/Footer";
+import ScrollTop from "../component/ScrollTop";
 
 const CampaignDetail = (props) => {
   const navigate = useNavigate();
@@ -94,6 +95,14 @@ const CampaignDetail = (props) => {
     }
   }, [curList]);
 
+// 부드럽게 페이지 상단으로 스크롤
+window.scrollTo({
+  top: 0, // Y 좌표
+  left: 0, // X 좌표
+  // behavior: "smooth", // 부드러운 스크롤 효과
+});
+  
+  
   return (
     <div id="wrap" className="campaign-detail">
       <Header/>
