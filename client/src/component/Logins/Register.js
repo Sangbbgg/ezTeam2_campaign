@@ -52,25 +52,30 @@ function Register() {
     return (
       <>
         <form className="form-register">
-          <h3 className="title">REGISTER</h3>
-          <p>BBANG끗과 함께 탄소중립을 실천해주세요</p>
+          <div className="txt-wrap">
+            <h3 className="title">REGISTER</h3>
+            <p>BBANG끗과 함께 탄소중립을 실천해주세요</p>
+          </div>
           <div className="register-botton-wrap">
             {/* 각 버튼 클릭 시에 해당 페이지로 이동하는 버튼을 추가합니다 */}
-            <button className={`register-botton ${addClass()}`} onClick={() => navigateTo("/Register/personal")}>
-              <img src="" alt="개인아이콘" />
-              <br />
-              개인
-            </button>
-            <button className={`register-botton ${addClass()}`} onClick={() => navigateTo("/Register/corporate")}>
-              <img src="" alt="기업아이콘" />
-              <br />
-              기업
-            </button>
-            <button className={`register-botton ${addClass()}`} onClick={() => navigateTo("/Register/group")}>
-              <img src="" alt="단체아이콘" />
-              <br />
-              단체
-            </button>
+            <div className="btn-w">
+              <button className={`register-botton ${addClass()}`} onClick={() => navigateTo("/Register/personal")}>
+                <img src={process.env.PUBLIC_URL + '/img/icon-register-user.png'} />
+              </button>
+              <span className="type">개인</span>
+            </div>
+            <div className="btn-w">
+              <button className={`register-botton ${addClass()}`} onClick={() => navigateTo("/Register/corporate")}>
+                <img src={process.env.PUBLIC_URL + '/img/icon-register-cooperation.png'} />
+              </button>
+              <span className="type">기업</span>
+            </div>
+            <div className="btn-w">
+              <button className={`register-botton ${addClass()}`} onClick={() => navigateTo("/Register/group")}>
+                <img src={process.env.PUBLIC_URL + '/img/icon-register-organization2.png'} />
+              </button>
+              <span className="type">단체</span>
+            </div>
           </div>
         </form>
       </>

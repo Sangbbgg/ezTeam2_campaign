@@ -17,7 +17,7 @@ input:focus, input:active {outline: none;}
 option {padding: 3px 10px;}
 option:focus, option:active {outline: none;}
 input[type="radio"], input[type="checkbox"] {border: 0; padding: 0; height: auto; -webkit-box-shadow: none; box-shadow: none;}
-input[type="password"] {height: 40px; border: 1px solid #e5e5e5; color: #888; background: #fff; -webkit-appearance: none; -webkit-box-shadow: none; box-shadow: none;}
+input[type="password"] {height: 50px; border: 1px solid #e5e5e5; color: #888; background: #fff; -webkit-appearance: none; -webkit-box-shadow: none; box-shadow: none;}
 input[type="password"]::-webkit-input-placeholder {color: #999;}
 input[type="password"]:-ms-input-placeholder {color: #999;}
 input[type="password"]::-ms-input-placeholder {color: #999;}
@@ -799,27 +799,41 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 /* ------------------------------- 로그인 회원가입 ------------------------------- */
 /* 로그인 */
 .login-inner {position: relative; margin: 0 auto; width: 1200px;}
-.login{display: flex; flex-direction: row; align-items: center; height: 500px;  border: 1px solid #ccc; border-radius: 8px; }
-.form-login, .form-register{height: 100%; padding: 50px 50px 30px 50px;}
-.form-login {width: 500px; border-right: 1px solid #ccc;}
-.form-register{flex-grow: 1;}
-.form-login .title, .form-register .title {font-size: 34px; font-weight: 700; color:#3AB868; margin:0 0 20px 0; background:none}
+.login{display: flex; border-radius: 8px;}
+.form-login, .form-register{height: 100%; padding: 50px;}
+.form-login {position: relative; width: 500px;}
+.form-login::after {content: ""; position: absolute; top: 50px; right: 0; width: 1px; height: 425px; background-color: #ccc;}
+.form-login .title {margin-bottom: 24px;}
+.form-register {flex-grow: 1;}
+.form-register .txt-wrap {margin-bottom: 24px;}
+.form-register .txt-wrap p {margin-top: 20px;}
+.form-login .title, .form-register .title {font-size: 34px; font-weight: 700; line-height: 34px; color:#3AB868;}
 .form-login .tab-wrap {padding-right: 40%;}
 .form-login .tab-wrap .tab-item-wrap{display: flex; position: relative; bottom: -1px;}
-.form-login .tab-wrap .tab-item-wrap .tab-item{flex-grow: 1; height: 40px; background-color: white; border: 1px solid #ccc; border-radius: 8px 8px 0 0; display: flex; align-items: center; justify-content: center;}
+.form-login .tab-wrap .tab-item-wrap .tab-item{flex-grow: 1; height: 40px; background-color: white; border: 1px solid #ccc; border-radius: 8px 8px 0 0; display: flex; align-items: center; justify-content: center; cursor: pointer;}
 .form-login .tab-wrap .tab-item-wrap .tab-item.active{color: #3AB868; font-weight: 700; border-bottom: none; }
+.form-login .tab-wrap .tab-item-wrap .tab-item.active {background: #e1f0de;}
 
-.form-login .input-wrap {padding: 30px 30px 10px 30px; border: 1px solid #ccc; display: flex; flex-direction: column; gap: 20px;}
+.form-login .input-wrap {padding: 30px; border: 1px solid #ccc; display: flex; flex-direction: column; gap: 20px; background-color: #e1f0de;}
 
 
 .form-login .login-input{width: 100%; border: 1px solid #ccc}
 
 .login-button{color: white; background-color: #25B058; height: 45px; margin-top: 20px;}
 
-.form-login-link{display: flex; justify-content: end; gap: 10px; margin-top: 20px;}
+.form-login-link{display: flex; justify-content: end; margin-top: 20px;}
+.form-login-link a:nth-child(2) {position: relative; margin-left: 10px; padding-left: 10px;}
+.form-login-link a:nth-child(2)::before {content: ""; position: absolute; top: 6px; left: 0; width: 1px; height: 10px; background-color: #ccc;}
 
 /* 회원가입 */
-.register-botton-wrap{display: flex; justify-content: space-around; padding: 80px 50px 50px 50px; height: 70%;}
-.register-botton{width: 30%; border: 1px solid #ccc; border-radius: 8px;}
-.render-register{width: 20%; height: 200px;}
+.register-botton-wrap{display: flex; justify-content: space-around; margin-top: 60px;}
+.register-botton-wrap .btn-w {display: flex; flex-direction: column; align-items: center;}
+/* .register-botton-wrap .btn-w:hover {transform: translateY(-10px);} */
+
+.register-botton-wrap .btn-w .type {margin-top: 10px; font-size: 18px;}
+.register-botton-wrap .register-botton {width: 180px; height: 180px; background-color: #25B058; border: 1px solid #ccc; border-radius: 50%; transition: transform .4s;}
+.register-botton-wrap .register-botton:hover {transform: translateY(-10px);}
+.register-botton-wrap .register-botton img {width: 80px;}
+.register-botton-wrap .btn-w:nth-child(1) img {width: 90px;}
+/* .render-register{width: 20%; height: 200px;} */
 .login-Link{padding: 0 50px;}
