@@ -73,10 +73,10 @@ const CampaignEdit = () => {
               const result = results[0]; //첫번째 결과의 값을 활용
               // 해당 주소에 대한 좌표를 받아서
               const coords = new window.daum.maps.LatLng(result.y, result.x);
-              // 지도를 보여준다.
+              // 지도를 보여줌
               mapContainer.style.display = "block";
               map.relayout();
-              // 지도 중심을 변경한다.
+              // 지도 중심을 변경
               map.setCenter(coords);
               marker.setPosition(coords);
     
@@ -88,7 +88,7 @@ const CampaignEdit = () => {
       }).open();
     }
     
-    return executeAddressSearch; // executeAddressSearch 함수를 반환하여 다른 곳에서 호출할 수 있도록 함
+    return executeAddressSearch; 
   };
 
   const handleChange = (e) => {
@@ -148,6 +148,7 @@ const CampaignEdit = () => {
       <Header/>
       <div className="content-w">
         <div className="inner">
+          <h2 className="page-tit">캠페인 수정</h2>
           <div className="form-w">
             <form>
               <div className="txt-box">
@@ -207,7 +208,7 @@ const CampaignEdit = () => {
               
               <WriteEditor value={write.body || ""} handleChangeQuill={handleChangeQuill} />
 
-              {/* // @@@@@@@@@@@@@@@@@@@@ 지도 @@@@@@@@@@@@@@@@@@@@  */}
+              {/* 주소 검색 */}
               <div className='address-area'>
                 <div className="addr-tit">주소</div>
 
@@ -229,7 +230,6 @@ const CampaignEdit = () => {
               
                 <div id="map" style={{ display: selOpt === "장소없음" ? "none" : "block" }}></div>
               </div>
-              {/* // @@@@@@@@@@@@@@@@@@@@ 지도 @@@@@@@@@@@@@@@@@@@@  */}
 
               <div className="bottom-area">
                 <div className="btn-w">
