@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 function ConsumptionItention() {
-  const [active, setActive] = useState();
+  const [active, setActive] = useState(false);
 
   const buttonHandle = () => {
     setActive(!active); // 상태를 토글합니다
@@ -16,21 +16,22 @@ function ConsumptionItention() {
         </button>
       </div>
       <div className={`carbon-intention-wrap ${active ? "active" : ""}`}>
-        <div className="carbon-consumption">
-          <div className="inner">
-            <div className="carbon-tap__handle">
-              <div className="carbon-tap-alert-wrap">
-                <div className="carbon-tap-alert__texbox">
-                  <p>#조건 : 사용량(5개항목) 미입력시</p>
-                  <p>#결과 : 탭 이동 제한</p>
-                  <p>#사용 Hooks : React &#123;"useState , useEffect"&#125;</p>
-                </div>
-                <img className="carbon-tap-alert" src="/img/carbon_tap_alert.png" />
-              </div>
-              <div className="carbon-tap__box"></div>
+        <div className="carbon-box">
+          <div className="content-box">
+            <div className="text-box">
+              <p># 조건 : 사용량(5개항목) 입력</p>
+              <p># 결과 : 미입력 사용량 존재시 탭이동 제한</p>
+              <p># 사용 Hooks : React &#123;"useState , useEffect"&#125;</p>
             </div>
+            <img className="carbon-tap__alert" src="/img/carbon_tap_alert.png"  alt="alert이미지"/>
+          </div>
+          <div className="img-box">
+            <img src="/img/free-icon-exclamation-mark-179386.png" alt="느낌표 아이콘" />
           </div>
         </div>
+        <div className="carbon-box">2</div>
+        <div className="carbon-box">3</div>
+        <div className="carbon-box">4</div>
       </div>
     </>
   );
