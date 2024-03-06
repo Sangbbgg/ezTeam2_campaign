@@ -235,7 +235,7 @@ axios.post('http://localhost:8000/regester', {
               value={address}
               onChange={(e) => setAddress(e.target.value)}
             />
-            <button className="check-btn" onClick={handle.clickButton}>
+            <button type="button" className="check-btn" onClick={handle.clickButton}>
               선택
             </button>
           </div>

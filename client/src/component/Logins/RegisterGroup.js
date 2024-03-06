@@ -236,7 +236,7 @@ axios.post('http://localhost:8000/Rigester', {
             onChange={(e) => setAddress(e.target.value)}
           />
         
-          <button
+          <button type="button"
           className="check-btn" 
           onClick={handle.clickButton}>선택</button>
           {openPostcode && (
