@@ -810,11 +810,11 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 .form-login .title, .form-register .title {font-size: 34px; font-weight: 700; line-height: 34px; color:#3AB868;}
 .form-login .tab-wrap {padding-right: 40%;}
 .form-login .tab-wrap .tab-item-wrap{display: flex; position: relative; bottom: -1px;}
-.form-login .tab-wrap .tab-item-wrap .tab-item{flex-grow: 1; height: 40px; background-color: white; border: 1px solid #ccc; border-radius: 8px 8px 0 0; display: flex; align-items: center; justify-content: center; cursor: pointer;}
-.form-login .tab-wrap .tab-item-wrap .tab-item.active{color: #3AB868; font-weight: 700; border-bottom: none; }
+.form-login .tab-wrap .tab-item-wrap .tab-item {flex-grow: 1; height: 40px; background-color: #f5f5f5; /*border: 1px solid #ccc;*/ border-radius: 8px 8px 0 0; display: flex; align-items: center; justify-content: center; cursor: pointer;}
+.form-login .tab-wrap .tab-item-wrap .tab-item.active {color: #3AB868; font-weight: 700; border-bottom: none;}
 .form-login .tab-wrap .tab-item-wrap .tab-item.active {background: #e1f0de;}
 
-.form-login .input-wrap {padding: 30px; border: 1px solid #ccc; display: flex; flex-direction: column; gap: 20px; background-color: #e1f0de;}
+.form-login .input-wrap {padding: 30px; /*border: 1px solid #ccc;*/ display: flex; flex-direction: column; gap: 20px; background-color: #e1f0de;}
 
 
 .form-login .login-input{width: 100%; border: 1px solid #ccc}
