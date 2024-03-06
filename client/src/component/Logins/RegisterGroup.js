@@ -169,8 +169,8 @@ axios.post('http://localhost:8000/Rigester', {
   
 
   return (
-    <div className="form-Details">
-      <form className="form-Details-Category">
+    <div className="form-details">
+      <form className="form-details-category">
         <div>
           <input
             type="text"
@@ -203,7 +203,7 @@ axios.post('http://localhost:8000/Rigester', {
           onChange={(e) => setuniquenumber(e.target.value)}
           />
           <button 
-          className="CheckBtn"
+          className="check-btn"
           onClick={handleuniquenumberCheck}>확인</button>
           {/* 고유 유효성 검사 02/20 김민호 */}
         </div>
@@ -215,7 +215,7 @@ axios.post('http://localhost:8000/Rigester', {
             onChange={(e) => setEmail(e.target.value)}
           />
           <button 
-          className="CheckBtn"
+          className="check-btn"
           onClick={handleEmailDuplicationCheck}>확인</button>
           {/* handleEmailDuplicationCheck 함수가 호출해서 이메일 중복확인 작업을 진행하고, 중복방지를 해주는 코드 */}
           {/* 이메일 유효성 검사 02/14 김민호 */}
@@ -237,7 +237,7 @@ axios.post('http://localhost:8000/Rigester', {
           />
         
           <button
-          className="CheckBtn" 
+          className="check-btn" 
           onClick={handle.clickButton}>선택</button>
           {openPostcode && (
             <DaumPostcode
@@ -256,11 +256,11 @@ axios.post('http://localhost:8000/Rigester', {
           />
         </div>
         <div>
-          <button className="RegesterBtn" onClick={handleRigesterClick}>
+          <button className="btn-register" onClick={handleRigesterClick}>
             가입완료
           </button>
         </div>
-          <div className="Category-Link">
+          <div className="category-link">
             <Link to="/login">로그인창</Link>
           </div>
       </form>

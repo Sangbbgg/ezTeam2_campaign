@@ -120,7 +120,7 @@ function LoginPage() {
                   로그인
                 </button>
                 <div className="form-login-link">
-                  <Link to="/Register">회원가입</Link>
+                  {/* <Link to="/Register">회원가입</Link> */}
                   <Link to="/Find">회원 ID찾기</Link>
                 </div>
               </div>

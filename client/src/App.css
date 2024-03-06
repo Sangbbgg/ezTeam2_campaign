@@ -336,18 +336,22 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 /* 글쓰기 */
 .form-w {border: 1px solid #ddd; padding: 120px; border-radius: 8px; background-color: #fff;}
 .campaign-write {position: relative; margin: 0 auto;}
+.campaign-write .inner {width: 1000px;}
+
 /* .campaign-write .content-w {background-color: #e1f0de;} */
 .campaign-write input {padding: 4px 12px; border: 0; color: #000; background-color: #f5f5f5;}
-.campaign-write .txt-box {display: flex;}
-.campaign-write .txt-box .title {margin-bottom: 14px; min-width: 180px; font-size: 20px;}
-.campaign-write .txt-box input {margin: 0 auto; padding: 4px 12px; width: 100%; border: 0;  color: #000; background-color: #f5f5f5;}
-.campaign-write .txt-box input::placeholder {color: #777;} 
-.campaign-write .content {margin-top: 20px; width: 100%; min-height: 400px; color: #000;}
-.campaign-write .ql-container {height: 400px; background-color: #f5f5f5;}
-.campaign-write .author-id {margin-top: 20px; padding: 4px 12px; width: 200px; border: 0; color: #000; background-color: #e1f0de;}
-.campaign-write .btn-submit {display: block; color: #fff; background-color: #25B058;}
-.campaign-write .btn-tolist {padding: 10px 30px; color: #fff; background-color: #25B058;}
-.campaign-write .btn-tolist.pos-right {position: absolute; right: 0; bottom: 0;}
+
+.form-w .form-input {display: flex; align-items: baseline;}
+.form-w .form-input + .form-input {margin-top: 20px;}
+.form-w .form-input .title {min-width: 140px; font-size: 18px;}
+.form-w .form-input input {margin: 0 auto; padding: 4px 12px; width: 100%; border: 0;  color: #000; background-color: #f5f5f5;}
+.form-w .form-input input::placeholder {color: #777;} 
+.form-w .content {margin-top: 20px; width: 100%; min-height: 400px; color: #000;}
+.form-w .ql-container {height: 400px; background-color: #f5f5f5;}
+.form-w .author-id {margin-top: 20px; padding: 4px 12px; width: 200px; border: 0; color: #000; background-color: #e1f0de;}
+.form-w .btn-submit {display: block; color: #fff; background-color: #25B058;}
+.form-w .btn-tolist {padding: 10px 30px; color: #fff; background-color: #25B058;}
+.form-w .btn-tolist.pos-right {position: absolute; right: 0; bottom: 0;}
 
 /* 상세 */
 #wrap.campaign-detail {padding-top: 0;}
@@ -419,8 +423,8 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .content-area {margin-top: 60px;}
 
 /* 캘린더 */
-.calendar-area {display: flex; margin-top: 60px;}
-.calendar-area .cal-tit {min-width: 180px; margin-bottom: 14px; font-size: 20px;}
+.calendar-area {display: flex; align-items: center; margin-top: 60px;}
+.calendar-area .cal-tit {min-width: 140px; font-size: 18px;}
 .calendar {display: flex;}
 .calendar > div:nth-child(2) {margin-left: 12px;}
 .calendar input {margin: 0 auto; padding: 4px 12px; min-width: 240px; border: 0; color: #000; background-color: #f5f5f5;}
@@ -454,7 +458,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 #map {margin-top: 10px; width:100%; height: 400px; border: 1px solid #ddd;}
 .address-area {position: relative; margin-top: 80px;}
 .address-area input {margin-bottom: 0;}
-.address-area .addr-tit {margin-bottom: 14px; font-size: 20px;}
+.address-area .addr-tit {margin-bottom: 14px; font-size: 18px;}
 .address-area .address-txt {min-width: 240px;}
 .address-area .addr-div .search-w {display: flex; justify-content: flex-start;}
 .address-area .addr-div .addr-detail {margin-top: 10px; width: 100%;}
@@ -839,3 +843,7 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 .register-botton-wrap .btn-w:nth-child(1) img {width: 90px;}
 /* .render-register{width: 20%; height: 200px;} */
 .login-Link{padding: 0 50px;}
+
+
+#wrap.register {padding-top: 0; background: #e1f0de;}
+.register .inner {width: 1000px;}

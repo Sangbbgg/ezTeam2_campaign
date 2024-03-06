@@ -116,7 +116,7 @@
  
 /* -------------------개인, 기업, 단체 정보 수정 회원가입 폼----------------------------- */
  
-.form-Details{
+.form-details{
   margin: auto;
   width: 300px;
   height: 400px;
@@ -129,25 +129,25 @@
 
 
 /* -------------------정보수정----------------------------- */
-.form-Details-Modify{
+.form-details-Modify{
   background-color: rgb(240, 246, 242);
     width: 250px;
     height: 350px;
     border-radius: 5px;
     margin:auto;
 }
-.form-Details-Modify h2{
+.form-details-Modify h2{
   margin-left: 20%;
 }
-.form-Details-Modify p{
+.form-details-Modify p{
   padding: 3px;
   margin: 10px;
 }
-.form-Details-Modify button{
+.form-details-Modify button{
   margin-left: 35%;
 }
 /* -------------------세부 회원가입----------------------------- */
-.form-Details-Category{
+.form-details-category{
   background-color: rgb(240, 246, 242);
   padding-top: 80px;
   width: 250px;
@@ -155,7 +155,7 @@
   border-radius: 5px;
   margin:auto;
 }
-.form-Details-Category input{
+.form-details-category input{
   width: 150px;
   height: 23px;
   border: solid 2px rgba(0, 0, 0, 0.15);
@@ -164,13 +164,13 @@
   margin-left: 50px;
   font-size: 12px;
 }
-.CheckBtn{
+.check-btn{
   width: 40px;
   height: 20px;
   font-size: 15px;
   padding: 3px;
 }
-.RegesterBtn{
+.btn-register{
   width: 80px;
   height: 20px;
   text-align: center;
@@ -180,7 +180,7 @@
   border-radius: 5px;
   color: #EEEFF1;
 }
-.Category-Link{
+.category-link{
   margin-top:1px;
   text-align: center; 
   font-size: 15px;

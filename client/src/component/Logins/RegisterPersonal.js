@@ -120,95 +120,125 @@ function RegisterPersonal() {
   };
 
   return (
-    <form className="form-Details">
-      <div className="form-Details-Category">
-        <div>
-          <input
-            type="text"
-            placeholder="사용자명"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
+    <div id="wrap" className="register personal">
+      <div className="content-w">
+        <div className="inner">
+        <h2 className="page-tit">회원가입</h2>
+          <div className="form-w">
+            <form className="form-details">
+              <div className="form-details-category">
+                <div className="form-input">
+                  <p className="title">사용자 이름</p>
 
-        <div>
-          <input
-            type="password"
-            placeholder="비밀번호"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
+                  <input
+                    type="text"
+                    placeholder="사용자명"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                </div>
+                
+                {/*  */}
+                {/* <dl className="pwd-chk">
+                  <dt className="f-hm-p1"><label for="confPwNum">비밀번호 확인</label> <span className="point-color" title="필수입력">*</span></dt>
+                  <dd className="f-hm-p2">
+                    <div className="form-text login-form-txt">
+                      <input id="confPwNum" type="password" placeholder="비밀번호를 다시 입력해주세요."/> 
+                    </div>
+                  </dd>
+                </dl> */}
+                {/*  */}
 
-        <div>
-          <input
-            type="password"
-            placeholder="비밀번호 확인"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-        </div>
+                <div className="form-input">
+                  <p className="title">비밀번호</p>
 
-        <div>
-          <input
-            type="text"
-            placeholder="이메일"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <button className="CheckBtn" onClick={handleEmailDuplicationCheck}>
-            확인
-          </button>
-        </div>
+                  <input
+                    type="password"
+                    placeholder="비밀번호"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
 
-        <div>
-          <input
-            type="text"
-            placeholder="핸드폰번호"
-            value={phonenumber}
-            onChange={(e) => setphonenumber(e.target.value)}
-          />
-        </div>
+                <div className="form-input">
+                  <p className="title">비밀번호 확인</p>
 
-        <div>
-          <input
-            type="text"
-            placeholder="주소"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-          />
-          <button className="CheckBtn" onClick={handle.clickButton}>
-            선택
-          </button>
-          {openPostcode && (
-            <DaumPostcode
-              onComplete={handle.selectAddress}
-              autoClose={false}
-              defaultQuery=""
-            />
-          )}
-        </div>
+                  <input
+                    type="password"
+                    placeholder="비밀번호 확인"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                  />
+                </div>
 
-        <div>
-          <input
-            type="text"
-            placeholder="상세주소"
-            value={detailedaddress}
-            onChange={(e) => setdetailedaddress(e.target.value)}
-          />
-        </div>
+                <div className="form-input">
+                  <p className="title">이메일</p>
 
-        <div>
-          <button className="RegesterBtn" onClick={handleRegesterClick}>
-            가입완료
-          </button>
-        </div>
+                  <input
+                    type="text"
+                    placeholder="이메일"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <button className="check-btn" onClick={handleEmailDuplicationCheck}>
+                    확인
+                  </button>
+                </div>
 
-        <div className="Category-Link">
-          <Link to="/login">로그인창</Link>
+                <div className="form-input">
+                  <p className="title">핸드폰</p>
+
+                  <input
+                    type="text"
+                    placeholder="핸드폰번호"
+                    value={phonenumber}
+                    onChange={(e) => setphonenumber(e.target.value)}
+                  />
+                </div>
+
+                <div>
+                  <input
+                    type="text"
+                    placeholder="주소"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                  />
+                  <button type="button" className="check-btn" onClick={handle.clickButton}>
+                    선택
+                  </button>
+                  {openPostcode && (
+                    <DaumPostcode
+                      onComplete={handle.selectAddress}
+                      autoClose={false}
+                      defaultQuery=""
+                    />
+                  )}
+                </div>
+
+                <div>
+                  <input
+                    type="text"
+                    placeholder="상세주소"
+                    value={detailedaddress}
+                    onChange={(e) => setdetailedaddress(e.target.value)}
+                  />
+                </div>
+
+                <div>
+                  <button className="btn-register" onClick={handleRegesterClick}>
+                    가입완료
+                  </button>
+                </div>
+
+                <div className="category-link">
+                  <Link to="/login">로그인창</Link>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-    </form>
+    </div>
   );
 }
 

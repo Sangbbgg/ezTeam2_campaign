@@ -44,8 +44,8 @@ function Modify() {
 
   console.log(userData);// 상호형
   return (
-    <form className="form-Details">
-      <div className="form-Details-Modify">
+    <form className="form-details">
+      <div className="form-details-Modify">
       <h2>정보 수정 페이지</h2>
         <p>회원번호: {userData.userid}</p>
         <p>회원이름: {userData.username}</p>

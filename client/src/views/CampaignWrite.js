@@ -195,7 +195,7 @@ const CampaignWrite = () => {
           <h2 className="page-tit">캠페인 글쓰기</h2>
           <div className="form-w">
             <form>
-              <div className="txt-box">
+              <div className="form-input">
                 <p className="title">캠페인 제목</p>
                 <input type="text" name="title" value={write.title || ""} placeholder="제목을 입력하세요" onChange={handleChange} />
               </div>

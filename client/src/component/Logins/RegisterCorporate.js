@@ -166,8 +166,8 @@ axios.post('http://localhost:8000/regester', {
 
   return (
     <>
-    <form className="form-Details">
-      <div className="form-Details-Category">
+    <form className="form-details">
+      <div className="form-details-category">
           <div>
             <input
               type="text"
@@ -200,7 +200,7 @@ axios.post('http://localhost:8000/regester', {
               onChange={(e) => setBusinessNumber(e.target.value)}
             />
             <button
-              className="CheckBtn"
+              className="check-btn"
               onClick={handlebusinessnumberCheck}
             >
               확인
@@ -214,7 +214,7 @@ axios.post('http://localhost:8000/regester', {
               onChange={(e) => setEmail(e.target.value)}
             />
             <button
-              className="CheckBtn"
+              className="check-btn"
               onClick={handleEmailDuplicationCheck}
             >
               확인
@@ -235,7 +235,7 @@ axios.post('http://localhost:8000/regester', {
               value={address}
               onChange={(e) => setAddress(e.target.value)}
             />
-            <button className="CheckBtn" onClick={handle.clickButton}>
+            <button className="check-btn" onClick={handle.clickButton}>
               선택
             </button>
           </div>
@@ -257,11 +257,11 @@ axios.post('http://localhost:8000/regester', {
             />
             </div>
             <div>
-              <button className="RegesterBtn" onClick={handleRegesterClick}>
+              <button className="btn-register" onClick={handleRegesterClick}>
                 가입완료
               </button>
             </div>
-          <div className="Category-Link">
+          <div className="category-link">
             <Link to="/login">로그인창</Link>
           </div>
         </div>
