@@ -87,11 +87,9 @@ const Header = () => {
                 <button className="one-link" onClick={()=>{navigate('/carbonNeutrality')}}>탄소 중립이란?</button>
               </li> */}
               <li>
-                {/* <a className="one-link" href=""><button className="one-link" onClick={()=>{navigate('/campaign')}}>캠페인</button></a> */}
                 <a className="one-link" href=""><button className="one-link" onClick={()=>navigateWithLoginCheck('/campaign')}>캠페인</button></a>
               </li>
               <li>
-                {/* <a className="one-link" href=""><button className="one-link" onClick={()=>{navigate('/carbonFootprint')}}>탄소발자국</button></a> */}
                 <a className="one-link" href=""><button className="one-link" onClick={()=>navigateWithLoginCheck('/carbonFootprint')}>탄소발자국</button></a>
               </li>
             </ul>
@@ -101,13 +99,12 @@ const Header = () => {
           <button type="button" className="btn-close-mo" title="메뉴 닫기"></button> */}
         </div>
 
-        {/* 로그인, 회원가입 버튼 임시 구현 */}
         <div className='utils'>
           {loggedIn ? (
             <>
               <button className="LoginBtn" onClick={handleLogout}>
                 로그아웃
-              </button>{"  "}
+              </button>
               <button>
                 <Link to="/modify">정보 수정</Link>
               </button>
@@ -118,11 +115,7 @@ const Header = () => {
             <>
               <button className="LoginBtn">
                 <Link to="/Login">로그인</Link>
-              </button>{" "}
-              <button>
-                <Link to="/Register">회원가입</Link>
               </button>
-              <br />
             </>
           )}
         </div>
