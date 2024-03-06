@@ -203,7 +203,7 @@ axios.post('http://localhost:8000/Rigester', {
           onChange={(e) => setuniquenumber(e.target.value)}
           />
           <button 
-          className="check-btn"
+          className="btn-check"
           onClick={handleuniquenumberCheck}>확인</button>
           {/* 고유 유효성 검사 02/20 김민호 */}
         </div>
@@ -215,7 +215,7 @@ axios.post('http://localhost:8000/Rigester', {
             onChange={(e) => setEmail(e.target.value)}
           />
           <button 
-          className="check-btn"
+          className="btn-check"
           onClick={handleEmailDuplicationCheck}>확인</button>
           {/* handleEmailDuplicationCheck 함수가 호출해서 이메일 중복확인 작업을 진행하고, 중복방지를 해주는 코드 */}
           {/* 이메일 유효성 검사 02/14 김민호 */}
@@ -237,7 +237,7 @@ axios.post('http://localhost:8000/Rigester', {
           />
         
           <button type="button"
-          className="check-btn" 
+          className="btn-check" 
           onClick={handle.clickButton}>선택</button>
           {openPostcode && (
             <DaumPostcode

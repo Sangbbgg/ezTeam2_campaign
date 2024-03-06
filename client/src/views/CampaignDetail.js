@@ -181,9 +181,13 @@ window.scrollTo({
                   <p className="sub-txt">&#8251; 문의사항은 메일 / 전화 / 댓글을 이용해주세요</p>
                 </div>
               </div>
-              <div className="btn-w">
-                <button className="btn-apply" onClick={() => {navigate(`/campaign/form/${curList.id}`)}}>신청하기</button>
-              </div>
+                {
+                  userData.userid !== curList?.userid && (
+                    <div className="btn-w">
+                      <button className="btn-apply" onClick={() => {navigate(`/campaign/form/${curList.id}`)}}>신청하기</button>
+                    </div>
+                  )
+                }
             </div>
           )}
 

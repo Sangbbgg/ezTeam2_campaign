@@ -200,7 +200,7 @@ axios.post('http://localhost:8000/regester', {
               onChange={(e) => setBusinessNumber(e.target.value)}
             />
             <button
-              className="check-btn"
+              className="btn-check"
               onClick={handlebusinessnumberCheck}
             >
               확인
@@ -214,7 +214,7 @@ axios.post('http://localhost:8000/regester', {
               onChange={(e) => setEmail(e.target.value)}
             />
             <button
-              className="check-btn"
+              className="btn-check"
               onClick={handleEmailDuplicationCheck}
             >
               확인
@@ -235,7 +235,7 @@ axios.post('http://localhost:8000/regester', {
               value={address}
               onChange={(e) => setAddress(e.target.value)}
             />
-            <button type="button" className="check-btn" onClick={handle.clickButton}>
+            <button type="button" className="btn-check" onClick={handle.clickButton}>
               선택
             </button>
           </div>
