@@ -10,14 +10,14 @@ img, fieldset {border: none; vertical-align: top;}
 legend, caption {visibility: hidden; overflow: hidden; width: 0; height: 0; font-size: 0; line-height: 0;}
 textarea, button {vertical-align: middle;}
 input, select {font-family: "Noto Sans KR", 'dotum', '돋움', 'gulim', '굴림', sans-serif; vertical-align: top;}
-input {padding: 3px 20px; height: 50px;}
+input {padding: 3px 20px; height: 44px;}
 input[type="text"]::-ms-clear {display:none;}
 input:focus, input:active {outline: none;}
 .attach_area .file_div input[readonly] {pointer-events: none;}
 option {padding: 3px 10px;}
 option:focus, option:active {outline: none;}
 input[type="radio"], input[type="checkbox"] {border: 0; padding: 0; height: auto; -webkit-box-shadow: none; box-shadow: none;}
-input[type="password"] {height: 50px; border: 1px solid #e5e5e5; color: #888; background: #fff; -webkit-appearance: none; -webkit-box-shadow: none; box-shadow: none;}
+input[type="password"] {height: 44px; border: 1px solid #e5e5e5; color: #888; background: #fff; -webkit-appearance: none; -webkit-box-shadow: none; box-shadow: none;}
 input[type="password"]::-webkit-input-placeholder {color: #999;}
 input[type="password"]:-ms-input-placeholder {color: #999;}
 input[type="password"]::-ms-input-placeholder {color: #999;}
@@ -107,6 +107,13 @@ header .gnb > li .two-depth > li .two-link:hover {color: #000;}
 header .btn-menu-mo {display: none; position: absolute; top: 50%; right: 50px; transform: translateY(-50%); width: 32px; height: 32px; background: url("../public/img/frog.png") no-repeat center center / cover; z-index: 3;}
 header nav .btn-close-mo {display: block; position: absolute; top: 22px; right: 30px; width: 20px; height: 20px; background: url("../public/img/icon-gnb-close.svg") no-repeat center center / cover;}
 
+
+/* 로그인 영역 */
+header .utils {position: absolute; right: 50px; z-index: 3;}
+header .utils button {font-size: 13px; color: #000;}
+header .utils button a {font-size: 13px; color: #000;}
+header .utils button + button {margin-left: 10px;}
+
 .main header {background-color: transparent;}
 .main header .logo button {background: url("../public/img/logo-wht.png") no-repeat center 2px / cover;}
 .main header nav {background-color: transparent;}
@@ -114,13 +121,6 @@ header nav .btn-close-mo {display: block; position: absolute; top: 22px; right: 
 .main header .gnb > li .one-link {color: #fff;}
 .main header .utils button {font-size: 13px; color: #fff;}
 .main header .utils button a {font-size: 13px; color: #fff;}
-
-
-/* 로그인 영역 */
-header .utils {position: absolute; right: 50px; z-index: 3;}
-header .utils button {font-size: 13px; color: #000;}
-header .utils button a {font-size: 13px; color: #000;}
-header .utils button + button {margin-left: 10px;}
 
 /* 푸터 */
 footer {width: 100%; background: #fff; padding: 80px 0px;}
@@ -223,6 +223,9 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .no-data .tit{font-size:20px; line-height:32px; color:#666}
 .no-data .sub_tit{margin-top:4px; font-size:16px; line-height:26px; color:#666;}
 .no-data-w .btn_wrap{margin-top:40px; text-align:center;}
+
+/* flex-box */
+.flex-box {display: flex;}
 
 
 
@@ -342,9 +345,10 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .campaign-write input {padding: 4px 12px; border: 0; color: #000; background-color: #f5f5f5;}
 
 .form-w .form-input {display: flex; align-items: baseline;}
+.form-w .form-input.multiple {flex-wrap: wrap;}
 .form-w .form-input + .form-input {margin-top: 20px;}
 .form-w .form-input .title {min-width: 140px; font-size: 18px;}
-.form-w .form-input input {margin: 0 auto; padding: 4px 12px; width: 100%; border: 0;  color: #000; background-color: #f5f5f5;}
+.form-w .form-input input {padding: 4px 12px; width: 100%; border: 0;  color: #000; background-color: #f5f5f5;}
 .form-w .form-input input::placeholder {color: #777;} 
 .form-w .content {margin-top: 20px; width: 100%; min-height: 400px; color: #000;}
 .form-w .ql-container {height: 400px; background-color: #f5f5f5;}
@@ -369,8 +373,8 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 
 /* 댓글 영역 */
 .comment-area {display: flex; justify-content: space-between; position: relative; margin-top: 80px; padding: 40px; background: #fff; border-radius: 6px;}
-.comment-area .comment-w {width: calc(100% - 230px);}
-.comment-area .comment-tit {margin-bottom: 20px; font-size: 20px; color: #000;}
+.comment-area .comment-tit {font-size: 22px; color: #000;}
+.comment-area .comment-w {width: calc(100% - 270px);}
 .comment-area textarea {background-color: #fff;}
 .comment-area .write-div {position: relative; border: 1px solid #000;}
 .comment-area .write-div::after {content: ""; display: block; position: absolute; bottom: 48px; left: 16px; width: calc(100% - 32px); height: 1px; background-color: #ccc;}
@@ -812,23 +816,15 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 .form-login {position: relative; width: 500px;}
 .form-login::after {content: ""; position: absolute; top: 50px; right: 0; width: 1px; height: 425px; background-color: #ccc;}
 .form-login .title {margin-bottom: 24px;}
-.form-register {flex-grow: 1;}
-.form-register .txt-wrap {margin-bottom: 24px;}
-.form-register .txt-wrap p {margin-top: 20px;}
-.form-login .title, .form-register .title {font-size: 34px; font-weight: 700; line-height: 34px; color:#3AB868;}
+.form-login .title, .form-register .title {font-size: 34px; font-weight: 700; line-height: 34px; color:#25B058;}
 .form-login .tab-wrap {padding-right: 40%;}
 .form-login .tab-wrap .tab-item-wrap{display: flex; position: relative; bottom: -1px;}
 .form-login .tab-wrap .tab-item-wrap .tab-item {flex-grow: 1; height: 40px; background-color: #f5f5f5; /*border: 1px solid #ccc;*/ border-radius: 8px 8px 0 0; display: flex; align-items: center; justify-content: center; cursor: pointer;}
-.form-login .tab-wrap .tab-item-wrap .tab-item.active {color: #3AB868; font-weight: 700; border-bottom: none;}
+.form-login .tab-wrap .tab-item-wrap .tab-item.active {color: #25B058; font-weight: 700; border-bottom: none;}
 .form-login .tab-wrap .tab-item-wrap .tab-item.active {background: #e1f0de;}
-
 .form-login .input-wrap {padding: 30px; /*border: 1px solid #ccc;*/ display: flex; flex-direction: column; gap: 20px; background-color: #e1f0de;}
-
-
 .form-login .login-input{width: 100%; border: 1px solid #ccc}
-
 .login-button{color: white; background-color: #25B058; height: 45px; margin-top: 20px;}
-
 .form-login-link{display: flex; justify-content: end; margin-top: 20px;}
 .form-login-link a:nth-child(2) {position: relative; margin-left: 10px; padding-left: 10px;}
 .form-login-link a:nth-child(2)::before {content: ""; position: absolute; top: 6px; left: 0; width: 1px; height: 10px; background-color: #ccc;}
@@ -836,8 +832,6 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 /* 회원가입 */
 .register-botton-wrap{display: flex; justify-content: space-around; margin-top: 60px;}
 .register-botton-wrap .btn-w {display: flex; flex-direction: column; align-items: center;}
-/* .register-botton-wrap .btn-w:hover {transform: translateY(-10px);} */
-
 .register-botton-wrap .btn-w .type {margin-top: 10px; font-size: 18px;}
 .register-botton-wrap .register-botton {width: 180px; height: 180px; background-color: #25B058; border: 1px solid #ccc; border-radius: 50%; transition: transform .4s;}
 .register-botton-wrap .register-botton:hover {transform: translateY(-10px);}
@@ -846,6 +840,22 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 /* .render-register{width: 20%; height: 200px;} */
 .login-Link{padding: 0 50px;}
 
+.form-register {flex-grow: 1;}
+.form-register .txt-wrap {margin-bottom: 24px;}
+.form-register .txt-wrap p {margin-top: 20px;}
 
+
+
+
+/* 회원가입 폼 */
 #wrap.register {padding-top: 0; background: #e1f0de;}
 .register .inner {width: 1000px;}
+.form-w .form-input + .form-input {margin-top: 30px;}
+.register .form-w .form-input .title {font-size: 16px;}
+.register .form-w .flex-box {width: calc(100% - 140px);}
+.register .form-w .flex-box input {width: calc(100% - 80px);}
+.register .form-w .flex-box + input {margin-top: 10px; margin-left: 140px; width: calc(100% - 140px);}
+.register .form-w .flex-box input + button {margin-left: 20px; min-width: 60px; font-size: 16px; background-color:#fff; border: 1px solid #000;}
+.register .bottom-area .btn-w {padding: 0; background-color: transparent; box-shadow: none; border-radius: 0;}
+.register .bottom-area a {margin-left: 10px; padding: 10px 30px; font-size: 16px; color: #000; background-color: #fff; border: 1px solid #000;}
+.register .bottom-area button {padding: 10px 30px; font-size: 16px; color: #fff; background-color: #25B058; border: 1px solid #25B058;}

@@ -162,7 +162,6 @@ function RegisterPersonal() {
 
                 <div className="form-input">
                   <p className="title">비밀번호 확인</p>
-
                   <input
                     type="password"
                     placeholder="비밀번호 확인"
@@ -173,16 +172,15 @@ function RegisterPersonal() {
 
                 <div className="form-input">
                   <p className="title">이메일</p>
-
-                  <input
-                    type="text"
-                    placeholder="이메일"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                  <button className="check-btn" onClick={handleEmailDuplicationCheck}>
-                    확인
-                  </button>
+                  <div className="flex-box">
+                    <input
+                      type="text"
+                      placeholder="이메일"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <button className="btn-check" onClick={handleEmailDuplicationCheck}>확인</button>
+                  </div>
                 </div>
 
                 <div className="form-input">
@@ -196,16 +194,19 @@ function RegisterPersonal() {
                   />
                 </div>
 
-                <div>
-                  <input
-                    type="text"
-                    placeholder="주소"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                  />
-                  <button type="button" className="check-btn" onClick={handle.clickButton}>
-                    선택
-                  </button>
+                <div className="form-input multiple">
+                  <p className="title">주소</p>
+                  <div className="flex-box">
+                    <input
+                      type="text"
+                      placeholder="주소"
+                      value={address}
+                      onChange={(e) => setAddress(e.target.value)}
+                    />
+                    <button type="button" className="btn-check" onClick={handle.clickButton}>
+                      선택
+                    </button>
+                  </div>
                   {openPostcode && (
                     <DaumPostcode
                       onComplete={handle.selectAddress}
@@ -213,9 +214,6 @@ function RegisterPersonal() {
                       defaultQuery=""
                     />
                   )}
-                </div>
-
-                <div>
                   <input
                     type="text"
                     placeholder="상세주소"
@@ -224,15 +222,13 @@ function RegisterPersonal() {
                   />
                 </div>
 
-                <div>
-                  <button className="btn-register" onClick={handleRegesterClick}>
-                    가입완료
-                  </button>
+                <div className="bottom-area">
+                  <div className="btn-w">
+                    <button className="btn-register" onClick={handleRegesterClick}>가입완료</button>
+                    <Link to="/Login">로그인창</Link>
+                  </div>
                 </div>
 
-                <div className="category-link">
-                  <Link to="/login">로그인창</Link>
-                </div>
               </div>
             </form>
           </div>
