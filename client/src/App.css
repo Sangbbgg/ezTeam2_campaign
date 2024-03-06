@@ -659,6 +659,7 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 .result_box_content .select_category > ul{width: 100%; display: flex; align-items: center; justify-content: center;  gap: 10px;}
 .result_box_content .select_category > ul > .select_tap{width: 8%; height: 40px; display: flex; align-items: center; justify-content: center; background-color: #e1f0de; border-radius: 8px;}
 .result_box_content .select_category > ul > .select_tap.active{background-color: #25B058; color:white;}
+.result_box_content .select_category > ul > .select_tap.disabled{background-color: #ccc; color:black;}
 
 .select_content {display: grid; grid-template-columns: 1.1fr 1fr; gap: 10px;}
 .select_content .category{grid-column: 1/-1; padding: 20px; border-radius: 8px; margin-bottom: 20px;}
