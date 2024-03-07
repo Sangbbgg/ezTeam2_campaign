@@ -724,7 +724,7 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 /* main */
 
 /* 탄소발자국 */
-.main .carbon {position: relative; padding: 90px 0 50px 0; background-color: white; z-index: 1; overflow: hidden;}
+.main .carbon {position: relative; padding: 160px 0 200px 0; background-color: white; z-index: 1; overflow: hidden;}
 .main .carbon::after{
   content: '';
     position: absolute;
@@ -738,24 +738,31 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
     z-index: -1;
 }
 
+.main .carbon .txt-area {position: relative; text-align: center; }
+
+
 .main .carbon .txt-area {text-align: center;}
-.main .carbon .sec-tit {font-size: 42px; font-weight: 500; color: #000;}
-.main .carbon .sec-txt {margin-top: 28px; font-size: 18px; color: #000;}
+.main .carbon .sec-tit {transform: translateY(80px); font-size: 42px; font-weight: 500; color: #000; opacity: 0; transition: opacity .8s, transform .8s;}
+.main .carbon .sec-txt {margin-top: 18px; transform: translateY(80px); font-size: 18px; color: #000; opacity: 0; transition: opacity .8s, transform .8s; transition-delay: .1s;}
+.main .carbon .txt-area.active .sec-tit {transform: translateY(0); opacity: 1;}
+.main .carbon .txt-area.active .sec-txt {transform: translateY(0); opacity: 1;}
+.main .carbon .cont-area {display: flex; position: relative; margin-top: 100px; transform: translateY(80px); opacity: 0; transition: opacity .8s, transform .8s;}
+.main .carbon .cont-area.active {transform: translateY(0); opacity: 1;}
 
 /* 메인 chart */
-.mainchart_wrap{padding: 30px 30px;}
+.mainchart_wrap{padding: 0 30px;}
 .mainchart_wrap .mainchart_title{display: flex; gap: 30px; align-items: center; padding: 0 60px;}
 .mainchart_wrap .mainchart_title .mainchart_title_month{flex-grow: 0.5; height: 80px; display: flex; justify-content: center;}
 .mainchart_wrap .mainchart_title .mainchart_title_month > select{width:100%; font-size: 30px; padding: 20px 20px; color: #25B058; font-weight: 600; background: url(../public/img/arrow-down-3101.svg) no-repeat 80% 55%; background-size: 25px; border-radius: 15px; border: 0px; -webkit-appearance: none; -moz-appearance: none; appearance: none;}
 
 .mainchart_wrap .mainchart_title .mainchart_title_left{flex-grow: 1.5; display: flex;}
-.mainchart_wrap .mainchart_title .mainchart_title_left > p{font-size: 30px;}
+.mainchart_wrap .mainchart_title .mainchart_title_left > p{font-size: 20px;}
 
 .mainchart_wrap .mainchart_content{border: 1px solid #ccc; border-radius: 8px; margin-top: 20px; background-color: white;}
 
 
-.mainchart_wrap .mainchart_content_bottom{padding: 15px 0px; display: flex; justify-content: end;}
-.mainchart_wrap .mainchart_content_bottom > button{font-size: 20px; width: 200px; height: 80px; background-color: #25B058; border-radius: 8px; color: white; margin-left: auto}
+.mainchart_wrap .mainchart_content_bottom{display: flex; justify-content: end;}
+.mainchart_wrap .mainchart_content_bottom > button{margin-top: 40px; font-size: 20px; width: 200px; height: 80px; background-color: #25B058; border-radius: 8px; color: white; margin-left: auto}
 
 .main_chart_img_left{position: absolute; z-index: -1; left: -30%;}
 .main_chart_img_left > img{width: 480px; height: 610px; transition: opacity 3s ease; opacity: 0;}

@@ -71,42 +71,30 @@ const Main = () => {
     return firstThreeItems;
   };
 
-//   let arrSclAniEleY = [];
-//   let sclElement = document.querySelectorAll(".scroll-motion");
+  let getScrollObjY = function() {
+    let _arrY = [];
+    let scrollMotions = document.querySelectorAll(".scroll-motion");
 
-//   function _getScrollObjY() {
-//     Array.prototype.forEach.call(sclElement, function(el, i) {
-//       arrSclAniEleY.push(parseInt(el.offsetTop) + 150);
-//       arrSclAniEleY.push(parseInt(el.offsetTop) + 90);
-//     });
-//   }
+    scrollMotions.forEach(function(el) {
+      let offsetTop = el.getBoundingClientRect().top + window.pageYOffset;
+      _arrY.push(parseInt(offsetTop));
+    });
 
-// _getScrollObjY();
+    return _arrY;
+  };
 
-var _getScrollObjY = function() {
-  var _arrY = [];
-  var scrollMotions = document.querySelectorAll(".scroll-motion");
+  window.addEventListener("scroll", function() {
+    let scrollMotions = document.querySelectorAll(".scroll-motion");
+    let scrollY = window.scrollY || window.pageYOffset;
 
-  scrollMotions.forEach(function(el) {
-    var offsetTop = el.getBoundingClientRect().top + window.pageYOffset;
-    _arrY.push(parseInt(offsetTop));
+    scrollMotions.forEach(function(el, q) {
+      if (scrollY + window.innerHeight > getScrollObjY()[q]) {
+        el.classList.add("active");
+      }
+    });
   });
 
-  return _arrY;
-};
-
-window.addEventListener("scroll", function() {
-  var scrollMotions = document.querySelectorAll(".scroll-motion");
-  var scrollY = window.scrollY || window.pageYOffset;
-
-  scrollMotions.forEach(function(el, q) {
-    if (scrollY + window.innerHeight > _getScrollObjY()[q]) {
-      el.classList.add("active");
-    }
-  });
-});
-
-console.log("해더스크롤 위치", window.scrollY)
+  console.log("해더스크롤 위치", window.scrollY)
   return (
     <div id="wrap" className='main'>
       <Header />
@@ -165,12 +153,12 @@ console.log("해더스크롤 위치", window.scrollY)
 
       <section className='carbon'>
       <div className="inner">
-          <div className="txt-area">
+          <div className="txt-area scroll-motion">
             <p className="sec-tit">탄소발자국</p>
             <p className="sec-txt">우리들의 생활 속에서 배출하는 이산화탄소의 양은 얼마일까요?</p>
           </div>
 
-          <div className="cont-area">
+          <div className="cont-area scroll-motion">
             <LegendEffectOpacityChart/>
           </div>
           
