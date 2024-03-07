@@ -6,7 +6,7 @@ import mysql from "mysql2";
 import bodyParser from "body-parser";
 
 import multer from "multer"; // 이미지 저장 관련
-import path from "path"; // 이미지 저장 관련
+import path, { resolve } from "path"; // 이미지 저장 관련
 
 import bcrypt from "bcrypt";
 import session from "express-session"; //0213 김민호 세션 추가
@@ -14,6 +14,7 @@ import MemoryStore from "memorystore"; // MemoryStore import 추가
 const MemoryStoreInstance = MemoryStore(session);
 
 import { fileURLToPath } from "url";
+import { rejects } from "assert";
 
 const app = express();
 const port = 8000;
@@ -525,19 +526,44 @@ app.get("/api/carbonFootprint/main", async (req, res) => {
 // 마이 페이지 차트 data
 app.get("/api/carbonFootprint/mypage/:userId", async (req, res) => {
   const { userId } = req.params;
-  try {
+  // try {
+  //   const query = `
+  //   SELECT * FROM ezteam2.user_calculation
+  //   WHERE user_id = ?;`
+  //   connection.query(query,[userId],(err, results) =>{
+  //     if (err) reject(err);
+  //     else return res.json(results);
+  //   });
+  // } catch (error) {
+  //   console.error("Server error:", error);
+  //   res.status(500).send("Server error");
+  // }
+  // 첫 번째 쿼리: carbon_footprint에서 user 월별 데이터 가져오기
+  const mypageInitial = new Promise((resolve, reject) =>{
     const query = `
     SELECT * FROM ezteam2.user_calculation
     WHERE user_id = ?;`
     connection.query(query,[userId],(err, results) =>{
       if (err) reject(err);
-      else return res.json(results);
-    });
-  } catch (error) {
-    console.error("Server error:", error);
-    res.status(500).send("Server error");
-  }
+      else resolve(results);
+    })
+  });    
+  const mypageInitialData = await mypageInitial;
 
+  // 두 번째 쿼리: calculation_advice에서 데이터 가져오기
+  const calculationAdvice = new Promise((resolve, reject) => {
+    connection.query("SELECT a.name, b.advice_text, b.savings_value FROM calculation_category as a join calculation_advice as b ON a.id = b.category_id;", (err, results) => {
+      if (err) reject(err);
+      else resolve(results);
+    });
+  });
+  const calculationAdviceData = await calculationAdvice;
+
+  // 두 쿼리의 결과를 합쳐서 응답
+  res.json({
+    mypageInitialData,
+    calculationAdviceData,
+  });
 });
 
 // POST 라우트 추가
