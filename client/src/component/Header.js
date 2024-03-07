@@ -33,6 +33,7 @@ const Header = () => {
   
         if (isScrollTop > thisScroll) { // down
           if (isScrollTop > 0) {
+            header.classList.add("wht");
             if (header && isScrollTop > 100) {
               if (!header.classList.contains("hover")) {
                 header.classList.add("hide");
@@ -43,6 +44,9 @@ const Header = () => {
         if (isScrollTop < thisScroll) { // up
           if (header) {
             header.classList.remove("hide");
+          }
+          if (header && isScrollTop <= 100) {
+            header.classList.remove("wht");
           }
         }
 
