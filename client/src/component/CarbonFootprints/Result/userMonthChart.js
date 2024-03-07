@@ -41,31 +41,32 @@ function UserMonthChart() {
 
     return (
       <g>
-        <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
-          {payload.name}
-        </text>
+        {/* <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}> */}
+        <text x={cx - 50} y={cy - 50} dy={8} fill={fill}>{payload.name}</text>
+        <text x={cx - 50} y={cy - 100} dy={8} >{`${value} kg/월`}</text>
         <Sector cx={cx} cy={cy} innerRadius={innerRadius} outerRadius={outerRadius} startAngle={startAngle} endAngle={endAngle} fill={fill} />
-        <Sector cx={cx} cy={cy} startAngle={startAngle} endAngle={endAngle} innerRadius={outerRadius + 6} outerRadius={outerRadius + 10} fill={fill} />
-        <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
-        <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
-        <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{`${name} ${value}`}</text>
-        <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#999">
+        <Sector cx={cx} cy={cy} startAngle={startAngle} endAngle={endAngle} innerRadius={innerRadius - 10} outerRadius={innerRadius - 5} fill={fill} />
+        {/* <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" /> */}
+        {/* <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" /> */}
+        {/* <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{`${name}`}</text>
+        <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#333">{`${value} kg/월`}</text> */}
+        {/* <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={36} textAnchor={textAnchor} fill="#999">
           {`(Rate ${(percent * 100).toFixed(2)}%)`}
-        </text>
+        </text> */}
       </g>
     );
   };
 
   // 저감 목표 차트
   const RADIAN = Math.PI / 180;
-  const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.7;
+  const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, value }) => {
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.6;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
     return (
       <text x={x} y={y} fill="white" textAnchor="middle" dominantBaseline="middle">
-        {`${(percent * 100).toFixed(0)}%`}
+        {`${value} kg`}
       </text>
     );
   };
@@ -74,13 +75,13 @@ function UserMonthChart() {
     <>
       <div className="carbon-mypage-userchart__wrap">
         {/* 요구사항 정리용 */}
-        {/* <div className="sang">
+        <div className="sang">
           1. 처음 화면에 당월 데이터가 있다면 당월 계산 내역이 출력
           <br />
           1-1. 왼쪽: total pi차트 + 하단 목표 배출량 왼쪽에서 오른쪽으로 var 차트 / 오른쪽: 월별 탭형식의 세부 전월 목표량, 당월 배출량 비교 가능한 bar형 차트 제공 + 꺽은선 추이 추가
           <br />
           2.
-        </div> */}
+        </div>
         <div className="carbon-mypage__userchart">
           <div className="carbon-mypage-userchart-title__wrap">
             <h2>{}월 탄소 배출량</h2>
@@ -110,7 +111,7 @@ function UserMonthChart() {
                   </Pie>
                 </PieChart>
               </ResponsiveContainer>
-              <div className="carbon-mypage__subpichart">
+              {/* <div className="carbon-mypage__subpichart">
                 <div className="carbon-mypage__subpichart-title">
                   <p>전월 저감 목표</p>
                 </div>
@@ -132,7 +133,7 @@ function UserMonthChart() {
                     </Pie>
                   </PieChart>
                 </ResponsiveContainer>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
