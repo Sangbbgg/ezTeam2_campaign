@@ -5,7 +5,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 const Example = () => {
   const navigate = useNavigate();
   const [mainInitialData, setMainInitialData] = useState(null);
-  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth()); // 현재 월을 기본값으로 설정
+  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1); // 현재 월을 기본값으로 설정
   const [opacity, setOpacity] = useState({ user: 0.3, average: 0.3 });
   const [isLoggedin, setIsLoggedin] = useState("");
 
@@ -148,7 +148,7 @@ const Example = () => {
   // 변환된 데이터를 현재 선택된 월에 따라 필터링
   const filteredData = transformedData.filter((data) => data.currentMonth === selectedMonth);
   // ################################################################################################################### chart데이터 월단위 분할 (consol.log)
-  // console.log("filteredData", filteredData);
+  console.log("filteredData", filteredData);
 
   const CustomTick = (props) => {
     const { x, y, payload } = props;
@@ -203,7 +203,6 @@ const Example = () => {
       navigate("/Login");
     } else {
       navigate("/carbonFootprint");
-      navigate("/carbonFootprint");
       window.scrollTo({
         top: 0, // Y 좌표
         left: 0, // X 좌표
@@ -231,7 +230,7 @@ const Example = () => {
   return (
     <div style={{ width: "100%" }}>
       <div className="main_chart_img_left main_chart_img">
-        <img src="/img/main_chart_img_left_bg.png" alt="왼쪽 배경"/>
+        <img src="/img/main_chart_img_left_bg.png" alt="왼쪽 배경" />
         {/* <img className="main_chart_img_left" src="/img/Wind_turbine_bro.svg"/> */}
       </div>
       <div className="main_chart_img_right main_chart_img">
