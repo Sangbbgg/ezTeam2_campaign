@@ -206,7 +206,6 @@ const CampaignEdit = () => {
                 </div>
               </div>
               
-              <WriteEditor value={write.body || ""} handleChangeQuill={handleChangeQuill} />
 
               {/* 주소 검색 */}
               <div className='address-area'>
@@ -223,13 +222,15 @@ const CampaignEdit = () => {
                     <label htmlFor="noaddress">장소없음</label>
                   </div>
                 </div>
-                  {/* selOpt이 해당 라디오 버튼의 value와 일치한다면, 해당 버튼에 체크 */}
+                {/* selOpt이 해당 라디오 버튼의 value와 일치한다면, 해당 버튼에 체크 */}
 
                 {/* "장소없음"이 아닐 때만 주소 입력 창을 렌더링 */}
                 {selOpt !== "장소없음" && renderAddrDiv()}
               
                 <div id="map" style={{ display: selOpt === "장소없음" ? "none" : "block" }}></div>
               </div>
+
+              <WriteEditor value={write.body || ""} handleChangeQuill={handleChangeQuill} />
 
               <div className="bottom-area">
                 <div className="btn-w">
