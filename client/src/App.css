@@ -124,6 +124,7 @@ header .utils button + button {margin-left: 10px;}
 .main header .utils button a {font-size: 13px; color: #fff;}
 
 .main header.wht {background-color: #fff;}
+.main header.wht .utils button {color: #000;}
 .main header.wht .utils button a {color: #000;}
 .main header.wht .gnb > li .one-link {color: #000;}
 .main header.wht .logo button {background-image: url("../public/img/logo-blk.png");}
