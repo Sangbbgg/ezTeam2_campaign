@@ -522,6 +522,24 @@ app.get("/api/carbonFootprint/main", async (req, res) => {
 
 });
 
+// 마이 페이지 차트 data
+app.get("/api/carbonFootprint/mypage/:userId", async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const query = `
+    SELECT * FROM ezteam2.user_calculation
+    WHERE user_id = ?;`
+    connection.query(query,[userId],(err, results) =>{
+      if (err) reject(err);
+      else return res.json(results);
+    });
+  } catch (error) {
+    console.error("Server error:", error);
+    res.status(500).send("Server error");
+  }
+
+});
+
 // POST 라우트 추가
 app.post("/api/carbonFootprint", async (req, res) => {
   const { userId, calculationMonth, electricity, gas, water, transportation, waste, total, checkedItems, categorySavings } = req.body;

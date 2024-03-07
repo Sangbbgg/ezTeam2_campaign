@@ -756,18 +756,12 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 .main_chart_img_right > img{width: 500px; height: 500px; fill: #0078C3; transition: opacity 3s ease; opacity: 0; }
 
 /* 마이페이지 */
-.sang{position: fixed; top: 20%; right: 5%;} /* 요구사항 정리용*/
+.mypage-userchart{width: 100%; padding: 30px; display: flex; gap: 20px; border:1px solid #ccc;}
+.mypage-userchart__left{display: flex; position: relative; height: 300px; flex-direction: row; width: 50%; justify-content: center; border:1px solid #ccc;  border-radius: 12px;}
+.mypage-userchart-left__chartarea{width: 100%;}
+.mypage-userchart__title{position: absolute; top:10%; right:10%}
 
-.carbon-mypage-userchart__wrap{padding: 10px 10px;}
-.carbon-mypage__userchart{height: 1000px;border: 1px solid black;}
-.carbon-mypage__chart-wrap{height: 100%; display: flex;}
-.carbon-mypage__pichart{border: 1px solid #ccc; /*position: relative;*/ width: 700px; height: 550px; display: flex; flex-direction: column; justify-content: center; align-items: center;}
-.carbon-mypage__pichart .carbon-mypage__pichart-title{margin-bottom: -30px;}
-.carbon-mypage__pichart .carbon-mypage__pichart-title > p {font-size: 24px;}
-.carbon-mypage__subpichart{display: flex; flex-direction: column; align-items: center; position: absolute; width: 200px; height: 200px;}
-.carbon-mypage__subpichart .carbon-mypage__subpichart-title{margin-bottom: -15px;}
-.carbon-mypage__subpichart .carbon-mypage__subpichart-title > p {font-size: 16px; font-weight: 500;}
-
+.mypage-userchart__right{flex-grow: 1;}
 
 
 

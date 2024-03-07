@@ -231,12 +231,12 @@ const Example = () => {
   return (
     <div style={{ width: "100%" }}>
       <div className="main_chart_img_left main_chart_img">
-        <img src="/img/main_chart_img_left_bg.png" />
+        <img src="/img/main_chart_img_left_bg.png" alt="왼쪽 배경"/>
         {/* <img className="main_chart_img_left" src="/img/Wind_turbine_bro.svg"/> */}
       </div>
       <div className="main_chart_img_right main_chart_img">
         {/* <img src="/img/foot.png" /> */}
-        <img className="main_chart_img_left" src="/img/foot_3.svg" />
+        <img className="main_chart_img_left" src="/img/foot_3.svg" alt="오른쪽 배경" />
       </div>
       <div className="mainchart_wrap">
         <div className="mainchart_title">
