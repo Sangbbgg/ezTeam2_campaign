@@ -108,6 +108,7 @@ header .btn-menu-mo {display: none; position: absolute; top: 50%; right: 50px; t
 header nav .btn-close-mo {display: block; position: absolute; top: 22px; right: 30px; width: 20px; height: 20px; background: url("../public/img/icon-gnb-close.svg") no-repeat center center / cover;}
 
 
+
 /* 로그인 영역 */
 header .utils {position: absolute; right: 50px; z-index: 3;}
 header .utils button {font-size: 13px; color: #000;}
@@ -121,6 +122,12 @@ header .utils button + button {margin-left: 10px;}
 .main header .gnb > li .one-link {color: #fff;}
 .main header .utils button {font-size: 13px; color: #fff;}
 .main header .utils button a {font-size: 13px; color: #fff;}
+
+.main header.wht {background-color: #fff;}
+.main header.wht .utils button a {color: #000;}
+.main header.wht .gnb > li .one-link {color: #000;}
+.main header.wht .logo button {background-image: url("../public/img/logo-blk.png");}
+
 
 /* 푸터 */
 footer {width: 100%; background: #fff; padding: 80px 0px;}
