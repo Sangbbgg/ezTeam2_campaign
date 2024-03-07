@@ -18,7 +18,6 @@ const Comments = ({ curList }) => {
 
   const storedUserData = sessionStorage.getItem("userData");
   const userData = JSON.parse(storedUserData);
-  console.log(userData)
 
   // 페이지가 로드될 때 사용자 정보를 가져오는 useEffect
   useEffect(() => {
