@@ -5,6 +5,8 @@ import { getPost } from "../store/store";
 import axios from "axios";
 import Header from "../component/Header";
 import Footer from "../component/Footer";
+import MyCampaign from "../component/campaign/MyCampaign";
+import MyApplication from "../component/campaign/MyApplication";
 // user 월별 차트
 import UserMonthChart from "../component/CarbonFootprints/Result/UserMonthChart";
 
@@ -17,7 +19,7 @@ function Mypage() {
 
   // 글 목록
   const [campaignList, setCampaignList] = useState([]); // 내가 쓴 글
-  const [myApplication, setMyApplication] = useState([]); // 신청한 캠페인 목록
+  const [application, setApplication] = useState([]); // 신청한 캠페인 목록
 
   // 현재 선택된 탭 인덱스
   const [activeTab, setActiveTab] = useState(0);
@@ -43,7 +45,7 @@ function Mypage() {
           return item.userid === userData.userid;
         });
 
-        setMyApplication(filteredData);
+        setApplication(filteredData);
       } catch (error) {
         console.error("Error fetching user info:", error);
       }
@@ -92,167 +94,11 @@ function Mypage() {
             <div className="content-area">
               {/* 내가 쓴 캠페인 글 */}
               {activeTab === 0 && (
-                <div className="mycont-wrap">
-                  <div className="cont-area">
-                    <div className="post-list">
-                      {campaignList.filter((item) => item.userid === userData.userid).length > 0 ? (
-                        campaignList
-                          .filter((item) => item.userid === userData.userid)
-                          .map((post, index) => (
-                            <div className="mypost summary-wrap" key={index}>
-                              <div className="title-area">
-                                <p className="title">{post.title}</p>
-                                <div className="regi-info">
-                                  {/* <p className="views">{"조회수: " + parseInt(post.views + 1)}</p> */}
-                                  <p className="date">{new Date(post.date).toLocaleDateString()}</p>
-                                </div>
-                              </div>
-                              <div className="info-area">
-                                <div className="detail-info">
-                                  {/* 캠페인 기간 */}
-                                  {post.end_date && (
-                                    <div className="info-box">
-                                      <p className="tit">캠페인 기간</p>
-                                      <div className="date-wrap">
-                                        {post.start_date && <p className="start-date">{new Date(post.start_date).toLocaleDateString()}</p>}
-                                        <span>~</span>
-                                        {post.end_date && <p className="end-date">{new Date(post.end_date).toLocaleDateString()}</p>}
-                                      </div>
-                                    </div>
-                                  )}
-                                  {/* 접수 기간 */}
-                                  {post.reception_end_date && (
-                                    <div className="info-box">
-                                      <p className="tit">접수 기간</p>
-                                      <div className="date-wrap">
-                                        {post.reception_start_date && <p className="start-date">{new Date(post.reception_start_date).toLocaleDateString()}</p>}
-                                        <span>~</span>
-                                        {post.reception_end_date && <p className="end-date">{new Date(post.reception_end_date).toLocaleDateString()}</p>}
-                                      </div>
-                                    </div>
-                                  )}
-                                  {/* 위치 정보 */}
-                                  {post.latitude && (
-                                    <div className="info-box">
-                                      <p className="tit">캠페인 장소</p>
-                                      <div className="txt-w">
-                                        <p className="txt">{post.address}</p>
-                                        <p className="detail-txt">{post.address_detail}</p>
-                                      </div>
-                                    </div>
-                                  )}
-                                </div>
-                              </div>
-                              <div className="btn-w">
-                                <button
-                                  className="btn-view"
-                                  onClick={() => {
-                                    navigate(`/campaign/detail/${post.id}`);
-                                  }}
-                                >
-                                  보러가기
-                                </button>
-                              </div>
-                            </div>
-                          ))
-                      ) : (
-                        <div className="no-data-w">
-                          <div className="no-data">
-                            <p className="tit">내가 쓴 글이 없습니다.</p>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
+                <MyCampaign campaignList={campaignList} userData={userData}/>
               )}
               {/* 신청한 캠페인 */}
               {activeTab === 1 && (
-                <div className="mycont-wrap">
-                  <div className="cont-area">
-                    <div className="post-list">
-                      {myApplication.length > 0 ? (
-                        myApplication.map((application, index) => {
-                          const matchedPost = campaignList.find((post) => post.id === application.post_id);
-                          if (matchedPost) {
-                            return (
-                              <div className="mypost summary-wrap" key={index}>
-                                <div className="title-area">
-                                  <p className="title">{matchedPost.title}</p>
-                                  <div className="regi-info">
-                                    <p className="date">{new Date(matchedPost.date).toLocaleDateString()}</p>
-                                  </div>
-                                </div>
-                                <div className="info-area">
-                                  <div className="detail-info">
-                                    {/* 캠페인 기간 */}
-                                    {matchedPost.end_date && (
-                                      <div className="info-box">
-                                        <p className="tit">캠페인 기간</p>
-                                        <div className="date-wrap">
-                                          {matchedPost.start_date && <p className="start-date">{new Date(matchedPost.start_date).toLocaleDateString()}</p>}
-                                          <span>~</span>
-                                          {matchedPost.end_date && <p className="end-date">{new Date(matchedPost.end_date).toLocaleDateString()}</p>}
-                                        </div>
-                                      </div>
-                                    )}
-                                    {/* 접수 기간 */}
-                                    {matchedPost.reception_end_date && (
-                                      <div className="info-box">
-                                        <p className="tit">접수 기간</p>
-                                        <div className="date-wrap">
-                                          {matchedPost.reception_start_date && <p className="start-date">{new Date(matchedPost.reception_start_date).toLocaleDateString()}</p>}
-                                          <span>~</span>
-                                          {matchedPost.reception_end_date && <p className="end-date">{new Date(matchedPost.reception_end_date).toLocaleDateString()}</p>}
-                                        </div>
-                                      </div>
-                                    )}
-                                    {/* 위치 정보 */}
-                                    {matchedPost.latitude && (
-                                      <div className="info-box">
-                                        <p className="tit">캠페인 장소</p>
-                                        <div className="txt-w">
-                                          <p className="txt">{matchedPost.address}</p>
-                                          <p className="detail-txt">{matchedPost.address_detail}</p>
-                                        </div>
-                                      </div>
-                                    )}
-                                  </div>
-                                </div>
-                                <div className="btn-w">
-                                  <button
-                                    className="btn-view"
-                                    onClick={() => {
-                                      navigate(`/campaign/detail/${matchedPost.id}`);
-                                    }}
-                                  >
-                                    보러가기
-                                  </button>
-                                  <button
-                                    className="btn-view"
-                                    onClick={() => {
-                                      navigate(`/campaign/form/${matchedPost.id}/application`);
-                                    }}
-                                  >
-                                    신청서 확인
-                                  </button>
-                                </div>
-                              </div>
-                            );
-                          } else {
-                            return null; // 일치하는 캠페인이 없는 경우 null 반환
-                          }
-                        })
-                      ) : (
-                        <div className="no-data-w">
-                          <div className="no-data">
-                            <p className="tit">신청한 캠페인이 없습니다.</p>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
+                <MyApplication campaignList={campaignList} application={application}/>
               )}
 
               {/* 탄소발자국 */}
