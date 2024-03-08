@@ -59,6 +59,13 @@ const Campaign = () => {
   // 검색 버튼 클릭 이벤트 핸들러
   const handleSearchButtonClick = () => {
     searchPosts();
+    setSearchInput(""); // 검색어 초기화
+
+    // 탭 버튼 초기화
+    const tabBtns = document.querySelectorAll(".tab-area .btn-tab");
+    tabBtns.forEach(tab => tab.classList.remove("active"));
+    // 전체 버튼 활성화
+    tabBtns[0].classList.add("active");
   };
 
   // 포스트 목록을 페이지에 따라 잘라내 반환하는 함수
@@ -109,7 +116,7 @@ const Campaign = () => {
             <div className="txt"> 우리는 탄소 중립 난제를 해결하고 녹색 성장을 이끌어내기 위해 모이고 있습니다.</div>
           </div>
           <div className="search-wrap">
-            <input type="text" placeholder="검색어를 입력하세요" onChange={(e) => setSearchInput(e.target.value)} />
+            <input type="text" placeholder="검색어를 입력하세요" value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
             <button className="btn-search" onClick={handleSearchButtonClick}>검색</button>
           </div>
             <div className="group-box">
