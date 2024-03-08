@@ -1,9 +1,3 @@
-// export const dataUrl = {
-//   home: "http://localhost:8000/campaign",
-//   getComments: (postId) => `http://localhost:8000/campaign/detail/${postId}/comments`
-// };
-
-
 export const dataUrl = {
   home: "http://localhost:8000/campaign",
 };

@@ -1,21 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import axios from 'axios';
-
-import "react-quill/dist/quill.core.css"
-
 import { getCommentsUrl } from "../../store/store";
+import axios from 'axios';
+import "react-quill/dist/quill.core.css"
 
 const Comments = ({ curList }) => {
   const dispatch = useDispatch();
   const { id } = useParams(); 
-
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [loadedComments, setLoadedComments] = useState([]);
   const [userInfo, setUserInfo] = useState(null); // 로그인한 사용자 정보를 저장
-
   const storedUserData = sessionStorage.getItem("userData");
   const userData = JSON.parse(storedUserData);
 

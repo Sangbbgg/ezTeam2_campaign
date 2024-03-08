@@ -10,7 +10,6 @@ import Footer from "../component/Footer";
 const CampaignEdit = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-
   const [write, setWrite] = useState({
     title: "",
     body: "",
@@ -23,6 +22,7 @@ const CampaignEdit = () => {
     latitude: "",
     longitude: "",
   });
+  const [selOpt, setSelOpt] = useState("오프라인");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,8 +38,6 @@ const CampaignEdit = () => {
 
     fetchData();
   }, [id]);
-
- 
 
   const initializeMap = (latitude, longitude) => {
     const mapContainer = document.getElementById("map"); // 지도를 표시할 div
@@ -117,9 +115,6 @@ const CampaignEdit = () => {
     executeSearch();
   };
 
-  const [selOpt, setSelOpt] = useState("오프라인");
-
-
   useEffect(()=>{
     if(write.latitude == null){
       setSelOpt("장소없음")
@@ -155,7 +150,6 @@ const CampaignEdit = () => {
                 <p className="title">캠페인 제목</p>
                 <input type="text" name="title" value={write.title || ""} placeholder="제목을 입력하세요" onChange={handleChange} />
               </div>
-
               <div className="calendar-area">
                 <p className="cal-tit">캠페인 기간</p>
                 <div className="calendar">
@@ -180,7 +174,6 @@ const CampaignEdit = () => {
                   />
                 </div>
               </div>
-              
               <div className="calendar-area">
                 <p className="cal-tit">접수 기간</p>
                 <div className="calendar">
@@ -205,7 +198,6 @@ const CampaignEdit = () => {
                   />
                 </div>
               </div>
-              
 
               {/* 주소 검색 */}
               <div className='address-area'>

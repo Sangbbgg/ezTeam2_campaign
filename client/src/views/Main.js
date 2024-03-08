@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Header from '../component/Header';
-import { useNavigate } from 'react-router-dom';
 import { getPost } from '../store/store';
 import { useDispatch } from 'react-redux';
 import TextList from '../component/campaign/TextList';
@@ -15,7 +14,6 @@ import LegendEffectOpacityChart from'../component/CarbonFootprints/Result/Legend
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation';
-
 
 // import required modules
 import { Navigation } from 'swiper/modules';
@@ -34,10 +32,11 @@ const Main = () => {
   }, [swiper]);
   
   // 글 목록
-  const [campaignList, setCampaignList] = useState([]); // 캠페인 목록을 저장 
-  const [mainCampaignList, setmainCampaignList] = useState([]); // 캠페인 목록을 저장 
+  const [campaignList, setCampaignList] = useState([]); 
+  const [mainCampaignList, setmainCampaignList] = useState([]); 
 
 
+  // 메인 비주얼 모션
   useEffect(()=>{
     document.querySelector(".main-visual").style.height = window.innerHeight + "px";
 
@@ -45,14 +44,12 @@ const Main = () => {
     gsap.to(".main-visual .sub-txt", { duration: 1, y: 0, opacity: 1, delay: 0.5, ease: "power2.out" });
   });
 
-  // 데이터 불러옴
+  // 캠페인 데이터 불러옴
   useEffect(() => {
-    // 포스트 데이터를 불러와서 campaignList state에 저장
     dispatch(getPost())
       .then((res) => {
         if (res.payload) {
           let arrPost = [...res.payload];
-          // 새로운 데이터가 불러와졌을 때 역순으로 정렬하여 최신 글이 위로 오도록 함
           setCampaignList(arrPost.reverse());
         }
       })
@@ -71,16 +68,17 @@ const Main = () => {
     return firstThreeItems;
   };
 
+  // 스크롤 모션
   let getScrollObjY = function() {
-    let _arrY = [];
+    let arrY = [];
     let scrollMotions = document.querySelectorAll(".scroll-motion");
 
     scrollMotions.forEach(function(el) {
       let offsetTop = el.getBoundingClientRect().top + window.pageYOffset;
-      _arrY.push(parseInt(offsetTop));
+      arrY.push(parseInt(offsetTop));
     });
 
-    return _arrY;
+    return arrY;
   };
 
   window.addEventListener("scroll", function() {
@@ -94,7 +92,6 @@ const Main = () => {
     });
   });
 
-  console.log("해더스크롤 위치", window.scrollY)
   return (
     <div id="wrap" className='main'>
       <Header />
@@ -120,36 +117,33 @@ const Main = () => {
 
       {/* 캠페인 소개 */}
       <section className="campaign">
-      <div className="inner">
-        <div className="txt-area scroll-motion">
-          <p className="sec-tit">캠페인</p>
-          <p className="sec-txt">우리는 탄소 중립 난제를 해결하고 녹색 성장을 이끌어내기 위해 모이고 있습니다.</p>
-        </div>
+        <div className="inner">
+          <div className="txt-area scroll-motion">
+            <p className="sec-tit">캠페인</p>
+            <p className="sec-txt">우리는 탄소 중립 난제를 해결하고 녹색 성장을 이끌어내기 위해 모이고 있습니다.</p>
+          </div>
 
-      
+          <div className="cont-area scroll-motion">
+            <Swiper loop={true} slidesPerView={3} spaceBetween={20} className="mySwiper" onSwiper={setSwiper} modules={[Navigation]} 
+              navigation={{ // navigation 활성화
+                prevEl: '.swiper-button-prev',
+                nextEl: '.swiper-button-next'
+              }}
+            >
+              {mainCampaignList.map((data, i) => (
+                <SwiperSlide key={i}>
+                  <TextList campaignList={data} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
 
-        <div className="cont-area scroll-motion">
-          <Swiper loop={true} slidesPerView={3} spaceBetween={20} className="mySwiper" onSwiper={setSwiper} modules={[Navigation]} 
-            navigation={{ // navigation 활성화
-              prevEl: '.swiper-button-prev',
-              nextEl: '.swiper-button-next'
-            }}
-          >
-            {mainCampaignList.map((data, i) => (
-              <SwiperSlide key={i}>
-                <TextList campaignList={data} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-
-          <div className="custom-swiper-navigation">
-            <button className="swiper-button-prev"></button>
-            <button className="swiper-button-next"></button>
+            <div className="custom-swiper-navigation">
+              <button className="swiper-button-prev"></button>
+              <button className="swiper-button-next"></button>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-
+      </section>
 
       <section className='carbon'>
       <div className="inner">
@@ -163,7 +157,6 @@ const Main = () => {
           </div>
           
         </div>
-
       </section>
       <Footer/>
     </div>

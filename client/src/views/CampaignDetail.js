@@ -95,14 +95,6 @@ const CampaignDetail = (props) => {
     }
   }, [curList]);
 
-// 부드럽게 페이지 상단으로 스크롤
-window.scrollTo({
-  top: 0, // Y 좌표
-  left: 0, // X 좌표
-  // behavior: "smooth", // 부드러운 스크롤 효과
-});
-  
-  
   return (
     <div id="wrap" className="campaign-detail">
       <Header/>

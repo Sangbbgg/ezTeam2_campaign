@@ -124,7 +124,6 @@ const Campaign = () => {
               <button className="btn-write" onClick={()=>{navigate('/campaign/write')}}>글쓰기</button>
             </div>
           <div className="campaign-wrap">
-          
             <div className="container">
               {/* 검색 결과에 따라 글목록 나열 */}
               {postsData(filteredResults).map((data, i) => (

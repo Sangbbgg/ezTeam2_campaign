@@ -12,7 +12,6 @@ const CampaignApplication = () => {
   const {id} = useParams();
   const storedUserData = sessionStorage.getItem("userData");
   const userData = JSON.parse(storedUserData);
-
   const [myApplication, setMyApplication] = useState([]);
   const [filteredUserInfo, setFilteredUserInfo] = useState(null); // 로그인한 사용자 정보를 저장
 
@@ -22,8 +21,7 @@ const CampaignApplication = () => {
       try {
         const response = await axios.get(`http://localhost:8000/campaign/form/all`);
         const filteredData =  response.data.filter((item)=>{
-          return item.userid === userData.userid
-          
+          return item.userid === userData.userid;
         })
         setMyApplication(filteredData);
       } catch (error) {
@@ -53,7 +51,6 @@ const CampaignApplication = () => {
   const filteredData = myApplication.find((data, index) => {
     return data.post_id == id
   });
-  console.log(filteredData)  
 
   return (
     <div id="wrap" className="application-form">
@@ -70,17 +67,16 @@ const CampaignApplication = () => {
                 <col style={{width: "auto"}} />
               </colgroup>
               <tbody>
-              <tr>
-                <th className="user-name" scope="row">이름</th>
-                <td className="user-name">
-                  <span className="value_txt">{filteredUserInfo?.username}</span>
-                </td>
-                <th className="user-email" scope="row">이메일</th>
-                <td className="user-email">
-                  <span className="value_txt">{filteredUserInfo?.email}</span>
-                </td>
-              </tr>
-
+                <tr>
+                  <th className="user-name" scope="row">이름</th>
+                  <td className="user-name">
+                    <span className="value_txt">{filteredUserInfo?.username}</span>
+                  </td>
+                  <th className="user-email" scope="row">이메일</th>
+                  <td className="user-email">
+                    <span className="value_txt">{filteredUserInfo?.email}</span>
+                  </td>
+                </tr>
                 <tr>
                   <th className="user-name" scope="row">전화번호</th>
                   <td className="user-name">
@@ -89,8 +85,6 @@ const CampaignApplication = () => {
                   <th className="user-email" scope="row">소속</th>
                   <td className="user-company">
                     <span className="value_txt">{filteredData?.company}</span>
-
-                    {/* <input type="text" name="company" value={formWrite.company} onChange={handleChange} /> */}
                   </td>
                 </tr>
                 <tr>
@@ -99,18 +93,11 @@ const CampaignApplication = () => {
                     <span className="value_txt">{filteredData?.memo}</span>
                   </td>
                 </tr>
-                {/* <tr>
-                  <th scope="row">제목</th>
-                  <td>내용</td>
-                </tr> */}
               </tbody>
             </table>
           </div>
-
           <div className="bottom-area">
             <div className="btn-w">
-              {/* <button className="btn-submit" onClick={handleClick}>신청</button> */}
-
               <button className="btn-tolist" type="button" onClick={()=>{navigate(-1)}}>뒤로가기</button> 
             </div>
           </div>

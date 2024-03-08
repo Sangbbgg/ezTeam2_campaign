@@ -7,10 +7,10 @@ const Footer = () => {
 			<div className="top">
 				<h1><div className="logo"></div></h1>
 				<ul>
-					<li><a href="">Policy</a></li>
-					<li><a href="">Terms</a></li>
-					<li><a href="">Family Site</a></li>
-					<li><a href="">Sitemap</a></li>
+					<li>Policy</li>
+					<li>Terms</li>
+					<li>Family Site</li>
+					<li>Sitemap</li>
 				</ul>
 			</div>	
 			<div className="bottom">

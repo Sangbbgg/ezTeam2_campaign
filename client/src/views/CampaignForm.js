@@ -12,10 +12,8 @@ const CampaignForm = () => {
   const {id} = useParams();
   const storedUserData = sessionStorage.getItem("userData");
   const userData = JSON.parse(storedUserData);
-
   const [myApplication, setMyApplication] = useState([]);
   const [filteredUserInfo, setFilteredUserInfo] = useState(null); // 로그인한 사용자 정보를 저장
-
   const [formWrite, setFormWrite] = useState({
     company: "",
     memo: "",
@@ -95,56 +93,51 @@ const CampaignForm = () => {
       <Header/>
       <div className="content-w">
         <div className="inner">
-          
-        <div className="form-table">
-          <table className="vertical">
-            <caption></caption>
-            <colgroup>
-              <col style={{width: "160px"}}/>
-              <col style={{width: "auto"}} />
-              <col style={{width: "160px"}}/>
-              <col style={{width: "auto"}} />
-            </colgroup>
-            <tbody>
-            <tr>
-              <th className="user-name" scope="row">이름</th>
-              <td className="user-name">
-                <span className="value_txt">{filteredUserInfo?.username}</span>
-              </td>
-              <th className="user-email" scope="row">이메일</th>
-              <td className="user-email">
-                <span className="value_txt">{filteredUserInfo?.email}</span>
-              </td>
-            </tr>
-
-              <tr>
-                <th className="user-name" scope="row">전화번호</th>
-                <td className="user-name">
-                  <span className="value_txt">{filteredUserInfo?.phonenumber}</span>
-                </td>
-                <th className="user-email" scope="row">소속</th>
-                <td className="user-company">
-                  <input type="text" name="company" value={formWrite.company} onChange={handleChange} />
-                </td>
-              </tr>
-              <tr>
-                <th>신청자 메모</th>
-                <td colSpan="3">
-                  <textarea value={formWrite.memo} placeholder="내용을 입력하세요" onChange={(e) => setFormWrite({...formWrite, memo: e.target.value})} />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div className="bottom-area">
-          <div className="btn-w">
-            <button className="btn-submit" onClick={handleClick}>신청</button>
-
-            <button className="btn-cancel" type="button" onClick={()=>{navigate(-1)}}>취소</button> 
+          <div className="form-table">
+            <table className="vertical">
+              <caption></caption>
+              <colgroup>
+                <col style={{width: "160px"}}/>
+                <col style={{width: "auto"}} />
+                <col style={{width: "160px"}}/>
+                <col style={{width: "auto"}} />
+              </colgroup>
+              <tbody>
+                <tr>
+                  <th className="user-name" scope="row">이름</th>
+                  <td className="user-name">
+                    <span className="value_txt">{filteredUserInfo?.username}</span>
+                  </td>
+                  <th className="user-email" scope="row">이메일</th>
+                  <td className="user-email">
+                    <span className="value_txt">{filteredUserInfo?.email}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <th className="user-name" scope="row">전화번호</th>
+                  <td className="user-name">
+                    <span className="value_txt">{filteredUserInfo?.phonenumber}</span>
+                  </td>
+                  <th className="user-email" scope="row">소속</th>
+                  <td className="user-company">
+                    <input type="text" name="company" value={formWrite.company} onChange={handleChange} />
+                  </td>
+                </tr>
+                <tr>
+                  <th>신청자 메모</th>
+                  <td colSpan="3">
+                    <textarea value={formWrite.memo} placeholder="내용을 입력하세요" onChange={(e) => setFormWrite({...formWrite, memo: e.target.value})} />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-        </div>
-
+          <div className="bottom-area">
+            <div className="btn-w">
+              <button className="btn-submit" onClick={handleClick}>신청</button>
+              <button className="btn-cancel" type="button" onClick={()=>{navigate(-1)}}>취소</button> 
+            </div>
+          </div>
         </div>
       </div>
       <Footer/>
