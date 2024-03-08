@@ -50,7 +50,7 @@ const TextList = ({campaignList}) => {
             <img key={index} src={src} alt={`Image ${index}`} />
           ))
         ) : (
-          <img src={process.env.PUBLIC_URL + '/img/img-campaign-def.jpg'} alt="Default Campaign Image" />
+          <img src={process.env.PUBLIC_URL + '/img/img-campaign-no-img.jpg'} alt="Default Campaign Image" />
           )}
           
         {/* 캠페인 진행상태 뱃지 */}
