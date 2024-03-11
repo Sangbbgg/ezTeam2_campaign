@@ -221,7 +221,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .main .campaign .cont .img-wrap {width: 100%; position: relative; width: auto; height: 367px; overflow: hidden; border-radius: 8px;}
 .main .campaign .cont .img-wrap img {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1); width: 100%; height: 100%; transition: transform .3s ease-out; object-fit: cover;}
 .main .campaign .cont .img-wrap:hover img {transform: translate(-50%, -50%) scale(1.1);}
-.main .campaign .cont .txt-wrap .title {margin-top: 18px; font-size: 16px; font-weight: 500; color: #fff;}
+.main .campaign .cont .txt-wrap .title {margin-top: 18px; font-size: 16px; font-weight: 500; color: #fff; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; word-break: keep-all;}
 .main .campaign .cont .txt-wrap .txt-info {display: none;}
 .main footer{background-color: #e1f0de;}
 
@@ -337,7 +337,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .campaign .group-box {display: flex; justify-content: space-between; align-items: flex-end;}
 .campaign .btn-write {margin-bottom: 20px; padding: 10px 30px; color: #fff; background-color: #25B058;}
 .campaign-wrap {padding: 50px 50px 60px; background-color: #e1f0de;}
-.campaign-wrap .cont .title {min-height: 32px; font-size: 18px; color: #000; text-align: left; overflow: hidden; white-space: normal; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; word-break: keep-all;}
+.campaign-wrap .cont .title {min-height: 32px; font-size: 18px; color: #000; text-align: left; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; word-break: keep-all;}
 .campaign-wrap .txt-wrap {display: block; position: relative; padding: 14px;}
 .campaign-wrap .txt-wrap .txt-info {display: flex; justify-content: space-between; margin-top: 20px;}
 .campaign-wrap .txt-wrap .username {font-size: 14px; text-align: right; color: #777;}
