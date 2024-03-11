@@ -441,7 +441,7 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
                             <div className="total">
                               <div className="total_chart_label">
                                 {barChatData.map((data) => (
-                                  <div key={data.key} className="chart_title">
+                                  <div key={data.name} className="chart_title">
                                     <div className={`step_icon forest_${data.category}_bg`}>
                                       <img src={`/img/${data.category}_small_icon.svg`} alt={`${data.name} icon`} />
                                     </div>
@@ -538,13 +538,15 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
                     <div className="total">
                       <div className="total_chart_label">
                         {barChatData.map((data) => (
-                          <div key={data.key} className="chart_title">
+                          <div key={data.name} className="chart_title">
                             <div className={`step_icon forest_${data.category}_bg`}>
                               <img src={`/img/${data.category}_small_icon.svg`} alt={`${data.category}_아이콘`}/>
                             </div>
                             <span className={`forest_${data.category}_text`}>{data.name}</span>
                           </div>
                         ))}
+                        {console.log("barChatData :",barChatData)}
+                        {console.log("barChartDataTotal :",barChartDataTotal)}
                       </div>
                       <div className="total_chart">
                         <TargetBarchartTotal barChartDataTotal={barChartDataTotal} />

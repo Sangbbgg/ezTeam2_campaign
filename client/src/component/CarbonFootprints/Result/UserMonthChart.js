@@ -4,6 +4,7 @@ import { PieChart, Pie, Sector, Cell, Tooltip, Legend, ResponsiveContainer } fro
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+import UserSavingChart from "./userSavingChart";
 const data = [
   { name: "전기", value: 400 },
   { name: "가스", value: 300 },
@@ -78,17 +79,63 @@ const labels = {
   waste: "폐기물",
   total: "전체",
 };
+
+const data3 = [
+  {
+    category: "electricity",
+    name: "전기",
+    value: -7.0,
+    color: "#316EE6",
+    maxVlaue: 1000,
+    minVlaue: -1000,
+  },
+  {
+    category: "gas",
+    name: "가스",
+    value: -676.8,
+    color: "#FE7713",
+    maxVlaue: 1000,
+    minVlaue: -1000,
+  },
+  {
+    category: "water",
+    name: "수도",
+    value: "4.3",
+    color: "#A364FF",
+    maxVlaue: 1000,
+    minVlaue: -1000,
+  },
+  {
+    category: "transportation",
+    name: "교통",
+    value: "39.1",
+    color: "#FE5A82",
+    maxVlaue: 1000,
+    minVlaue: -1000,
+  },
+  {
+    category: "waste",
+    name: "폐기물",
+    value: "14.6",
+    color: "#4ACC9C",
+    maxVlaue: 1000,
+    minVlaue: -1000,
+  },
+];
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 function UserMonthChart() {
   const storedUserData = sessionStorage.getItem("userData"); // 세션접근
   const userData = JSON.parse(storedUserData); // 세션 userData 획득
   const [mypageInitialData, setMypageInitialData] = useState([]); //mypage data
-  const [calculationAdviceData, setCalculationAdviceData] = useState([]); //
+
+  const [calculationAdviceData, setCalculationAdviceData] = useState([]);
   const [resultDataSet, setResultDataSet] = useState([]);
 
   const [activeIndex, setActiveIndex] = useState(0); // 차트 상태관리
+  // 주 차트 데이터
   const [currentMonthchartData, setCurrentMonthchartData] = useState([]);
+  // 보조 차트 데이터
   const [previousMonthchartData, setPreviousMonthchartData] = useState([
     {
       category: "electricity",
@@ -116,12 +163,57 @@ function UserMonthChart() {
       value: 0.0,
     },
   ]);
+  // 저감달성 차트 데이터
+  // console.log("categorySavings :",categorySavings)
+  const [categorySavings, setCategorySavings] = useState([
+    {
+      category: "electricity",
+      name: "전기",
+      value: 0,
+      color: "#316EE6",
+      maxVlaue: 1000,
+      minVlaue: -1000,
+    },
+    {
+      category: "gas",
+      name: "가스",
+      value: 0,
+      color: "#FE7713",
+      maxVlaue: 1000,
+      minVlaue: -1000,
+    },
+    {
+      category: "water",
+      name: "수도",
+      value: 0,
+      color: "#A364FF",
+      maxVlaue: 1000,
+      minVlaue: -1000,
+    },
+    {
+      category: "transportation",
+      name: "교통",
+      value: 0,
+      color: "#FE5A82",
+      maxVlaue: 1000,
+      minVlaue: -1000,
+    },
+    {
+      category: "waste",
+      name: "폐기물",
+      value: 0,
+      color: "#4ACC9C",
+      maxVlaue: 1000,
+      minVlaue: -1000,
+    },
+  ]);
 
+  // @@@@@@@@@@@@@@@@
   const [startDate, setStartDate] = useState(new Date());
-console.log("startDate :",startDate)
-  const [beforeYear, setBeforeYear] = useState(startDate.getFullYear());
   const [checkYear, setCheckYear] = useState(startDate.getFullYear());
-  const [beforeMonth, setBeforeMonth] = useState(1);
+  // @@@@@@@@@@@@@@@@
+
+  const [beforeMonth, setBeforeMonth] = useState(null);
   const [checkMonth, setCheckMonth] = useState(startDate.getMonth() + 1);
 
   const [isDataCheck, setIsDataCheck] = useState(false);
@@ -133,7 +225,7 @@ console.log("startDate :",startDate)
   const [isClicked, setIsClicked] = useState(false);
   const [buttonCSS, setButtonCSS] = useState();
 
-  // 
+  // 차트 에니메이션
   const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
     <button
       className={`example-custom-input ${buttonCSS}`}
@@ -229,107 +321,72 @@ console.log("startDate :",startDate)
     }));
   };
 
-  // 이전 작성된 최근의 월 데이터 획득 함수 / 최초 자료 2023년 12월
-  function findPreviousMonthData(dataSet, currentMonth) {
-    // 현재 연도와 월을 정수로 변환
-    let year = parseInt(startDate.getFullYear());
-    let month = currentMonth
-
-    // 2023년 이후 데이터만 처리
-    while (year >= 2023) {
-      // 현재 월에서 이전 월로 이동
-      while (month > 1) {
-        month -= 1; // 한 달 감소
-        const yearData = dataSet.find((d) => parseInt(d.year) === year);
-        
-        if (yearData) {
-          // 해당 연도에서 월 데이터 찾기
-          const monthData = yearData.months.find((m) => parseInt(m.month) === month);
-          if (monthData) {
-            return (setBeforeYear(yearData.year),setBeforeMonth(monthData)) // 데이터 반환
-          }
-        }
-      }
-
-      // 2023년 1월에 도달했을 경우 종료
-      if (year === 2023 && month <= 1) {
-        break;
-      }
-
-      // 1월에 도달하면 이전 연도로 이동
-      if (month === 1) {
-        year -= 1; // 연도 감소
-        month = 13; // 12월로 설정하기 위해 13에서 시작
-      }
-    }
-
-    return null; // 데이터를 찾지 못했을 경우 null 반환
-  }
-
   useEffect(() => {
-    findPreviousMonthData(resultDataSet, checkMonth);
-    console.log("전월데이터 년도 :",beforeYear);
-    console.log("최근월 데이터 :",beforeMonth);
-    // 현재 선택된 년도를 기준 월별 데이터를 추출
-    const selectedYearData = resultDataSet.find((d) => d.year === checkYear.toString());
-    // console.log("월별데이터추출:", selectedYearData);
-    // 지정된 년도에 선택된 월 데이터 유무 확인
-    // 선택년도가 정상이라면
-    if (selectedYearData !== undefined) {
-      // 정상적인 년도 기준 월별데이터에서 지정 월 데이터를 추출
-      const selectedMonthData = selectedYearData.months.find((m) => m.month === checkMonth);
-      console.log(`선택월 : ${checkMonth}월 / 출력 데이터:`, selectedMonthData);
-      // 추출된 월 데이터가 정상이며
-      if (selectedMonthData !== undefined) {
-      }
-    }
-
-    // setIsDataCheck(selectedYearData);
-
-    if (selectedYearData !== undefined) {
-      const checkData = selectedYearData.months.find((m) => m.month === checkMonth);
-      const checkData1 = selectedYearData.months.find((m) => m.month === (checkMonth - 1 === 0 ? 12 : 1));
-
-      if (checkData && checkData1) {
-        // setIsMonthCheck(true);
-
-        const filteredCurrentMonthData = checkData.details.filter((item) => item.category !== "total");
-        setCurrentMonthchartData(filteredCurrentMonthData);
-
-        const filteredPreviousMonthData = checkData1.details.filter((item) => item.category !== "total");
-        setPreviousMonthchartData(filteredPreviousMonthData);
+    // 현재 년/월이 기본값으로 데이터 셋을 점검
+    if (resultDataSet && resultDataSet.length > 0) {
+      const selectedYearData = resultDataSet.find((d) => d.year === checkYear.toString());
+      // 데이터가 있다면
+      if (selectedYearData !== undefined) {
+        setIsDataCheck(true);
+        const selectedCurrentMonthData = selectedYearData.months.find((m) => m.month === checkMonth);
+        if (selectedCurrentMonthData !== undefined) {
+          const filteredCurrentMonthData = selectedCurrentMonthData.details.filter((item) => item.category !== "total");
+          // console.log(filteredCurrentMonthData);
+          setCurrentMonthchartData(filteredCurrentMonthData);
+          if (checkMonth !== 1) {
+            const selectedPreviousMonthData = selectedYearData.months
+              .filter((m) => m.month < checkMonth)
+              .sort((a, b) => b.month - a.month)
+              .find((m) => m);
+            const filteredPreviousMonthData = selectedPreviousMonthData.details.filter((item) => item.category !== "total");
+            setBeforeMonth(selectedPreviousMonthData.month);
+            setPreviousMonthchartData(filteredPreviousMonthData);
+          } else {
+            setPreviousMonthchartData([
+              {
+                category: "electricity",
+                label: "전기",
+                value: 0.0,
+              },
+              {
+                category: "gas",
+                label: "가스",
+                value: 0.0,
+              },
+              {
+                category: "water",
+                label: "수도",
+                value: 0.0,
+              },
+              {
+                category: "transportation",
+                label: "교통",
+                value: 0.0,
+              },
+              {
+                category: "waste",
+                label: "폐기물",
+                value: 0.0,
+              },
+            ]);
+          }
+        } else {
+          console.log("데이터 없음2");
+          setIsDataCheck(false);
+        }
       } else {
-        // setIsMonthCheck(false);
+        console.log("데이터 없음");
+        setIsDataCheck(false);
       }
     }
-    // const checkData = selectedYearData.months.find((m) => m.month === checkMonth - 1);
-    // console.log("ll",selectedYearData.month)
-    // if (resultDataSet && resultDataSet.length > 0) {
-    //   const selectedYearData = resultDataSet.find((d) => d.year === year.toString());
-    //   const checkData = selectedYearData.months.find((m) => m.month === checkMonth - 1);
-    //   const isMonthCheck = checkData === undefined;
-    //   console.log("해당월", checkMonth);
-    //   console.log("data체크", checkData);
-    //   console.log("확인", isMonthCheck);
-    //   if (isMonthCheck) {
-    //     const selectedCurrentMonthData = selectedYearData.months.find((m) => m.month === checkMonth);
-    //     const filteredCurrentMonthData = selectedCurrentMonthData.details.filter((item) => item.category !== "total");
-    //     setCurrentMonthchartData(filteredCurrentMonthData);
-    //   } else {
-    //     const selectedCurrentMonthData = selectedYearData.months.find((m) => m.month === checkMonth);
-    //     const selectedPreviousMonthData = selectedYearData.months.find((m) => m.month === checkMonth - 1);
-    //     if (selectedCurrentMonthData && selectedPreviousMonthData) {
-    //       const filteredCurrentMonthData = selectedCurrentMonthData.details.filter((item) => item.category !== "total");
-    //       const filteredPreviousMonthData = selectedPreviousMonthData.details.filter(
-    //         (item) => item.category !== "total"
-    //       );
-    //       setCurrentMonthchartData(filteredCurrentMonthData);
-    //       setPreviousMonthchartData(filteredPreviousMonthData);
-    //     }
-    //   }
-    // }
-  }, [resultDataSet, checkYear, checkMonth, isDataCheck]);
 
+    // console.log("최초 : ",mypageInitialData)
+    // console.log("포멧변경 : ",resultDataSet)
+    // console.log("지정 년 : ",checkYear)
+    // console.log("지정 년도 데이터 추출 : ",selectedYearData)
+  }, [resultDataSet, checkYear, checkMonth]);
+
+  // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@_차트 관련_@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
   const onPieEnter = (_, index) => {
     setActiveIndex(index); // 활성 인덱스 업데이트
   };
@@ -341,31 +398,9 @@ console.log("startDate :",startDate)
         <text style={{ fontSize: "20px", fontWeight: 900 }} x={cx} y={cy - 20} dy={8} textAnchor="middle" fill={fill}>
           {payload.label}
         </text>
-        <Sector
-          cx={cx}
-          cy={cy}
-          innerRadius={innerRadius + 5}
-          outerRadius={outerRadius + 5}
-          startAngle={startAngle}
-          endAngle={endAngle}
-          fill={fill}
-        />
-        <Sector
-          cx={cx}
-          cy={cy}
-          startAngle={startAngle}
-          endAngle={endAngle}
-          innerRadius={innerRadius - 10}
-          outerRadius={innerRadius - 3}
-          fill={fill}
-        />
-        <text
-          x={cx + 5}
-          y={cy + 20}
-          textAnchor="middle"
-          fill="#333"
-          style={{ fontSize: "18px", fontWeight: 700 }}
-        >{`${value} kg`}</text>
+        <Sector cx={cx} cy={cy} innerRadius={innerRadius + 5} outerRadius={outerRadius + 5} startAngle={startAngle} endAngle={endAngle} fill={fill} />
+        <Sector cx={cx} cy={cy} startAngle={startAngle} endAngle={endAngle} innerRadius={innerRadius - 10} outerRadius={innerRadius - 3} fill={fill} />
+        <text x={cx + 5} y={cy + 20} textAnchor="middle" fill="#333" style={{ fontSize: "18px", fontWeight: 700 }}>{`${value} kg`}</text>
       </g>
     );
   };
@@ -377,60 +412,47 @@ console.log("startDate :",startDate)
         <text style={{ fontSize: "20px" }} x={cx} y={cy - 10} dy={8} textAnchor="middle" fill="#AAC">
           {`${beforeMonth} 월`}
         </text>
-        <Sector
-          cx={cx}
-          cy={cy}
-          innerRadius={innerRadius}
-          outerRadius={outerRadius}
-          startAngle={startAngle}
-          endAngle={endAngle}
-          fill={fill}
-          opacity={1}
-        />
-        <text
-          x={cx + 5}
-          y={cy + 20}
-          textAnchor="middle"
-          fill="#333"
-          style={{ fontSize: "16px", fontWeight: 700 }}
-        >{`${value} kg`}</text>
+        <Sector cx={cx} cy={cy} innerRadius={innerRadius} outerRadius={outerRadius} startAngle={startAngle} endAngle={endAngle} fill={fill} opacity={1} />
+        <text x={cx + 5} y={cy + 20} textAnchor="middle" fill="#333" style={{ fontSize: "16px", fontWeight: 700 }}>{`${value} kg`}</text>
       </g>
     );
   };
 
+  console.log("1", currentMonthchartData.length);
+
+  useEffect(() => {
+    if (currentMonthchartData.length > 0) {
+      const updateCategorySavings = () => {
+        const updatedCategorySavings = categorySavings.map((entry, index) => {
+          const previousValue = currentMonthchartData[index].value;
+          const currentValue = previousMonthchartData[index].value;
+          const maxValaue = Math.max(previousValue, currentValue);
+          const minValaue = Math.min(previousValue, currentValue);
+          const savings = parseFloat((currentValue - previousValue).toFixed(1));
+          // const savings = 1;
+          return { ...entry, value: savings, maxValaue: maxValaue, minValaue: minValaue };
+        });
+        setCategorySavings(updatedCategorySavings);
+      };
+      updateCategorySavings();
+    }
+  }, [currentMonthchartData]);
+
   const CustomLegend = (props) => {
     // 목록 커스텀
-    const { payload } = props;
-    // console.log(payload);
+    const { categorySavings } = props;
 
-    const currentMonthfilteredPayload = currentMonthchartData.filter((entry) =>
-      payload.some((data) => data.value === entry.label)
-    );
-    const previousMonthfilteredPayload = previousMonthchartData.filter((entry) =>
-      payload.some((data) => data.value === entry.label)
-    );
-    // console.log("a:", currentMonthfilteredPayload);
-    // console.log("b:", previousMonthfilteredPayload);
-    // console.log("c:", previousMonthchartData);
     return (
       <ul className={`mypage-left-chart__ul ${isActive ? "load" : ""}`}>
         <li>{beforeMonth}월 대비 저감량</li>
-        {currentMonthfilteredPayload.map((entry, index) => (
+        {categorySavings.map((entry, index) => (
           <li key={`item-${index}`}>
             <div>
               <svg width="14" height="14" style={{ marginRight: 10 }}>
                 <rect width="14" height="14" fill={COLORS[entry.category]} />
               </svg>
-              <span>{entry.label}</span>
-              {entry.value - previousMonthfilteredPayload[index].value > 0 ? (
-                <span style={{ color: "red" }}>
-                  +{(entry.value - previousMonthfilteredPayload[index].value).toFixed(1)} kg
-                </span>
-              ) : (
-                <span style={{ color: "#0095ff" }}>
-                  {(entry.value - previousMonthfilteredPayload[index].value).toFixed(1)} kg
-                </span>
-              )}
+              <span>{entry.name}</span>
+              {entry.value > 0 ? <span style={{ color: "red" }}>+{entry.value.toFixed(1)} kg</span> : <span style={{ color: "#0095ff" }}>{entry.value.toFixed(1)} kg</span>}
             </div>
           </li>
         ))}
@@ -459,6 +481,7 @@ console.log("startDate :",startDate)
       </div>
     </div>
   );
+
   const userChartRender = (
     <div>
       <div className="mypage-userchart">
@@ -483,7 +506,7 @@ console.log("startDate :",startDate)
                     <Cell key={`cell-${index}`} fill={COLORS[entry.category]} />
                   ))}
                 </Pie>
-                <Legend content={<CustomLegend />} />
+                <Legend content={<CustomLegend categorySavings={categorySavings} />} />
                 <Pie
                   activeIndex={activeIndex}
                   activeShape={renderActiveShape1}
@@ -510,22 +533,55 @@ console.log("startDate :",startDate)
             </h2>
           </div>
         </div>
-        <div className="mypage-userchart__right"></div>
+        <div className="mypage-userchart__right">
+          {/* <TargetBarchartTotal barChartDataTotal={data3} /> */}
+
+          <div className="target_co2saving">
+            <div className="item_title">
+              <h3>월간 CO₂ 저감 달성량</h3>
+            </div>
+            <div className="barChart">
+              <div className="total">
+                <div className="total_chart_label">
+                  {data3.map((data) => (
+                    <div key={data.name} className="chart_title">
+                      <div className={`step_icon forest_${data.category}_bg`}>
+                        <img src={`/img/${data.category}_small_icon.svg`} alt={`${data.category}_아이콘`} />
+                      </div>
+                      <span className={`forest_${data.category}_text`}>{data.name}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="total_chart">
+                  <UserSavingChart barChartDataTotal={categorySavings} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
+
   return (
     <>
-      <DatePicker
-        selected={startDate}
-        onChange={(date) => setStartDate(date)}
-        dateFormat="yyyy년 MM월"
-        showMonthYearPicker
-        showFullMonthYearPicker
-        open={isHovered || isClicked}
-        customInput={<ExampleCustomInput />}
-        onClickOutside={() => setIsClicked(false)}
-      />
+      <div className="carbon-myage-title-wrap">
+        <DatePicker
+          selected={startDate}
+          onChange={(date) => setStartDate(date)}
+          dateFormat="yyyy년 MM월"
+          showMonthYearPicker
+          showFullMonthYearPicker
+          open={isHovered || isClicked}
+          customInput={<ExampleCustomInput />}
+          onClickOutside={() => setIsClicked(false)}
+        />
+        <div>
+          <h2>
+            <span className="forest_green_text">{checkYear}</span>년 <span className="forest_green_text">{checkMonth}</span>월 계산결과
+          </h2>
+        </div>
+      </div>
       {!isDataCheck ? undefinedDataRender : userChartRender}
     </>
   );

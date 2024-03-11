@@ -769,13 +769,15 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 .main_chart_img_right > img{width: 500px; height: 500px; fill: #0078C3; transition: opacity 3s ease; opacity: 0; }
 
 /* 마이페이지 */
-.mypage-userchart{width: 100%; padding: 30px; display: flex; gap: 20px; border:1px solid #ccc;}
-.mypage-userchart__left{display: flex; position: relative; height: 300px; flex-direction: row; width: 50%; justify-content: center; border:1px solid #ccc;  border-radius: 12px;}
+.carbon-myage-title-wrap{display: flex; justify-content: space-between;}
+
+.mypage-userchart{width: 100%;height: 400px; padding: 30px; display: flex; gap: 20px; border:1px solid #ccc;}
+.mypage-userchart__left{display: flex; position: relative; height: 100%; flex-direction: row; width: 50%; justify-content: center; border:1px solid #ccc;  border-radius: 12px;}
 .mypage-userchart-left__chartarea{width: 100%;}
 .mypage-userchart__title{position: absolute; top:8%; right:5%;}
 .mypage-userchart__title > h2{font-size: 30px;}
 
-.mypage-userchart__right{flex-grow: 1;}
+.mypage-userchart__right{flex-grow: 1; border:1px solid #ccc;  border-radius: 12px;}
 
 .mypage-left-chart__ul{width: 25%; position: absolute; bottom: 10%; right:2%; display: flex; flex-direction: column; gap: 8px;}
 .load{animation: fadeIn 1s ease-in-out forwards;}
