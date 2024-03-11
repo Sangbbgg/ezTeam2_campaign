@@ -325,55 +325,78 @@ function UserMonthChart() {
     // 현재 년/월이 기본값으로 데이터 셋을 점검
     if (resultDataSet && resultDataSet.length > 0) {
       const selectedYearData = resultDataSet.find((d) => d.year === checkYear.toString());
+      // console.log("길이", selectedYearData.months.length);
+      // console.log("내용", selectedYearData);
+      // console.log("전월", previousMonthchartData);
+      const selectedCurrentMonthData = selectedYearData.months.find((m) => m.month === checkMonth);
+
+      const selectedPreviousMonthData = selectedYearData.months
+        .filter((m) => m.month < checkMonth)
+        .sort((a, b) => b.month - a.month);
+      console.log("전월 종류", selectedPreviousMonthData);
+      console.log("전월 종류 길이", selectedPreviousMonthData.length);
+
       // 데이터가 있다면
-      if (selectedYearData !== undefined) {
+      if (selectedCurrentMonthData) {
         setIsDataCheck(true);
-        const selectedCurrentMonthData = selectedYearData.months.find((m) => m.month === checkMonth);
-        if (selectedCurrentMonthData !== undefined) {
-          const filteredCurrentMonthData = selectedCurrentMonthData.details.filter((item) => item.category !== "total");
-          // console.log(filteredCurrentMonthData);
-          setCurrentMonthchartData(filteredCurrentMonthData);
-          if (checkMonth !== 1) {
-            const selectedPreviousMonthData = selectedYearData.months
-              .filter((m) => m.month < checkMonth)
-              .sort((a, b) => b.month - a.month)
-              .find((m) => m);
-            const filteredPreviousMonthData = selectedPreviousMonthData.details.filter((item) => item.category !== "total");
-            setBeforeMonth(selectedPreviousMonthData.month);
-            setPreviousMonthchartData(filteredPreviousMonthData);
-          } else {
-            setPreviousMonthchartData([
-              {
-                category: "electricity",
-                label: "전기",
-                value: 0.0,
-              },
-              {
-                category: "gas",
-                label: "가스",
-                value: 0.0,
-              },
-              {
-                category: "water",
-                label: "수도",
-                value: 0.0,
-              },
-              {
-                category: "transportation",
-                label: "교통",
-                value: 0.0,
-              },
-              {
-                category: "waste",
-                label: "폐기물",
-                value: 0.0,
-              },
-            ]);
-          }
-        } else {
-          console.log("데이터 없음2");
-          setIsDataCheck(false);
+        const filteredCurrentMonthData = selectedCurrentMonthData.details.filter((item) => item.category !== "total");
+        setCurrentMonthchartData(filteredCurrentMonthData);
+        if (selectedPreviousMonthData.length === 0) {
+          return;
         }
+        console.log("두번째 데이터 로직 구현");
+        // selectedPreviousMonthData.find((m) => m.month === checkMonth - 1);
+        console.log("??", selectedPreviousMonthData);
+        // const filteredPreviousMonthData = selectedPreviousMonthData.details.filter((item) => item.category !== "total");
+        // console.log(selectedCurrentMonthData);
+        // if (selectedCurrentMonthData !== undefined) {
+        //   const filteredCurrentMonthData = selectedCurrentMonthData.details.filter((item) => item.category !== "total");
+        //   // console.log(filteredCurrentMonthData);
+        //   setCurrentMonthchartData(filteredCurrentMonthData);
+
+        //   if (checkMonth !== 1) {
+        //     const selectedPreviousMonthData = selectedYearData.months
+        //       .filter((m) => m.month < checkMonth)
+        //       .sort((a, b) => b.month - a.month)
+        //       .find((m) => m);
+        //     const filteredPreviousMonthData = selectedPreviousMonthData.details.filter(
+        //       (item) => item.category !== "total"
+        //     );
+        //     setBeforeMonth(selectedPreviousMonthData.month);
+        //     setPreviousMonthchartData(filteredPreviousMonthData);
+        //   } else {
+        //     setPreviousMonthchartData([
+        //       {
+        //         category: "electricity",
+        //         label: "전기",
+        //         value: 0.0,
+        //       },
+        //       {
+        //         category: "gas",
+        //         label: "가스",
+        //         value: 0.0,
+        //       },
+        //       {
+        //         category: "water",
+        //         label: "수도",
+        //         value: 0.0,
+        //       },
+        //       {
+        //         category: "transportation",
+        //         label: "교통",
+        //         value: 0.0,
+        //       },
+        //       {
+        //         category: "waste",
+        //         label: "폐기물",
+        //         value: 0.0,
+        //       },
+        //     ]);
+        //   }
+        // } else {
+        //   console.log("데이터 없음2");
+        //   setIsDataCheck(false);
+        // }
       } else {
         console.log("데이터 없음");
         setIsDataCheck(false);
@@ -398,9 +421,31 @@ function UserMonthChart() {
         <text style={{ fontSize: "20px", fontWeight: 900 }} x={cx} y={cy - 20} dy={8} textAnchor="middle" fill={fill}>
           {payload.label}
         </text>
-        <Sector cx={cx} cy={cy} innerRadius={innerRadius + 5} outerRadius={outerRadius + 5} startAngle={startAngle} endAngle={endAngle} fill={fill} />
-        <Sector cx={cx} cy={cy} startAngle={startAngle} endAngle={endAngle} innerRadius={innerRadius - 10} outerRadius={innerRadius - 3} fill={fill} />
-        <text x={cx + 5} y={cy + 20} textAnchor="middle" fill="#333" style={{ fontSize: "18px", fontWeight: 700 }}>{`${value} kg`}</text>
+        <Sector
+          cx={cx}
+          cy={cy}
+          innerRadius={innerRadius + 5}
+          outerRadius={outerRadius + 5}
+          startAngle={startAngle}
+          endAngle={endAngle}
+          fill={fill}
+        />
+        <Sector
+          cx={cx}
+          cy={cy}
+          startAngle={startAngle}
+          endAngle={endAngle}
+          innerRadius={innerRadius - 10}
+          outerRadius={innerRadius - 3}
+          fill={fill}
+        />
+        <text
+          x={cx + 5}
+          y={cy + 20}
+          textAnchor="middle"
+          fill="#333"
+          style={{ fontSize: "18px", fontWeight: 700 }}
+        >{`${value} kg`}</text>
       </g>
     );
   };
@@ -412,13 +457,26 @@ function UserMonthChart() {
         <text style={{ fontSize: "20px" }} x={cx} y={cy - 10} dy={8} textAnchor="middle" fill="#AAC">
           {`${beforeMonth} 월`}
         </text>
-        <Sector cx={cx} cy={cy} innerRadius={innerRadius} outerRadius={outerRadius} startAngle={startAngle} endAngle={endAngle} fill={fill} opacity={1} />
-        <text x={cx + 5} y={cy + 20} textAnchor="middle" fill="#333" style={{ fontSize: "16px", fontWeight: 700 }}>{`${value} kg`}</text>
+        <Sector
+          cx={cx}
+          cy={cy}
+          innerRadius={innerRadius}
+          outerRadius={outerRadius}
+          startAngle={startAngle}
+          endAngle={endAngle}
+          fill={fill}
+          opacity={1}
+        />
+        <text
+          x={cx + 5}
+          y={cy + 20}
+          textAnchor="middle"
+          fill="#333"
+          style={{ fontSize: "16px", fontWeight: 700 }}
+        >{`${value} kg`}</text>
       </g>
     );
   };
-
-  console.log("1", currentMonthchartData.length);
 
   useEffect(() => {
     if (currentMonthchartData.length > 0) {
@@ -452,7 +510,11 @@ function UserMonthChart() {
                 <rect width="14" height="14" fill={COLORS[entry.category]} />
               </svg>
               <span>{entry.name}</span>
-              {entry.value > 0 ? <span style={{ color: "red" }}>+{entry.value.toFixed(1)} kg</span> : <span style={{ color: "#0095ff" }}>{entry.value.toFixed(1)} kg</span>}
+              {entry.value > 0 ? (
+                <span style={{ color: "red" }}>+{entry.value.toFixed(1)} kg</span>
+              ) : (
+                <span style={{ color: "#0095ff" }}>{entry.value.toFixed(1)} kg</span>
+              )}
             </div>
           </li>
         ))}
@@ -578,7 +640,8 @@ function UserMonthChart() {
         />
         <div>
           <h2>
-            <span className="forest_green_text">{checkYear}</span>년 <span className="forest_green_text">{checkMonth}</span>월 계산결과
+            <span className="forest_green_text">{checkYear}</span>년{" "}
+            <span className="forest_green_text">{checkMonth}</span>월 계산결과
           </h2>
         </div>
       </div>
