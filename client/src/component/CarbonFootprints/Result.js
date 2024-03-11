@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import PiChart from "./Result/piChartData";
-import BarChart from "./Result/barChart";
-import TargetBarchart from "./Result/targetBarchart";
-import TargetBarchartTotal from "./Result/targetBarchartTotal";
+import PiChart from "./Result/PiChartData";
+import BarChart from "./Result/BarChart";
+import TargetBarchart from "./Result/TargetBarchart";
+import TargetBarchartTotal from "./Result/TargetBarchartTotal";
 
 import { useNavigate } from "react-router-dom";
 

@@ -4,7 +4,7 @@ import { PieChart, Pie, Sector, Cell, Tooltip, Legend, ResponsiveContainer } fro
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import UserSavingChart from "./userSavingChart";
+import UserSavingChart from "./UserSavingChart";
 const data = [
   { name: "전기", value: 400 },
   { name: "가스", value: 300 },
