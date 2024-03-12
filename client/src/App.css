@@ -232,6 +232,8 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .no-data .sub_tit{margin-top:4px; font-size:16px; line-height:26px; color:#666;}
 .no-data-w .btn_wrap{margin-top:40px; text-align:center;}
 
+.campaign .no-data-w {padding: 80px 0;}
+
 /* flex-box */
 .flex-box {display: flex;}
 

@@ -23,7 +23,7 @@ const Campaign = () => {
   const offset = (page - 1) * listLimit; // 시작점과 끝점을 구하는 offset
 
   // 검색 인풋  
-  const [searchInput, setSearchInput] = useState(''); // 검색어를 저장하는 state
+  const [searchInput, setSrchInput] = useState(''); // 검색어를 저장하는 state
 
   // 데이터 불러옴
   useEffect(() => {
@@ -54,12 +54,13 @@ const Campaign = () => {
     // 검색 결과에 따라 전체 포스트 개수 업데이트
     setTotalPostsCount(filteredData.length);
     setPage(1); // 페이지를 1로 초기화
+    // console.log(filteredData.length)
   };
 
   // 검색 버튼 클릭 이벤트 핸들러
-  const handleSearchButtonClick = () => {
+  const handleSrchBtnClk = () => {
     searchPosts();
-    setSearchInput(""); // 검색어 초기화
+    setSrchInput(""); // 검색어 초기화
 
     // 탭 버튼 초기화
     const tabBtns = document.querySelectorAll(".tab-area .btn-tab");
@@ -79,7 +80,7 @@ const Campaign = () => {
   };
 
   // 버튼 탭 클릭 이벤트
-  const handleTabClick = (index) => {
+  const handleTabClk = (index) => {
     let filteredUsertype;
     if (index === 0) {
       // 전체 보기 버튼을 클릭한 경우 
@@ -116,16 +117,16 @@ const Campaign = () => {
             <div className="txt"> 우리는 탄소 중립 난제를 해결하고 녹색 성장을 이끌어내기 위해 모이고 있습니다.</div>
           </div>
           <div className="search-wrap">
-            <input type="text" placeholder="검색어를 입력하세요" value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
-            <button className="btn-search" onClick={handleSearchButtonClick}>검색</button>
+            <input type="text" placeholder="검색어를 입력하세요" value={searchInput} onChange={(e) => setSrchInput(e.target.value)} />
+            <button className="btn-search" onClick={handleSrchBtnClk}>검색</button>
           </div>
             <div className="group-box">
               <div className="tab-area">
-                {/* 각 탭 클릭시 handleTabClick 함수 호출 */}
-                <button className='btn-tab active' onClick={() => handleTabClick(0)}>전체</button>
-                <button className='btn-tab' onClick={() => handleTabClick(1)}>개인</button>
-                <button className='btn-tab' onClick={() => handleTabClick(2)}>기업</button>
-                <button className='btn-tab' onClick={() => handleTabClick(3)}>단체</button>
+                {/* 각 탭 클릭시 handleTabClk 함수 호출 */}
+                <button className='btn-tab active' onClick={() => handleTabClk(0)}>전체</button>
+                <button className='btn-tab' onClick={() => handleTabClk(1)}>개인</button>
+                <button className='btn-tab' onClick={() => handleTabClk(2)}>기업</button>
+                <button className='btn-tab' onClick={() => handleTabClk(3)}>단체</button>
               </div>
 
               <button className="btn-write" onClick={()=>{navigate('/campaign/write')}}>글쓰기</button>
@@ -133,9 +134,22 @@ const Campaign = () => {
           <div className="campaign-wrap">
             <div className="container">
               {/* 검색 결과에 따라 글목록 나열 */}
-              {postsData(filteredResults).map((data, i) => (
+              {
+                filteredResults.length > 0 ? (
+                  postsData(filteredResults).map((data, i) => (
+                    <TextList campaignList={data} key={i} />
+                  ))
+                ):(
+                <div className="no-data-w">
+                  <div className="no-data">
+                    <p className="tit">검색 결과가 없습니다.</p>
+                  </div>
+                </div>
+                )
+              }
+              {/* {postsData(filteredResults).map((data, i) => (
                 <TextList campaignList={data} key={i} />
-              ))}
+              ))} */}
             </div>
           </div>
           {/* 페이지네이션 컴포넌트 */}
