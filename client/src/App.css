@@ -53,6 +53,8 @@ input[type="number"]:disabled {color: #999; background-color: #f3f3f3;}
 input[type="number"]:-moz-read-only {color: #999; background-color: #f3f3f3;}
 input[type="number"]:read-only {color: #999; background-color: #f3f3f3;}
 input[type="number"].readonly {color: #999; background-color: #f3f3f3;}
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {-webkit-text-fill-color: #000;-webkit-box-shadow: 0 0 0px 1000px #fff inset; box-shadow: 0 0 0px 1000px #fff inset;transition: background-color 5000s ease-in-out 0s; }
+input:autofill, input:autofill:hover, input:autofill:focus, input:autofill:active {-webkit-text-fill-color: #000; -webkit-box-shadow: 0 0 0px 1000px #fff inset; box-shadow: 0 0 0px 1000px #fff inset;transition: background-color 5000s ease-in-out 0s;}
 select {font-size: 18px; color: #888; appearance: none; -webkit-appearance: none; -moz-appearance: none; -o-appearance: none; vertical-align: top;}
 select::-ms-expand {display: none;}
 select:focus, select:active {outline: none;}
