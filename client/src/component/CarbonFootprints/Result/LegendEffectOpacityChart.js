@@ -148,7 +148,7 @@ const Example = () => {
   // 변환된 데이터를 현재 선택된 월에 따라 필터링
   const filteredData = transformedData.filter((data) => data.currentMonth === selectedMonth);
   // ################################################################################################################### chart데이터 월단위 분할 (consol.log)
-  console.log("filteredData", filteredData);
+  // console.log("filteredData", filteredData);
 
   const CustomTick = (props) => {
     const { x, y, payload } = props;

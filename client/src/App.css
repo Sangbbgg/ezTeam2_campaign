@@ -804,6 +804,7 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 }
 .example-custom-input:hover{background-color: #25B058; color: white;}
 .example-custom-input.active{background-color: #25B058; color: white;}
+.no-data > button{ margin-top: 20px; font-size: 20px; width: 200px; height: 80px; background-color: #25B058; border-radius: 8px; color: white; margin-left: auto;}
 
 
 
