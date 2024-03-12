@@ -68,6 +68,7 @@ function Mypage() {
     });
   };
 
+  window.scrollTo({top: 0, behavior: "auto", });
   return (
     <div id="wrap" className="mypage">
       <Header />
