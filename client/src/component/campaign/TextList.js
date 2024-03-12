@@ -46,11 +46,6 @@ const TextList = ({campaignList}) => {
       navigate("/Login");
     } else {
       navigate(`/campaign/detail/${campaignList.id}`);
-      window.scrollTo({
-        top: 0, // Y 좌표
-        left: 0, // X 좌표
-        behavior: "smooth", // 부드러운 스크롤 효과
-      });
     }
   };
   
