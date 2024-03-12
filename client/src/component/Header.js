@@ -109,9 +109,6 @@ const Header = () => {
               <button className="LoginBtn" onClick={handleLogout}>
                 로그아웃
               </button>
-              <button>
-                <Link to="/modify">정보 수정</Link>
-              </button>
               <button className="one-link" onClick={()=>navigateWithLoginCheck('/mypage')}><a className="one-link" href="">MyPage</a></button>
             </>
           ) : (
