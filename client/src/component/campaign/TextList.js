@@ -1,7 +1,10 @@
+import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
 const TextList = ({campaignList}) => {
   const navigate = useNavigate();
+  const storedUserData = sessionStorage.getItem("userData");
+  const userData = JSON.parse(storedUserData);
 
   // 이미지 태그의 src 속성값을 추출하는 함수
   const extractImageSrc = (htmlString) => {
@@ -36,9 +39,23 @@ const TextList = ({campaignList}) => {
       return <span className="badge completed">마감</span>;
     }
   };
+
+  const campaignNavigate = () => {
+    if (userData === null) {
+      alert("로그인이 필요한 서비스입니다.");
+      navigate("/Login");
+    } else {
+      navigate(`/campaign/detail/${campaignList.id}`);
+      window.scrollTo({
+        top: 0, // Y 좌표
+        left: 0, // X 좌표
+        behavior: "smooth", // 부드러운 스크롤 효과
+      });
+    }
+  };
   
   return (
-    <button className="cont" onClick={()=>{navigate(`/campaign/detail/${campaignList.id}`)}}>
+    <button className="cont" onClick={campaignNavigate}>
       <div className="img-wrap">
         {imageSrcList.length > 0 ? (
           imageSrcList.map((src, index) => (
@@ -56,7 +73,6 @@ const TextList = ({campaignList}) => {
         <p className="title">{campaignList.title}</p>
         <div className="txt-info">
           <p className="username">{campaignList.username}</p>
-          {/* {console.log(campaignList.start_date)} */}
           <p className="date">{campaignList.date.slice(0, 10).replace('T', ' ')}</p>
         </div>
       </div>
