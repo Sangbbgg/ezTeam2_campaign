@@ -8,7 +8,6 @@ import Comments from '../component/campaign/Comments';
 import DOMPurify from "isomorphic-dompurify"
 import "react-quill/dist/quill.core.css";
 import Footer from "../component/Footer";
-import ScrollTop from "../component/ScrollTop";
 
 const CampaignDetail = (props) => {
   const navigate = useNavigate();
@@ -94,6 +93,8 @@ const CampaignDetail = (props) => {
       marker.setMap(map);
     }
   }, [curList]);
+
+  window.scrollTo({top: 0, behavior: "auto", });
 
   return (
     <div id="wrap" className="campaign-detail">
