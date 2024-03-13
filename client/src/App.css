@@ -371,9 +371,8 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 
 /* 상세 */
 #wrap.campaign-detail {padding-top: 0;}
-/* #wrap.campaign-detail .content-w {position: relative; padding-top: 160px; padding-bottom: 120px; background-color: #e1f0de;background-image: url("../public/img/bg-main-campaign.jpg"); background-size: cover; background-position: center;} */
-#wrap.campaign-detail .content-w {position: relative; padding-top: 160px; padding-bottom: 120px; background-color: #e1f0de;background: url("../public/img/carbon_content_bg.png") no-repeat center / cover fixed;}
-/* #wrap.campaign-detail .content-w {position: relative; padding-top: 160px; padding-bottom: 120px; background-color: #e1f0de;background: url("../public/img/carbon_content_bg.png") no-repeat center / cover fixed;} */
+#wrap.campaign-detail .content-w {position: relative; padding-top: 160px; padding-bottom: 120px; background-color: #e1f0de;background-image: url("../public/img/bg-main-campaign.jpg"); background-size: cover; background-position: center;}
+#wrap.campaign-detail .content-w {position: relative; padding-top: 160px; padding-bottom: 120px; background-color: #e1f0de;background: url("../public/img/carbon_content_bg.png") no-repeat center / cover fixed; /*background: linear-gradient(#bef0ff, #03bd8c);*/}
 
 .campaign-detail {position: relative;}
 .campaign-detail .summary-wrap {background-color: #fff;}
