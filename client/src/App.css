@@ -326,7 +326,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 
 .container {display: flex; flex-wrap: wrap;}
 .container .cont {position: relative; margin-right: 30px; width: calc((100%  - 60px) / 3); background-color: #fff; overflow: hidden; box-shadow: 0 4px 6px -2px #00000001, 0 10px 15px -3px #0000000c;}
-.container .cont:nth-child(n+4) {margin-top: 50px;}
+.container .cont:nth-child(n+4) {margin-top: 30px;}
 .container .cont:nth-child(3n) {margin-right: 0;}
 .container .cont .img-wrap {position: relative; overflow: hidden; width: auto; height: 288px;}
 .container .cont .img-wrap:hover img {transform: translate(-50%, -50%) scale(1.1);}
@@ -340,8 +340,8 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 
 .campaign .group-box {display: flex; justify-content: space-between; align-items: flex-end;}
 .campaign .btn-write {margin-bottom: 20px; padding: 10px 30px; color: #fff; background-color: #25B058;}
-.campaign-wrap {padding: 50px 50px 60px; background-color: #e1f0de;}
-.campaign-wrap .cont .title {min-height: 32px; font-size: 18px; color: #000; text-align: left; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; word-break: keep-all;}
+.campaign-wrap {padding: 40px 40px 60px; background-color: #e1f0de;}
+.campaign-wrap .cont .title {min-height: 32px; font-size: 16px; color: #000; text-align: left; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; word-break: keep-all;}
 .campaign-wrap .txt-wrap {display: block; position: relative; padding: 14px;}
 .campaign-wrap .txt-wrap .txt-info {display: flex; justify-content: space-between; margin-top: 20px;}
 .campaign-wrap .txt-wrap .username {font-size: 14px; text-align: right; color: #777;}
@@ -385,10 +385,10 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 
 
 /* 댓글 영역 */
-.comment-area {display: flex; justify-content: space-between; position: relative; padding: 40px; background: #fff; border-radius:0 0 6px 6px;}
+.comment-area {display: flex; justify-content: space-between; position: relative; padding: 40px 40px 80px; background: #fafafa; border-radius:0 0 6px 6px;}
 .comment-area .comment-tit {font-size: 22px; color: #000;}
 .comment-area .comment-w {width: calc(100% - 270px);}
-.comment-area textarea {background-color: #fff;}
+.comment-area textarea {background-color: #fafafa;}
 .comment-area .write-div {position: relative; border: 1px solid #000;}
 .comment-area .write-div::after {content: ""; display: block; position: absolute; bottom: 48px; left: 16px; width: calc(100% - 32px); height: 1px; background-color: #ccc;}
 .comment-area .for-padding {padding: 14px 14px 48px 14px;}
@@ -459,7 +459,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .view-wrap .comment .write-div {display: none;}
 /* .view-wrap .comment .view-div .btn-w {display: flex; justify-content: flex-end; margin-top: 20px;} */
 .view-wrap .comment .view-div .btn-w {position: absolute; top: 12px; right: 10px;}
-.view-wrap .comment .view-div .btn-w button {padding: 4px 8px; font-size: 14px; color: #777; background-color: #ddd;}
+.view-wrap .comment .view-div .btn-w button {padding: 4px 8px; font-size: 12px; color: #777; background-color: #ddd;}
 .view-wrap .comment .view-div .btn-w .btn-delete {margin-left: 8px;}
 .view-wrap .comment.edit .view-div {display: none;}
 .view-wrap .comment.edit .write-div {display: block;}
