@@ -201,12 +201,14 @@ const CampaignDetail = (props) => {
               </div>
             </div>
           )}
+          <Comments curList={curList}/>
+
 
           {/* 하단 버튼 영역 */}
           {renderModifyBtn()}
 
           {/* 댓글 */}
-          <Comments curList={curList}/>
+          {/* <Comments curList={curList}/> */}
         </div>
       </div>
       <Footer/>

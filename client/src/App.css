@@ -134,7 +134,7 @@ header .utils button + button {margin-left: 20px;}
 
 /* 푸터 */
 footer {width: 100%; background: #fff; padding: 80px 0px;}
-footer .inner {margin: 0px auto; width: 1200px;}
+footer .inner {margin: 0px auto; width: 1024px;}
 footer .inner .top {width: 100%; border-bottom: 1px solid #000; padding-bottom: 20px;}
 footer .inner .top h1 {float: left;font: 24px/1 'Righteous', cursive; color: #000;}
 footer .logo {z-index: 10; width: 56px; height:60px; background: url("../public/img/logo-blk.png") no-repeat center 2px / cover;}
@@ -147,7 +147,7 @@ footer .inner .bottom address {width: 100%; font-style: normal; font-size: 13px;
 footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 
 
-/* @media screen and (max-width: 1200px) {
+/* @media screen and (max-width: 1024px) {
   header {height: 60px;}
   header .logo {left: 30px; width: 50px; height: 28px;}
   header .utils {display: none;}
@@ -313,7 +313,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 /* ------------------------------- 캠페인 ------------------------------- */
 /* #228e0c */
 #wrap {position: relative; padding-top: 80px; overflow-x: hidden;}
-.inner {position: relative; margin: 0 auto; width: 1200px;}
+.inner {position: relative; margin: 0 auto; width: 1024px;}
 .content-w {position: relative; padding-top: 80px; padding-bottom: 200px;}
 #wrap.campaign-write {background: #e1f0de;}
 #wrap.campaign footer {background: #e1f0de;}
@@ -328,7 +328,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .container .cont {position: relative; margin-right: 30px; width: calc((100%  - 60px) / 3); background-color: #fff; overflow: hidden; box-shadow: 0 4px 6px -2px #00000001, 0 10px 15px -3px #0000000c;}
 .container .cont:nth-child(n+4) {margin-top: 50px;}
 .container .cont:nth-child(3n) {margin-right: 0;}
-.container .cont .img-wrap {position: relative; overflow: hidden; width: auto; height: 366px;}
+.container .cont .img-wrap {position: relative; overflow: hidden; width: auto; height: 288px;}
 .container .cont .img-wrap:hover img {transform: translate(-50%, -50%) scale(1.1);}
 .container .cont .img-wrap img {position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1); width: 100%; height: 100%; transition: transform .3s ease-out; object-fit: cover;}
 .container .cont .img-wrap img {position: absolute; top: 0; left: 0; transform: scale(1); width: 100%; transition: transform .3s ease-out; object-fit: cover;}
@@ -371,11 +371,12 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 
 /* 상세 */
 #wrap.campaign-detail {padding-top: 0;}
-#wrap.campaign-detail .content-w {position: relative; padding-top: 160px; padding-bottom: 120px; background-color: #e1f0de;background-image: url("../public/img/carbon_content_bg.png"); background-size: cover; background-position: center;}
+#wrap.campaign-detail .content-w {position: relative; padding-top: 160px; padding-bottom: 120px; background-color: #e1f0de;background-image: url("../public/img/bg-main-campaign.jpg"); background-size: cover; background-position: center;}
+/* #wrap.campaign-detail .content-w {position: relative; padding-top: 160px; padding-bottom: 120px; background-color: #e1f0de;background-image: url("../public/img/carbon_content_bg.png"); background-size: cover; background-position: center;} */
 
 .campaign-detail {position: relative;}
 .campaign-detail .summary-wrap {background-color: #fff;}
-.campaign-detail .body-wrap {position: relative; margin-top: 40px; padding: 40px; background-color: #fff; border-radius: 6px;}
+.campaign-detail .body-wrap {position: relative; margin-top: 40px; padding: 40px; background-color: #fff; border-radius: 6px 6px 0 0;}
 .campaign-detail .body-wrap .body-tit {margin-bottom: 20px; padding-bottom: 14px; font-size: 20px; border-bottom: 1px solid #ddd;}
 .campaign-detail .body-area {font-size: 18px;  background-color: #fff;}
 .campaign-detail .body-area img {margin-bottom: 40px; max-width: 944px; height: auto;}
@@ -384,7 +385,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 
 
 /* 댓글 영역 */
-.comment-area {display: flex; justify-content: space-between; position: relative; margin-top: 80px; padding: 40px; background: #fff; border-radius: 6px;}
+.comment-area {display: flex; justify-content: space-between; position: relative; padding: 40px; background: #fff; border-radius:0 0 6px 6px;}
 .comment-area .comment-tit {font-size: 22px; color: #000;}
 .comment-area .comment-w {width: calc(100% - 270px);}
 .comment-area textarea {background-color: #fff;}
@@ -582,7 +583,7 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 
 /* ------------------------------- 탄소 발자국 ------------------------------- */
 /* 상단 title */
-.title_box {padding: 16px 24px; margin: 0 auto; width: 1200px;}
+.title_box {padding: 16px 24px; margin: 0 auto; width: 1024px;}
 .title_box > div {justify-content: flex-start;}
 .title_box > div > div h1 {font-size: 24px;}
 .title_box > div > p {font-size: 13px;}
