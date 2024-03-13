@@ -29,7 +29,7 @@ export default class CustomBarChart extends PureComponent {
       );
     };
 
-    console.log("??", barChartDataTotal);
+    // console.log("??", barChartDataTotal);
     return (
       <ResponsiveContainer width="100%" height={barChartDataTotal.length * 11}>
         {barChartDataTotal.map((entry, index) => (

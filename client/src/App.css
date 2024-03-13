@@ -773,9 +773,9 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 .main_chart_img_right > img{width: 500px; height: 500px; fill: #0078C3; transition: opacity 3s ease; opacity: 0; }
 
 /* 마이페이지 */
-.carbon-myage-title-wrap{display: flex; justify-content: space-between;}
+.carbon-myage-title-wrap{display: flex; justify-content: space-between; padding: 0 30px;}
 
-.mypage-userchart{width: 100%;height: 400px; padding: 30px; display: flex; gap: 20px; border:1px solid #ccc;}
+.mypage-userchart{width: 100%;height: 400px; padding: 30px; display: flex; gap: 20px; }
 .mypage-userchart__left{display: flex; position: relative; height: 100%; flex-direction: row; width: 50%; justify-content: center; border:1px solid #ccc;  border-radius: 12px;}
 .mypage-userchart-left__chartarea{width: 100%;}
 .mypage-userchart__title{position: absolute; top:8%; right:5%;}

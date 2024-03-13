@@ -315,7 +315,7 @@ function UserMonthChart() {
     // 현재 년/월이 기본값으로 데이터 셋을 점검
     if (resultDataSet && resultDataSet.length > 0) {
       const selectedYearData = resultDataSet.find((d) => d.year === checkYear.toString());
-      console.log(selectedYearData);
+      // console.log(selectedYearData);
       if (selectedYearData) {
         const selectedCurrentMonthData = selectedYearData.months.find((m) => m.month === checkMonth);
         const selectedPreviousMonthData = selectedYearData.months.filter((m) => m.month < checkMonth).sort((a, b) => b.month - a.month);
@@ -360,7 +360,7 @@ function UserMonthChart() {
           setBeforeMonth(selectedPreviousMonthData[0].month);
           setPreviousMonthchartData(filteredPreviousMonthData);
         } else {
-          console.log("데이터 없음");
+          // console.log("데이터 없음");
           setIsDataCheck(false);
         }
       } else setIsDataCheck(false);
