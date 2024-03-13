@@ -371,8 +371,9 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 
 /* 상세 */
 #wrap.campaign-detail {padding-top: 0;}
-#wrap.campaign-detail .content-w {position: relative; padding-top: 160px; padding-bottom: 120px; background-color: #e1f0de;background-image: url("../public/img/bg-main-campaign.jpg"); background-size: cover; background-position: center;}
-/* #wrap.campaign-detail .content-w {position: relative; padding-top: 160px; padding-bottom: 120px; background-color: #e1f0de;background-image: url("../public/img/carbon_content_bg.png"); background-size: cover; background-position: center;} */
+/* #wrap.campaign-detail .content-w {position: relative; padding-top: 160px; padding-bottom: 120px; background-color: #e1f0de;background-image: url("../public/img/bg-main-campaign.jpg"); background-size: cover; background-position: center;} */
+#wrap.campaign-detail .content-w {position: relative; padding-top: 160px; padding-bottom: 120px; background-color: #e1f0de;background: url("../public/img/carbon_content_bg.png") no-repeat center / cover fixed;}
+/* #wrap.campaign-detail .content-w {position: relative; padding-top: 160px; padding-bottom: 120px; background-color: #e1f0de;background: url("../public/img/carbon_content_bg.png") no-repeat center / cover fixed;} */
 
 .campaign-detail {position: relative;}
 .campaign-detail .summary-wrap {background-color: #fff;}
@@ -485,7 +486,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .daum_popup {z-index: 1;}
 
 /* 상세페이지 - 지도 */
-.map-area.vis-map {display: block; position: relative; margin-top: 40px; padding: 40px; background-color: #fff; border-radius: 6px;}
+.map-area.vis-map {display: block; position: relative; margin-top: 40px; padding: 40px; background-color: #fff; border-radius: 6px 6px 0 0;}
 .map-area.vis-map .tit {margin-bottom: 14px; font-size: 20px;margin-bottom: 20px; padding-bottom: 14px; font-size: 20px; border-bottom: 1px solid #ddd;}
 .map-area.vis-map .txt-w {display: flex; flex-wrap: wrap; position: relative; margin-top: 20px; padding-left: 24px; background: url("../public/img/map-marker.svg") no-repeat no-repeat 0 3px; background-size: 20px;}
 .map-area.vis-map .txt-w p {font-size: 16px;}
