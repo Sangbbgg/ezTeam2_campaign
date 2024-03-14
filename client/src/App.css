@@ -743,7 +743,7 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 }
 
 .mypage-left-chart__ul > li:first-child{font-size: 18px; font-weight: 700;}
-.mypage-left-chart__ul > li{font-size: 15px;}
+.mypage-left-chart__ul > li{font-size: 12px;}
 .mypage-left-chart__ul > li > div{display: flex; align-items: center;}
 .mypage-left-chart__ul > li > div > span{flex-grow: 1; font-weight: 500;}
 .mypage-left-chart__ul > li > div > span:last-child{flex-grow: 1;}

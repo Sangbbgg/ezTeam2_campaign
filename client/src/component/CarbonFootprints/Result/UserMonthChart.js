@@ -514,8 +514,8 @@ function UserMonthChart() {
                   activeShape={renderActiveShape1}
                   data={previousMonthchartData}
                   nameKey="label"
-                  cx={90}
-                  cy={90}
+                  cx={70}
+                  cy={70}
                   innerRadius={45}
                   outerRadius={60}
                   fill="#8884d8"
