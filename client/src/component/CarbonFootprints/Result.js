@@ -545,8 +545,8 @@ function Result({ initialData, resultData, userData, isTransportationOption, onS
                             <span className={`forest_${data.category}_text`}>{data.name}</span>
                           </div>
                         ))}
-                        {console.log("barChatData :",barChatData)}
-                        {console.log("barChartDataTotal :",barChartDataTotal)}
+                        {/* {console.log("barChatData :",barChatData)}
+                        {console.log("barChartDataTotal :",barChartDataTotal)} */}
                       </div>
                       <div className="total_chart">
                         <TargetBarchartTotal barChartDataTotal={barChartDataTotal} />
