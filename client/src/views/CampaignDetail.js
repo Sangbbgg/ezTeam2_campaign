@@ -171,7 +171,7 @@ const CampaignDetail = (props) => {
                       <p className="txt">{curList.phonenumber}</p>
                     </div>
                   </div>
-                  <p className="sub-txt">&#8251; 문의사항은 메일 / 전화 / 댓글을 이용해주세요</p>
+                  <p className="sub-txt">&#8251; 문의사항은 메일 / 전화 / 댓글을 이용해주세요.</p>
                 </div>
               </div>
                 {
