@@ -148,7 +148,7 @@ const CampaignEdit = () => {
             <form>
               <div className="form-input">
                 <p className="title">캠페인 제목</p>
-                <input type="text" name="title" value={write.title || ""} placeholder="제목을 입력하세요" onChange={handleChange} />
+                <input type="text" name="title" value={write.title || ""} placeholder="제목을 입력하세요." onChange={handleChange} />
               </div>
               <div className="calendar-area">
                 <p className="cal-tit">캠페인 기간</p>

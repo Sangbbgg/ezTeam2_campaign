@@ -111,7 +111,7 @@ const Comments = ({ curList }) => {
         <div className="write-wrap">
           <div className="write-div">
             <div className="for-padding">
-              <textarea className="comment-text" type="text" name="comment_text" value={newComment} placeholder="내용을 입력하세요" onChange={handleChange} />
+              <textarea className="comment-text" type="text" name="comment_text" value={newComment} placeholder="내용을 입력하세요." onChange={handleChange} />
             </div>
             <div className="btn-w">
               <button className="btn-submit" type="submit" onClick={postComment}>등록</button>
