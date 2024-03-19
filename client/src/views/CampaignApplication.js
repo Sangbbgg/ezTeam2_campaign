@@ -57,6 +57,9 @@ const CampaignApplication = () => {
       <Header/>
       <div className="content-w">
         <div className="inner">
+          <div className="tit-wrap">
+            <div className="tit">신청서 확인</div>
+          </div>
           <div className="form-table">
             <table className="vertical">
               <caption></caption>

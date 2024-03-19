@@ -93,6 +93,9 @@ const CampaignForm = () => {
       <Header/>
       <div className="content-w">
         <div className="inner">
+          <div className="tit-wrap">
+            <div className="tit">캠페인 신청</div>
+          </div>
           <div className="form-table">
             <table className="vertical">
               <caption></caption>
@@ -120,13 +123,13 @@ const CampaignForm = () => {
                   </td>
                   <th className="user-email" scope="row">소속</th>
                   <td className="user-company">
-                    <input type="text" name="company" value={formWrite.company} onChange={handleChange} />
+                    <input type="text" name="company" value={formWrite.company} onChange={handleChange} placeholder="소속을 입력하세요." />
                   </td>
                 </tr>
                 <tr>
                   <th>신청자 메모</th>
                   <td colSpan="3">
-                    <textarea value={formWrite.memo} placeholder="내용을 입력하세요" onChange={(e) => setFormWrite({...formWrite, memo: e.target.value})} />
+                    <textarea value={formWrite.memo} placeholder="내용을 입력하세요." onChange={(e) => setFormWrite({...formWrite, memo: e.target.value})} />
                   </td>
                 </tr>
               </tbody>

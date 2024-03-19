@@ -285,6 +285,8 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .tit-wrap .txt {margin-top: 12px; font-size: 16px;}
 .page-tit {margin: 40px 0 30px; font-size: 24px;}
 
+.application-form .tit-wrap, .application-form .tit-wrap {margin-bottom: 30px;}
+
 .container {display: flex; flex-wrap: wrap;}
 .container .cont {position: relative; margin-right: 30px; width: calc((100%  - 60px) / 3); background-color: #fff; overflow: hidden; box-shadow: 0 4px 6px -2px #00000001, 0 10px 15px -3px #0000000c;}
 .container .cont:nth-child(n+4) {margin-top: 30px;}
