@@ -165,7 +165,6 @@ axios.post('http://localhost:8000/regester', {
   
 
   return (
-    <>
     <div id="wrap" className="register enterprise">
       <div className="content-w">
         <div className="inner">
@@ -274,8 +273,6 @@ axios.post('http://localhost:8000/regester', {
         </div>
       </div>
     </div>
-  
-    </>
   );
 }
 

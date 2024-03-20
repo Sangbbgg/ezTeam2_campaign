@@ -861,3 +861,7 @@ table {border-collapse: collapse; border-spacing: 0; word-break: break-all;}
 .register .bottom-area .btn-w {padding: 0; background-color: transparent; box-shadow: none; border-radius: 0;}
 .register .bottom-area a {margin-left: 10px; padding: 10px 30px; font-size: 16px; color: #000; background-color: #fff; border: 1px solid #000;}
 .register .bottom-area button {padding: 10px 30px; font-size: 16px; color: #fff; background-color: #25B058; border: 1px solid #25B058;}
+
+.find-id .bottom-area {margin-top: 40px;}
+.find-id .result-w p {margin-top: 80px; font-size: 16px;}
+.find-id .result-w span {margin-right: 6px;}
