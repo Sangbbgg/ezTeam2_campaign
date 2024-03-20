@@ -28,22 +28,38 @@ function Find() {
 };
 
   return (
-    <div className="form">
-      <form className="form-Find">
-      <h1>회원 찾기</h1>
-        <input type="text" placeholder="이름" value={username} onChange={(e) => setUsername(e.target.value)} />
-      <br />
-        <input
-          type="text"
-          placeholder="핸드폰번호"
-          value={phoneNumber}
-          onChange={(e) => setPhoneNumber(e.target.value)}
-        />
-      <br />
-      <button onClick={handleFindClick}>찾기</button>
-      <br />
-      {email && <p>가입된 이메일: {email}</p>}
-      </form>
+    <div id="wrap" className="register find-id">
+      <div className="content-w">
+        <div className="inner">
+          <div className="page-tit">회원 ID 찾기</div>
+          <div className="form-w">
+            <form>
+              <div className="form-input">
+                <p className="title">사용자 이름</p>
+                <input type="text" placeholder="이름" value={username} onChange={(e) => setUsername(e.target.value)} />
+              </div>
+              <div className="form-input">
+                <p className="title">휴대폰 번호</p>
+                <input
+                  type="text"
+                  placeholder="휴대폰 번호"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                />
+              </div>
+
+              <div className="bottom-area">
+                <div className="btn-w">
+                  <button type="button" onClick={handleFindClick}>찾기</button>
+                </div>
+              </div>
+              <div className="result-w">
+                {email && <p><span>가입된 이메일: </span>{email}</p>}
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
