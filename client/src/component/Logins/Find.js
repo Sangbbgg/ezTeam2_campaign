@@ -36,13 +36,13 @@ function Find() {
             <form>
               <div className="form-input">
                 <p className="title">사용자 이름</p>
-                <input type="text" placeholder="이름" value={username} onChange={(e) => setUsername(e.target.value)} />
+                <input type="text" placeholder="사용자 이름을 입력해주세요." value={username} onChange={(e) => setUsername(e.target.value)} />
               </div>
               <div className="form-input">
                 <p className="title">휴대폰 번호</p>
                 <input
                   type="text"
-                  placeholder="휴대폰 번호"
+                  placeholder="휴대폰 번호를 입력하세요."
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
                 />

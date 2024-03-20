@@ -273,7 +273,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 
 /* ------------------------------- 캠페인 ------------------------------- */
 /* #228e0c */
-#wrap {position: relative; padding-top: 80px;}
+#wrap {position: relative; padding-top: 80px; min-height: 100vh;}
 .inner {position: relative; margin: 0 auto; width: 1024px;}
 .content-w {position: relative; padding-top: 80px; padding-bottom: 200px;}
 #wrap.campaign-write {background: #e1f0de;}

@@ -96,14 +96,14 @@ function LoginPage() {
                   id="id"
                   className="login-input"
                   type="text"
-                  placeholder="아이디"
+                  placeholder="아이디를 입력해주세요."
                   value={email}
                   onChange={(e) => setemail(e.target.value)}
                 />
                 <input
                   className="login-input"
                   type="password"
-                  placeholder="비밀번호"
+                  placeholder="비밀번호를 입력해주세요."
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />

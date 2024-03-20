@@ -175,7 +175,7 @@ axios.post('http://localhost:8000/regester', {
                 <p className="title">사용자 이름</p>
                 <input
                   type="text"
-                  placeholder="사용자명"
+                  placeholder="사용자 이름을 입력해주세요."
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                 />
@@ -184,7 +184,7 @@ axios.post('http://localhost:8000/regester', {
                 <p className="title">비밀번호</p>
                 <input
                   type="password"
-                  placeholder="비밀번호"
+                  placeholder="비밀번호를 입력해주세요."
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
@@ -193,7 +193,7 @@ axios.post('http://localhost:8000/regester', {
                 <p className="title">비밀번호 확인</p>
                 <input
                   type="password"
-                  placeholder="비밀번호 확인"
+                  placeholder="비밀번호를 다시 입력해주세요."
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
@@ -218,7 +218,7 @@ axios.post('http://localhost:8000/regester', {
                 <div className="flex-box">
                   <input
                     type="text"
-                    placeholder="이메일"
+                    placeholder="이메일 주소를 입력해주세요."
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
@@ -232,7 +232,7 @@ axios.post('http://localhost:8000/regester', {
                 <p className="title">휴대폰 번호</p>
                 <input
                   type="text"
-                  placeholder="휴대폰 번호"
+                  placeholder="휴대폰 번호를 입력해주세요."
                   value={phonenumber}
                   onChange={(e) => setphonenumber(e.target.value)}
                 />
@@ -242,7 +242,7 @@ axios.post('http://localhost:8000/regester', {
                 <div className="flex-box">
                   <input
                     type="text"
-                    placeholder="주소"
+                    placeholder="주소를 입력해주세요."
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                   />
@@ -257,7 +257,7 @@ axios.post('http://localhost:8000/regester', {
                 )}
                 <input
                   type="text"
-                  placeholder="상세주소"
+                  placeholder="상세 주소를 입력해주세요."
                   value={detailedaddress}
                   onChange={(e) => setdetailedaddress(e.target.value)}
                 />
