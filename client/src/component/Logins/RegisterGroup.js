@@ -134,7 +134,7 @@ const handleuniquenumberCheck = async(event) => {
     // }
   
 // 클라이언트에서 서버로 회원가입 요청
-axios.post('http://localhost:8000/Rigester', {
+axios.post('http://localhost:8000/register', {
   username,
   password,
   email,

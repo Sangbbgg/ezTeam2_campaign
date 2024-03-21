@@ -903,7 +903,7 @@ app.post("/checkEmailDuplication", (req, res) => {
   });
 });
 //---------------------------회원가입 기능구현----------------------------------------------
-app.post("/regester", async (req, res) => {
+app.post("/register", async (req, res) => {
   // 클라이언트에서 받은 요청의 body에서 필요한 정보를 추출합니다.
   const { username, password, email, address, detailedaddress, phonenumber, usertype: clientUsertype, businessnumber, uniquenumber } = req.body;
 
