@@ -401,6 +401,7 @@ footer .inner .bottom p {width: 100%; font-size: 12px; color: #000;}
 .calendar {display: flex;}
 .calendar > div:nth-child(2) {margin-left: 12px;}
 .calendar input {margin: 0 auto; padding: 4px 12px; min-width: 240px; border: 0; color: #000; background-color: #f5f5f5;}
+.react-datepicker-popper {z-index: 2;}
 
 /* 댓글 */
 .view-wrap .comment {position: relative; margin: 20px 0; border-bottom: 1px solid #ddd;}
