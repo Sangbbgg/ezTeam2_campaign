@@ -5,4 +5,4 @@
 * 개발 : 2024-02-16 ~ 2024-03-15
 * 1차 프로토타입 리뷰 : 2024-03-08
 ## 확인용
-<img src="(https://github.com/Sangbbgg/ezTeam2_campaign/assets/151603886/9357efe9-6554-42fb-aa41-938f9389eb33)">
+<img src="https://github.com/Sangbbgg/ezTeam2_campaign/assets/151603886/9357efe9-6554-42fb-aa41-938f9389eb33">
