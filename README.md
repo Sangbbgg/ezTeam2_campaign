@@ -36,6 +36,25 @@
 --- 
 
 
+### ERD
+![ERD](https://github.com/jisoooo17/bbangkkeut_campaign/blob/main/erd.png)
+
+--- 
+
+### URL Mapping
+![url](https://github.com/jisoooo17/bbangkkeut_campaign/blob/main/urlmapping.png)
+
+---
+
+### 주요 기능
+1. 로그인
+2. 회원가입
+3. 캠페인 게시판 - CRUD
+4. 탄소발자국 계산기 - 데이터 시각화
+5. 마이페이지
+
+---
+
 <!-- ## 확인용
 <img src="https://github.com/Sangbbgg/ezTeam2_campaign/assets/151603886/9357efe9-6554-42fb-aa41-938f9389eb33"> -->
 
