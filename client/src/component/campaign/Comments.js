@@ -88,7 +88,6 @@ const Comments = ({ curList }) => {
   // 댓글 삭제 버튼
   const deleteComment = async (commentId) => {
     const confirmDelete = window.confirm("댓글을 삭제하시겠습니까?");
-    console.log(curList.id, commentId); 
 
     if (confirmDelete) {
       try {
