@@ -19,6 +19,11 @@
 ### 사용 기술
 ![stack](https://github.com/jisoooo17/bbangkkeut_campaign/blob/main/tech-stack.png)
 
+* React를 활용한 UI 개발
+* Node.js를 통한 서버 사이드 애플리케이션 개벌
+* JavaScript와 CSS를 사용한 인터랙션 효과 및 스타일링 작업
+* Axios를 활용한 HTTP 요청 처리
+* MySQL 서버를 활용한 데이터 전송 및 관리
 --- 
 
 ### 일정
