@@ -28,7 +28,7 @@ function RegisterCorporate() {
 // 이메일 유효성 검사 02/14 김민호
 const handleEmailDuplicationCheck = async(event) => {
   event.preventDefault();
-  console.log("이메일 중복 확인 시작");
+  // console.log("이메일 중복 확인 시작");
 
   if (!email) {
     alert('이메일을 입력해주세요!');
@@ -36,7 +36,7 @@ const handleEmailDuplicationCheck = async(event) => {
   }
   try {
     const response = await axios.post('http://localhost:8000/checkEmailDuplication', { email });
-    console.log('서버 응답:', response.data);
+    // console.log('서버 응답:', response.data);
     alert(response.data.message);
     setEmailDuplication(response.data.success);
 
@@ -55,7 +55,7 @@ const handleEmailDuplicationCheck = async(event) => {
   
 const handlebusinessnumberCheck = async(event) => {
   event.preventDefault();
-  console.log("사업자 중복 확인 시작");
+  // console.log("사업자 중복 확인 시작");
 
   if (!businessnumber) {
     alert('사업자을 입력해주세요!');
@@ -66,7 +66,7 @@ const handlebusinessnumberCheck = async(event) => {
   // 클라이언트가 서버에 사업자 중복 확인을 요청합니다./0214 김민호
   try{
     const response = await axios.post('http://localhost:8000/checkbusinessnumber', { businessnumber })
-      console.log('서버 응답:', response.data);
+      // console.log('서버 응답:', response.data);
       alert(response.data.message);
       setbusinessnumberDuplication(response.data.success);
       
@@ -83,7 +83,7 @@ const handlebusinessnumberCheck = async(event) => {
 
   const handleRegesterClick = (event) => {
     event.preventDefault();
-    console.log("회원가입 시작");
+    // console.log("회원가입 시작");
 
 
     if (!username || !email || !password || !confirmPassword || !address) {
@@ -141,7 +141,7 @@ axios.post('http://localhost:8000/register', {
   businessnumber
 })
   .then(response => {
-    console.log('서버 응답:', response.data);
+    // console.log('서버 응답:', response.data);
     alert('회원가입이 완료되었습니다.');
     if (response.data.userType === 1) {
       // 개인 사용자 처리

@@ -28,7 +28,7 @@ function RegisterGroup() {
 // 이메일 유효성 검사 02/14 김민호
 const handleEmailDuplicationCheck = async(event) => {
   event.preventDefault();
-  console.log("이메일 중복 확인 시작");
+  // console.log("이메일 중복 확인 시작");
 
   if (!email) {
     alert('이메일을 입력해주세요!');
@@ -39,7 +39,7 @@ const handleEmailDuplicationCheck = async(event) => {
   // 클라이언트가 서버에 이메일 중복 확인을 요청합니다./0214 김민호
   try {
     const response = await axios.post('http://localhost:8000/checkEmailDuplication', { email });
-    console.log('서버 응답:', response.data);
+    // console.log('서버 응답:', response.data);
     alert(response.data.message);
     setEmailDuplication(response.data.success);
 
@@ -57,7 +57,7 @@ const handleEmailDuplicationCheck = async(event) => {
 
 const handleuniquenumberCheck = async(event) => {
   event.preventDefault();
-  console.log("사업자 중복 확인 시작");
+  // console.log("사업자 중복 확인 시작");
 
   if (!uniquenumber) {
     alert('고유번호을 입력해주세요!');
@@ -68,7 +68,7 @@ const handleuniquenumberCheck = async(event) => {
   // 클라이언트가 서버에 고유번호 중복 확인을 요청합니다./0220 김민호
   try{
     const response=await axios.post('http://localhost:8000/checkuniquenumber', { uniquenumber })
-      console.log('서버 응답:', response.data);
+      // console.log('서버 응답:', response.data);
       alert(response.data.message);
       setuniquenumberDuplication(response.data.success);
 
@@ -145,7 +145,7 @@ axios.post('http://localhost:8000/register', {
   uniquenumber
 })
   .then(response => {
-    console.log('서버 응답:', response.data);
+    // console.log('서버 응답:', response.data);
     alert('회원가입이 완료되었습니다.');
     if (response.data.userType === 1) {
       // 개인 사용자 처리

@@ -26,7 +26,7 @@ function RegisterPersonal() {
   // 이메일 유효성 검사 02/14 김민호
   const handleEmailDuplicationCheck = async (event) => {
     event.preventDefault();
-    console.log("이메일 중복 확인 시작");
+    // console.log("이메일 중복 확인 시작");
 
     if (!email) {
       alert('이메일을 입력해주세요!');
@@ -34,7 +34,7 @@ function RegisterPersonal() {
     }
     try {
       const response = await axios.post('http://localhost:8000/checkEmailDuplication', { email });
-      console.log('서버 응답:', response.data);
+      // console.log('서버 응답:', response.data);
       alert(response.data.message);
       setEmailDuplication(response.data.success);
 
@@ -53,7 +53,7 @@ function RegisterPersonal() {
 
   const handleRegesterClick = (event) => {
     event.preventDefault();
-    console.log("회원가입 시작");
+    // console.log("회원가입 시작");
 
     if (!IsDuplicateChecked) {
       alert('이미 등록된 이메일이거나 이메일 중복 확인을 해주세요.');
@@ -97,7 +97,7 @@ function RegisterPersonal() {
       usertype: 'personal'
     })
       .then(response => {
-        console.log('서버 응답:', response.data);
+        // console.log('서버 응답:', response.data);
         alert('회원가입이 완료되었습니다.');
         if (response.data.userType === 1) {
           // 개인 사용자 처리

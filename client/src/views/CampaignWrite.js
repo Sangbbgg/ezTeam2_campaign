@@ -29,7 +29,7 @@ const CampaignWrite = () => {
   const [selOpt, setSelOpt] = useState("오프라인");
   const onChangeRadio = (e) => {
     setSelOpt(e.target.value);
-    console.log(e.target.value);
+    // console.log(e.target.value);
   };
 
   const renderAddrDiv = () => {
@@ -164,7 +164,6 @@ const CampaignWrite = () => {
               // 지도 중심을 변경
               map.setCenter(coords);
               marker.setPosition(coords);
-              console.log(data);
   
               setAddress(addr);
               setLatitude(coords.Ma);

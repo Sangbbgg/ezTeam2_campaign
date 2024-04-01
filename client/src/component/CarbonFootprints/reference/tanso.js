@@ -314,9 +314,9 @@ $(document).ready(function () {
         "z-index": "1",
         opacity: "1",
       });
-      console.log($(this).hasClass("company_one_step"));
-      console.log($(this).hasClass("household_one_step"));
-      console.log($(this).hasClass("company_one_step") || $(this).hasClass("household_one_step"));
+      // console.log($(this).hasClass("company_one_step"));
+      // console.log($(this).hasClass("household_one_step"));
+      // console.log($(this).hasClass("company_one_step") || $(this).hasClass("household_one_step"));
 
       if ($(this).hasClass("company_one_step") || $(this).hasClass("household_one_step")) {
         $(".title_info_box").css("display", "flex");
