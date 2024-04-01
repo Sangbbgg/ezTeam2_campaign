@@ -1,9 +1,15 @@
 ﻿# BBANGK끗 캠페인
 <!-- * readme 작성요령: https://velog.io/@gmlstjq123/Readme.md-%ED%8C%8C%EC%9D%BC-%EC%9E%91%EC%84%B1%EB%B2%95 -->
 
+### 기획 의도
+![plan](https://github.com/jisoooo17/bbangkkeut_campaign/blob/main/intro.png)
+
 ### 개요
 * 프로젝트 참여자: 김지수, 상호형, 김민호
 ![team](https://github.com/jisoooo17/bbangkkeut_campaign/blob/main/introduce-team.png) 
+
+### 사용 기술
+![stack](https://github.com/jisoooo17/bbangkkeut_campaign/blob/main/tech-stack.png)
 
 
 
