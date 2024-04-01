@@ -169,7 +169,7 @@ app.get("/users", (req, res) => {
       console.error("Error executing MySQL query:", err);
       return res.json(err);
     }
-    console.log(res);
+    // console.log(res);
     return res.json(data);
   });
 });
@@ -435,7 +435,7 @@ app.get("/api/carbonFootprint/check/:userId/:date", async (req, res) => {
   const lastDay = endDate.getDate();
   const endDateStr = `${yearMonth}-${lastDay}`;
 
-  console.log(`Checking data for user ${userId} between ${startDate} and ${endDateStr}`);
+  // console.log(`Checking data for user ${userId} between ${startDate} and ${endDateStr}`);
 
   try {
     const query = `
@@ -444,8 +444,8 @@ app.get("/api/carbonFootprint/check/:userId/:date", async (req, res) => {
         AND calculation_month BETWEEN ? AND ?;
       `;
 
-    console.log(`Executing query: ${query}`);
-    console.log(`With parameters: userId=${userId}, startDate=${startDate}, endDateStr=${endDateStr}`);
+    // console.log(`Executing query: ${query}`);
+    // console.log(`With parameters: userId=${userId}, startDate=${startDate}, endDateStr=${endDateStr}`);
 
     connection.query(query, [userId, startDate, endDateStr], (err, results) => {
       if (err) {
@@ -454,10 +454,10 @@ app.get("/api/carbonFootprint/check/:userId/:date", async (req, res) => {
       }
 
       if (results.length > 0) {
-        console.log(`Found data for user ${userId} in the specified month.`);
+        // console.log(`Found data for user ${userId} in the specified month.`);
         res.json({ hasData: true, data: results[0] });
       } else {
-        console.log(`No data found for user ${userId} in the specified month.`);
+        // console.log(`No data found for user ${userId} in the specified month.`);
         res.json({ hasData: false });
       }
     });
@@ -699,7 +699,7 @@ app.use(
 //-------------------------------로그인------------------------------------
 
 app.post("/login", async (req, res) => {
-  console.log(req.session);
+  // console.log(req.session);
   const { email, password, usertype } = req.body; //usertype 추가 2/14 김민호
 
   try {
@@ -719,7 +719,7 @@ app.post("/login", async (req, res) => {
             //세션데이터 저장(새로운 데이터 추가시 이부분 수정)
             req.session.usertype = result[0].usertype; //0213 김민호 익스플로우 세션기능 추가
             req.session.userid = result[0].userid; //0213 김민호 익스플로우 세션기능 추가
-            console.log(req.session);
+            // console.log(req.session);
             res.send({ success: true, message: "로그인 성공", data: result });
           } else {
             res.send({
@@ -895,7 +895,7 @@ app.post("/register", async (req, res) => {
         });
       }
       // 회원가입이 성공한 경우 응답을 클라이언트에게 보냅니다.
-      console.log("사용자가 성공적으로 등록됨");
+      // console.log("사용자가 성공적으로 등록됨");
       return res.status(200).json({
         success: true,
         message: "사용자가 성공적으로 등록됨",
@@ -957,7 +957,7 @@ app.delete("/delete-account/:userId/:userType", (req, res) => {
       console.error("주문 테이블 업데이트 오류:", updateError);
       res.status(500).json({ success: false, message: "주문 테이블 업데이트 오류" });
     } else {
-      console.log("주문 테이블이 성공적으로 업데이트되었습니다");
+      // console.log("주문 테이블이 성공적으로 업데이트되었습니다");
 
       // 사용자 테이블에서 사용자를 삭제합니다.
       const deleteQuery = `DELETE FROM ${tableName} WHERE userid = ?`;
@@ -967,7 +967,7 @@ app.delete("/delete-account/:userId/:userType", (req, res) => {
           console.error("사용자 삭제 오류:", error);
           res.status(500).json({ success: false, message: "사용자 삭제 오류" });
         } else {
-          console.log("사용자가 성공적으로 삭제되었습니다");
+          // console.log("사용자가 성공적으로 삭제되었습니다");
 
           if (tableName === "user") {
             const deleteCommentsQuery = `DELETE FROM campaign_comments WHERE userid = ?`;
@@ -975,7 +975,7 @@ app.delete("/delete-account/:userId/:userType", (req, res) => {
               if (commentsError) {
                 console.error("관련 댓글 삭제 오류:", commentsError);
               } else {
-                console.log("관련 댓글이 성공적으로 삭제되었습니다");
+                // console.log("관련 댓글이 성공적으로 삭제되었습니다");
               }
             });
           }
