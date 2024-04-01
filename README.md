@@ -3,10 +3,14 @@
 
 ### 기획 의도
 ![plan](https://github.com/jisoooo17/bbangkkeut_campaign/blob/main/intro.png)
+* 환경 보호 활동을 위한 인터랙티브한 플랫폼의 부재
+* 개인, 기업, 단체 사용자가 캠페인 생성 및 공유
+* 개인의 활동이 탄소 중립에 미치는 영향 시각화
+* 탄소 중립 가치 공유 및 참여 문화 조성
 
-### 개요
+### 프로젝트 참여자
 * 프로젝트 참여자: 김지수, 상호형, 김민호
-![team](https://github.com/jisoooo17/bbangkkeut_campaign/blob/main/introduce-team.png) 
+![team](https://github.com/jisoooo17/bbangkkeut_campaign/blob/main/introduce-teamm.png) 
 
 ### 사용 기술
 ![stack](https://github.com/jisoooo17/bbangkkeut_campaign/blob/main/tech-stack.png)
