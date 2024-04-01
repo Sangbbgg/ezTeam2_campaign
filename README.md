@@ -8,14 +8,18 @@
 * 개인의 활동이 탄소 중립에 미치는 영향 시각화
 * 탄소 중립 가치 공유 및 참여 문화 조성
 
+---
+
 ### 프로젝트 참여자
 * 프로젝트 참여자: 김지수, 상호형, 김민호
 ![team](https://github.com/jisoooo17/bbangkkeut_campaign/blob/main/introduce-teamm.png) 
 
+---
+
 ### 사용 기술
 ![stack](https://github.com/jisoooo17/bbangkkeut_campaign/blob/main/tech-stack.png)
 
-
+--- 
 
 ### 일정
 * 기획 및 설계 : 2024-02-01 ~ 2023-02-15
@@ -24,6 +28,7 @@
 * 2차 기능 리뷰 : 2024-03-11
 * 발표 : 2024-04-05
 
+--- 
 
 
 <!-- ## 확인용
