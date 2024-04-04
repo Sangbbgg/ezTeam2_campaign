@@ -1,6 +1,5 @@
 ﻿# BBANGK끗
 <!-- * readme 작성요령: https://velog.io/@gmlstjq123/Readme.md-%ED%8C%8C%EC%9D%BC-%EC%9E%91%EC%84%B1%EB%B2%95 -->
-
 ## 탄소 중립 캠페인 공유 플랫폼
 
 ### 기획 의도
@@ -22,7 +21,7 @@
 ![stack](https://github.com/jisoooo17/bbangkkeut_campaign/blob/main/tech-stack.png)
 
 * React를 활용한 UI 개발
-* Node.js를 통한 서버 사이드 애플리케이션 개벌
+* Node.js를 통한 서버 사이드 애플리케이션 개발
 * JavaScript와 CSS를 사용한 인터랙션 효과 및 스타일링 작업
 * Axios를 활용한 HTTP 요청 처리
 * MySQL 서버를 활용한 데이터 전송 및 관리
@@ -36,7 +35,6 @@
 * 발표 : 2024-04-05
 
 --- 
-
 
 ### ERD
 ![ERD](https://github.com/jisoooo17/bbangkkeut_campaign/blob/main/erd.png)
@@ -60,6 +58,81 @@
 
 ---
 
-<!-- ## 확인용
-<img src="https://github.com/Sangbbgg/ezTeam2_campaign/assets/151603886/9357efe9-6554-42fb-aa41-938f9389eb33"> -->
+### 시연 영상
+#### 🌱 메인
+![main](https://github.com/jisoooo17/bbangkkeut_campaign/blob/main/main.gif)
+
+
+#### 🌱 로그인
+![login](https://github.com/jisoooo17/bbangkkeut_campaign/blob/main/login.gif)
+
+
+---
+
+
+#### 🌱 검색
+![search](https://github.com/jisoooo17/bbangkkeut_campaign/blob/main/search.gif)
+
+
+---
+
+
+#### 🌱 탭 & 페이징
+![tab](https://github.com/jisoooo17/bbangkkeut_campaign/blob/main/tab.gif)
+
+
+---
+
+
+#### 🌱 캠페인 글쓰기
+![create](https://github.com/jisoooo17/bbangkkeut_campaign/blob/main/create.gif)
+
+
+---
+
+
+#### 🌱 캠페인 상세
+![read](https://github.com/jisoooo17/bbangkkeut_campaign/blob/main/read.gif)
+
+
+---
+
+
+#### 🌱 캠페인 수정
+![update](https://github.com/jisoooo17/bbangkkeut_campaign/blob/main/update.gif)
+
+
+---
+
+
+#### 🌱 캠페인 삭제
+![delete](https://github.com/jisoooo17/bbangkkeut_campaign/blob/main/delete.gif)
+
+
+---
+
+
+#### 🌱 댓글 등록 및 삭제
+![comment](https://github.com/jisoooo17/bbangkkeut_campaign/blob/main/comment.gif)
+
+
+---
+#### 🌱 캠페인 신청하기
+![application](https://github.com/jisoooo17/bbangkkeut_campaign/blob/main/application.gif)
+
+
+---
+#### 🌱 탄소발자국 계산기 - 계산하기
+![carbon](https://github.com/jisoooo17/bbangkkeut_campaign/blob/main/carbon.gif)
+
+
+---
+#### 🌱 탄소발자국 계산기 - 결과보기
+![carbon-result](https://github.com/jisoooo17/bbangkkeut_campaign/blob/main/carbon-result.gif)
+
+
+
+--- 
+#### 마이페이지
+![mypage](https://github.com/jisoooo17/bbangkkeut_campaign/blob/main/mypage.gif)
 
