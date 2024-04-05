@@ -14,7 +14,7 @@ const WriteEditor = ({ value, handleChangeQuill }) => {
     input.setAttribute('type', 'file');
     input.setAttribute('accept', 'image/*');
     input.click(); // 에디터 이미지버튼을 클릭하면 이 input이 클릭됨
-    // input이 클릭되면 파일 선택창이 나타난다.
+    // input이 클릭되면 파일 선택창이 나타남
 
     // input에 변화가 생긴다면 = 이미지를 선택
     input.addEventListener('change', async () => {
@@ -25,7 +25,6 @@ const WriteEditor = ({ value, handleChangeQuill }) => {
       // 백엔드 multer라우터에 이미지를 보냄
       try {
         const result = await axios.post('http://localhost:8000/img', formData);
-        // console.log('성공 시, 백엔드가 보내주는 데이터', result.data.url);
         const IMG_URL = result.data.url;
         // 이 URL을 img 태그의 src에 넣은 요소를 현재 에디터의 커서에 넣어주면 에디터 내에서 이미지가 나타남
         // src가 base64가 아닌 짧은 URL이기 때문에 데이터베이스에 에디터의 전체 글 내용을 저장할 수 있게됨
